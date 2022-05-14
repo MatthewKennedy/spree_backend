@@ -4,6 +4,7 @@
 // .spree-warn-btn
 // .spree-standard-btn
 
+
 .payment-action-save {
     // This is a bad idea:
     // Ideally, I would keep colors out of SASS mixins, preferably set via -var() CSS variables
@@ -52,13 +53,4 @@ input[type="file"]::-webkit-file-upload-button {
 .actions .btn,
 .page-actions .btn {
   margin: 2px;
-}
-
-
-.btn-success {
-  background-color: var(--bs-primary);
-
-  &:hover {
-    background: red;
-  }
 }

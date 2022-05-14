@@ -1,14 +1,75 @@
-// TODO setup full css var setup in bootstrap 5.2 for theming.
-// Need to use 5.2 on node_modules.
+:root {
+  --sp-white-rgb: 255, 255, 255;
 
-// body.admin {
-//   --bs-primary-rgb: 165,42,42;
-//   --bs-secondary-rgb: 165,42,42;
-//   --bs-success-rgb: 165,42,42;
-//   --bs-info-rgb: 165,42,42;
-//   --bs-warning-rgb: 165,42,42;
-//   --bs-danger-rgb: 165,42,42;
-//   --bs-warning-rgb: 165,42,42;
-//   --bs-success: 165,42,42;
-//   --bs-primary: #503395;
-// }
+  --sp-success-rgb: 25, 135, 84;
+  --sp-success-darker-rgb: 21, 115, 71;
+
+  --sp-danger-rgb: 220, 53, 69;
+  --sp-danger-darker-rgb: 187, 45, 59;
+
+  --sp-light-rgb: 108, 117, 125;
+  --sp-light-darker-rgb: 92, 99, 106;
+}
+
+body.admin {
+  .btn-success {
+    --bs-btn-color:                 rgba(var(--sp-white-rgb));
+    --bs-btn-bg:                    rgba(var(--sp-success-rgb));
+    --bs-btn-border-color:          rgba(var(--sp-success-rgb));
+
+    --bs-btn-hover-color:           rgba(var(--sp-white-rgb));
+    --bs-btn-hover-bg:              rgba(var(--sp-success-darker-rgb));
+    --bs-btn-hover-border-color:    rgba(var(--sp-success-darker-rgb));
+
+    --bs-btn-focus-shadow-rgb:      var(--sp-success-rgb);
+
+    --bs-btn-active-color:          rgba(var(--sp-white-rgb));
+    --bs-btn-active-bg:             rgba(var(--sp-success-darker-rgb));
+    --bs-btn-active-border-color:   rgba(var(--sp-success-darker-rgb));
+
+    --bs-btn-disabled-color:        rgba(var(--sp-white-rgb));
+    --bs-btn-disabled-bg:           rgba(var(--sp-success-rgb));
+    --bs-btn-disabled-border-color: rgba(var(--sp-success-rgb));
+  }
+
+  .btn-danger {
+    --bs-btn-color:                 rgba(var(--sp-white-rgb));
+    --bs-btn-bg:                    rgba(var(--sp-danger-rgb));
+    --bs-btn-border-color:          rgba(var(--sp-danger-rgb));
+
+    --bs-btn-hover-color:           rgba(var(--sp-white-rgb));
+    --bs-btn-hover-bg:              rgba(var(--sp-danger-darker-rgb));
+    --bs-btn-hover-border-color:    rgba(var(--sp-danger-darker-rgb));
+
+    --bs-btn-focus-shadow-rgb:      var(--sp-danger-rgb);
+
+    --bs-btn-active-color:          rgba(var(--sp-white-rgb));
+    --bs-btn-active-bg:             rgba(var(--sp-danger-darker-rgb));
+    --bs-btn-active-border-color:   rgba(var(--sp-danger-darker-rgb));
+
+    --bs-btn-disabled-color:        rgba(var(--sp-white-rgb));
+    --bs-btn-disabled-bg:           rgba(var(--sp-danger-rgb));
+    --bs-btn-disabled-border-color: rgba(var(--sp-danger-rgb));
+  }
+
+  .btn-light {
+    --bs-btn-color:                 rgba(var(--sp-white-rgb));
+    --bs-btn-bg:                    rgba(var(--sp-light-rgb));
+    --bs-btn-border-color:          rgba(var(--sp-light-rgb));
+
+    --bs-btn-hover-color:           rgba(var(--sp-white-rgb));
+    --bs-btn-hover-bg:              rgba(var(--sp-light-darker-rgb));
+    --bs-btn-hover-border-color:    rgba(var(--sp-light-darker-rgb));
+
+    --bs-btn-focus-shadow-rgb:      var(--sp-light-rgb);
+
+    --bs-btn-active-color:          rgba(var(--sp-white-rgb));
+    --bs-btn-active-bg:             rgba(var(--sp-light-darker-rgb));
+    --bs-btn-active-border-color:   rgba(var(--sp-light-darker-rgb));
+
+    --bs-btn-disabled-color:        rgba(var(--sp-white-rgb));
+    --bs-btn-disabled-bg:           rgba(var(--sp-light-rgb));
+    --bs-btn-disabled-border-color: rgba(var(--sp-light-rgb));
+  }
+}
+
