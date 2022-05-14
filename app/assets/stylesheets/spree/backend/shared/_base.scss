@@ -54,7 +54,7 @@ div.admin-product-image-container {
   }
 
   &.mini-img {
-    border-radius: $border-radius / 2;
+    border-radius: calc($border-radius / 2);
     width: 24px;
     height: 24px;
   }
