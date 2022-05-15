@@ -1,3 +1,6 @@
+import "./spree"
+import "./api_routes"
+
 import "./alerts"
 import "./animate_css"
 import "./fetch_request_utility"
