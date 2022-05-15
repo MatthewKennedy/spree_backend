@@ -10,4 +10,3 @@
 //= require spree/backend/global/select2_populate
 //= require spree/backend/global/sortable
 //= require spree/backend/global/side_scroll_indication
-//= require spree/backend/global/tinymce

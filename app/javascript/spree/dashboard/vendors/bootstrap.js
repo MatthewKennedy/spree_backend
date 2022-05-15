@@ -1,8 +1,5 @@
-import jquery from 'jquery'
-import 'bootstrap'
-import 'popper.js'
-
-const $ = jquery
+import Bootstrap from "bootstrap"
+if (!window.bootstrap)  { window.bootstrap = Bootstrap }
 
 document.addEventListener("spree:load", function() {
   $('.with-tip').each(function() {
@@ -15,3 +12,5 @@ document.addEventListener("spree:load", function() {
     }
   })
 })
+
+

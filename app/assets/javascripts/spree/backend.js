@@ -1,13 +1,11 @@
 //= require purify
 //= require sortable
-//= require jquery3
 //= require handlebars
 //= require cleave
-//= require jquery_ujs
+
 //= require jquery-ui/widgets/autocomplete
 //= require select2-full
 //= require sweetalert2
-//= require tinymce
 //= require underscore-min.js
 //= require jsonapi-serializer.min
 
