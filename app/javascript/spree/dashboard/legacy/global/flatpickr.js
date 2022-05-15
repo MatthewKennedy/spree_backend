@@ -1,24 +1,26 @@
+import Flatpickr from "flatpickr"
+
 document.addEventListener("spree:load", function() {
-  flatpickr.setDefaults({
+  Flatpickr.setDefaults({
     altInput: true,
     time_24hr: true,
     altInputClass: 'flatpickr-alt-input',
     locale: Spree.translations.flatpickr_locale
   })
 
-  var dateFrom = flatpickr('.datePickerFrom', {
+  var dateFrom = Flatpickr('.datePickerFrom', {
     onChange: function(selectedDates) {
       dateTo.set('minDate', selectedDates[0])
     }
   })
 
-  var dateTo = flatpickr('.datePickerTo', {
+  var dateTo = Flatpickr('.datePickerTo', {
     onChange: function(selectedDates) {
       dateFrom.set('maxDate', selectedDates[0])
     }
   })
 
-  flatpickr('.datepicker', {})
+  Flatpickr('.datepicker', {})
 })
 
 document.addEventListener("turbo:before-cache", function() {
@@ -26,4 +28,3 @@ document.addEventListener("turbo:before-cache", function() {
     element._flatpickr.destroy()
   })
 })
-

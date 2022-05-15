@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 /**
   populateSelectOptionsFromApi(params)
   Allows you to easily fetch data from API (Platform v2) and populate an empty <select> with <option> tags, including a selected <option> tag.
@@ -40,7 +42,7 @@ const populateSelectOptionsFromApi = function(params) {
 }
 
 const handleErrors = function(response) {
-  if (!response.ok) throw new Error((response.status + ': ' + response.statusText))
+  if (!response.ok) throw new Error((response.status + ": " + response.statusText))
 
   return response.json()
 }
@@ -60,10 +62,10 @@ const createRequest = function(params, succeed, fail) {
 }
 
 const updateSelectSuccess = function(parsedData, returnValueFromAttributes, returnOptionText, selectEl, selectedOption) {
-  const selectedOpt = selectEl.querySelector('option[selected]')
+  const selectedOpt = selectEl.querySelector("option[selected]")
 
   parsedData.forEach((object) => {
-    const optionEl = document.createElement('option')
+    const optionEl = document.createElement("option")
 
     if (returnValueFromAttributes == null) {
       optionEl.value = object.id
@@ -73,7 +75,7 @@ const updateSelectSuccess = function(parsedData, returnValueFromAttributes, retu
       if (selectedOpt.value === object.attributes[returnValueFromAttributes]) {
         selectedOpt.remove()
 
-        optionEl.setAttribute('selected', 'selected')
+        optionEl.setAttribute("selected", "selected")
       }
     }
 

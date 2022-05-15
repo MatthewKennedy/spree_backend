@@ -1,5 +1,3 @@
-import './jquery'
-import './bootstrap'
-import './tinymce'
-import './flatpickr'
-import './select2'
+import "./jquery"
+import "./bootstrap"
+import "./tinymce"

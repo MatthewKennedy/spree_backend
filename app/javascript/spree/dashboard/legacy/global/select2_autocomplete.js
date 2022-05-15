@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // SELECT2 AUTOCOMPLETE JS
 //  The JavaScript in this file allows Spree developers to set up Select2 autocomplete search
 //  using the API v2 by simply adding data attributes to a select element.

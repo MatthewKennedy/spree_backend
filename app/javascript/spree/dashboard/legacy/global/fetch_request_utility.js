@@ -2,14 +2,14 @@
 /* eslint-disable no-unused-vars */
 
 //
-// Shows the progress bar on fech requests
+// Shows the progress bar on fetch requests
 const showProgressIndicator = () => {
   Turbo.navigator.delegate.adapter.progressBar.setValue(0)
   Turbo.navigator.delegate.adapter.progressBar.show()
 }
 
 //
-// Hides the progress bar on fech requests
+// Hides the progress bar on fetch requests
 const hideProgressIndicator = () => {
   Turbo.navigator.delegate.adapter.progressBar.setValue(1)
   Turbo.navigator.delegate.adapter.progressBar.hide()
@@ -30,17 +30,17 @@ const spreeHandleFetchRequestResponse = function(response) {
 }
 
 //
-// Handles fech request errors by triggering the appropriate flash alert type and displaying
+// Handles fetch request errors by triggering the appropriate flash alert type and displaying
 // the response message.
 const spreeHandleFetchRequestError = function(data) {
   if (data.error != null) {
-    show_flash('error', data.error)
+    show_flash("error", data.error)
   } else if (data.message != null) {
-    show_flash('success', data.message)
+    show_flash("success", data.message)
   } else if (data.exception != null) {
-    show_flash('info', data.exception)
+    show_flash("info", data.exception)
   } else if (data.detail != null) {
-    show_flash('info', data.detail)
+    show_flash("info", data.detail)
   }
 }
 
@@ -83,8 +83,8 @@ const spreeFetchRequest = function(requstData, success = null, target = null) {
   let requestDataBody
 
   const requestUri = requstData.uri || null
-  const requestMethod = requstData.method || 'GET'
-  const requestContentType = requstData.ContentType || 'application/json'
+  const requestMethod = requstData.method || "GET"
+  const requestContentType = requstData.ContentType || "application/json"
 
   if (requstData.formatDataBody === false) {
     requestDataBody = requstData.dataBody
@@ -97,8 +97,8 @@ const spreeFetchRequest = function(requstData, success = null, target = null) {
   fetch(requestUri, {
     method: requestMethod,
     headers: {
-      'Authorization': 'Bearer ' + OAUTH_TOKEN,
-      'Content-Type': requestContentType
+      "Authorization": "Bearer " + OAUTH_TOKEN,
+      "Content-Type": requestContentType
     },
     body: requestDataBody
   })

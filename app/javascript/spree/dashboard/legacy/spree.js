@@ -1,4 +1,5 @@
-//= require jsuri
+import Uri from "jsuri"
+
 function Spree () {}
 
 Spree.ready = function (callback) {
@@ -69,3 +70,5 @@ Spree.ajax = function (urlOrSettings, settings) {
 
 Spree.routes = {}
 Spree.url_params = {}
+
+if (!window.Spree)  { window.Spree = Spree }
