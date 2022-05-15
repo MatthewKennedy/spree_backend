@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'babel-transpiler', '~> 0.7'
   s.add_dependency 'glyphicons',       '~> 1.0'
-  s.add_dependency 'flatpickr',        '~> 4.6'
   s.add_dependency 'flag-icons-rails', '~> 3.4'
   s.add_dependency 'hotwire-rails'
   s.add_dependency 'inline_svg',       '~> 1.5'
