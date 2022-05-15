@@ -26,15 +26,13 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree', '>= 4.4.0'
 
-  s.add_dependency 'babel-transpiler', '~> 0.7'
-  s.add_dependency 'flag-icons-rails', '~> 3.4'
-  s.add_dependency 'glyphicons',       '~> 1.0'
+  s.add_dependency 'babel-transpiler', '~> 0.7' #
   s.add_dependency 'hotwire-rails'
   s.add_dependency 'inline_svg', '~> 1.5'
-  s.add_dependency 'jquery-ui-rails',  '~> 6.0'
+  s.add_dependency 'jquery-ui-rails',  '~> 6.0' #
   s.add_dependency 'jsbundling-rails'
   s.add_dependency 'responders'
-  s.add_dependency 'sass-rails',       '>= 5'
-  s.add_dependency 'select2-rails',    '~> 4.0'
-  s.add_dependency 'sprockets',        '~> 4.0'
+  s.add_dependency 'sass-rails',       '>= 5'   #
+  s.add_dependency 'select2-rails',    '~> 4.0' #
+  s.add_dependency 'sprockets',        '~> 4.0' #
 end
