@@ -4,7 +4,6 @@
 //= require cleave
 
 //= require jquery-ui/widgets/autocomplete
-//= require select2-full
 //= require sweetalert2
 //= require underscore-min.js
 //= require jsonapi-serializer.min
