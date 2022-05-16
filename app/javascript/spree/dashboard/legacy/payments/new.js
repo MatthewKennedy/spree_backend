@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import Cleave from 'cleave.js'
+// import Cleave from 'cleave.js'
 
 document.addEventListener("spree:load", function() {
   if ($("#new_payment").length) {
