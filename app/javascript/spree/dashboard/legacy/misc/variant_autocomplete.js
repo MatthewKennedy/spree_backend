@@ -1,5 +1,6 @@
-import JSONAPIDeserializer from "jsonapi-serializer"
+/* eslint-disable no-undef */
 
+import JSONAPIDeserializer from "jsonapi-serializer"
 
 document.addEventListener("spree:load", function() {
   var variantAutocompleteTemplate = $("#variant_autocomplete_template")

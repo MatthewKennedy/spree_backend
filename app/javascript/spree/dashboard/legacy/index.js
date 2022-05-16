@@ -7,6 +7,3 @@ import "./payments"
 import "./menus"
 import "./returns"
 import "./users"
-
-
-

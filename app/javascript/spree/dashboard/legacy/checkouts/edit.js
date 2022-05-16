@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 function clearAddressFields(addressKinds) {
   if (addressKinds === undefined) {
     addressKinds = ["ship", "bill"]

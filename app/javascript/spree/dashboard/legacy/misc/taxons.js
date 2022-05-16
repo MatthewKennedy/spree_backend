@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import Sortable from "sortablejs"
 
 document.addEventListener("spree:load", function() {

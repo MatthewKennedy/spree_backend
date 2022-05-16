@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-
 // Shipments AJAX API
 document.addEventListener("spree:load", function() {
   "use strict"

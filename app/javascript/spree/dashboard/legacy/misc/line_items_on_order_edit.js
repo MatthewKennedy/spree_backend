@@ -10,7 +10,6 @@ document.addEventListener("spree:load", function() {
     var variantId = $(this).val().toString()
 
     var variant = _.find(window.variants, function (variant) {
-      // eslint-disable-next-line eqeqeq
       return variant.id.toString() == variantId
     })
     $("#stock_details").html(variantLineItemTemplate({ variant: variant }))
@@ -28,7 +27,7 @@ function addVariant () {
   return 1
 }
 
-adjustLineItems = function(order_id, variant_id, quantity){
+const adjustLineItems = function(order_id, variant_id, quantity){
   $.ajax({
     type: "POST",
     url: Spree.routes.line_items_api_v2,
