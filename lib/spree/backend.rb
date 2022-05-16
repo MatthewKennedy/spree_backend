@@ -3,9 +3,8 @@ require 'spree_api'
 
 require 'sprockets/railtie'
 
-require 'hotwire-rails'
+require 'turbo-rails'
 require 'inline_svg'
-require 'jsbundling-rails'
 require 'responders'
 
 require 'spree/backend/action_callbacks'
