@@ -1,4 +1,5 @@
 import select2 from "select2"
+
 select2($)
 
 // we need to delete select2 instances before document is saved to cache
