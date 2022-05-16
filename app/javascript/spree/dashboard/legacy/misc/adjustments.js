@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   $("[data-hook=adjustments_new_coupon_code] #add_coupon_code").click(function () {
     var couponCode = $("#coupon_code").val()
@@ -8,18 +6,18 @@ document.addEventListener("spree:load", function() {
     }
     $.ajax({
       type: "PATCH",
-      url: Spree.routes.apply_coupon_code(order_number),
+      url: SpreeDashboard.routes.apply_coupon_code(order_number),
       data: {
         coupon_code: couponCode,
       },
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
     }).done(function () {
       window.location.reload()
     }).fail(function (message) {
       if (message.responseJSON["error"]) {
-        show_flash("error", message.responseJSON["error"])
+        SpreeDashboard.showFlash("error", message.responseJSON["error"])
       } else {
-        show_flash("error", "There was a problem adding this coupon code.")
+        SpreeDashboard.showFlash("error", "There was a problem adding this coupon code.")
       }
     })
   })

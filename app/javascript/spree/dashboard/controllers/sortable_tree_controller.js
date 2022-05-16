@@ -31,7 +31,7 @@ export default class extends Controller {
     const response = await patch(item.dataset.sortableTreeUpdateUrlValue, { body: data })
 
     if (!response.ok) {
-      show_flash("error", "This move could not be saved.")
+      SpreeDashboard.showFlash("error", "This move could not be saved.")
     }
   }
 

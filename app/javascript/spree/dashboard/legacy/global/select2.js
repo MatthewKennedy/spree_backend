@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import select2 from "select2"
 select2($)
 
@@ -19,7 +17,7 @@ document.addEventListener("spree:load", function() {
   // Set: include_blank: true in the ERB.
   // A placeholder is auto-added here as it is required to clear the Select2.
   $("select.select2-clear").select2({
-    placeholder: Spree.translations.select_an_option,
+    placeholder: SpreeDashboard.translations.select_an_option,
     allowClear: true
   })
 })
@@ -28,14 +26,9 @@ $.fn.addSelect2Options = function (data) {
   var select = this
 
   function appendOption(select, data) {
-    var option = null;
-    if (data.attributes) {
-      // API v2
-      option = new Option(data.attributes.name, data.id, true, true)
-    } else {
-      // API v1
-      option = new Option(data.name, data.id, true, true)
-    }
+    var option = null
+    option = new Option(data.attributes.name, data.id, true, true)
+
     select.append(option).trigger("change")
   }
 

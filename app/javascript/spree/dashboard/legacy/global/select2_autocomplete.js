@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // SELECT2 AUTOCOMPLETE JS
 //  The JavaScript in this file allows Spree developers to set up Select2 autocomplete search
 //  using the API v2 by simply adding data attributes to a select element.
@@ -29,19 +28,18 @@ document.addEventListener("spree:load", function() {
 // we need to delete select2 instances before document is saved to cache
 // https://stackoverflow.com/questions/36497723/select2-with-ajax-gets-initialized-several-times-with-rails-turbolinks-events
 document.addEventListener("turbo:before-cache", function() {
-  const select2Autocompletes = document.querySelectorAll('select[data-autocomplete-url-value]')
-  select2Autocompletes.forEach(element => $(element).select2('destroy'))
+  const select2Autocompletes = document.querySelectorAll("select[data-autocomplete-url-value]")
+  select2Autocompletes.forEach(element => $(element).select2("destroy"))
 })
 
-// eslint-disable-next-line no-unused-vars
 function loadAutoCompleteParams() {
-  const select2Autocompletes = document.querySelectorAll('select[data-autocomplete-url-value]')
+  const select2Autocompletes = document.querySelectorAll("select[data-autocomplete-url-value]")
   select2Autocompletes.forEach(element => buildParamsFromDataAttrs(element))
 }
 
 function buildParamsFromDataAttrs(element) {
   $(element).select2Autocomplete({
-    apiUrl: Spree.routes[element.dataset.autocompleteUrlValue],
+    apiUrl: SpreeDashboard.routes[element.dataset.autocompleteUrlValue],
     placeholder: element.dataset.autocompletePlaceholderValue,
     allow_clear: element.dataset.autocompleteClearValue,
     multiple: element.dataset.autocompleteMultipleValue,
@@ -60,12 +58,12 @@ $.fn.select2Autocomplete = function(params) {
 
   const resourcePlural = params.apiUrl.match(/([^/]*)\/*$/)[1]
   const resourceSingular = resourcePlural.slice(0, -1)
-  const select2placeHolder = params.placeholder || Spree.translations.search
+  const select2placeHolder = params.placeholder || SpreeDashboard.translations.search
   const select2Multiple = params.multiple || false
   const select2allowClear = params.allow_clear || false
-  const returnAttribute = params.return_attribute || 'name'
+  const returnAttribute = params.return_attribute || "name"
   const minimumInput = params.minimum_input || 3
-  const searchQuery = params.search_query || 'name_i_cont'
+  const searchQuery = params.search_query || "name_i_cont"
   const customReturnId = params.custom_return_id || null
   const additionalUrlParams = params.additional_url_params || null
   const DebugMode = params.debug_mode || null
@@ -89,7 +87,7 @@ $.fn.select2Autocomplete = function(params) {
     apiUrl = `${params.apiUrl}?${sparseFields}`
   }
 
-  if (DebugMode != null) console.log('Request URL:' + apiUrl)
+  if (DebugMode != null) console.log("Request URL:" + apiUrl)
 
   //
   // Format the returned values.
@@ -120,7 +118,7 @@ $.fn.select2Autocomplete = function(params) {
     minimumInputLength: minimumInput,
     ajax: {
       url: apiUrl,
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
       data: function(params) {
         return {
           filter: {

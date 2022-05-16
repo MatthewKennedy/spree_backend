@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   var extend = function (child, parent) {
     for (var key in parent) {
@@ -17,11 +15,11 @@ document.addEventListener("spree:load", function() {
   var EditPaymentView, Payment, PaymentView, ShowPaymentView
   Payment = (function () {
     function Payment (id) {
-      this.url = Spree.routes.payments_api_v2 + "/" + id
+      this.url = SpreeDashboard.routes.payments_api_v2 + "/" + id
       this.json = $.ajax({
         dataType: "json",
         url: this.url,
-        headers: Spree.apiV2Authentication(),
+        headers: SpreeDashboard.apiV2Authentication(),
         success: function (data) {
           this.data = data.data
         }.bind(this)
@@ -46,7 +44,7 @@ document.addEventListener("spree:load", function() {
         data: {
           payment: attributes
         },
-        headers: Spree.apiV2Authentication()
+        headers: SpreeDashboard.apiV2Authentication()
       })
       jqXHR.always(function () {
         this.updating = false
@@ -57,7 +55,7 @@ document.addEventListener("spree:load", function() {
       }.bind(this))
       jqXHR.fail(function () {
         var response = (jqXHR.responseJSON && jqXHR.responseJSON.error) || jqXHR.statusText
-        show_flash("error", response)
+        SpreeDashboard.showFlash("error", response)
         onDone()
       })
       return jqXHR
@@ -105,7 +103,7 @@ document.addEventListener("spree:load", function() {
     PaymentView.prototype.$new_button = function (action) {
       return $("<a><i class=\"icon icon-" + action + "\"></i></a>").attr({
         "class": "payment-action-" + action + " btn btn-light btn-sm no-filter",
-        title: Spree.translations[action]
+        title: SpreeDashboard.translations[action]
       }).data({
         action: action
       }).one({
@@ -226,7 +224,7 @@ document.addEventListener("spree:load", function() {
     }
 
     EditPaymentView.normalize_amount = function (amount) {
-      var separator = Spree.translations.currency_separator
+      var separator = SpreeDashboard.translations.currency_separator
       return amount.replace(RegExp("[^\\d" + separator + "]", "g"), "")
     }
 

@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-function updateAddressState(region, successCallback) {
+export function updateAddressState(region, successCallback) {
   const countryId = $("#" + region + "country select").val()
   const stateContainer = $("#" + region + "state").parent()
   const stateSelect = $("#" + region + "state select")
@@ -8,8 +6,8 @@ function updateAddressState(region, successCallback) {
 
   if (!countryId) { return }
 
-  fetch(Spree.routes.countries_api_v2 + "/" + countryId + "?include=states", {
-    headers: Spree.apiV2Authentication()
+  fetch(SpreeDashboard.routes.countries_api_v2 + "/" + countryId + "?include=states", {
+    headers: SpreeDashboard.apiV2Authentication()
   }).then((response) => {
     switch (response.status) {
     case 200:
@@ -49,4 +47,8 @@ function updateAddressState(region, successCallback) {
       break
     }
   })
+}
+
+if (!window.SpreeDashboard.updateAddressState) {
+  window.SpreeDashboard.updateAddressState = updateAddressState
 }

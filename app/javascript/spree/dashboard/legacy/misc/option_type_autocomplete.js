@@ -9,9 +9,9 @@ $.fn.optionTypeAutocomplete = function () {
     minimumInputLength: 2,
     multiple: true,
     ajax: {
-      url: Spree.routes.option_types_api_v2,
+      url: SpreeDashboard.routes.option_types_api_v2,
       datatype: "json",
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
       data: function (params) {
         return {
           filter: {

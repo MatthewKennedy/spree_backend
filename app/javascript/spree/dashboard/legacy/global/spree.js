@@ -1,52 +1,51 @@
 import Uri from "jsuri"
 
-function Spree () {}
+function SpreeDashboard () {}
 
-Spree.ready = function (callback) {
+SpreeDashboard.ready = function (callback) {
   return document.addEventListener("spree:load", function() {
     return callback(jQuery)
   })
 }
 
-Spree.mountedAt = function () {
+SpreeDashboard.mountedAt = function () {
   return window.SpreePaths.mounted_at
 }
 
-Spree.adminPath = function () {
+SpreeDashboard.adminPath = function () {
   return window.SpreePaths.admin
 }
 
-Spree.pathFor = function (path) {
-  var locationOrigin = (window.location.protocol + '//' + window.location.hostname) + (window.location.port ? ':' + window.location.port : '')
+SpreeDashboard.pathFor = function (path) {
+  var locationOrigin = (window.location.protocol + "//" + window.location.hostname) + (window.location.port ? ":" + window.location.port : "")
 
-  return this.url('' + locationOrigin + (this.mountedAt()) + path, this.url_params).toString()
+  return this.url("" + locationOrigin + (this.mountedAt()) + path, this.url_params).toString()
 }
 
-Spree.localizedPathFor = function(path) {
-  if (typeof (SPREE_LOCALE) !== 'undefined' && typeof (SPREE_CURRENCY) !== 'undefined') {
-    var fullUrl = new URL(Spree.pathFor(path))
+SpreeDashboard.localizedPathFor = function(path) {
+  if (typeof (SPREE_LOCALE) !== "undefined" && typeof (SPREE_CURRENCY) !== "undefined") {
+    var fullUrl = new URL(SpreeDashboard.pathFor(path))
     var params = fullUrl.searchParams
     var pathName = fullUrl.pathname
 
-    params.set('currency', SPREE_CURRENCY)
+    params.set("currency", SPREE_CURRENCY)
 
     if (pathName.match(/api\/v/)) {
-      params.set('locale', SPREE_LOCALE)
+      params.set("locale", SPREE_LOCALE)
     } else {
-      pathName = (this.mountedAt()) + SPREE_LOCALE + '/' + path
+      pathName = (this.mountedAt()) + SPREE_LOCALE + "/" + path
     }
-    return fullUrl.origin + pathName + '?' + params.toString()
+    return fullUrl.origin + pathName + "?" + params.toString()
   }
-  return Spree.pathFor(path)
+  return SpreeDashboard.pathFor(path)
 }
 
-Spree.adminPathFor = function (path) {
-  return this.pathFor('' + (this.adminPath()) + path)
+SpreeDashboard.adminPathFor = function (path) {
+  return this.pathFor("" + (this.adminPath()) + path)
 }
 
-Spree.url = function (uri, query) {
+SpreeDashboard.url = function (uri, query) {
   if (uri.path === void 0) {
-    // eslint-disable-next-line no-undef
     uri = new Uri(uri)
   }
   if (query) {
@@ -57,18 +56,20 @@ Spree.url = function (uri, query) {
   return uri
 }
 
-Spree.ajax = function (urlOrSettings, settings) {
+SpreeDashboard.ajax = function (urlOrSettings, settings) {
   var url
-  if (typeof urlOrSettings === 'string') {
-    return $.ajax(Spree.url(urlOrSettings).toString(), settings)
+  if (typeof urlOrSettings === "string") {
+    return $.ajax(SpreeDashboard.url(urlOrSettings).toString(), settings)
   } else {
-    url = urlOrSettings['url']
-    delete urlOrSettings['url']
-    return $.ajax(Spree.url(url).toString(), urlOrSettings)
+    url = urlOrSettings["url"]
+    delete urlOrSettings["url"]
+    return $.ajax(SpreeDashboard.url(url).toString(), urlOrSettings)
   }
 }
 
-Spree.routes = {}
-Spree.url_params = {}
+SpreeDashboard.routes = {}
+SpreeDashboard.url_params = {}
 
-if (!window.Spree)  { window.Spree = Spree }
+if (!window.SpreeDashboard) {
+  window.SpreeDashboard = SpreeDashboard
+}

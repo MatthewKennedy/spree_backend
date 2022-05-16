@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   $(".track_inventory_checkbox").on("click", function () {
     $(this).siblings(".variant_track_inventory").val($(this).is(":checked"))

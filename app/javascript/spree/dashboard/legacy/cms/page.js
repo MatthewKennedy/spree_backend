@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Sortable from "sortablejs"
 
 document.addEventListener("spree:load", function() {
@@ -43,12 +42,12 @@ function handleTogglePageVisibility(obj) {
     }
   }
   const requestData = {
-    uri: Spree.routes.pages_api_v2 + `/${pageId}`,
+    uri: SpreeDashboard.routes.pages_api_v2 + `/${pageId}`,
     method: "PATCH",
     dataBody: data,
   }
 
-  spreeFetchRequest(requestData, handleToggleSuccess)
+  SpreeDashboard.fetchRequestUtil(requestData, handleToggleSuccess)
 
   function handleToggleSuccess() {
     toggleVisibilityState(obj)
@@ -86,11 +85,11 @@ function handleSectionReposition(evt) {
     }
   }
   const requestData = {
-    uri: `${Spree.routes.sections_api_v2}/${sectionId}`,
+    uri: `${SpreeDashboard.routes.sections_api_v2}/${sectionId}`,
     method: "PATCH",
     dataBody: data,
   }
-  spreeFetchRequest(requestData, reloadPreview)
+  SpreeDashboard.fetchRequestUtil(requestData, reloadPreview)
 }
 
 function updateCmsPageType() {

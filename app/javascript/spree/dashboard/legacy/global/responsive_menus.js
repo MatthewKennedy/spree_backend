@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   var body = $("body")
   var modalBackdrop = $("#multi-backdrop")

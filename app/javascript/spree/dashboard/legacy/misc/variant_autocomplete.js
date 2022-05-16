@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import JSONAPIDeserializer from "jsonapi-serializer"
 
 document.addEventListener("spree:load", function() {
@@ -28,11 +26,11 @@ $.fn.variantAutocomplete = function () {
 
   // deal with initSelection
   return this.select2({
-    placeholder: Spree.translations.variant_placeholder,
+    placeholder: SpreeDashboard.translations.variant_placeholder,
     minimumInputLength: 3,
     quietMillis: 200,
     ajax: {
-      url: Spree.url(Spree.routes.variants_api_v2),
+      url: SpreeDashboard.url(SpreeDashboard.routes.variants_api_v2),
       dataType: "json",
       data: function (params) {
         var query = {
@@ -47,7 +45,7 @@ $.fn.variantAutocomplete = function () {
 
         return query;
       },
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
       success: function(data) {
         new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {
           jsonApiVariants = variants

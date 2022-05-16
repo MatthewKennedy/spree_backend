@@ -10,12 +10,11 @@ document.addEventListener("spree:load", function() {
     const alertType = elem.dataset.alertType
     const alertMessage = elem.innerHTML
 
-    show_flash(alertType, alertMessage)
+    SpreeDashboard.showFlash(alertType, alertMessage)
   })
 })
 
-// eslint-disable-next-line camelcase
-function show_flash(type, message) {
+export function showFlash(type, message) {
   let sanitizedType = DOMPurify.sanitize(type)
   const sanitizedMessage = DOMPurify.sanitize(message)
 
@@ -65,3 +64,5 @@ function appendToFlashAlertsContainer (message, type) {
 
   parnetNode.appendChild(node)
 }
+
+if (!window.SpreeDashboard.showFlash)  { window.SpreeDashboard.showFlash = showFlash }

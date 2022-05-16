@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 $.fn.userAutocomplete = function () {
   "use strict"
 
@@ -16,9 +14,9 @@ $.fn.userAutocomplete = function () {
     multiple: true,
     minimumInputLength: 1,
     ajax: {
-      url: Spree.routes.users_api_v2,
+      url: SpreeDashboard.routes.users_api_v2,
       dataType: "json",
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
       data: function (params) {
         return {
           filter: {

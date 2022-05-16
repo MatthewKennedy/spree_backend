@@ -1,33 +1,26 @@
-//
-// Import JavaScript packages that are required globally.
-import { Application } from "@hotwired/stimulus"
+/* eslint-disable no-undef */
 
-//
-// Stimulus - Setup
-const application = Application.start()
-application.debug = false
-window.Stimulus = application
+import { Application } from "@hotwired/stimulus"
 
 // Stimulus - Spree Controllers
 import UploadButtonController from "./upload_button_controller"
-application.register("upload-button", UploadButtonController)
-
 import SpreeController from "./spree_controller"
-application.register("spree", SpreeController)
-
 import SortableTreeController from "./sortable_tree_controller"
-application.register("sortable-tree", SortableTreeController)
-
 import WebhooksSubscriberEventsController from "./webhooks_subscriber_events_controller"
-application.register("webhooks_subscriber_events", WebhooksSubscriberEventsController)
-
 import PasswordToggleController from "./password_toggle_controller"
-application.register("password-toggle", PasswordToggleController)
-
 import ClipboardController from "./clipboard_controller"
-application.register("clipboard", ClipboardController)
-
 import ProductEditController from "./product_edit_controller"
-application.register("product-edit", ProductEditController)
+import FlatpickrController from "./flatpickr_controller"
 
-export { application }
+
+// Stimulus - Setup
+window.Stimulus = Application.start()
+
+Stimulus.register("upload-button", UploadButtonController)
+Stimulus.register("spree", SpreeController)
+Stimulus.register("sortable-tree", SortableTreeController)
+Stimulus.register("webhooks_subscriber_events", WebhooksSubscriberEventsController)
+Stimulus.register("password-toggle", PasswordToggleController)
+Stimulus.register("clipboard", ClipboardController)
+Stimulus.register("product-edit", ProductEditController)
+Stimulus.register("flatpickr", FlatpickrController)

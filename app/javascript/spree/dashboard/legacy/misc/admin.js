@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   /**
     OBSERVE FIELD:
@@ -53,7 +51,7 @@ document.addEventListener("spree:load", function() {
         url: $(this).prop("href"),
         data: {
           _method: "delete",
-          authenticity_token: AUTH_TOKEN
+          authenticity_token: SpreeDashboard.AUTH_TOKEN
         },
         dataType: "script",
         complete: function() {
@@ -72,7 +70,7 @@ document.addEventListener("spree:load", function() {
           if (livePreview) { livePreview.contentWindow.location.reload() }
         }
       }).fail(function(response) {
-        show_flash("error", response.responseText)
+        SpreeDashboard.showFlash("error", response.responseText)
       })
     } else {
       el.blur()
@@ -95,14 +93,14 @@ document.addEventListener("spree:load", function() {
         url: el.prop("href"),
         data: {
           _method: "delete",
-          authenticity_token: AUTH_TOKEN
+          authenticity_token: SpreeDashboard.AUTH_TOKEN
         }
       }).done(function() {
         el.parents("tr").fadeOut("hide", function() {
           $(this).remove()
         })
       }).fail(function(response) {
-        show_flash("error", response.responseText)
+        SpreeDashboard.showFlash("error", response.responseText)
       })
     }
     return false
@@ -128,12 +126,12 @@ document.addEventListener("spree:load", function() {
   /**
     UTILITY
   **/
-  window.Spree.advanceOrder = function() {
+  window.SpreeDashboard.advanceOrder = function() {
     $.ajax({
       type: "PATCH",
       async: false,
-      headers: Spree.apiV2Authentication(),
-      url: Spree.url(Spree.routes.orders_api_v2 + "/" + order_number + "/advance")
+      headers: SpreeDashboard.apiV2Authentication(),
+      url: SpreeDashboard.url(SpreeDashboard.routes.orders_api_v2 + "/" + order_number + "/advance")
     }).done(function() {
       window.location.reload()
     })

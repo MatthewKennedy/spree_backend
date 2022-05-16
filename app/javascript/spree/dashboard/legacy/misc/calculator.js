@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   var calculatorSelect = $("select#calc_type")
   var originalCalcType = calculatorSelect.prop("value")

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 document.addEventListener("spree:load", function() {
   const linkSwitcher = $(".link_switcher").select2()
 

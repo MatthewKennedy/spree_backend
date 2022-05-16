@@ -15,14 +15,16 @@
 
 <%= stylesheet_link_tag 'spree/backend/all', media: :all %>
 
+<%= render 'spree/admin/shared/paths' %>
+
+<%= javascript_include_tag "spree-dashboard", data: { turbo_track: "reload" } %>
+
 <script>
-  <%== "var AUTH_TOKEN = #{form_authenticity_token.inspect};" %>
-  <%== "var OAUTH_TOKEN = '#{admin_oauth_token}';" if defined?(admin_oauth_token) %>
-  <%== "var ADDRESS_FIELDS = #{Spree::Address::ADDRESS_FIELDS}" %>
+  <%== "SpreeDashboard.AUTH_TOKEN = #{form_authenticity_token.inspect}" %>
+  <%== "SpreeDashboard.OAUTH_TOKEN = '#{admin_oauth_token}'" if defined?(admin_oauth_token) %>
+  <%== "SpreeDashboard.ADDRESS_FIELDS = #{Spree::Address::ADDRESS_FIELDS}" %>
 </script>
 
-<%= render 'spree/admin/shared/paths' %>
-<%= javascript_include_tag "spree-dashboard", data: { turbo_track: "reload" } %>
 <%= render "spree/admin/shared/translations" %>
 
 <%= yield :head %>

@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 // import Cleave from 'cleave.js'
 
 document.addEventListener("spree:load", function() {

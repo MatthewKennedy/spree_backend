@@ -10,7 +10,7 @@ $.fn.productAutocomplete = function (options) {
 
   function addOptions(select, values) {
     $.ajax({
-      url: Spree.routes.products_api_v2,
+      url: SpreeDashboard.routes.products_api_v2,
       dataType: "json",
       data: {
         filter: {
@@ -20,7 +20,7 @@ $.fn.productAutocomplete = function (options) {
           product: "name"
         }
       },
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
     }).then(function (data) {
       select.addSelect2Options(data.data)
     })
@@ -30,7 +30,7 @@ $.fn.productAutocomplete = function (options) {
     multiple: multiple,
     minimumInputLength: 3,
     ajax: {
-      url: Spree.routes.products_api_v2,
+      url: SpreeDashboard.routes.products_api_v2,
       dataType: "json",
       data: function (params) {
         return {
@@ -42,7 +42,7 @@ $.fn.productAutocomplete = function (options) {
           }
         }
       },
-      headers: Spree.apiV2Authentication(),
+      headers: SpreeDashboard.apiV2Authentication(),
       processResults: function(data) {
         return formatSelect2Options(data)
       }

@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 /**
   populateSelectOptionsFromApi(params)
   Allows you to easily fetch data from API (Platform v2) and populate an empty <select> with <option> tags, including a selected <option> tag.
@@ -9,7 +7,7 @@
 
   populateSelectOptionsFromApi({
     targetElement: '#mySelectElement',
-    apiUrl: Spree.routes.taxons_api_v2,
+    apiUrl: SpreeDashboard.routes.taxons_api_v2,
     returnAttribute: 'pretty_name',
 
     <% if @menu_item.linked_resource_id %>
@@ -24,7 +22,7 @@
     <script>
       populateSelectOptionsFromApi({
         targetElement: "#<%= save_to %>Select2",
-        apiUrl: Spree.routes.taxons_api_v2 + "?filter[permalink_matches]=<%= resource.send(save_to) %>",
+        apiUrl: SpreeDashboard.routes.taxons_api_v2 + "?filter[permalink_matches]=<%= resource.send(save_to) %>",
         returnValueFromAttributes: 'permalink',
         returnOptionText: 'pretty_name',
 
@@ -55,7 +53,7 @@ const createRequest = function(params, succeed, fail) {
   const selectedOption = params.selectedOption
   const selectEl = document.querySelector(targetElement)
 
-  fetch(apiUrl, { headers: Spree.apiV2Authentication() })
+  fetch(apiUrl, { headers: SpreeDashboard.apiV2Authentication() })
     .then((response) => handleErrors(response))
     .then((json) => succeed(json.data, returnValueFromAttributes, returnOptionText, selectEl, selectedOption))
     .catch((error) => fail(error, selectEl))

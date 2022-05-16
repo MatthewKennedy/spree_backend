@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   var countryBased = $("#country_based")
   var stateBased = $("#state_based")
@@ -29,7 +27,7 @@ function show_country () {
   })
   $("#country_members").show()
 }
-// eslint-disable-next-line camelcase
+
 function show_state () {
   $("#country_members :input").each(function () {
     $(this).prop("disabled", true)

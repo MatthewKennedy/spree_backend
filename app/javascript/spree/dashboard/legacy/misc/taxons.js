@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import Sortable from "sortablejs"
 
 document.addEventListener("spree:load", function() {
@@ -30,22 +28,22 @@ document.addEventListener("spree:load", function() {
       }
     }
     var requestData = {
-      uri: Spree.routes.classifications_api_v2 + "/" + classificationId,
+      uri: SpreeDashboard.routes.classifications_api_v2 + "/" + classificationId,
       method: "PATCH",
       dataBody: data,
     }
-    spreeFetchRequest(requestData)
+    SpreeDashboard.fetchRequestUtil(requestData)
   }
 
   if (taxonId.length > 0) {
     taxonId.select2({
-      placeholder: Spree.translations.find_a_taxon,
+      placeholder: SpreeDashboard.translations.find_a_taxon,
       minimumInputLength: 3,
       multiple: false,
       ajax: {
-        url: Spree.routes.taxons_api_v2,
+        url: SpreeDashboard.routes.taxons_api_v2,
         datatype: "json",
-        headers: Spree.apiV2Authentication(),
+        headers: SpreeDashboard.apiV2Authentication(),
         data: function (params, page) {
           return {
             per_page: 50,
@@ -75,8 +73,8 @@ document.addEventListener("spree:load", function() {
       }
     }).on("select2:select", function (e) {
       $.ajax({
-        url: Spree.routes.classifications_api_v2,
-        headers: Spree.apiV2Authentication(),
+        url: SpreeDashboard.routes.classifications_api_v2,
+        headers: SpreeDashboard.apiV2Authentication(),
         data: {
           filter: {
             taxon_id_eq: e.params.data.id
@@ -89,7 +87,7 @@ document.addEventListener("spree:load", function() {
         taxonProducts.empty()
 
         if (json.meta.total_count === 0) {
-          return taxonProducts.html("<p class=\"text-center w-100 p-4\">" + Spree.translations.no_results + "</p>")
+          return taxonProducts.html("<p class=\"text-center w-100 p-4\">" + SpreeDashboard.translations.no_results + "</p>")
         } else {
           var results = []
 
@@ -137,8 +135,8 @@ document.addEventListener("spree:load", function() {
     var product = $(this).parents(".product")
     var classificationId = product.data("classification-id")
     $.ajax({
-      url: Spree.routes.classifications_api_v2 + "/" + classificationId.toString(),
-      headers: Spree.apiV2Authentication(),
+      url: SpreeDashboard.routes.classifications_api_v2 + "/" + classificationId.toString(),
+      headers: SpreeDashboard.apiV2Authentication(),
       type: "DELETE"
     }).done(function () {
       product.fadeOut(400, function (e) {

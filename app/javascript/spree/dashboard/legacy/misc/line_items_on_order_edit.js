@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-
-
 // This file contains the code for interacting with line items in the manual cart
 document.addEventListener("spree:load", function() {
   "use strict"
@@ -30,7 +27,7 @@ function addVariant () {
 const adjustLineItems = function(order_id, variant_id, quantity){
   $.ajax({
     type: "POST",
-    url: Spree.routes.line_items_api_v2,
+    url: SpreeDashboard.routes.line_items_api_v2,
     data: {
       line_item: {
         order_id: order_id,
@@ -38,11 +35,11 @@ const adjustLineItems = function(order_id, variant_id, quantity){
         quantity: quantity
       }
     },
-    headers: Spree.apiV2Authentication()
+    headers: SpreeDashboard.apiV2Authentication()
   }).done(function () {
-    window.Spree.advanceOrder()
+    window.SpreeDashboard.advanceOrder()
     window.location.reload()
   }).fail(function (response) {
-    show_flash("error", response.responseJSON.error)
+    SpreeDashboard.showFlash("error", response.responseJSON.error)
   })
 }

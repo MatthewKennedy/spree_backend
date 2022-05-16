@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 document.addEventListener("spree:load", function() {
   var originalGtwyType = $("#gtwy-type").prop("value")
   $("div#gateway-settings-warning").hide()

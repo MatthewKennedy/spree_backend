@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+import DOMPurify from "dompurify"
 
 document.addEventListener("spree:load", function() {
   const QuickSearchInput = document.getElementById("quick_search")
@@ -16,7 +16,7 @@ document.addEventListener("spree:load", function() {
     $(this).parents(".filter-wrap").toggleClass("collapsed")
   })
 
-  // TODO: remove this js temp behaviour and fix this decent
+  // TODO: remove this js temp behavior and fix this decent
   // Temp quick search
   // When there was a search term, copy it
   $(".js-quick-search").val($(".js-quick-search-target").val())
