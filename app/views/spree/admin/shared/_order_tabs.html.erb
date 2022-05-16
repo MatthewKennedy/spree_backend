@@ -42,7 +42,7 @@
 
   <% if can? :index, Spree::Adjustment %>
     <li class="nav-item" data-hook='admin_order_tabs_adjustments'>
-      <%= link_to_with_icon 'adjust.svg',
+      <%= link_to_with_icon 'grid-3x3-gap.svg',
         Spree.t(:adjustments),
         spree.admin_order_adjustments_url(@order),
         class: "#{'active' if current == :adjustments} nav-link" %>

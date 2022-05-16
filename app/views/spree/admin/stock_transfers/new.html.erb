@@ -79,7 +79,7 @@
             <div class="input-group">
               <%= number_field_tag :transfer_variant_quantity, 1, class: 'form-control', min: 1 %>
               <span class="input-group-btn ms-2">
-                <%= button Spree.t(:add), 'add.svg', 'submit', class: "transfer_add_variant" %>
+                <%= button Spree.t(:add), 'plus.svg', 'submit', class: "transfer_add_variant" %>
               </span>
             </div>
           </div>
@@ -106,6 +106,6 @@
   </div>
 
   <div class="form-actions" data-hook="buttons">
-    <%= button Spree.t(:transfer_stock), 'add.svg', class: 'transfer_transfer' %>
+    <%= button Spree.t(:transfer_stock), 'plus.svg', class: 'transfer_transfer' %>
   </div>
 <% end %>

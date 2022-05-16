@@ -86,9 +86,9 @@ module Spree
       def svg_icon(name:, classes: '', width:, height:)
         if name.ends_with?('.svg')
           icon_name = File.basename(name, File.extname(name))
-          inline_svg_tag "backend-#{icon_name}.svg", class: "icon-#{icon_name} #{classes}", size: "#{width}px*#{height}px"
+          inline_svg_tag "#{icon_name}.svg", class: "icon-#{icon_name} #{classes}", size: "#{width}px*#{height}px"
         else
-          inline_svg_tag "backend-#{name}.svg", class: "icon-#{name} #{classes}", size: "#{width}px*#{height}px"
+          inline_svg_tag "#{name}.svg", class: "icon-#{name} #{classes}", size: "#{width}px*#{height}px"
         end
       end
 
@@ -242,7 +242,7 @@ module Spree
         button_link_to(
           Spree.t('admin.utilities.preview', name: resource_name),
           spree_storefront_resource_url(resource),
-          class: 'btn-light', icon: 'view.svg', id: "adminPreview#{resource_name}", target: :blank, data: { turbo: false }
+          class: 'btn-light', icon: 'eye.svg', id: "adminPreview#{resource_name}", target: :blank, data: { turbo: false }
         )
       end
 

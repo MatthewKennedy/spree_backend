@@ -21,7 +21,7 @@
   <% end if can?(:admin, Spree::Image) && !@product.deleted? %>
 
   <%= content_tag :li, class: 'nav-item' do %>
-    <%= link_to_with_icon 'adjust.svg',
+    <%= link_to_with_icon 'grid-3x3-gap.svg',
       Spree.t(:variants),
       spree.admin_product_variants_url(@product),
       class: "nav-link #{'active' if current == :variants}" %>

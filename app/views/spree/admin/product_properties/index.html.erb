@@ -13,7 +13,7 @@
   <%= button_link_to(
     Spree.t(:add_product_properties),
     "javascript:;",
-    { icon: 'add.svg', :'data-target' => "tbody#sortVert", class: 'btn-success spree_add_fields' }) %>
+    { icon: 'plus.svg', :'data-target' => "tbody#sortVert", class: 'btn-success spree_add_fields' }) %>
 <% end if can? :create, Spree::ProductProperty %>
 
 <%= form_for @product, url: spree.admin_product_url(@product), method: :put do |f| %>
