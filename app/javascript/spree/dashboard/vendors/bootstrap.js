@@ -1,7 +1,4 @@
-/* eslint-disable no-undef */
-
-import * as Bootstrap from "bootstrap"
-if (!window.bootstrap)  { window.bootstrap = Bootstrap }
+import "bootstrap"
 
 document.addEventListener("spree:load", function() {
   $(".with-tip").each(function() {
@@ -14,5 +11,3 @@ document.addEventListener("spree:load", function() {
     }
   })
 })
-
-

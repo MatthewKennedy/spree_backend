@@ -1,4 +1,4 @@
-import Flatpickr from "flatpickr"
+import Flatpickr from "flatpickr/dist/flatpickr"
 import "flatpickr/dist/l10n"
 
 document.addEventListener("spree:load", function() {
