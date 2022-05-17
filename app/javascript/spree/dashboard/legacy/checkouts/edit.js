@@ -1,3 +1,5 @@
+import Deserializer from "jsonapi-serializer"
+
 function clearAddressFields(addressKinds) {
   if (addressKinds === undefined) {
     addressKinds = ["ship", "bill"]
@@ -87,8 +89,7 @@ $.fn.customerAutocomplete = function() {
         }
       },
       success: function(data) {
-        var JSONAPIDeserializer = require("jsonapi-serializer").Deserializer
-        new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, users) {
+        new Deserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, users) {
           jsonApiUsers = users
         })
       },
@@ -124,7 +125,7 @@ document.addEventListener("spree:load", function() {
   // On page load hide shipping address from
   orderUseBilling()
 
-  // On click togggle shipping address from
+  // On click toggle shipping address from
   orderUseBillingInput.click(orderUseBilling)
 
   // If guest checkout clear fields

@@ -73,7 +73,7 @@ module Spree
 
       # Single main menu item
       def main_menu_item(text, url: nil, icon: nil)
-        link_to url, 'data-toggle': 'collapse', class: 'd-flex w-100 px-3 py-2 position-relative align-items-center' do
+        link_to url, data: { bs_toggle: "collapse"}, class: 'd-flex w-100 px-3 py-2 position-relative align-items-center' do
           if icon.ends_with?('.svg')
             svg_icon(name: icon, classes: 'me-2 text-muted', width: MENU_ICON_SIZE, height: MENU_ICON_SIZE) +
               content_tag(:span, raw(" #{text}"), class: 'text-muted') +

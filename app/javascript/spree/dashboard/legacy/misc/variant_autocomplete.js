@@ -1,11 +1,9 @@
-import JSONAPIDeserializer from "jsonapi-serializer"
-
-document.addEventListener("spree:load", function() {
-  var variantAutocompleteTemplate = $("#variant_autocomplete_template")
+document.addEventListener("SpreeDash:load", function() {
+  var variantAutocompleteTemplate = $('#variant_autocomplete_template')
   if (variantAutocompleteTemplate.length > 0) {
     window.variantTemplate = Handlebars.compile(variantAutocompleteTemplate.text())
-    window.variantStockTemplate = Handlebars.compile($("#variant_autocomplete_stock_template").text())
-    window.variantLineItemTemplate = Handlebars.compile($("#variant_line_items_autocomplete_stock_template").text())
+    window.variantStockTemplate = Handlebars.compile($('#variant_autocomplete_stock_template').text())
+    window.variantLineItemTemplate = Handlebars.compile($('#variant_line_items_autocomplete_stock_template').text())
   }
 })
 
@@ -14,7 +12,7 @@ function formatVariantResult(variant) {
     return variant.text
   }
 
-  if (variant["images"][0] !== undefined && variant["images"][0].transformed_url !== undefined) {
+  if (variant['images'][0] !== undefined && variant['images'][0].transformed_url !== undefined) {
     variant.image = variant.images[0].transformed_url
   }
   return $(variantTemplate({
@@ -31,15 +29,15 @@ $.fn.variantAutocomplete = function () {
     quietMillis: 200,
     ajax: {
       url: SpreeDash.url(SpreeDash.routes.variants_api_v2),
-      dataType: "json",
+      dataType: 'json',
       data: function (params) {
         var query = {
           filter: {
             search_by_product_name_or_sku: params.term
           },
-          include: "images,stock_items.stock_location",
+          include: 'images,stock_items.stock_location',
           image_transformation: {
-            size: "100x100"
+            size: '100x100'
           }
         }
 
@@ -47,19 +45,19 @@ $.fn.variantAutocomplete = function () {
       },
       headers: SpreeDash.apiV2Authentication(),
       success: function(data) {
-        new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {
-          jsonApiVariants = variants
+        var JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
+        new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
           window.variants = variants
         })
       },
       processResults: function (_data) {
-        return { results: jsonApiVariants } // we need to return deserialized json api data
+        return { results: variants } // we need to return deserialized json api data
       }
     },
     templateResult: formatVariantResult,
     templateSelection: function(variant) {
       if (!!variant.options_text) {
-        return variant.name + "(" + variant.options_text + ")"
+        return variant.name + '(' + variant.options_text + ')'
       } else {
         return variant.name
       }
