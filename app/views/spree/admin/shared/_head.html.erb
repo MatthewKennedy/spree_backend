@@ -17,12 +17,12 @@
 
 <%= render 'spree/admin/shared/paths' %>
 
-<%= javascript_include_tag "spree-dashboard", data: { turbo_track: "reload" } %>
+<%= javascript_include_tag "spree_dash", data: { turbo_track: "reload" } %>
 
 <script>
-  <%== "SpreeDashboard.AUTH_TOKEN = #{form_authenticity_token.inspect}" %>
-  <%== "SpreeDashboard.OAUTH_TOKEN = '#{admin_oauth_token}'" if defined?(admin_oauth_token) %>
-  <%== "SpreeDashboard.ADDRESS_FIELDS = #{Spree::Address::ADDRESS_FIELDS}" %>
+  <%== "SpreeDash.AUTH_TOKEN = #{form_authenticity_token.inspect}" %>
+  <%== "SpreeDash.OAUTH_TOKEN = '#{admin_oauth_token}'" if defined?(admin_oauth_token) %>
+  <%== "SpreeDash.ADDRESS_FIELDS = #{Spree::Address::ADDRESS_FIELDS}" %>
 </script>
 
 <%= render "spree/admin/shared/translations" %>

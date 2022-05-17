@@ -26,11 +26,11 @@ $.fn.variantAutocomplete = function () {
 
   // deal with initSelection
   return this.select2({
-    placeholder: SpreeDashboard.translations.variant_placeholder,
+    placeholder: SpreeDash.translations.variant_placeholder,
     minimumInputLength: 3,
     quietMillis: 200,
     ajax: {
-      url: SpreeDashboard.url(SpreeDashboard.routes.variants_api_v2),
+      url: SpreeDash.url(SpreeDash.routes.variants_api_v2),
       dataType: "json",
       data: function (params) {
         var query = {
@@ -45,7 +45,7 @@ $.fn.variantAutocomplete = function () {
 
         return query;
       },
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       success: function(data) {
         new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {
           jsonApiVariants = variants

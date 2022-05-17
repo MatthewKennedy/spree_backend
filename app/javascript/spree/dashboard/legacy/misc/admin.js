@@ -51,7 +51,7 @@ document.addEventListener("spree:load", function() {
         url: $(this).prop("href"),
         data: {
           _method: "delete",
-          authenticity_token: SpreeDashboard.AUTH_TOKEN
+          authenticity_token: SpreeDash.AUTH_TOKEN
         },
         dataType: "script",
         complete: function() {
@@ -70,7 +70,7 @@ document.addEventListener("spree:load", function() {
           if (livePreview) { livePreview.contentWindow.location.reload() }
         }
       }).fail(function(response) {
-        SpreeDashboard.showFlash("error", response.responseText)
+        SpreeDash.showFlash("error", response.responseText)
       })
     } else {
       el.blur()
@@ -93,14 +93,14 @@ document.addEventListener("spree:load", function() {
         url: el.prop("href"),
         data: {
           _method: "delete",
-          authenticity_token: SpreeDashboard.AUTH_TOKEN
+          authenticity_token: SpreeDash.AUTH_TOKEN
         }
       }).done(function() {
         el.parents("tr").fadeOut("hide", function() {
           $(this).remove()
         })
       }).fail(function(response) {
-        SpreeDashboard.showFlash("error", response.responseText)
+        SpreeDash.showFlash("error", response.responseText)
       })
     }
     return false
@@ -126,12 +126,12 @@ document.addEventListener("spree:load", function() {
   /**
     UTILITY
   **/
-  window.SpreeDashboard.advanceOrder = function() {
+  window.SpreeDash.advanceOrder = function() {
     $.ajax({
       type: "PATCH",
       async: false,
-      headers: SpreeDashboard.apiV2Authentication(),
-      url: SpreeDashboard.url(SpreeDashboard.routes.orders_api_v2 + "/" + order_number + "/advance")
+      headers: SpreeDash.apiV2Authentication(),
+      url: SpreeDash.url(SpreeDash.routes.orders_api_v2 + "/" + order_number + "/advance")
     }).done(function() {
       window.location.reload()
     })

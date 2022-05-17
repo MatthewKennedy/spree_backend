@@ -41,24 +41,24 @@ document.addEventListener("spree:load", function() {
 
   // handle delete click
   $("a.delete-item").click(function (event) {
-    if (confirm(SpreeDashboard.translations.are_you_sure_delete)) {
+    if (confirm(SpreeDash.translations.are_you_sure_delete)) {
       var del = $(this)
       var shipmentNumber = del.data("shipment-number")
       var variantId = del.data("variant-id")
       // eslint-disable-next-line
-      var url = SpreeDashboard.routes.shipments_api_v2 + '/' + shipmentNumber + '/remove_item'
+      var url = SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber + '/remove_item'
 
       toggleItemEdit()
 
       $.ajax({
         type: "PATCH",
-        url: SpreeDashboard.url(url),
+        url: SpreeDash.url(url),
         data: {
           shipment: {
             variant_id: variantId
           }
         },
-        headers: SpreeDashboard.apiV2Authentication()
+        headers: SpreeDash.apiV2Authentication()
       }).done(function (msg) {
         window.location.reload()
       }).fail(function (msg) {
@@ -71,11 +71,11 @@ document.addEventListener("spree:load", function() {
   // handle ship click
   $("[data-hook=admin_shipment_form] a.ship").on("click", function () {
     var link = $(this)
-    var url = SpreeDashboard.url(SpreeDashboard.routes.shipments_api_v2 + "/" + link.data("shipment-number") + "/ship")
+    var url = SpreeDash.url(SpreeDash.routes.shipments_api_v2 + "/" + link.data("shipment-number") + "/ship")
     $.ajax({
       type: "PATCH",
       url: url,
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).done(function () {
       window.location.reload()
     }).fail(function (msg) {
@@ -95,7 +95,7 @@ document.addEventListener("spree:load", function() {
     var shipmentNumber = link.data("shipment-number")
     var selectedShippingRateId = link.parents("tbody").find("select#selected_shipping_rate_id[data-shipment-number='" + shipmentNumber + "']").val()
     var unlock = link.parents("tbody").find("input[name='open_adjustment'][data-shipment-number='" + shipmentNumber + "']:checked").val()
-    var url = SpreeDashboard.url(SpreeDashboard.routes.shipments_api_v2 + "/" + shipmentNumber + ".json")
+    var url = SpreeDash.url(SpreeDash.routes.shipments_api_v2 + "/" + shipmentNumber + ".json")
 
     $.ajax({
       type: "PATCH",
@@ -106,7 +106,7 @@ document.addEventListener("spree:load", function() {
           unlock: unlock
         },
       },
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).done(function () {
       window.location.reload()
     }).fail(function (msg) {
@@ -141,7 +141,7 @@ document.addEventListener("spree:load", function() {
     var link = $(this)
     var shipmentNumber = link.data("shipment-number")
     var tracking = link.parents("tbody").find("input#tracking").val()
-    var url = SpreeDashboard.url(SpreeDashboard.routes.shipments_api_v2 + "/" + shipmentNumber + ".json")
+    var url = SpreeDash.url(SpreeDash.routes.shipments_api_v2 + "/" + shipmentNumber + ".json")
 
     $.ajax({
       type: "PATCH",
@@ -151,7 +151,7 @@ document.addEventListener("spree:load", function() {
           tracking: tracking
         }
       },
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).done(function (json) {
       link.parents("tbody").find("tr.edit-tracking").toggle()
 
@@ -159,9 +159,9 @@ document.addEventListener("spree:load", function() {
       show.toggle()
 
       if (json.data.attributes.tracking) {
-        show.find(".tracking-value").html($("<strong>").html(SpreeDashboard.translations.tracking + ": ")).append(createTrackingValueContent(json.data))
+        show.find(".tracking-value").html($("<strong>").html(SpreeDash.translations.tracking + ": ")).append(createTrackingValueContent(json.data))
       } else {
-        show.find(".tracking-value").html(SpreeDashboard.translations.no_tracking_present)
+        show.find(".tracking-value").html(SpreeDash.translations.no_tracking_present)
       }
     })
   })
@@ -170,7 +170,7 @@ document.addEventListener("spree:load", function() {
 function adjustShipmentItems(shipmentNumber, variantId, quantity) {
   var shipment = _.findWhere(shipments, { number: shipmentNumber + "" })
   var inventoryUnits = _.where(shipment.inventory_units, { variant_id: variantId })
-  var url = SpreeDashboard.routes.shipments_api_v2 + "/" + shipmentNumber
+  var url = SpreeDash.routes.shipments_api_v2 + "/" + shipmentNumber
   var previousQuantity = inventoryUnits.reduce(function (accumulator, currentUnit, _index, _array) {
     return accumulator + currentUnit.quantity
   }, 0)
@@ -188,14 +188,14 @@ function adjustShipmentItems(shipmentNumber, variantId, quantity) {
   if (newQuantity !== 0) {
     $.ajax({
       type: "PATCH",
-      url: SpreeDashboard.url(url),
+      url: SpreeDash.url(url),
       data: {
         shipment: {
           variant_id: variantId,
           quantity: newQuantity,
         }
       },
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).done(function (msg) {
       window.location.reload()
     }).fail(function (msg) {
@@ -241,11 +241,11 @@ function startItemSplit(event) {
   $.ajax({
     type: "GET",
     async: false,
-    url: SpreeDashboard.routes.variants_api_v2 + "/" + variantId,
+    url: SpreeDash.routes.variants_api_v2 + "/" + variantId,
     data: {
       include: "stock_items.stock_location"
     },
-    headers: SpreeDashboard.apiV2Authentication()
+    headers: SpreeDash.apiV2Authentication()
   }).done(function (json) {
     var JSONAPIDeserializer = require("jsonapi-serializer").Deserializer
     new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(json, function (_err, deserializedJson) {
@@ -258,7 +258,7 @@ function startItemSplit(event) {
       $("a.cancel-split").click(cancelItemSplit)
       $("a.save-split").click(completeItemSplit)
 
-      $("#item_stock_location").select2({ width: "resolve", placeholder: SpreeDashboard.translations.item_stock_placeholder })
+      $("#item_stock_location").select2({ width: "resolve", placeholder: SpreeDash.translations.item_stock_placeholder })
     })
   }).fail(function (msg) {
     alert(msg.responseJSON.error)
@@ -305,11 +305,11 @@ function completeItemSplit(event) {
     $.ajax({
       type: "PATCH",
       async: false,
-      url: SpreeDashboard.url(SpreeDashboard.routes.shipments_api_v2 + "/" + originalShipmentNumber + path),
+      url: SpreeDash.url(SpreeDash.routes.shipments_api_v2 + "/" + originalShipmentNumber + path),
       data: {
         shipment: $.extend(data, additionalData)
       },
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).fail(function (msg) {
       alert(msg.responseJSON.error)
     }).done(function (msg) {
@@ -344,7 +344,7 @@ function addVariantFromStockLocation(event) {
   if (shipment === undefined) {
     $.ajax({
       type: "POST",
-      url: SpreeDashboard.routes.shipments_api_v2,
+      url: SpreeDash.routes.shipments_api_v2,
       data: {
         shipment: {
           order_id: order_id,
@@ -353,7 +353,7 @@ function addVariantFromStockLocation(event) {
           stock_location_id: stockLocationId
         }
       },
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).done(function (msg) {
       window.location.reload()
     }).fail(function (msg) {

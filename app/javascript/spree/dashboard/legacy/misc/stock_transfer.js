@@ -18,14 +18,14 @@ document.addEventListener("spree:load", function() {
     $("#transfer_receive_stock").change(this.receive_stock_change.bind(this))
 
     $.ajax({
-      url: SpreeDashboard.routes.stock_locations_api_v2 + "?per_page=1000",
+      url: SpreeDash.routes.stock_locations_api_v2 + "?per_page=1000",
       type: "GET",
       data: {
         fields: {
           stock_location: "name"
         }
       },
-      headers: SpreeDashboard.apiV2Authentication()
+      headers: SpreeDash.apiV2Authentication()
     }).then(function (json) {
       this.locations = (function () {
         var ref = json.data
@@ -123,12 +123,12 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferVariants.prototype._search_transfer_variants = function () {
-    return this.build_select(SpreeDashboard.url(SpreeDashboard.routes.variants_api_v2), "product_name_or_sku_cont")
+    return this.build_select(SpreeDash.url(SpreeDash.routes.variants_api_v2), "product_name_or_sku_cont")
   }
 
   TransferVariants.prototype._search_transfer_stock_items = function () {
     var stockLocationId = $("#transfer_source_location_id").val()
-    return this.build_select(SpreeDashboard.routes.stock_items_api_v2 + "?filter[stock_location_id_eq]=" + stockLocationId + "&include=variant", "variant_product_name_or_variant_sku_cont")
+    return this.build_select(SpreeDash.routes.stock_items_api_v2 + "?filter[stock_location_id_eq]=" + stockLocationId + "&include=variant", "variant_product_name_or_variant_sku_cont")
   }
 
   TransferVariants.prototype.format_variant_result = function (result) {
@@ -168,7 +168,7 @@ document.addEventListener("spree:load", function() {
             }
           }
         },
-        headers: SpreeDashboard.apiV2Authentication(),
+        headers: SpreeDash.apiV2Authentication(),
         success: function(data) {
           var JSONAPIDeserializer = require("jsonapi-serializer").Deserializer
           new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {

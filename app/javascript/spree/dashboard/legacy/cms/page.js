@@ -42,12 +42,12 @@ function handleTogglePageVisibility(obj) {
     }
   }
   const requestData = {
-    uri: SpreeDashboard.routes.pages_api_v2 + `/${pageId}`,
+    uri: SpreeDash.routes.pages_api_v2 + `/${pageId}`,
     method: "PATCH",
     dataBody: data,
   }
 
-  SpreeDashboard.fetchRequestUtil(requestData, handleToggleSuccess)
+  SpreeDash.fetchRequestUtil(requestData, handleToggleSuccess)
 
   function handleToggleSuccess() {
     toggleVisibilityState(obj)
@@ -85,11 +85,11 @@ function handleSectionReposition(evt) {
     }
   }
   const requestData = {
-    uri: `${SpreeDashboard.routes.sections_api_v2}/${sectionId}`,
+    uri: `${SpreeDash.routes.sections_api_v2}/${sectionId}`,
     method: "PATCH",
     dataBody: data,
   }
-  SpreeDashboard.fetchRequestUtil(requestData, reloadPreview)
+  SpreeDash.fetchRequestUtil(requestData, reloadPreview)
 }
 
 function updateCmsPageType() {

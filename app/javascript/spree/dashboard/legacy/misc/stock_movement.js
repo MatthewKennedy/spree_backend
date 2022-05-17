@@ -10,7 +10,7 @@ document.addEventListener("spree:load", function() {
     minimumInputLength: 3,
     quietMillis: 200,
     ajax: {
-      url: SpreeDashboard.routes.stock_items_api_v2,
+      url: SpreeDash.routes.stock_items_api_v2,
       data: function (params, page) {
         return {
           filter: {
@@ -28,7 +28,7 @@ document.addEventListener("spree:load", function() {
           page: page
         }
       },
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       success: function(data) {
         new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {
           jsonApiVariants = variants

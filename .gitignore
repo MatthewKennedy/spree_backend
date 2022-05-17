@@ -58,7 +58,7 @@ vendor/bundle
 TODO
 
 node_modules
-app/assets/javascripts/spree-dashboard.js
-app/assets/javascripts/spree-dashboard.*.js
+app/assets/javascripts/spree_dash.js
+app/assets/javascripts/spree_dash.*.js
 src
 *.gem

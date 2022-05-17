@@ -17,7 +17,7 @@ document.addEventListener("spree:load", function() {
       forceFallback: true,
       onEnd: function(evt) {
         var itemEl = evt.item
-        var positions = { authenticity_token: SpreeDashboard.AUTH_TOKEN }
+        var positions = { authenticity_token: SpreeDash.AUTH_TOKEN }
         $.each($("tr", element), function(position, obj) {
           var reg = /spree_(\w+_?)+_(.*)/
           var parts = reg.exec($(obj).prop("id"))

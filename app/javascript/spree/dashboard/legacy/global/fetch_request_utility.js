@@ -30,13 +30,13 @@ const spreeHandleFetchRequestResponse = function(response) {
 // the response message.
 const spreeHandleFetchRequestError = function(data) {
   if (data.error != null) {
-    SpreeDashboard.showFlash("error", data.error)
+    SpreeDash.showFlash("error", data.error)
   } else if (data.message != null) {
-    SpreeDashboard.showFlash("success", data.message)
+    SpreeDash.showFlash("success", data.message)
   } else if (data.exception != null) {
-    SpreeDashboard.showFlash("info", data.exception)
+    SpreeDash.showFlash("info", data.exception)
   } else if (data.detail != null) {
-    SpreeDashboard.showFlash("info", data.detail)
+    SpreeDash.showFlash("info", data.detail)
   }
 }
 
@@ -51,7 +51,7 @@ const spreeWindowReload = function() {
 // Pass a json object containing your fetch request details and settings, you can also send a second optional
 // argument, this second argument is your success response handler, and lastly a third argument that carries
 // through a target element to the response method if needed, the second and third arguments are optional.
-// When using SpreeDashboard.fetchRequestUtil() the loading... progress bar, flash notice and errors are all handled for you.
+// When using SpreeDash.fetchRequestUtil() the loading... progress bar, flash notice and errors are all handled for you.
 //
 // EXAMPLE SENDING A POST REQUEST TO CREATE A NEW SHIPMENT:
 //    const data = {
@@ -63,7 +63,7 @@ const spreeWindowReload = function() {
 //
 //    const requestData = {
 //      // request details
-//      uri: SpreeDashboard.routes.shipments_api_v2,
+//      uri: SpreeDash.routes.shipments_api_v2,
 //      method: 'POST',
 //      dataBody: data,
 //
@@ -71,7 +71,7 @@ const spreeWindowReload = function() {
 //   // disableProgressIndicator: true,   Allows you to disable the progress loader bar if needed.
 //   // formatDataBody: false             If you have pre-formatted data, pass this option to stop the function performing the default stringify.
 //    }
-//    SpreeDashboard.fetchRequestUtil(requestData, someCallbackFunction, this)
+//    SpreeDash.fetchRequestUtil(requestData, someCallbackFunction, this)
 //
 const fetchRequestUtil = function(requstData, success = null, target = null) {
   if (!requstData.disableProgressIndicator === true) showProgressIndicator()
@@ -93,7 +93,7 @@ const fetchRequestUtil = function(requstData, success = null, target = null) {
   fetch(requestUri, {
     method: requestMethod,
     headers: {
-      "Authorization": "Bearer " + SpreeDashboard.OAUTH_TOKEN,
+      "Authorization": "Bearer " + SpreeDash.OAUTH_TOKEN,
       "Content-Type": requestContentType
     },
     body: requestDataBody
@@ -109,7 +109,7 @@ const fetchRequestUtil = function(requstData, success = null, target = null) {
     .catch(err => console.log(err))
 }
 
-if (!window.SpreeDashboard.fetchRequestUtil) {
-  window.SpreeDashboard.fetchRequestUtil = fetchRequestUtil
+if (!window.SpreeDash.fetchRequestUtil) {
+  window.SpreeDash.fetchRequestUtil = fetchRequestUtil
 }
 

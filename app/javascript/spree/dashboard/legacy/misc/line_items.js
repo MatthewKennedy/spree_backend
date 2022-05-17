@@ -13,7 +13,7 @@ document.addEventListener("spree:load", function() {
   })
   // handle delete click
   $("a.delete-line-item").click(function () {
-    if (confirm(SpreeDashboard.translations.are_you_sure_delete)) {
+    if (confirm(SpreeDash.translations.are_you_sure_delete)) {
       var del = $(this)
       var lineItemId = del.data("line-item-id")
       toggleItemEdit()
@@ -35,34 +35,34 @@ function toggleLineItemEdit () {
 }
 
 function lineItemURL (lineItemId) {
-  return SpreeDashboard.routes.line_items_api_v2 + "/" + lineItemId
+  return SpreeDash.routes.line_items_api_v2 + "/" + lineItemId
 }
 
 function adjustLineItem (lineItemId, quantity) {
   $.ajax({
     type: "PATCH",
-    url: SpreeDashboard.url(lineItemURL(lineItemId)),
+    url: SpreeDash.url(lineItemURL(lineItemId)),
     data: {
       line_item: {
         quantity: quantity
       }
     },
-    headers: SpreeDashboard.apiV2Authentication(),
+    headers: SpreeDash.apiV2Authentication(),
   }).done(function () {
-    window.SpreeDashboard.advanceOrder()
+    window.SpreeDash.advanceOrder()
   })
 }
 
 function deleteLineItem (lineItemId) {
   $.ajax({
     type: "DELETE",
-    url: SpreeDashboard.url(lineItemURL(lineItemId)),
-    headers: SpreeDashboard.apiV2Authentication(),
+    url: SpreeDash.url(lineItemURL(lineItemId)),
+    headers: SpreeDash.apiV2Authentication(),
   }).done(function () {
     $("#line-item-" + lineItemId).remove()
     if ($(".line-items tr.line-item").length === 0) {
       $(".line-items").remove()
     }
-    window.SpreeDashboard.advanceOrder()
+    window.SpreeDash.advanceOrder()
   })
 }

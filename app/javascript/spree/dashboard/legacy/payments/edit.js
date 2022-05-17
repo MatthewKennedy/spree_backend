@@ -15,11 +15,11 @@ document.addEventListener("spree:load", function() {
   var EditPaymentView, Payment, PaymentView, ShowPaymentView
   Payment = (function () {
     function Payment (id) {
-      this.url = SpreeDashboard.routes.payments_api_v2 + "/" + id
+      this.url = SpreeDash.routes.payments_api_v2 + "/" + id
       this.json = $.ajax({
         dataType: "json",
         url: this.url,
-        headers: SpreeDashboard.apiV2Authentication(),
+        headers: SpreeDash.apiV2Authentication(),
         success: function (data) {
           this.data = data.data
         }.bind(this)
@@ -44,7 +44,7 @@ document.addEventListener("spree:load", function() {
         data: {
           payment: attributes
         },
-        headers: SpreeDashboard.apiV2Authentication()
+        headers: SpreeDash.apiV2Authentication()
       })
       jqXHR.always(function () {
         this.updating = false
@@ -55,7 +55,7 @@ document.addEventListener("spree:load", function() {
       }.bind(this))
       jqXHR.fail(function () {
         var response = (jqXHR.responseJSON && jqXHR.responseJSON.error) || jqXHR.statusText
-        SpreeDashboard.showFlash("error", response)
+        SpreeDash.showFlash("error", response)
         onDone()
       })
       return jqXHR
@@ -103,7 +103,7 @@ document.addEventListener("spree:load", function() {
     PaymentView.prototype.$new_button = function (action) {
       return $("<a><i class=\"icon icon-" + action + "\"></i></a>").attr({
         "class": "payment-action-" + action + " btn btn-light btn-sm no-filter",
-        title: SpreeDashboard.translations[action]
+        title: SpreeDash.translations[action]
       }).data({
         action: action
       }).one({
@@ -224,7 +224,7 @@ document.addEventListener("spree:load", function() {
     }
 
     EditPaymentView.normalize_amount = function (amount) {
-      var separator = SpreeDashboard.translations.currency_separator
+      var separator = SpreeDash.translations.currency_separator
       return amount.replace(RegExp("[^\\d" + separator + "]", "g"), "")
     }
 

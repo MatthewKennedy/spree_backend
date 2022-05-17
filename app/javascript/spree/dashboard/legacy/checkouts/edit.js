@@ -3,7 +3,7 @@ function clearAddressFields(addressKinds) {
     addressKinds = ["ship", "bill"]
   }
   addressKinds.forEach(function(addressKind) {
-    SpreeDashboard.ADDRESS_FIELDS.forEach(function(field) {
+    SpreeDash.ADDRESS_FIELDS.forEach(function(field) {
       $("#order_" + addressKind + "_address_attributes_" + field).val("")
     })
   })
@@ -33,7 +33,7 @@ function formatCustomerAddress(address, kind) {
 
   var stateSelect = $("#order_" + kind + "_address_attributes_state_id")
 
-  SpreeDashboard.updateAddressState(kind.charAt(0), function() {
+  SpreeDash.updateAddressState(kind.charAt(0), function() {
     if (address.state) {
       stateSelect.val(address.state.id).trigger("change")
     }
@@ -70,11 +70,11 @@ $.fn.customerAutocomplete = function() {
 
   this.select2({
     minimumInputLength: 3,
-    placeholder: SpreeDashboard.translations.choose_a_customer,
+    placeholder: SpreeDash.translations.choose_a_customer,
     ajax: {
-      url: SpreeDashboard.routes.users_api_v2,
+      url: SpreeDash.routes.users_api_v2,
       datatype: "json",
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
         return {
           filter: {

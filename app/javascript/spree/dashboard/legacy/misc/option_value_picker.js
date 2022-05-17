@@ -14,8 +14,8 @@ $.fn.optionValueAutocomplete = function (options) {
   function addOptions(select, productId, values) {
     $.ajax({
       type: "GET",
-      url: SpreeDashboard.routes.option_values_api_v2,
-      headers: SpreeDashboard.apiV2Authentication(),
+      url: SpreeDash.routes.option_values_api_v2,
+      headers: SpreeDash.apiV2Authentication(),
       dataType: "json",
       data: {
         filter: {
@@ -32,9 +32,9 @@ $.fn.optionValueAutocomplete = function (options) {
     multiple: multiple,
     minimumInputLength: 1,
     ajax: {
-      url: SpreeDashboard.routes.option_values_api_v2,
+      url: SpreeDash.routes.option_values_api_v2,
       dataType: "json",
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
         var selectedProductId = typeof (productSelect) !== "undefined" ? productSelect.val() : null
 

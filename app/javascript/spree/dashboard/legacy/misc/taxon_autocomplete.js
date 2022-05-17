@@ -14,10 +14,10 @@ $.fn.taxonAutocomplete = function() {
 
   this.select2({
     multiple: true,
-    placeholder: SpreeDashboard.translations.taxon_placeholder,
+    placeholder: SpreeDash.translations.taxon_placeholder,
     minimumInputLength: 2,
     ajax: {
-      url: SpreeDashboard.routes.taxons_api_v2,
+      url: SpreeDash.routes.taxons_api_v2,
       dataType: "json",
       data: function (params) {
         return {
@@ -29,7 +29,7 @@ $.fn.taxonAutocomplete = function() {
           }
         }
       },
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       processResults: function(data) {
         return {
           results: formatTaxonList(data.data)

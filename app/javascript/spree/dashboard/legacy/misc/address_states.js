@@ -6,8 +6,8 @@ export function updateAddressState(region, successCallback) {
 
   if (!countryId) { return }
 
-  fetch(SpreeDashboard.routes.countries_api_v2 + "/" + countryId + "?include=states", {
-    headers: SpreeDashboard.apiV2Authentication()
+  fetch(SpreeDash.routes.countries_api_v2 + "/" + countryId + "?include=states", {
+    headers: SpreeDash.apiV2Authentication()
   }).then((response) => {
     switch (response.status) {
     case 200:
@@ -49,6 +49,6 @@ export function updateAddressState(region, successCallback) {
   })
 }
 
-if (!window.SpreeDashboard.updateAddressState) {
-  window.SpreeDashboard.updateAddressState = updateAddressState
+if (!window.SpreeDash.updateAddressState) {
+  window.SpreeDash.updateAddressState = updateAddressState
 }

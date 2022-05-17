@@ -1,4 +1,4 @@
-// import Cleave from 'cleave.js'
+import Cleave from 'cleave.js'
 
 document.addEventListener("spree:load", function() {
   if ($("#new_payment").length) {
@@ -14,7 +14,6 @@ document.addEventListener("spree:load", function() {
 
     updateCardCodeCleave(3)
 
-    /* eslint-disable no-new */
     new Cleave(".cardNumber", {
       creditCard: true,
       onCreditCardTypeChanged: function (type) {
@@ -27,7 +26,7 @@ document.addEventListener("spree:load", function() {
         }
       }
     })
-    /* eslint-disable no-new */
+
     new Cleave(".cardExpiry", {
       date: true,
       datePattern: ["m", "Y"]

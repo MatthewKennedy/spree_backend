@@ -1,6 +1,6 @@
 //= link_tree ../images
 
-//= link spree-dashboard.js
+//= link spree_dash.js
 //= link spree/backend/all.css
 
 //= link select2/dist/js/i18n/af.js

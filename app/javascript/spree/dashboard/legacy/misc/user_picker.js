@@ -14,9 +14,9 @@ $.fn.userAutocomplete = function () {
     multiple: true,
     minimumInputLength: 1,
     ajax: {
-      url: SpreeDashboard.routes.users_api_v2,
+      url: SpreeDash.routes.users_api_v2,
       dataType: "json",
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
         return {
           filter: {

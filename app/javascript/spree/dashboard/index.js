@@ -6,4 +6,4 @@ import "./new"
 import "./legacy"
 import "./utilities"
 
-console.log("Spree Dashboard Initialized")
+console.log("Spree Dash Initialized")

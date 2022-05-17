@@ -6,18 +6,18 @@ document.addEventListener("spree:load", function() {
     }
     $.ajax({
       type: "PATCH",
-      url: SpreeDashboard.routes.apply_coupon_code(order_number),
+      url: SpreeDash.routes.apply_coupon_code(order_number),
       data: {
         coupon_code: couponCode,
       },
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
     }).done(function () {
       window.location.reload()
     }).fail(function (message) {
       if (message.responseJSON["error"]) {
-        SpreeDashboard.showFlash("error", message.responseJSON["error"])
+        SpreeDash.showFlash("error", message.responseJSON["error"])
       } else {
-        SpreeDashboard.showFlash("error", "There was a problem adding this coupon code.")
+        SpreeDash.showFlash("error", "There was a problem adding this coupon code.")
       }
     })
   })

@@ -10,7 +10,7 @@ document.addEventListener("spree:load", function() {
     const alertType = elem.dataset.alertType
     const alertMessage = elem.innerHTML
 
-    SpreeDashboard.showFlash(alertType, alertMessage)
+    SpreeDash.showFlash(alertType, alertMessage)
   })
 })
 
@@ -65,4 +65,4 @@ function appendToFlashAlertsContainer (message, type) {
   parnetNode.appendChild(node)
 }
 
-if (!window.SpreeDashboard.showFlash)  { window.SpreeDashboard.showFlash = showFlash }
+if (!window.SpreeDash.showFlash)  { window.SpreeDash.showFlash = showFlash }

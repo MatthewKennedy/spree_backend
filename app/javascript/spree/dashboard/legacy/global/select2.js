@@ -18,7 +18,7 @@ document.addEventListener("spree:load", function() {
   // Set: include_blank: true in the ERB.
   // A placeholder is auto-added here as it is required to clear the Select2.
   $("select.select2-clear").select2({
-    placeholder: SpreeDashboard.translations.select_an_option,
+    placeholder: SpreeDash.translations.select_an_option,
     allowClear: true
   })
 })

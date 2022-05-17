@@ -1,4 +1,4 @@
-import "./spree"
+import "./base"
 import "./api_routes"
 
 import "./alerts"

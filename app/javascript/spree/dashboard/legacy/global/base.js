@@ -1,30 +1,25 @@
 import Uri from "jsuri"
 
-function SpreeDashboard () {}
+const SpreeDash = {}
+if (!window.SpreeDash) { window.SpreeDash = SpreeDash }
 
-SpreeDashboard.ready = function (callback) {
-  return document.addEventListener("spree:load", function() {
-    return callback(jQuery)
-  })
-}
-
-SpreeDashboard.mountedAt = function () {
+SpreeDash.mountedAt = function () {
   return window.SpreePaths.mounted_at
 }
 
-SpreeDashboard.adminPath = function () {
+SpreeDash.adminPath = function () {
   return window.SpreePaths.admin
 }
 
-SpreeDashboard.pathFor = function (path) {
+SpreeDash.pathFor = function (path) {
   var locationOrigin = (window.location.protocol + "//" + window.location.hostname) + (window.location.port ? ":" + window.location.port : "")
 
   return this.url("" + locationOrigin + (this.mountedAt()) + path, this.url_params).toString()
 }
 
-SpreeDashboard.localizedPathFor = function(path) {
+SpreeDash.localizedPathFor = function(path) {
   if (typeof (SPREE_LOCALE) !== "undefined" && typeof (SPREE_CURRENCY) !== "undefined") {
-    var fullUrl = new URL(SpreeDashboard.pathFor(path))
+    var fullUrl = new URL(SpreeDash.pathFor(path))
     var params = fullUrl.searchParams
     var pathName = fullUrl.pathname
 
@@ -37,14 +32,14 @@ SpreeDashboard.localizedPathFor = function(path) {
     }
     return fullUrl.origin + pathName + "?" + params.toString()
   }
-  return SpreeDashboard.pathFor(path)
+  return SpreeDash.pathFor(path)
 }
 
-SpreeDashboard.adminPathFor = function (path) {
+SpreeDash.adminPathFor = function (path) {
   return this.pathFor("" + (this.adminPath()) + path)
 }
 
-SpreeDashboard.url = function (uri, query) {
+SpreeDash.url = function (uri, query) {
   if (uri.path === void 0) {
     uri = new Uri(uri)
   }
@@ -56,20 +51,16 @@ SpreeDashboard.url = function (uri, query) {
   return uri
 }
 
-SpreeDashboard.ajax = function (urlOrSettings, settings) {
+SpreeDash.ajax = function (urlOrSettings, settings) {
   var url
   if (typeof urlOrSettings === "string") {
-    return $.ajax(SpreeDashboard.url(urlOrSettings).toString(), settings)
+    return $.ajax(SpreeDash.url(urlOrSettings).toString(), settings)
   } else {
     url = urlOrSettings["url"]
     delete urlOrSettings["url"]
-    return $.ajax(SpreeDashboard.url(url).toString(), urlOrSettings)
+    return $.ajax(SpreeDash.url(url).toString(), urlOrSettings)
   }
 }
 
-SpreeDashboard.routes = {}
-SpreeDashboard.url_params = {}
-
-if (!window.SpreeDashboard) {
-  window.SpreeDashboard = SpreeDashboard
-}
+SpreeDash.routes = {}
+SpreeDash.url_params = {}

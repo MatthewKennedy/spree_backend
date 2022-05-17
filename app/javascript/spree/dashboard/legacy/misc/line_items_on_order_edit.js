@@ -27,7 +27,7 @@ function addVariant () {
 const adjustLineItems = function(order_id, variant_id, quantity){
   $.ajax({
     type: "POST",
-    url: SpreeDashboard.routes.line_items_api_v2,
+    url: SpreeDash.routes.line_items_api_v2,
     data: {
       line_item: {
         order_id: order_id,
@@ -35,11 +35,11 @@ const adjustLineItems = function(order_id, variant_id, quantity){
         quantity: quantity
       }
     },
-    headers: SpreeDashboard.apiV2Authentication()
+    headers: SpreeDash.apiV2Authentication()
   }).done(function () {
-    window.SpreeDashboard.advanceOrder()
+    window.SpreeDash.advanceOrder()
     window.location.reload()
   }).fail(function (response) {
-    SpreeDashboard.showFlash("error", response.responseJSON.error)
+    SpreeDash.showFlash("error", response.responseJSON.error)
   })
 }

@@ -6,7 +6,7 @@ document.addEventListener("spree:load", function() {
     altInput: true,
     time_24hr: true,
     altInputClass: "flatpickr-alt-input",
-    locale: SpreeDashboard.translations.flatpickr_locale
+    locale: SpreeDash.translations.flatpickr_locale
   })
 
   var dateFrom = Flatpickr(".datePickerFrom", {

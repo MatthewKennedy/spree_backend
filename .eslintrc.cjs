@@ -8,14 +8,14 @@ module.exports = {
     "sourceType": "module"
   },
   "globals": {
-    "SpreeDashboard":   "readonly",
+    "SpreeDash":   "readonly",
     "Turbo":            "readonly",
     "URL":              "readonly",
     "SPREE_CURRENCY":   "readonly",
     "SPREE_LOCALE":     "readonly",
-    "SpreeDashboard.OAUTH_TOKEN":      "readonly",
+    "SpreeDash.OAUTH_TOKEN":      "readonly",
     "Handlebars":       "readonly",
-    "SpreeDashboard.ADDRESS_FIELDS":   "readonly",
+    "SpreeDash.ADDRESS_FIELDS":   "readonly",
     "clearTimeout":     "readonly",
     "setTimeout":       "readonly",
     "jQuery":           "readonly",

@@ -39,7 +39,7 @@ function loadAutoCompleteParams() {
 
 function buildParamsFromDataAttrs(element) {
   $(element).select2Autocomplete({
-    apiUrl: SpreeDashboard.routes[element.dataset.autocompleteUrlValue],
+    apiUrl: SpreeDash.routes[element.dataset.autocompleteUrlValue],
     placeholder: element.dataset.autocompletePlaceholderValue,
     allow_clear: element.dataset.autocompleteClearValue,
     multiple: element.dataset.autocompleteMultipleValue,
@@ -58,7 +58,7 @@ $.fn.select2Autocomplete = function(params) {
 
   const resourcePlural = params.apiUrl.match(/([^/]*)\/*$/)[1]
   const resourceSingular = resourcePlural.slice(0, -1)
-  const select2placeHolder = params.placeholder || SpreeDashboard.translations.search
+  const select2placeHolder = params.placeholder || SpreeDash.translations.search
   const select2Multiple = params.multiple || false
   const select2allowClear = params.allow_clear || false
   const returnAttribute = params.return_attribute || "name"
@@ -118,7 +118,7 @@ $.fn.select2Autocomplete = function(params) {
     minimumInputLength: minimumInput,
     ajax: {
       url: apiUrl,
-      headers: SpreeDashboard.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication(),
       data: function(params) {
         return {
           filter: {

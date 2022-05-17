@@ -28,22 +28,22 @@ document.addEventListener("spree:load", function() {
       }
     }
     var requestData = {
-      uri: SpreeDashboard.routes.classifications_api_v2 + "/" + classificationId,
+      uri: SpreeDash.routes.classifications_api_v2 + "/" + classificationId,
       method: "PATCH",
       dataBody: data,
     }
-    SpreeDashboard.fetchRequestUtil(requestData)
+    SpreeDash.fetchRequestUtil(requestData)
   }
 
   if (taxonId.length > 0) {
     taxonId.select2({
-      placeholder: SpreeDashboard.translations.find_a_taxon,
+      placeholder: SpreeDash.translations.find_a_taxon,
       minimumInputLength: 3,
       multiple: false,
       ajax: {
-        url: SpreeDashboard.routes.taxons_api_v2,
+        url: SpreeDash.routes.taxons_api_v2,
         datatype: "json",
-        headers: SpreeDashboard.apiV2Authentication(),
+        headers: SpreeDash.apiV2Authentication(),
         data: function (params, page) {
           return {
             per_page: 50,
@@ -73,8 +73,8 @@ document.addEventListener("spree:load", function() {
       }
     }).on("select2:select", function (e) {
       $.ajax({
-        url: SpreeDashboard.routes.classifications_api_v2,
-        headers: SpreeDashboard.apiV2Authentication(),
+        url: SpreeDash.routes.classifications_api_v2,
+        headers: SpreeDash.apiV2Authentication(),
         data: {
           filter: {
             taxon_id_eq: e.params.data.id
@@ -87,7 +87,7 @@ document.addEventListener("spree:load", function() {
         taxonProducts.empty()
 
         if (json.meta.total_count === 0) {
-          return taxonProducts.html("<p class=\"text-center w-100 p-4\">" + SpreeDashboard.translations.no_results + "</p>")
+          return taxonProducts.html("<p class=\"text-center w-100 p-4\">" + SpreeDash.translations.no_results + "</p>")
         } else {
           var results = []
 
@@ -135,8 +135,8 @@ document.addEventListener("spree:load", function() {
     var product = $(this).parents(".product")
     var classificationId = product.data("classification-id")
     $.ajax({
-      url: SpreeDashboard.routes.classifications_api_v2 + "/" + classificationId.toString(),
-      headers: SpreeDashboard.apiV2Authentication(),
+      url: SpreeDash.routes.classifications_api_v2 + "/" + classificationId.toString(),
+      headers: SpreeDash.apiV2Authentication(),
       type: "DELETE"
     }).done(function () {
       product.fadeOut(400, function (e) {
