@@ -1,27 +1,6 @@
 .header {
   .navbar {
-    min-height:54px;
-
-    a:hover {
-      text-decoration: none;
-    }
-    .btn {
-      &:hover,
-      &:focus {
-        text-decoration: none;
-        outline: 0;
-        outline: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-      }
-    }
-
-    #accountNav {
-      i {
-        font-size: 1.3em;
-        line-height: 1rem;
-      }
-    }
+    min-height: var(--nav-bar-height);
 
     #storeSwitcherDropdown {
       .dropdown-menu.show {
@@ -30,7 +9,7 @@
         max-width: 90vw;
         max-height: 70vh;
         overflow-y: hidden !important;
-        top: $navbar-brand-height + 1.5rem;
+        top: var(--nav-bar-height);
         left: 50%;
         right: 50%;
         transform: translate(-50%, 0%);
@@ -52,7 +31,7 @@
           }
 
           &.disabled svg {
-            color: theme-color('success');
+            color: var(--bs-success);
           }
         }
       }
