@@ -60,5 +60,7 @@ TODO
 node_modules
 app/assets/javascripts/spree_dash.js
 app/assets/javascripts/spree_dash.*.js
+app/assets/javascripts/spree_dash.js.map
+app/assets/javascripts/spree_dash.*.js.map
 src
 *.gem
