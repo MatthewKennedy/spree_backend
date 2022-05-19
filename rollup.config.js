@@ -19,7 +19,7 @@ export default [
       format: "umd",
       name: "SpreeDash",
       inlineDynamicImports: true,
-      sourcemap: true
+      sourcemap: false
     },
     plugins: [
       resolve(),
@@ -35,7 +35,7 @@ export default [
       format: "es",
       name: "SpreeDash",
       inlineDynamicImports: true,
-      sourcemap: true
+      sourcemap: false
     },
     plugins: [
       resolve(),
