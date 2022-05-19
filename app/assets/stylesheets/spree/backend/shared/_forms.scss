@@ -1,5 +1,5 @@
 label {
-  font-size: $font-size-sm;
+  font-size: var(--bs-body-font-size);
 
   &:hover {
     cursor: pointer;
@@ -15,12 +15,12 @@ span.or {
 .form-group {
   &.withError {
     label, .formError, .required {
-      color: theme-color('danger');
+      color: var(--bs-danger);
     }
 
     input,
     .select2-choice {
-      border-color: theme-color('danger');
+      border-color: var(--bs-danger);
     }
   }
 }

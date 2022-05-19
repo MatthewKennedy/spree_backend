@@ -6,7 +6,7 @@
     }
       .numInputWrapper {
       margin-left: 3px;
-      border-radius: $border-radius;
+      border-radius: var(--bs-border-radius);
       overflow: hidden;
     }
 
@@ -16,7 +16,7 @@
       ), webkit moz ms khtml);
 
       padding: 0.2em;
-      border-radius: $border-radius;
+      border-radius: var(--bs-border-radius);
     }
   }
 
@@ -32,7 +32,7 @@
 
   .flatpickr-day {
     margin: 2px 0;
-    border-radius: $border-radius ;
+    border-radius: var(--bs-border-radius) ;
   }
 
   .flatpickr-months .flatpickr-prev-month:hover svg,
@@ -72,7 +72,7 @@
   input.flatpickr-alt-input[readonly] {
     // Flatpickr alternate input is read-only,
     // style it as an active input field.
-    background-color: white !important;
+    background-color: var(--bs-body-bg) !important;
 
     // Fix a bug where occasionally the whole screen will highlight
     // if you clicked the Flatpickr input box while moving the cursor.

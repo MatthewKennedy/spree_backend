@@ -1,5 +1,5 @@
 .ui-widget {
-  font-family: $headings-font-family;
-  font-size: $font-size-base;
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
   font-weight: 400;
 }

@@ -7,7 +7,7 @@
 
 #menuArea {
   .space-buttons {
-    box-shadow: -11px 0 16px 6px white;
+    box-shadow: -11px 0 16px 6px var(--bs-white);
     z-index: 9;
     a {
       margin: 2px;
@@ -15,9 +15,9 @@
   }
   .container-item-row {
     overflow: hidden;
-    border: 1px solid $border-color;
+    border: 1px solid var(--bs-border-color);
     margin: 2px;
-    background-color: white;
+    background-color: var(--bs-white);
   }
 
   .menu-container-item {
@@ -44,7 +44,7 @@
 
   .menu_items_image_holder {
     position: relative;
-    border: 1px solid $border-color;
+    border: 1px solid var(--bs-border-color);
     border-radius: 7px;
     overflow: hidden;
     width: 45px;

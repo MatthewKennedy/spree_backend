@@ -13,8 +13,8 @@
 
 figure.admin-img-holder {
   max-width: 275px;
-  border: 2px dashed grey;
-  border-radius: $border-radius;
+  border: 2px dashed var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
   overflow: hidden;
   display: inline-block;
 
@@ -25,9 +25,9 @@ figure.admin-img-holder {
 }
 
 div.admin-product-image-container {
-  border: 1px solid var(--bs-gray-500);
-  background-color: #fefefe;
-  border-radius: $border-radius;
+  border: 1px solid var(--bs-border-color);
+  background-color: var(--bs-gray-100);
+  border-radius: var(--bs-border-radius);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -50,27 +50,27 @@ div.admin-product-image-container {
   }
 
   &.mini-img {
-    border-radius: calc($border-radius / 2);
+    border-radius: calc(var(--bs-border-radius) / 2);
     width: 24px;
     height: 24px;
   }
 
   &.small-img {
-    border-radius: $border-radius;
+    border-radius: var(--bs-border-radius);
     width: 50px;
     height: 50px;
   }
 
   &.product-img {
     border-width: 2px;
-    border-radius: $border-radius * 2;
+    border-radius: calc(var(--bs-border-radius) * 2);
     width: 100px;
     height: 100px;
   }
 
   &.large-img {
     border-width: 3px;
-    border-radius: $border-radius * 3;
+    border-radius: calc(var(--bs-border-radius) * 3);
     width: 300px;
     height: 300px;
   }

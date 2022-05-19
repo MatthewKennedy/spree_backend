@@ -1,6 +1,6 @@
 #ImageGalleryLayout {
   #LayoutType {
-    color: rgb(134, 134, 134);
+    color: var(--bs-gray);
   }
 
   .select2-container--bootstrap4 {
@@ -68,7 +68,7 @@ button#cmsSectionEditorFullScreen {
   max-height: 100%;
 
   .border {
-    border-color: #9c9c9c !important;
+    border-color: var(--bs-border-color) !important;
   }
 
   // Hide scroll-bar in live preview
@@ -91,7 +91,7 @@ button#cmsSectionEditorFullScreen {
       top: 0;
       left: 0;
       z-index: 9999;
-      background: white;
+      background: var(--bs-white);
       padding: 15px 15px 0 15px;
       height: 100vh;
 
@@ -112,7 +112,7 @@ button#cmsSectionEditorFullScreen {
 
 #pageLivePreview {
   transform-origin: top left;
-  background: rgb(62, 62, 62);
+  background: var(--bs-gray-800);
 }
 
 .desktopLiveView {

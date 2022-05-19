@@ -1,17 +1,13 @@
 aside#main-sidebar {
   overflow-y: auto;
-  border-right: 1px solid $gray-200;
+  border-right: 1px solid var(--bs-gray-200);
   width: 100%;
   left: -100%;
   margin-top: 0;
   height: 100%;
   transition: 0.3s ease;
   z-index: 1041;
-  background: white;
-
-  .text-muted {
-    color: #5C5F62 !important;
-  }
+  background: var(--bs-body-bg);
 }
 
 body.sidebar-open {
@@ -27,15 +23,16 @@ body.sidebar-open {
 .sidebar-submenu-item.pl-5 {
   padding-left: 2.6rem !important;
 }
-a.sidebar-submenu-item:hover, a.sidebar-submenu-item:focus {
-    text-decoration: none;
+a.sidebar-submenu-item {
+  text-decoration: none;
+  &:hover, a.sidebar-submenu-item:focus {
     color: var(--bs-primary) !important;
-    cursor: pointer;
+  }
 }
 
 ul.active-option {
-  background-color: $gray-100;
-  border-radius: $border-radius;
+  background-color: var(--bs-gray-100);
+  border-radius: var(--bs-border-radius);
   .drop-menu-indicator {
     transform: rotate(90deg);
   }
@@ -44,7 +41,8 @@ ul.active-option {
 ul.nav-sidebar {
   > li {
     > a {
-      color: $gray-700;
+      color: var(--bs-gray-700);
+      text-decoration: none;
 
       &:hover,
       &[aria-expanded="true"] {
@@ -75,14 +73,14 @@ ul.nav-sidebar {
 #contextualSideMenu {
   max-height: 85vh;
   overflow-x: auto;
-  background-color: white;
+  background-color: var(--bs-body-bg);
   position: fixed;
   left:0;
   top: -100%;
   z-index: 1041;
   transition: .3s ease-in-out;
   .page-actions__close {
-    margin: -1.5rem -1.5rem 1.5rem;
+    margin: -1.5rem 1.5rem;
   }
 }
 

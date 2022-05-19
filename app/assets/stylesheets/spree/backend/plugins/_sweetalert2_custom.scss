@@ -1,7 +1,7 @@
 // Custom SCSS Standard SweetAlerts
 body.swal2-shown {
   .swal2-popup {
-    border-radius:$border-radius;
+    border-radius:var(--bs-border-radius);
   }
   .swal2-html-container {
     text-align: left;
@@ -30,7 +30,7 @@ body.swal2-shown {
       padding-bottom: 3px;
 
       &:hover {
-        color:grey;
+        color: var(--bs-grey);
       }
     }
   }

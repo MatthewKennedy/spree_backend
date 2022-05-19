@@ -22,7 +22,7 @@ $color_size: 26px;
   }
   .option-value__color {
     border-radius: 50%;
-    border: 2px solid #d3d3d3;
+    border: 2px solid var(--bs-gray-300);
     width: $color_size;
     height: $color_size;
     overflow: hidden;
@@ -37,6 +37,6 @@ $color_size: 26px;
     }
   }
   input:checked + .option-value__color {
-    border-color: #565656;
+    border-color: var(--bs-gray-800);
   }
 }
