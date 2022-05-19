@@ -59,7 +59,7 @@
   }
 }
 
-// Mixin for calendar toggle icon show/hide.
+// Mixins for calendar toggle icon show/hide.
 @mixin swith-appended-icon {
   &:placeholder-shown:not(:focus) + * {
       @content;
@@ -75,39 +75,24 @@
     background-color: white !important;
 
     // Fix a bug where occasionally the whole screen will highlight
-    // if you clicked the Flatpcikr input box while moving the cursor.
+    // if you clicked the Flatpickr input box while moving the cursor.
     @include prefix((
       appearance: none,
       touch-callout: none,
       user-select: none
     ), webkit moz ms khtml);
 
-    @include swith-appended-icon  {
+    @include swith-appended-icon {
       opacity: 0;
     }
   }
 
   // Required for calendar toggle icon show/hide.
-  .append_under {
+  .append_over {
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 0;
+    z-index: 1;
     height: 100%;
-  }
-
-  // Styling for calendar toggle icon toggle
-  .input-group-append:not(:last-child) >
-  .force-round {
-    z-index: 5;
-    border-top-right-radius: $border-radius !important;
-    border-bottom-right-radius: $border-radius !important;
-  }
-
-  // Styling for calendar toggle icon toggle
-  .form-control:not(:first-child),
-  .input-group >.flatpickr-alt-input:not(:first-child) {
-    border-top-left-radius: $border-radius !important;
-    border-bottom-left-radius: $border-radius !important;
   }
 }
