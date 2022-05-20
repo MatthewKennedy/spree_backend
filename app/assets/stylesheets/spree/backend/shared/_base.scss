@@ -2,15 +2,6 @@
   overflow: hidden;
 }
 
-.is-hidden {
-  display: none;
-}
-
-.tooltip{
-  pointer-events: none;
-  z-index: $zindex-dropdown;
-}
-
 figure.admin-img-holder {
   max-width: 275px;
   border: 2px dashed var(--bs-border-color);
@@ -78,9 +69,6 @@ div.admin-product-image-container {
 
 .js-remove-promo-rule-option-value {
   color: var(--bs-primary) !important;
-  &:hover {
-   color: darken($primary, 10) !important;
-  }
 }
 
 .button_to {
@@ -91,10 +79,6 @@ div.admin-product-image-container {
   cursor: grab;
 }
 
-.badge-light-muted-text {
-  color: rgba(0, 0, 0, 0.50);
-}
-
 .truncate {
   white-space: nowrap;
   overflow: hidden;
@@ -102,7 +86,7 @@ div.admin-product-image-container {
 }
 
 [data-show-info] {
-  color:  $primary;
+  color:  var(--bs-primary);
   cursor: pointer;
 }
 

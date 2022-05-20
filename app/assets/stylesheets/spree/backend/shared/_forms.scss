@@ -26,26 +26,19 @@ span.or {
 }
 
 // Hide number toggle
-  // Chrome, Safari, Edge, Opera
+// Chrome, Safari, Edge, Opera
 input.hide-number-toggle::-webkit-outer-spin-button,
 input.hide-number-toggle::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-  // Firefox
+
+// Firefox
 input[type=number].hide-number-toggle {
   -moz-appearance: textfield;
 }
 
-input[type="file"] {
-  width: fit-content;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .custom-select {
-  background: $input-bg url(asset-path("chevron-down.svg")) no-repeat right 0.5rem center/8px 10px;
+  background: url(asset-path("chevron-down.svg")) no-repeat right 0.5rem center/8px 10px;
   background-size: 0.7em;
 }

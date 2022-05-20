@@ -31,7 +31,7 @@
               <td class="line-item-qty-show text-center" style="width:120px;">
                 <%= item.quantity %>
               </td>
-              <td class="line-item-qty-edit is-hidden" style="width:120px;">
+              <td class="line-item-qty-edit d-none" style="width:120px;">
                 <%= number_field_tag :quantity, item.quantity, min: 0, class: "line_item_quantity form-control", size: 5 %>
               </td>
               <td class="line-item-total text-center"><%= line_item_shipment_price(item, item.quantity) %></td>

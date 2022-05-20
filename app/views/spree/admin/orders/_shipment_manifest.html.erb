@@ -22,7 +22,7 @@
     </td>
 
     <% unless shipment.shipped? %>
-      <td class="item-qty-edit is-hidden">
+      <td class="item-qty-edit d-none">
         <%= number_field_tag :quantity, item.quantity, min: 0, class: "line_item_quantity form-control", size: 5 %>
       </td>
     <% end %>
