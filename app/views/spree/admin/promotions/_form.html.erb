@@ -66,20 +66,20 @@
     </div>
     <div id="starts_at_field" class="form-group">
       <%= f.label :starts_at %>
-      <%= render partial: 'spree/admin/shared/date_picker_from',  locals: { f: f,
-                                                                            from_field: :starts_at,
-                                                                            data_max_date: @promotion.expires_at,
-                                                                            date_time: true,
-                                                                            placeholder: Spree.t('starting_from') } %>
+      <%= render partial: 'spree/admin/shared/date_picker_from', locals: { f: f,
+                                                                           from_field: :starts_at,
+                                                                           data_max_date: @promotion.expires_at,
+                                                                           date_time: true,
+                                                                           placeholder: Spree.t('starting_from') } %>
     </div>
 
     <div id="expires_at_field" class="form-group">
       <%= f.label :expires_at %>
-      <%= render partial: 'spree/admin/shared/date_picker_to',    locals: { f: f,
-                                                                            to_field: :expires_at,
-                                                                            data_min_date: @promotion.starts_at,
-                                                                            date_time: true,
-                                                                            placeholder: Spree.t('ends_at') } %>
+      <%= render partial: 'spree/admin/shared/date_picker_to',  locals: { f: f,
+                                                                          to_field: :expires_at,
+                                                                          data_min_date: @promotion.starts_at,
+                                                                          date_time: true,
+                                                                          placeholder: Spree.t('ends_at') } %>
     </div>
   </div>
 </div>
