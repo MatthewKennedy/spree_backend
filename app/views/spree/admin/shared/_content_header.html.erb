@@ -4,7 +4,7 @@
       <div id="contentHeaderRow" class="row align-items-center  <%= if content_for?(:page_tabs) then "pb-3" else "pb-3 mb-3" end %>">
 
         <% if content_for?(:page_title) %>
-          <h2 class="px-0 mb-0 col">
+          <h2 class="px-0 mb-0 col d-flex">
             <%= yield :page_title %>
             <% if content_for?(:page_title_small) %>
               <small><%= yield :page_title_small %></small>
@@ -16,9 +16,7 @@
           <div class="page-actions ps-0 pe-0 d-none d-lg-flex col-auto" data-hook="toolbar">
             <%= yield :page_actions %>
           </div>
-        <% end %>
 
-        <% if content_for?(:page_actions) %>
           <div class="d-flex d-lg-none justify-content-end m-0 p-0">
             <button type="button"
                     id="contextual-menu-toggle"
@@ -34,7 +32,7 @@
 
       <% if content_for?(:page_tabs) %>
         <div class="row my-2 mb-3 pb-1 pt-1 align-items-center" data-nav-x-wrapper>
-          <div data-nav-x-container class="w-100">
+          <div data-nav-x-container class="w-100 p-0">
             <ul id="spreePageTabs" class="nav nav-pills flex-nowrap" data-nav-x-content>
               <%= yield :page_tabs %>
             </ul>

@@ -278,37 +278,8 @@ module Spree
         end
       end
 
-      def main_part_classes
-        ActiveSupport::Deprecation.warn(<<-DEPRECATION, caller)
-          Admin::NavigationHelper#main_part_classes is deprecated and will be removed in Spree 5.0.
-        DEPRECATION
-        if cookies['sidebar-minimized'] == 'true'
-          'col-12 sidebar-collapsed'
-        else
-          'col-9 offset-3 col-md-10 offset-md-2'
-        end
-      end
-
-      def main_sidebar_classes
-        ActiveSupport::Deprecation.warn(<<-DEPRECATION, caller)
-          Admin::NavigationHelper#main_sidebar_classes is deprecated and will be removed in Spree 5.0.
-        DEPRECATION
-        if cookies['sidebar-minimized'] == 'true'
-          'col-3 col-md-2 sidebar'
-        else
-          'p-0 col-3 col-md-2 sidebar'
-        end
-      end
-
-      def wrapper_classes
-        ActiveSupport::Deprecation.warn(<<-DEPRECATION, caller)
-          Admin::NavigationHelper#wrapper_classes is deprecated and will be removed in Spree 5.0.
-        DEPRECATION
-        'sidebar-minimized' if cookies['sidebar-minimized'] == 'true'
-      end
-
       def page_header_back_button(url)
-        link_to url, class: 'btn btn-outline-info me-3 pe-1' do
+        link_to url, class: 'btn btn-outline-info me-3' do
           svg_icon name: 'chevron-left.svg', width: 15, height: 15
         end
       end
