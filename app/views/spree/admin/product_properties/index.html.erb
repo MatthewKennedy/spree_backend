@@ -7,13 +7,13 @@
   <span class="js-new-ptype-link">
     <%= button_link_to Spree.t(:select_from_prototype),
       available_admin_prototypes_url,
-      { icon: 'list.svg', remote: true, 'data-update' => 'prototypes', class: 'btn-light' } %>
+      { icon: 'list.svg', remote: true, 'data-update' => 'prototypes', class: 'btn-secondary' } %>
   </span>
 
   <%= button_link_to(
     Spree.t(:add_product_properties),
     "javascript:;",
-    { icon: 'plus.svg', :'data-target' => "tbody#sortVert", class: 'btn-success spree_add_fields' }) %>
+    { icon: 'plus.svg', :'data-target' => "tbody#sortVert", class: 'btn-success  spree_add_fields' }) %>
 <% end if can? :create, Spree::ProductProperty %>
 
 <%= form_for @product, url: spree.admin_product_url(@product), method: :put do |f| %>

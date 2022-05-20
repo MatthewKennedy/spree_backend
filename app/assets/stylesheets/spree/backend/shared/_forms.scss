@@ -37,8 +37,3 @@ input.hide-number-toggle::-webkit-inner-spin-button {
 input[type=number].hide-number-toggle {
   -moz-appearance: textfield;
 }
-
-.custom-select {
-  background: url(asset-path("chevron-down.svg")) no-repeat right 0.5rem center/8px 10px;
-  background-size: 0.7em;
-}

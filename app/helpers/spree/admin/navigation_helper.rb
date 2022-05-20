@@ -112,7 +112,7 @@ module Spree
 
         select_tag(:per_page,
                    options_for_select(per_page_options, selected_option),
-                   class: "w-auto form-control js-per-page-select per-page-selected-#{selected_option} custom-select custom-select-sm")
+                   class: "w-auto form-control js-per-page-select per-page-selected-#{selected_option} form-select form-select-sm")
       end
 
       # helper method to create proper url to apply per page ing
@@ -140,7 +140,7 @@ module Spree
 
       def link_to_clone(resource, options = {})
         options[:data] = { action: 'clone', 'original-title': Spree.t(:clone) }
-        options[:class] = 'btn btn-light btn-sm with-tip icon-link'
+        options[:class] = 'btn btn-secondary btn-sm with-tip icon-link'
         options[:method] = :post
         options[:icon] = 'clone.svg'
         button_link_to '', clone_object_url(resource), options
@@ -148,7 +148,7 @@ module Spree
 
       def link_to_clone_promotion(promotion, options = {})
         options[:data] = { action: 'clone', 'original-title': Spree.t(:clone) }
-        options[:class] = 'btn btn-light btn-sm with-tip'
+        options[:class] = 'btn btn-secondary btn-sm with-tip'
         options[:method] = :post
         options[:icon] = 'clone.svg'
         button_link_to '', clone_admin_promotion_path(promotion), options
@@ -157,13 +157,13 @@ module Spree
       def link_to_edit(resource, options = {})
         url = options[:url] || edit_object_url(resource)
         options[:data] = { action: 'edit' }
-        options[:class] = 'btn btn-light btn-sm'
+        options[:class] = 'btn btn-secondary btn-sm'
         link_to_with_icon('edit.svg', Spree.t(:edit), url, options)
       end
 
       def link_to_edit_url(url, options = {})
         options[:data] = { action: 'edit' }
-        options[:class] = 'btn btn-light btn-sm'
+        options[:class] = 'btn btn-secondary btn-sm'
         link_to_with_icon('edit.svg', Spree.t(:edit), url, options)
       end
 
@@ -184,9 +184,9 @@ module Spree
         options[:height] ||= ICON_SIZE
         if icon_name
           icon = if icon_name.ends_with?('.svg')
-                   svg_icon(name: icon_name, classes: "#{'me-2' unless text.empty?} icon icon-#{icon_name}", width: options[:width], height: options[:height])
+                   svg_icon(name: icon_name, classes: "icon icon-#{icon_name}", width: options[:width], height: options[:height])
                  else
-                   content_tag(:span, '', class: "#{'me-2' unless text.empty?} icon icon-#{icon_name}")
+                   content_tag(:span, '', class: "icon icon-#{icon_name}")
                  end
           text = "#{icon} #{text}"
         end
@@ -212,7 +212,7 @@ module Spree
           text = "#{icon} #{text}"
         end
 
-        css_classes = options[:class] || 'btn-primary'
+        css_classes = options[:class] || 'btn-success '
         button_tag(
           text.html_safe,
           options.merge(
@@ -228,7 +228,7 @@ module Spree
             !html_options[:method].to_s.casecmp('get').zero? &&
             !html_options[:remote]
 
-          html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : 'btn btn-primary'
+          html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : 'btn btn-success '
 
           form_tag(url, method: html_options.delete(:method)) do
             button(text, html_options.delete(:icon), nil, html_options)
@@ -241,7 +241,7 @@ module Spree
 
           html_options.delete('data-update') unless html_options['data-update']
 
-          html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : 'btn btn-light'
+          html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : 'btn btn-secondary'
 
           if html_options[:icon]
             icon = if html_options[:icon].ends_with?('.svg')

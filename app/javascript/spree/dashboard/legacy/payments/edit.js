@@ -102,7 +102,7 @@ document.addEventListener("spree:load", function() {
 
     PaymentView.prototype.$new_button = function (action) {
       return $("<a><i class=\"icon icon-" + action + "\"></i></a>").attr({
-        "class": "payment-action-" + action + " btn btn-light btn-sm no-filter",
+        "class": "payment-action-" + action + " btn btn-secondary btn-sm no-filter",
         title: SpreeDash.translations[action]
       }).data({
         action: action

@@ -5,7 +5,7 @@
 <% content_for :page_actions do %>
   <%= button_link_to Spree.t(:new_order),
     new_admin_order_url,
-    class: "btn-success",
+    class: "btn-success ",
       icon: 'plus.svg',
       id: 'admin_new_order' %>
 <% end if can? :create, Spree::Order %>

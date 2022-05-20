@@ -14,7 +14,7 @@
 </div>
 
 <div class="js-tiers"></div>
-<button class="btn btn-success js-add-tier"><%= Spree.t(:add) %></button>
+<button class="btn btn-success  js-add-tier"><%= Spree.t(:add) %></button>
 
 <script type="text/x-handlebars-template" id="tier-input-name">
   <%= prefix %>[calculator_attributes][preferred_tiers][{{base}}]
@@ -40,7 +40,7 @@
             name="{{valueField.name}}" type="text" value={{valueField.value}}>
         </div>
       </div>
-      <a class="js-remove-tier btn btn-light btn-sm"><span class="icon icon-delete"></span></a>
+      <a class="js-remove-tier btn btn-secondary btn-sm"><span class="icon icon-delete"></span></a>
     </div>
   </div>
 </script>

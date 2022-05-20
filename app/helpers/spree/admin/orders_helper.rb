@@ -14,7 +14,7 @@ module Spree
             method: :put,
             icon: event.to_s + '.svg',
             data: { confirm: Spree.t(:order_sure_want_to, event: label) },
-            class: 'btn-light'
+            class: 'btn-secondary'
           )
         end
         safe_join(links, ''.html_safe)
