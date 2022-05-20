@@ -16,7 +16,7 @@ module Spree
       #   # Link to /admin/orders, also highlight tab for ProductsController and ShipmentsController
       #   tab :orders, :products, :shipments
 
-      ICON_SIZE = 14
+      ICON_SIZE = 16
       MENU_ICON_SIZE = 18
 
       def tab(*args)
@@ -30,11 +30,11 @@ module Spree
 
         destination_url = options[:url] || spree.send("#{options[:route]}_path")
 
-        if options[:do_not_titleize] == true
-          titleized_label = options[:label]
-        else
-          titleized_label = Spree.t(options[:label], default: options[:label], scope: [:admin, :tab]).titleize
-        end
+        titleized_label = if options[:do_not_titleize] == true
+                            options[:label]
+                          else
+                            Spree.t(options[:label], default: options[:label], scope: [:admin, :tab]).titleize
+                          end
 
         css_classes = ['sidebar-menu-item d-block w-100 position-relative']
 
@@ -74,10 +74,11 @@ module Spree
 
       # Single main menu item
       def main_menu_item(text, url: nil, icon: nil)
-        link_to url, data: { bs_toggle: "collapse"}, class: 'd-flex w-100 px-3 py-2 position-relative align-items-center' do
+        link_to url, data: { bs_toggle: 'collapse' }, class: 'd-flex w-100 px-3 py-2 position-relative align-items-center' do
           svg_icon(name: icon, classes: 'me-2 text-muted', width: MENU_ICON_SIZE, height: MENU_ICON_SIZE) +
             content_tag(:span, raw(" #{text}"), class: 'text-muted') +
-            svg_icon(name: 'chevron-right.svg', classes: 'drop-menu-indicator text-muted position-absolute', width: (MENU_ICON_SIZE - 8), height: (MENU_ICON_SIZE - 8))
+            svg_icon(name: 'chevron-right.svg', classes: 'drop-menu-indicator text-muted position-absolute', width: (MENU_ICON_SIZE - 8),
+                     height: (MENU_ICON_SIZE - 8))
         end
       end
 
@@ -180,7 +181,8 @@ module Spree
         options[:icon_classes] ||= ''
 
         if icon_name
-          icon = svg_icon(name: icon_name, classes: "icon icon-#{icon_name} #{options[:icon_classes]}", width: options[:width], height: options[:height])
+          icon = svg_icon(name: icon_name, classes: "icon icon-#{icon_name} #{options[:icon_classes]}", width: options[:width],
+                          height: options[:height])
           text = "#{icon} #{text}"
         end
 
