@@ -6,24 +6,25 @@ module Spree
       def index
         @q = StockTransfer.ransack(params[:q])
 
-        @stock_transfers = @q.result.
-                           includes(stock_movements: { stock_item: :stock_location }).
-                           order(created_at: :desc).
-                           page(params[:page])
+        @stock_transfers = @q.result
+          .includes(stock_movements: {stock_item: :stock_location})
+          .order(created_at: :desc)
+          .page(params[:page])
       end
 
       def show
         @stock_transfer = StockTransfer.find_by!(number: params[:id])
       end
 
-      def new; end
+      def new
+      end
 
       def create
         if params[:variant].nil?
-          flash.now[:error] = Spree.t('stock_transfer.errors.must_have_variant')
+          flash.now[:error] = Spree.t("stock_transfer.errors.must_have_variant")
           render :new, status: :unprocessable_entity
         elsif any_missing_variants?(params[:variant])
-          flash.now[:error] = Spree.t('stock_transfer.errors.variants_unavailable', stock: source_location.name)
+          flash.now[:error] = Spree.t("stock_transfer.errors.variants_unavailable", stock: source_location.name)
           render :new, status: :unprocessable_entity
         else
           variants = Hash.new(0)
@@ -32,8 +33,8 @@ module Spree
           end
           stock_transfer = StockTransfer.create(reference: params[:reference])
           stock_transfer.transfer(source_location,
-                                  destination_location,
-                                  variants)
+            destination_location,
+            variants)
 
           flash[:success] = Spree.t(:stock_successfully_transferred)
           redirect_to spree.admin_stock_transfer_path(stock_transfer)

@@ -12,14 +12,14 @@ module Spree
         @shippable_countries = Spree::ShippingMethod.all.collect(&:zones).flatten.uniq.compact.collect(&:countries).flatten.uniq.sort_by(&:name)
 
         @active_tab = if !@products_added
-                        'products'
-                      elsif !@shipping_methods_added
-                        'shipping'
-                      elsif !@payment_methods_added
-                        'payment'
-                      else
-                        'taxes'
-                      end
+          "products"
+        elsif !@shipping_methods_added
+          "shipping"
+        elsif !@payment_methods_added
+          "payment"
+        else
+          "taxes"
+        end
       end
     end
   end

@@ -1,11 +1,11 @@
 module Spree
   module Admin
     class ReturnAuthorizationsController < ResourceController
-      belongs_to 'spree/order', find_by: :number
+      belongs_to "spree/order", find_by: :number
 
       before_action :load_form_data, only: [:new, :edit]
-      create.fails  :load_form_data
-      update.fails  :load_form_data
+      create.fails :load_form_data
+      update.fails :load_form_data
 
       def cancel
         @return_authorization.cancel!

@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class CmsSectionsController < ResourceController
-      belongs_to 'spree/cms_page'
+      belongs_to "spree/cms_page"
 
       def collection_url
         spree.edit_admin_cms_page_path(@cms_page)

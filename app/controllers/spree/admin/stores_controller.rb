@@ -17,7 +17,7 @@ module Spree
           flash[:success] = flash_message_for(@store, :successfully_created)
           redirect_to spree.admin_url(domain: @store.url), allow_other_host: true
         else
-          flash[:error] = "#{Spree.t('store_errors.unable_to_create')}: #{@store.errors.full_messages.join(', ')}"
+          flash[:error] = "#{Spree.t("store_errors.unable_to_create")}: #{@store.errors.full_messages.join(", ")}"
           render :new, status: :unprocessable_entity
         end
       end
@@ -28,7 +28,7 @@ module Spree
         if @store.save
           flash[:success] = flash_message_for(@store, :successfully_updated)
         else
-          flash[:error] = "#{Spree.t('store_errors.unable_to_update')}: #{@store.errors.full_messages.join(', ')}"
+          flash[:error] = "#{Spree.t("store_errors.unable_to_update")}: #{@store.errors.full_messages.join(", ")}"
         end
 
         redirect_to spree.edit_admin_store_path(@store)
@@ -41,7 +41,7 @@ module Spree
           flash[:success] = flash_message_for(@store, :successfully_removed)
           redirect_to spree.admin_url(domain: Spree::Store.default.url), allow_other_host: true
         else
-          render plain: "#{Spree.t('store_errors.unable_to_delete')}: #{@store.errors.full_messages.join(', ')}", status: :unprocessable_entity
+          render plain: "#{Spree.t("store_errors.unable_to_delete")}: #{@store.errors.full_messages.join(", ")}", status: :unprocessable_entity
         end
       end
 
@@ -75,13 +75,13 @@ module Spree
 
       def normalize_supported_currencies
         if params[:store][:supported_currencies]&.is_a?(Array)
-          params[:store][:supported_currencies] = params[:store][:supported_currencies].compact.uniq.reject(&:blank?).join(',')
+          params[:store][:supported_currencies] = params[:store][:supported_currencies].compact.uniq.reject(&:blank?).join(",")
         end
       end
 
       def normalize_supported_locales
         if params[:store][:supported_locales]&.is_a?(Array)
-          params[:store][:supported_locales] = params[:store][:supported_locales].compact.uniq.reject(&:blank?).join(',')
+          params[:store][:supported_locales] = params[:store][:supported_locales].compact.uniq.reject(&:blank?).join(",")
         end
       end
 

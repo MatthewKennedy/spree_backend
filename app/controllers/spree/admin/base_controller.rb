@@ -10,11 +10,11 @@ module Spree
 
       respond_to :html
 
-      helper 'spree/base'
-      helper 'spree/admin/navigation'
-      helper 'spree/locale'
-      helper 'spree/currency'
-      layout 'spree/layouts/admin'
+      helper "spree/base"
+      helper "spree/admin/navigation"
+      helper "spree/locale"
+      helper "spree/currency"
+      layout "spree/layouts/admin"
 
       before_action :authorize_admin
       before_action :load_stores
@@ -29,10 +29,10 @@ module Spree
 
       def authorize_admin
         record = if respond_to?(:model_class, true) && model_class
-                   model_class
-                 else
-                   controller_name.to_sym
-                 end
+          model_class
+        else
+          controller_name.to_sym
+        end
         authorize! :admin, record
         authorize! action, record
       end
@@ -50,19 +50,19 @@ module Spree
           elsif spree.respond_to?(:root_path)
             redirect_to spree.root_path
           else
-            redirect_to main_app.respond_to?(:root_path) ? main_app.root_path : '/'
+            redirect_to main_app.respond_to?(:root_path) ? main_app.root_path : "/"
           end
         end
       end
 
       def flash_message_for(object, event_sym)
-        resource_desc  = object.class.model_name.human
+        resource_desc = object.class.model_name.human
         resource_desc += " \"#{object.name}\"" if (object.persisted? || object.destroyed?) && object.respond_to?(:name) && object.name.present? && !object.is_a?(Spree::Order)
         Spree.t(event_sym, resource: resource_desc)
       end
 
       def render_js_for_destroy
-        render partial: '/spree/admin/shared/destroy'
+        render partial: "/spree/admin/shared/destroy"
       end
 
       def config_locale
@@ -85,9 +85,7 @@ module Spree
       end
 
       def admin_oauth_application
-        @admin_oauth_application ||= begin
-          Spree::OauthApplication.find_or_create_by!(name: 'Admin Panel', scopes: 'admin', redirect_uri: '')
-        end
+        @admin_oauth_application ||= Spree::OauthApplication.find_or_create_by!(name: "Admin Panel", scopes: "admin", redirect_uri: "")
       end
 
       # FIXME: auto-expire this token

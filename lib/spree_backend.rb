@@ -1,4 +1,4 @@
-require 'spree/backend'
+require "spree/backend"
 
 module Spree
   def self.admin_path

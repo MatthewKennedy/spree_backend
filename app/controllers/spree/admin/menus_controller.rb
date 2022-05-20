@@ -1,7 +1,8 @@
 module Spree
   module Admin
     class MenusController < ResourceController
-      def index; end
+      def index
+      end
 
       private
 
@@ -20,8 +21,8 @@ module Spree
         @collection = scope
 
         @search = @collection.ransack(params[:q])
-        @collection = @search.result.page(params[:page]).
-                      per(params[:per_page] || Spree::Backend::Config[:menus_per_page])
+        @collection = @search.result.page(params[:page])
+          .per(params[:per_page] || Spree::Backend::Config[:menus_per_page])
       end
 
       def location_after_save

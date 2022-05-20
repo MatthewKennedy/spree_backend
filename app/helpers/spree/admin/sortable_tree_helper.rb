@@ -17,14 +17,14 @@ module Spree
         end
 
         row = sortable_tree_bar(parent_resource, child_resource)
-        container = content_tag(:div, raw(descendants.join), data: { sortable_tree_parent_id_value: child_resource.id })
+        container = content_tag(:div, raw(descendants.join), data: {sortable_tree_parent_id_value: child_resource.id})
 
         content_tag(:div, row + container,
-                    class: 'sortable-tree-item draggable removable-dom-element',
-                    data: {
-                      sortable_tree_resource_name_value: child_resource_name.singularize,
-                      sortable_tree_update_url_value: "/api/v2/platform/#{child_resource_name.pluralize}/#{child_resource.id}/reposition"
-                    })
+          class: "sortable-tree-item draggable removable-dom-element",
+          data: {
+            sortable_tree_resource_name_value: child_resource_name.singularize,
+            sortable_tree_update_url_value: "/api/v2/platform/#{child_resource_name.pluralize}/#{child_resource.id}/reposition"
+          })
       end
     end
   end

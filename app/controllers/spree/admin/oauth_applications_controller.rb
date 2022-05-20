@@ -10,7 +10,7 @@ module Spree
       end
 
       def set_default_scopes
-        @object.scopes = 'admin' if @object.scopes.blank?
+        @object.scopes = "admin" if @object.scopes.blank?
       end
     end
   end

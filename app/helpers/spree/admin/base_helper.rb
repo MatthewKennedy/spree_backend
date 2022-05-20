@@ -17,17 +17,17 @@ module Spree
         if flash.present?
           type = flash.first[0]
           message = flash.first[1]
-          content_tag(:span, message, class: 'd-none', data: { alert_type: type })
+          content_tag(:span, message, class: "d-none", data: {alert_type: type})
         end
       end
 
       def field_container(model, method, options = {}, &block)
         css_classes = options[:class].to_a
-        css_classes << 'form-group'
-        css_classes << 'withError' if error_message_on(model, method).present?
+        css_classes << "form-group"
+        css_classes << "withError" if error_message_on(model, method).present?
         content_tag(
           :div, capture(&block),
-          options.merge(class: css_classes.join(' '), id: "#{model}_#{method}_field")
+          options.merge(class: css_classes.join(" "), id: "#{model}_#{method}_field")
         )
       end
 
@@ -50,10 +50,10 @@ module Spree
 
         model_name.constantize.const_get(const).map do |type|
           return_value = if paramterize_values
-                           type.parameterize(separator: '_')
-                         else
-                           type
-                         end
+            type.parameterize(separator: "_")
+          else
+            type
+          end
 
           formatted_option_values << [spree_humanize_type(type), return_value]
         end
@@ -62,12 +62,12 @@ module Spree
       end
 
       def spree_humanize_type(obj)
-        last_word = obj.split('::', 10).last
+        last_word = obj.split("::", 10).last
 
-        if last_word.starts_with?('Cms')
-          last_word.slice(3, 100).gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
+        if last_word.starts_with?("Cms")
+          last_word.slice(3, 100).gsub(/(?<=[a-z])(?=[A-Z])/, " ")
         else
-          last_word.gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
+          last_word.gsub(/(?<=[a-z])(?=[A-Z])/, " ")
         end
       end
 
@@ -76,15 +76,15 @@ module Spree
         obj = object.respond_to?(:errors) ? object : instance_variable_get("@#{object}")
 
         if obj && obj.errors[method].present?
-          errors = safe_join(obj.errors[method], '<br />'.html_safe)
-          content_tag(:span, errors, class: 'formError')
+          errors = safe_join(obj.errors[method], "<br />".html_safe)
+          content_tag(:span, errors, class: "formError")
         else
-          ''
+          ""
         end
       end
 
-      def svg_icon(name:, classes: '', width:, height:)
-        if name.ends_with?('.svg')
+      def svg_icon(name:, width:, height:, classes: "")
+        if name.ends_with?(".svg")
           icon_name = File.basename(name, File.extname(name))
           inline_svg_tag "#{icon_name}.svg", class: "icon-#{icon_name} #{classes}", size: "#{width}px*#{height}px"
         else
@@ -94,15 +94,15 @@ module Spree
 
       def datepicker_field_value(date)
         unless date.blank?
-          l(date, format: '%Y/%m/%d')
+          l(date, format: "%Y/%m/%d")
         end
       end
 
       def preference_field_tag(name, value, options)
         if options[:key] == :currency
           return select_tag(name,
-                            options_from_collection_for_select(supported_currencies_for_all_stores, :iso_code, :iso_code, value),
-                            class: 'select2')
+            options_from_collection_for_select(supported_currencies_for_all_stores, :iso_code, :iso_code, value),
+            class: "select2")
         end
 
         case options[:type]
@@ -141,41 +141,41 @@ module Spree
 
       def preference_field_options(options)
         field_options = case options[:type]
-                        when :integer
-                          {
-                            size: 10,
-                            class: 'input_integer form-control'
-                          }
-                        when :boolean
-                          {
-                            class: 'form-check-input'
-                          }
-                        when :string
-                          {
-                            size: 10,
-                            class: 'input_string form-control'
-                          }
-                        when :password
-                          {
-                            size: 10,
-                            class: 'password_string form-control'
-                          }
-                        when :text
-                          {
-                            rows: 15,
-                            cols: 85,
-                            class: 'form-control'
-                          }
-                        else
-                          {
-                            size: 10,
-                            class: 'input_string form-control'
-                          }
-                        end
+        when :integer
+          {
+            size: 10,
+            class: "input_integer form-control"
+          }
+        when :boolean
+          {
+            class: "form-check-input"
+          }
+        when :string
+          {
+            size: 10,
+            class: "input_string form-control"
+          }
+        when :password
+          {
+            size: 10,
+            class: "password_string form-control"
+          }
+        when :text
+          {
+            rows: 15,
+            cols: 85,
+            class: "form-control"
+          }
+        else
+          {
+            size: 10,
+            class: "input_string form-control"
+          }
+        end
 
         field_options.merge!(readonly: options[:readonly],
-                             disabled: options[:disabled],
-                             size: options[:size])
+          disabled: options[:disabled],
+          size: options[:size])
       end
 
       def preference_fields(object, form)
@@ -186,17 +186,17 @@ module Spree
             case key
             when :currency
               content_tag(:div, form.label("preferred_#{key}", Spree.t(key)) +
-                (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, { class: 'form-control select2' }),
-                          class: 'form-group', id: [object.class.to_s.parameterize, 'preference', key].join('-'))
+                (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {class: "form-control select2"}),
+                class: "form-group", id: [object.class.to_s.parameterize, "preference", key].join("-"))
             else
               if object.preference_type(key).to_sym == :boolean
                 content_tag(:div, preference_field_for(form, "preferred_#{key}", type: object.preference_type(key)) +
-                  form.label("preferred_#{key}", Spree.t(key), class: 'form-check-label'),
-                            class: 'form-group form-check', id: [object.class.to_s.parameterize, 'preference', key].join('-'))
+                  form.label("preferred_#{key}", Spree.t(key), class: "form-check-label"),
+                  class: "form-group form-check", id: [object.class.to_s.parameterize, "preference", key].join("-"))
               else
                 content_tag(:div, form.label("preferred_#{key}", Spree.t(key)) +
                   preference_field_for(form, "preferred_#{key}", type: object.preference_type(key)),
-                            class: 'form-group', id: [object.class.to_s.parameterize, 'preference', key].join('-'))
+                  class: "form-group", id: [object.class.to_s.parameterize, "preference", key].join("-"))
               end
             end
           end
@@ -206,19 +206,18 @@ module Spree
 
       # renders hidden field and link to remove record using nested_attributes
       def link_to_icon_remove_fields(form)
-        url = form.object.persisted? ? [:admin, form.object] : '#'
-        link_to_with_icon('delete.svg', '', url,
-                          class: 'spree_remove_fields btn btn-sm btn-danger',
-                          data: {
-                            action: 'remove'
-                          },
-                          title: Spree.t(:remove),
-                          no_text: true
-                         ) + form.hidden_field(:_destroy)
+        url = form.object.persisted? ? [:admin, form.object] : "#"
+        link_to_with_icon("delete.svg", "", url,
+          class: "spree_remove_fields btn btn-sm btn-danger",
+          data: {
+            action: "remove"
+          },
+          title: Spree.t(:remove),
+          no_text: true) + form.hidden_field(:_destroy)
       end
 
       def spree_dom_id(record)
-        dom_id(record, 'spree')
+        dom_id(record, "spree")
       end
 
       I18N_PLURAL_MANY_COUNT = 2.1
@@ -227,22 +226,22 @@ module Spree
       end
 
       def order_time(time)
-        return '' if time.blank?
+        return "" if time.blank?
 
-        [I18n.l(time.to_date), time.strftime('%l:%M %p %Z').strip].join(' ')
+        [I18n.l(time.to_date), time.strftime("%l:%M %p %Z").strip].join(" ")
       end
 
       def required_span_tag
-        content_tag(:span, ' *', class: 'required font-weight-bold text-danger')
+        content_tag(:span, " *", class: "required font-weight-bold text-danger")
       end
 
       def external_page_preview_link(resource, options = {})
         resource_name = options[:name] || resource.class.name.demodulize
 
         button_link_to(
-          Spree.t('admin.utilities.preview', name: resource_name),
+          Spree.t("admin.utilities.preview", name: resource_name),
           spree_storefront_resource_url(resource),
-          class: 'btn-secondary', icon: 'eye.svg', id: "adminPreview#{resource_name}", target: :blank, data: { turbo: false }
+          class: "btn-secondary", icon: "eye.svg", id: "adminPreview#{resource_name}", target: :blank, data: {turbo: false}
         )
       end
 
@@ -255,28 +254,28 @@ module Spree
       end
 
       def select2_local_fallback
-        stripped_locale = I18n.locale.to_s.split('-').first
+        stripped_locale = I18n.locale.to_s.split("-").first
 
-        if ['zh-CN', 'zh-TW', 'sr-Cyrl', 'pt-BR'].include?(I18n.locale.to_s)
+        if ["zh-CN", "zh-TW", "sr-Cyrl", "pt-BR"].include?(I18n.locale.to_s)
           I18n.locale
         elsif SELECT2_SUPPORTED_LOCALES.include? stripped_locale
           stripped_locale
         else
-          'en'
+          "en"
         end
       end
 
       def flatpickr_local_fallback
-        stripped_locale = I18n.locale.to_s.split('-').first
+        stripped_locale = I18n.locale.to_s.split("-").first
 
-        if I18n.locale.to_s == 'zh-TW'
+        if I18n.locale.to_s == "zh-TW"
           # Taiwanese is a popular language in Spree,
           # it has been well translated.
-          'zh-tw'
+          "zh-tw"
         elsif FLATPICKR_SUPPORTED_LOCALES.include? stripped_locale
           stripped_locale
         else
-          'default'
+          "default"
         end
       end
 

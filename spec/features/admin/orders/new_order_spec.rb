@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'New Order', type: :feature do
+describe "New Order", type: :feature do
   let!(:product) { create(:product_in_stock, stores: [store]) }
   let!(:state) { create(:state) }
   let!(:user) { create(:user, ship_address: create(:address), bill_address: create(:address)) }
@@ -17,123 +17,123 @@ describe 'New Order', type: :feature do
     visit spree.new_admin_order_path
   end
 
-  it 'does check if you have a billing address before letting you add shipments' do
-    click_on 'Shipments'
-    expect(page).to have_content 'Please fill in customer info'
+  it "does check if you have a billing address before letting you add shipments" do
+    click_on "Shipments"
+    expect(page).to have_content "Please fill in customer info"
     expect(page).to have_current_path(spree.edit_admin_order_customer_path(order))
   end
 
-  it 'sets proper currency and store' do
+  it "sets proper currency and store" do
     expect(order.store).to eq(store)
     expect(order.currency).to eq(store.default_currency)
   end
 
-  it 'completes new order successfully without using the cart', js: true do
+  it "completes new order successfully without using the cart", js: true do
     select2 product.name, from: Spree.t(:name_or_sku), search: true
 
     click_icon :add
-    expect(page).to have_css('.card', text: 'Order Line Items')
+    expect(page).to have_css(".card", text: "Order Line Items")
 
-    click_on 'Customer'
+    click_on "Customer"
     select_customer
 
-    check 'order_use_billing'
+    check "order_use_billing"
     fill_in_address
-    click_on 'Update'
+    click_on "Update"
     wait_for_turbo
 
-    click_on 'Payments'
-    click_on 'Update'
+    click_on "Payments"
+    click_on "Update"
 
     expect(page).to have_current_path(spree.admin_order_payments_path(order))
-    click_icon 'capture'
+    click_icon "capture"
 
-    click_on 'Shipments'
+    click_on "Shipments"
     wait_for_turbo
 
-    click_on 'Ship'
+    click_on "Ship"
     wait_for_turbo
 
-    expect(page).to have_content('shipped')
+    expect(page).to have_content("shipped")
   end
 
-  context 'adding new item to the order', js: true do
-    it 'inventory items show up just fine and are also registered as shipments' do
+  context "adding new item to the order", js: true do
+    it "inventory items show up just fine and are also registered as shipments" do
       select2 product.name, from: Spree.t(:name_or_sku), search: true
 
-      within('table.stock-levels') do
-        fill_in 'variant_quantity', with: 2
+      within("table.stock-levels") do
+        fill_in "variant_quantity", with: 2
         click_icon :add
       end
 
-      within('.line-items') do
+      within(".line-items") do
         expect(page).to have_content(product.name)
         expect(page).to have_content(product.price_in(store.default_currency).display_price.to_s)
       end
 
-      click_on 'Customer'
+      click_on "Customer"
       select_customer
 
-      check 'order_use_billing'
+      check "order_use_billing"
       fill_in_address
-      click_on 'Update'
+      click_on "Update"
       wait_for_turbo
 
-      click_on 'Shipments'
+      click_on "Shipments"
 
-      within('.stock-contents') do
+      within(".stock-contents") do
         expect(page).to have_content(product.name)
       end
     end
   end
 
-  context 'skipping to shipping without having an address', js: true do
-    it 'prompts you with a flash notice to: Please fill in customer info' do
-      click_on 'Shipments'
-      assert_admin_flash_alert_notice('Please fill in customer info')
+  context "skipping to shipping without having an address", js: true do
+    it "prompts you with a flash notice to: Please fill in customer info" do
+      click_on "Shipments"
+      assert_admin_flash_alert_notice("Please fill in customer info")
     end
   end
 
   context "adding new item to the order which isn't available", js: true do
     before do
-      product.update(status: 'draft', available_on: nil)
+      product.update(status: "draft", available_on: nil)
       select2 product.name, from: Spree.t(:name_or_sku), search: true
     end
 
-    it 'inventory items is displayed' do
+    it "inventory items is displayed" do
       expect(page).to have_content(product.name)
-      expect(page).to have_css('#stock_details')
+      expect(page).to have_css("#stock_details")
     end
 
-    context 'on increase in quantity the product should be removed from order' do
+    context "on increase in quantity the product should be removed from order" do
       before do
-        within('table.stock-levels') do
-          fill_in 'variant_quantity', with: 2
+        within("table.stock-levels") do
+          fill_in "variant_quantity", with: 2
           click_icon :add
         end
       end
 
-      it { expect(page).not_to have_css('#stock_details') }
+      it { expect(page).not_to have_css("#stock_details") }
     end
   end
 
   # Regression test for #3958
-  context 'without a delivery step', js: true do
+  context "without a delivery step", js: true do
     before do
       allow(Spree::Order).to receive_messages checkout_step_names: [:address, :payment, :confirm, :complete]
     end
 
-    it 'can still see line items' do
+    it "can still see line items" do
       select2 product.name, from: Spree.t(:name_or_sku), search: true
       click_icon :add
-      within('.line-items') do
-        within('.line-item-name') do
+      within(".line-items") do
+        within(".line-item-name") do
           expect(page).to have_content(product.name)
         end
-        within('.line-item-qty-show') do
-          expect(page).to have_content('1')
+        within(".line-item-qty-show") do
+          expect(page).to have_content("1")
         end
-        within('.line-item-price') do
+        within(".line-item-price") do
           expect(page).to have_content(product.price)
         end
       end
@@ -141,73 +141,73 @@ describe 'New Order', type: :feature do
   end
 
   # Regression test for #3336
-  context 'start by customer address' do
-    it 'completes order fine', js: true do
-      click_on 'Customer'
+  context "start by customer address" do
+    it "completes order fine", js: true do
+      click_on "Customer"
       select_customer
 
-      check 'order_use_billing'
+      check "order_use_billing"
       fill_in_address
-      click_on 'Update'
+      click_on "Update"
 
-      click_on 'Shipments'
-      expect(page).to have_content('Add Product')
+      click_on "Shipments"
+      expect(page).to have_content("Add Product")
       select2 product.name, from: Spree.t(:name_or_sku), search: true
 
       expect(page).to have_content(product.name)
-      expect(page).to have_content('Select stock')
+      expect(page).to have_content("Select stock")
 
       click_icon :add
-      expect(page).not_to have_content('Your order is empty')
+      expect(page).not_to have_content("Your order is empty")
 
-      click_on 'Payments'
-      click_on 'Continue'
+      click_on "Payments"
+      click_on "Continue"
 
-      expect(page).to have_css('#order_tab_summary .state', text: 'COMPLETE')
+      expect(page).to have_css("#order_tab_summary .state", text: "COMPLETE")
     end
   end
 
   # Regression test for #5327
-  context 'customer with default credit card', js: true do
+  context "customer with default credit card", js: true do
     before do
       allow(Spree.user_class).to receive(:find_by).and_return(user)
       create(:credit_card, default: true, user: user)
     end
 
-    it 'transitions to delivery not to complete' do
+    it "transitions to delivery not to complete" do
       select2 product.name, from: Spree.t(:name_or_sku), search: true
 
-      within('table.stock-levels') do
-        fill_in 'variant_quantity', with: 1
+      within("table.stock-levels") do
+        fill_in "variant_quantity", with: 1
         click_icon :add
       end
 
-      expect(page).not_to have_content('Your order is empty')
+      expect(page).not_to have_content("Your order is empty")
 
-      click_link 'Customer'
+      click_link "Customer"
       select_customer
-      wait_for { !page.has_button?('Update') }
-      click_button 'Update'
+      wait_for { !page.has_button?("Update") }
+      click_button "Update"
       wait_for_turbo
 
-      expect(order.state).to eq 'delivery'
+      expect(order.state).to eq "delivery"
     end
   end
 
-  def fill_in_address(kind = 'bill')
-    fill_in 'First Name',                with: 'John 99'
-    fill_in 'Last Name',                 with: 'Doe'
-    fill_in 'Address',                   with: '100 first lane'
-    fill_in 'Address (contd.)',          with: '#101'
-    fill_in 'City',                      with: 'Bethesda'
-    fill_in 'Zip Code',                  with: '20170'
-    select2 state.name,                  css: '#bstate'
-    fill_in 'Phone',                     with: '123-456-7890'
+  def fill_in_address(kind = "bill")
+    fill_in "First Name", with: "John 99"
+    fill_in "Last Name", with: "Doe"
+    fill_in "Address", with: "100 first lane"
+    fill_in "Address (contd.)", with: "#101"
+    fill_in "City", with: "Bethesda"
+    fill_in "Zip Code", with: "20170"
+    select2 state.name, css: "#bstate"
+    fill_in "Phone", with: "123-456-7890"
   end
 
   def select_customer
-    within 'div#select-customer' do
-      select2 user.email, css: '#customer-search-field', search: true
+    within "div#select-customer" do
+      select2 user.email, css: "#customer-search-field", search: true
     end
   end
 end

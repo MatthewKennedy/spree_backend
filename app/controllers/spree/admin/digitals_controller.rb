@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class DigitalsController < ResourceController
-      belongs_to 'spree/product', find_by: :slug
+      belongs_to "spree/product", find_by: :slug
 
       def create
         invoke_callbacks(:create, :before)
@@ -11,7 +11,7 @@ module Spree
           super
         else
           invoke_callbacks(:create, :fails)
-          flash[:error] = @object.errors.full_messages.join(', ')
+          flash[:error] = @object.errors.full_messages.join(", ")
           respond_with(@object) do |format|
             format.html { render action: :index, status: :unprocessable_entity }
             format.js { render layout: false, status: :unprocessable_entity }

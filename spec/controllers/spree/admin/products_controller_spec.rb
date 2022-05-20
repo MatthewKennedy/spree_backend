@@ -1,32 +1,32 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Spree::Admin::ProductsController, type: :controller do
   stub_authorization!
 
   let(:store) { Spree::Store.default }
 
-  context '#index' do
+  context "#index" do
     let(:ability_user) { stub_model(Spree::LegacyUser, has_spree_role?: true) }
 
     # Regression test for #1259
-    it 'can find a product by SKU' do
-      product = create(:product, sku: 'ABC123', stores: [store])
-      get :index, params: { q: { sku_start: 'ABC123' } }
+    it "can find a product by SKU" do
+      product = create(:product, sku: "ABC123", stores: [store])
+      get :index, params: {q: {sku_start: "ABC123"}}
       expect(assigns[:collection]).not_to be_empty
       expect(assigns[:collection]).to include(product)
     end
 
-    it 'cannot find products from different stores' do
-      product = create(:product, sku: 'ABC123', stores: [create(:store)])
-      get :index, params: { q: { sku_start: 'ABC123' } }
+    it "cannot find products from different stores" do
+      product = create(:product, sku: "ABC123", stores: [create(:store)])
+      get :index, params: {q: {sku_start: "ABC123"}}
       expect(assigns[:collection]).to be_empty
       expect(assigns[:collection]).not_to include(product)
     end
   end
 
-  context '#update' do
+  context "#update" do
     let!(:product) { create(:product, stores: [store]) }
-    let(:product_params) { { status: 'draft', make_active_at: Time.current.beginning_of_day } }
+    let(:product_params) { {status: "draft", make_active_at: Time.current.beginning_of_day} }
     let(:send_request) do
       put :update, params: {
         id: product.to_param,
@@ -34,15 +34,15 @@ describe Spree::Admin::ProductsController, type: :controller do
       }
     end
 
-    it 'will successfully update product' do
+    it "will successfully update product" do
       send_request
       expect(flash[:success]).to eq("Product #{product.name.inspect} has been successfully updated!")
-      expect(product.reload.status).to eq('draft')
+      expect(product.reload.status).to eq("draft")
       expect(product.make_active_at).to eq(Time.current.beginning_of_day)
     end
 
-    context 'with limited activate_product permissions' do
-      let(:product_params) { { status: :active, make_active_at: Time.current.beginning_of_day } }
+    context "with limited activate_product permissions" do
+      let(:product_params) { {status: :active, make_active_at: Time.current.beginning_of_day} }
 
       stub_authorization! do |_u|
         can :manage, :all
@@ -53,17 +53,17 @@ describe Spree::Admin::ProductsController, type: :controller do
         product.update(status: :draft)
       end
 
-      it 'cannot change the product status and make_available_at' do
+      it "cannot change the product status and make_available_at" do
         send_request
         expect(flash[:success]).to eq("Product #{product.name.inspect} has been successfully updated!")
-        expect(product.reload.status).not_to eq('active')
+        expect(product.reload.status).not_to eq("active")
         expect(product.make_active_at).not_to eq(Time.current.beginning_of_day)
       end
     end
 
     # regression test for #1370
-    context 'adding properties to a product' do
-      let(:product_params) { { product_properties_attributes: { '1' => { property_name: 'Foo', value: 'bar' } } } }
+    context "adding properties to a product" do
+      let(:product_params) { {product_properties_attributes: {"1" => {property_name: "Foo", value: "bar"}}} }
 
       specify do
         send_request
@@ -73,22 +73,22 @@ describe Spree::Admin::ProductsController, type: :controller do
   end
 
   # regression test for #801
-  describe '#destroy' do
+  describe "#destroy" do
     let(:product) { mock_model(Spree::Product) }
     let(:products) { double(ActiveRecord::Relation) }
 
     def send_request
-      delete :destroy, params: { id: product, format: :js }
+      delete :destroy, params: {id: product, format: :js}
     end
 
-    context 'will successfully destroy product' do
+    context "will successfully destroy product" do
       before do
         allow(Spree::Product).to receive(:friendly).and_return(products)
         allow(products).to receive(:find).with(product.id.to_s).and_return(product)
         allow(product).to receive(:destroy).and_return(true)
       end
 
-      describe 'expects to receive' do
+      describe "expects to receive" do
         after { send_request }
 
         it { expect(Spree::Product).to receive(:friendly).and_return(products) }
@@ -96,22 +96,22 @@ describe Spree::Admin::ProductsController, type: :controller do
         it { expect(product).to receive(:destroy).and_return(true) }
       end
 
-      describe 'assigns' do
+      describe "assigns" do
         before { send_request }
 
         it { expect(assigns(:product)).to eq(product) }
       end
 
-      describe 'response' do
+      describe "response" do
         before { send_request }
 
         it { expect(response).to have_http_status(:ok) }
-        it { expect(flash[:success]).to eq(Spree.t('notice_messages.product_deleted')) }
+        it { expect(flash[:success]).to eq(Spree.t("notice_messages.product_deleted")) }
       end
     end
 
-    context 'will not successfully destroy product' do
-      let(:error_msg) { 'Failed to delete' }
+    context "will not successfully destroy product" do
+      let(:error_msg) { "Failed to delete" }
 
       before do
         allow(Spree::Product).to receive(:friendly).and_return(products)
@@ -120,7 +120,7 @@ describe Spree::Admin::ProductsController, type: :controller do
         allow(product).to receive(:destroy).and_return(false)
       end
 
-      describe 'expects to receive' do
+      describe "expects to receive" do
         after { send_request }
 
         it { expect(Spree::Product).to receive(:friendly).and_return(products) }
@@ -128,46 +128,46 @@ describe Spree::Admin::ProductsController, type: :controller do
         it { expect(product).to receive(:destroy).and_return(false) }
       end
 
-      describe 'assigns' do
+      describe "assigns" do
         before { send_request }
 
         it { expect(assigns(:product)).to eq(product) }
       end
 
-      describe 'response' do
+      describe "response" do
         before { send_request }
 
         it { expect(response).to have_http_status(:ok) }
 
-        it 'set flash error' do
-          expected_error = Spree.t('notice_messages.product_not_deleted', error: error_msg)
+        it "set flash error" do
+          expected_error = Spree.t("notice_messages.product_not_deleted", error: error_msg)
           expect(flash[:error]).to eq(expected_error)
         end
       end
     end
 
-    context 'cannot destroy product from different store' do
+    context "cannot destroy product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
       it { expect(send_request).to redirect_to(spree.admin_products_path) }
 
       it do
         send_request
-        expect(flash[:error]).to eq('Product is not found')
+        expect(flash[:error]).to eq("Product is not found")
       end
     end
   end
 
-  describe '#clone' do
+  describe "#clone" do
     subject(:send_request) do
-      post :clone, params: { id: product, format: :js }
+      post :clone, params: {id: product, format: :js}
     end
 
-    let!(:product) { create(:custom_product, name: 'MyProduct', sku: 'MySku') }
-    let(:product2) { create(:custom_product, name: 'COPY OF MyProduct', sku: 'COPY OF MySku') }
-    let(:variant) { create(:master_variant, name: 'COPY OF MyProduct', sku: 'COPY OF MySku', created_at: product.created_at - 1.day) }
+    let!(:product) { create(:custom_product, name: "MyProduct", sku: "MySku") }
+    let(:product2) { create(:custom_product, name: "COPY OF MyProduct", sku: "COPY OF MySku") }
+    let(:variant) { create(:master_variant, name: "COPY OF MyProduct", sku: "COPY OF MySku", created_at: product.created_at - 1.day) }
 
-    context 'will successfully clone product' do
+    context "will successfully clone product" do
       before do
         Timecop.freeze(Date.today + 30)
         allow(product).to receive(:duplicate).and_return(product2)
@@ -178,80 +178,80 @@ describe Spree::Admin::ProductsController, type: :controller do
         Timecop.return
       end
 
-      describe 'response' do
+      describe "response" do
         it { expect(response).to have_http_status(:found) }
         it { expect(response).to be_redirect }
-        it { expect(flash[:success]).to eq(Spree.t('notice_messages.product_cloned')) }
+        it { expect(flash[:success]).to eq(Spree.t("notice_messages.product_cloned")) }
       end
     end
 
-    context 'will not successfully clone product' do
+    context "will not successfully clone product" do
       before do
         variant
       end
 
-      describe 'response' do
+      describe "response" do
         before { send_request }
 
         it { expect(response).to have_http_status(:found) }
         it { expect(response).to be_redirect }
 
-        it 'set flash error' do
-          expected_error = Spree.t('notice_messages.product_not_cloned', error: 'Validation failed: Sku has already been taken')
+        it "set flash error" do
+          expected_error = Spree.t("notice_messages.product_not_cloned", error: "Validation failed: Sku has already been taken")
           expect(flash[:error]).to eq(expected_error)
         end
       end
     end
 
-    context 'cannot clone product from different store' do
+    context "cannot clone product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
       it { expect(send_request).to redirect_to(spree.admin_products_path) }
 
       it do
         send_request
-        expect(flash[:error]).to eq('Product is not found')
+        expect(flash[:error]).to eq("Product is not found")
       end
     end
   end
 
-  describe '#show' do
+  describe "#show" do
     let(:product) { create(:product, stores: [store]) }
-    let(:send_request) { get :stock, params: { id: product } }
+    let(:send_request) { get :stock, params: {id: product} }
 
     it { expect(send_request).to have_http_status(:ok) }
 
-    context 'cannot see product from different store' do
+    context "cannot see product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
       it { expect(send_request).to redirect_to(spree.admin_products_path) }
 
       it do
         send_request
-        expect(flash[:error]).to eq('Product is not found')
+        expect(flash[:error]).to eq("Product is not found")
       end
     end
   end
 
-  describe '#stock' do
+  describe "#stock" do
     let(:product) { create(:product, stores: [store]) }
-    let(:send_request) { get :stock, params: { id: product } }
+    let(:send_request) { get :stock, params: {id: product} }
 
-    it 'restricts stock location based on accessible attributes' do
+    it "restricts stock location based on accessible attributes" do
       expect(Spree::StockLocation).to receive(:accessible_by).and_return([])
       send_request
     end
 
     it { expect(send_request).to have_http_status(:ok) }
 
-    context 'cannot see stock of product from different store' do
+    context "cannot see stock of product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
       it { expect(send_request).to redirect_to(spree.admin_products_path) }
 
       it do
         send_request
-        expect(flash[:error]).to eq('Product is not found')
+        expect(flash[:error]).to eq("Product is not found")
       end
     end
   end

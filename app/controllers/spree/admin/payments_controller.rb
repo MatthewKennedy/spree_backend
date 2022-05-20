@@ -19,7 +19,7 @@ module Spree
 
       def new
         # Move order to payment state in order to capture tax generated on shipments
-        @order.next if @order.can_go_to_state?('payment')
+        @order.next if @order.can_go_to_state?("payment")
         @payment = @order.payments.build
       end
 
@@ -32,14 +32,14 @@ module Spree
             payments = @order.payments.store_credits.valid
           else
             @payment ||= @order.payments.build(object_params)
-            if @payment.payment_method.source_required? && params[:card].present? && params[:card] != 'new'
+            if @payment.payment_method.source_required? && params[:card].present? && params[:card] != "new"
               @payment.source = @payment.payment_method.payment_source_class.find_by(id: params[:card])
             end
             @payment.save
             payments = [@payment]
           end
 
-          if payments && (saved_payments = payments.select &:persisted?).any?
+          if payments && (saved_payments = payments.select(&:persisted?)).any?
             invoke_callbacks(:create, :after)
 
             # Transition order as far as it will go.
@@ -67,7 +67,7 @@ module Spree
         return unless event = params[:e] and @payment.payment_source
 
         # Because we have a transition method also called void, we do this to avoid conflicts.
-        event = 'void_transaction' if event == 'void'
+        event = "void_transaction" if event == "void"
         if @payment.send("#{event}!")
           flash[:success] = Spree.t(:payment_updated)
         else

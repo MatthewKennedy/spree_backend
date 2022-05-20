@@ -1,12 +1,12 @@
-require 'spree_core'
-require 'spree_api'
+require "spree_core"
+require "spree_api"
 
-require 'sprockets/railtie'
+require "sprockets/railtie"
 
-require 'turbo-rails'
-require 'inline_svg'
-require 'responders'
+require "turbo-rails"
+require "inline_svg"
+require "responders"
 
-require 'spree/backend/action_callbacks'
-require 'spree/backend/callbacks'
-require 'spree/backend/engine'
+require "spree/backend/action_callbacks"
+require "spree/backend/callbacks"
+require "spree/backend/engine"

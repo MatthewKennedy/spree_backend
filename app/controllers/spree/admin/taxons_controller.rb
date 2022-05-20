@@ -1,12 +1,13 @@
 module Spree
   module Admin
     class TaxonsController < ResourceController
-      belongs_to 'spree/taxonomy'
+      belongs_to "spree/taxonomy"
 
       before_action :set_permalink_part, only: [:edit]
       respond_to :html, :js
 
-      def index; end
+      def index
+      end
 
       def update
         successful = @taxon.transaction do
@@ -47,10 +48,10 @@ module Spree
 
       def remove_icon
         if @taxon.icon.destroy
-          flash[:success] = Spree.t('notice_messages.icon_removed')
+          flash[:success] = Spree.t("notice_messages.icon_removed")
           redirect_to spree.edit_admin_taxonomy_taxon_url(@taxonomy.id, @taxon.id)
         else
-          flash[:error] = Spree.t('errors.messages.cannot_remove_icon')
+          flash[:error] = Spree.t("errors.messages.cannot_remove_icon")
           render :edit, status: :unprocessable_entity
         end
       end
@@ -62,7 +63,7 @@ module Spree
       end
 
       def parent_data
-        if action_name == 'index'
+        if action_name == "index"
           nil
         else
           super
@@ -70,9 +71,9 @@ module Spree
       end
 
       def set_permalink_part
-        @permalink_part = @taxon.permalink.split('/').last
-        @parent_permalink = @taxon.permalink.split('/')[0...-1].join('/')
-        @parent_permalink += '/' unless @parent_permalink.blank?
+        @permalink_part = @taxon.permalink.split("/").last
+        @parent_permalink = @taxon.permalink.split("/")[0...-1].join("/")
+        @parent_permalink += "/" unless @parent_permalink.blank?
       end
 
       def taxon_params
@@ -91,7 +92,7 @@ module Spree
       def set_permalink_params
         set_permalink_part
 
-        if params.key? 'permalink_part'
+        if params.key? "permalink_part"
           params[:taxon][:permalink] = @parent_permalink + params[:permalink_part]
         end
       end
