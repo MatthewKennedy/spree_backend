@@ -21,7 +21,6 @@ plugins:
     enabled: true
     config:
       extensions:
-        - .es6
         - .js
     channel: "eslint-7" # need to keep this value the same as eslint version
                         # https://docs.codeclimate.com/v1.0/docs/eslint#section-eslint-versions
