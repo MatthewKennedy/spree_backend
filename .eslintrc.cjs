@@ -17,6 +17,7 @@ module.exports = {
     window: 'readonly',
     console: 'readonly',
     fetch: 'readonly',
+    Rails: 'readonly',
 
     updateAddressState: 'readonly',
     toggleItemEdit: 'readonly',
