@@ -357,15 +357,13 @@ function startItemSplit (event) {
             $('#variant_split_template').text()
           )
 
-          link
-            .closest('tr')
-            .after(
-              splitItemTemplate({
-                variant: variant,
-                shipments: shipments,
-                max_quantity: maxQuantity
-              })
-            )
+          link.closest('tr').after(
+            splitItemTemplate({
+              variant: variant,
+              shipments: shipments,
+              max_quantity: maxQuantity
+            })
+          )
           $('a.cancel-split').click(cancelItemSplit)
           $('a.save-split').click(completeItemSplit)
 
