@@ -11,6 +11,6 @@ inherit_gem:
   standard: config/base.yml
 
 inherit_from:
-  - rubocop/rails.yml
-  - rubocop/rspec.yml
-  - rubocop/custom.yml
+  - .rubocop/rails.yml
+  - .rubocop/rspec.yml
+  - .rubocop/custom.yml
