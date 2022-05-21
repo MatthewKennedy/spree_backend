@@ -30,9 +30,12 @@ document.addEventListener('spree:load', function () {
       },
       headers: SpreeDash.apiV2Authentication(),
       success: function (data) {
-        new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
-          jsonApiVariants = variants
-        })
+        new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(
+          data,
+          function (_err, variants) {
+            jsonApiVariants = variants
+          }
+        )
       },
       processResults: function (json) {
         const res = jsonApiVariants.map(function (stockItem) {
@@ -48,7 +51,7 @@ document.addEventListener('spree:load', function () {
         }
       },
       results: function (data, page) {
-        const more = (page * 50) < data.count
+        const more = page * 50 < data.count
         return {
           results: data.stock_items,
           more: more
@@ -61,12 +64,17 @@ document.addEventListener('spree:load', function () {
       }
 
       const variant = stockItem.variant
-      if (variant.images[0] !== undefined && variant.images[0].transformed_url !== undefined) {
+      if (
+        variant.images[0] !== undefined &&
+        variant.images[0].transformed_url !== undefined
+      ) {
         variant.image = variant.images[0].transformed_url
       }
-      return $(variantTemplate({
-        variant: variant
-      }))
+      return $(
+        variantTemplate({
+          variant: variant
+        })
+      )
     },
     templateSelection: function (stockItem) {
       const variant = stockItem.variant

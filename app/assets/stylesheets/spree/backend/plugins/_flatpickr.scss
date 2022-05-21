@@ -4,16 +4,19 @@
     span.cur-month:hover {
       background: transparent;
     }
-      .numInputWrapper {
+    .numInputWrapper {
       margin-left: 3px;
       border-radius: var(--bs-border-radius);
       overflow: hidden;
     }
 
     .flatpickr-monthDropdown-months {
-      @include prefix((
-        appearance: none
-      ), webkit moz ms khtml);
+      @include prefix(
+        (
+          appearance: none
+        ),
+        webkit moz ms khtml
+      );
 
       padding: 0.2em;
       border-radius: var(--bs-border-radius);
@@ -32,7 +35,7 @@
 
   .flatpickr-day {
     margin: 2px 0;
-    border-radius: var(--bs-border-radius) ;
+    border-radius: var(--bs-border-radius);
   }
 
   .flatpickr-months .flatpickr-prev-month:hover svg,
@@ -62,7 +65,7 @@
 // Mixins for calendar toggle icon show/hide.
 @mixin swith-appended-icon {
   &:placeholder-shown:not(:focus) + * {
-      @content;
+    @content;
   }
 }
 
@@ -76,11 +79,14 @@
 
     // Fix a bug where occasionally the whole screen will highlight
     // if you clicked the Flatpickr input box while moving the cursor.
-    @include prefix((
-      appearance: none,
-      touch-callout: none,
-      user-select: none
-    ), webkit moz ms khtml);
+    @include prefix(
+      (
+        appearance: none,
+        touch-callout: none,
+        user-select: none
+      ),
+      webkit moz ms khtml
+    );
 
     @include swith-appended-icon {
       opacity: 0;

@@ -31,12 +31,12 @@ run_tests: &run_tests
         name: Install libvips
         command: sudo apt-get install libvips
     - run:
-          name: Set bundle path
-          command: bundle config --local path vendor/bundle
+        name: Set bundle path
+        command: bundle config --local path vendor/bundle
     - run:
-          name: Ensure bundle Install
-          command: |
-            bundle check || bundle install
+        name: Ensure bundle Install
+        command: |
+          bundle check || bundle install
     - run:
         name: Create test app
         command: |
@@ -46,17 +46,17 @@ run_tests: &run_tests
         command: |
           cd spec/dummy && yarn unlink @spree/dashboard
     - run:
-          name: Run Rspec
-          command: |
-            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            bundle exec rspec --format documentation \
-                              --format RspecJunitFormatter \
-                              -o ~/rspec/rspec.xml \
-                              -- ${TESTFILES}
+        name: Run Rspec
+        command: |
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            -o ~/rspec/rspec.xml \
+                            -- ${TESTFILES}
     - store_test_results:
-          path: ~/rspec
+        path: ~/rspec
     - store_artifacts:
-          path: tmp/capybara
+        path: tmp/capybara
 
 run_tests_3_0: &run_tests_3_0
   <<: *defaults_3_0
@@ -71,12 +71,12 @@ run_tests_3_0: &run_tests_3_0
         name: Install libvips
         command: sudo apt-get install libvips
     - run:
-          name: Set bundle path
-          command: bundle config --local path vendor/bundle
+        name: Set bundle path
+        command: bundle config --local path vendor/bundle
     - run:
-          name: Ensure bundle Install
-          command: |
-            bundle check || bundle install
+        name: Ensure bundle Install
+        command: |
+          bundle check || bundle install
     - run:
         name: Create test app
         command: |
@@ -86,17 +86,17 @@ run_tests_3_0: &run_tests_3_0
         command: |
           cd spec/dummy && yarn unlink @spree/dashboard
     - run:
-          name: Run Rspec
-          command: |
-            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            bundle exec rspec --format documentation \
-                              --format RspecJunitFormatter \
-                              -o ~/rspec/rspec.xml \
-                              -- ${TESTFILES}
+        name: Run Rspec
+        command: |
+          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bundle exec rspec --format documentation \
+                            --format RspecJunitFormatter \
+                            -o ~/rspec/rspec.xml \
+                            -- ${TESTFILES}
     - store_test_results:
-          path: ~/rspec
+        path: ~/rspec
     - store_artifacts:
-          path: tmp/capybara
+        path: tmp/capybara
 
 jobs:
   bundle:

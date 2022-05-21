@@ -36,106 +36,119 @@ document.addEventListener('spree:load', function () {
   }
 
   if (taxonId.length > 0) {
-    taxonId.select2({
-      placeholder: SpreeDash.translations.find_a_taxon,
-      minimumInputLength: 3,
-      multiple: false,
-      ajax: {
-        url: SpreeDash.routes.taxons_api_v2,
-        datatype: 'json',
-        headers: SpreeDash.apiV2Authentication(),
-        data: function (params, page) {
-          return {
-            per_page: 50,
-            page: page,
-            filter: {
-              name_cont: params.term
-            }
-          }
-        },
-        processResults: function (data, page) {
-          const more = page < data.meta.total_pages
-
-          const results = data.data.map(function (obj) {
+    taxonId
+      .select2({
+        placeholder: SpreeDash.translations.find_a_taxon,
+        minimumInputLength: 3,
+        multiple: false,
+        ajax: {
+          url: SpreeDash.routes.taxons_api_v2,
+          datatype: 'json',
+          headers: SpreeDash.apiV2Authentication(),
+          data: function (params, page) {
             return {
-              id: obj.id,
-              text: obj.attributes.pretty_name
+              per_page: 50,
+              page: page,
+              filter: {
+                name_cont: params.term
+              }
             }
-          })
-
-          return {
-            results: results,
-            pagination: {
-              more: more
-            }
-          }
-        }
-      }
-    }).on('select2:select', function (e) {
-      $.ajax({
-        url: SpreeDash.routes.classifications_api_v2,
-        headers: SpreeDash.apiV2Authentication(),
-        data: {
-          filter: {
-            taxon_id_eq: e.params.data.id
           },
-          include: 'product.images',
-          per_page: 150,
-          sort: 'position'
-        }
-      }).done(function (json) {
-        taxonProducts.empty()
+          processResults: function (data, page) {
+            const more = page < data.meta.total_pages
 
-        if (json.meta.total_count === 0) {
-          return taxonProducts.html('<p class="text-center w-100 p-4">' + SpreeDash.translations.no_results + '</p>')
-        } else {
-          const results = []
-
-          json.data.forEach(function (classification) {
-            const productId = classification.relationships.product.data.id.toString()
-
-            const product = json.included.find(function (included) {
-              if (included.type === 'product' && included.id === productId) {
-                return included
+            const results = data.data.map(function (obj) {
+              return {
+                id: obj.id,
+                text: obj.attributes.pretty_name
               }
             })
 
-            if (product && classification) {
-              let imageUrl = null
-
-              if (product.relationships.images.data.length > 0) {
-                const imageId = product.relationships.images.data[0].id
-
-                const image = json.included.find(function (included) {
-                  if (included.type === 'image' && included.id === imageId) {
-                    return included
-                  }
-                })
-
-                if (image && image.attributes && image.attributes.styles) {
-                  imageUrl = image.attributes.styles[2].url
-                }
+            return {
+              results: results,
+              pagination: {
+                more: more
               }
-
-              results.push(taxonProducts.append(productTemplate({
-                product: product,
-                classification: classification,
-                image: imageUrl
-              })))
             }
-          })
-
-          return results
+          }
         }
       })
-    })
+      .on('select2:select', function (e) {
+        $.ajax({
+          url: SpreeDash.routes.classifications_api_v2,
+          headers: SpreeDash.apiV2Authentication(),
+          data: {
+            filter: {
+              taxon_id_eq: e.params.data.id
+            },
+            include: 'product.images',
+            per_page: 150,
+            sort: 'position'
+          }
+        }).done(function (json) {
+          taxonProducts.empty()
+
+          if (json.meta.total_count === 0) {
+            return taxonProducts.html(
+              '<p class="text-center w-100 p-4">' +
+                SpreeDash.translations.no_results +
+                '</p>'
+            )
+          } else {
+            const results = []
+
+            json.data.forEach(function (classification) {
+              const productId = classification.relationships.product.data.id.toString()
+
+              const product = json.included.find(function (included) {
+                if (included.type === 'product' && included.id === productId) {
+                  return included
+                }
+              })
+
+              if (product && classification) {
+                let imageUrl = null
+
+                if (product.relationships.images.data.length > 0) {
+                  const imageId = product.relationships.images.data[0].id
+
+                  const image = json.included.find(function (included) {
+                    if (included.type === 'image' && included.id === imageId) {
+                      return included
+                    }
+                  })
+
+                  if (image && image.attributes && image.attributes.styles) {
+                    imageUrl = image.attributes.styles[2].url
+                  }
+                }
+
+                results.push(
+                  taxonProducts.append(
+                    productTemplate({
+                      product: product,
+                      classification: classification,
+                      image: imageUrl
+                    })
+                  )
+                )
+              }
+            })
+
+            return results
+          }
+        })
+      })
   }
 
   taxonProducts.on('click', '.js-delete-product', function (e) {
     const product = $(this).parents('.product')
     const classificationId = product.data('classification-id')
     $.ajax({
-      url: SpreeDash.routes.classifications_api_v2 + '/' + classificationId.toString(),
+      url:
+        SpreeDash.routes.classifications_api_v2 +
+        '/' +
+        classificationId.toString(),
       headers: SpreeDash.apiV2Authentication(),
       type: 'DELETE'
     }).done(function () {

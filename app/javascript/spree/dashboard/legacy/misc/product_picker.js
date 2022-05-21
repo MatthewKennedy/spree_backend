@@ -5,8 +5,9 @@ $.fn.productAutocomplete = function (options) {
 
   // Default options
   options = options || {}
-  const multiple = typeof (options.multiple) !== 'undefined' ? options.multiple : true
-  const values = typeof (options.values) !== 'undefined' ? options.values : null
+  const multiple =
+    typeof options.multiple !== 'undefined' ? options.multiple : true
+  const values = typeof options.values !== 'undefined' ? options.values : null
 
   function addOptions (select, values) {
     $.ajax({

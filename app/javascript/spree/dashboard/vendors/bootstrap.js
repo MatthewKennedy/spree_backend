@@ -6,7 +6,7 @@ document.addEventListener('spree:load', function () {
   })
 
   $('.with-tip').on('show.bs.tooltip', function (event) {
-    if (('ontouchstart' in window)) {
+    if ('ontouchstart' in window) {
       event.preventDefault()
     }
   })

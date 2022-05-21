@@ -98,14 +98,15 @@ const fetchRequestUtil = function (requstData, success = null, target = null) {
     },
     body: requestDataBody
   })
-    .then((response) => spreeHandleFetchRequestResponse(response)
-      .then((data) => {
+    .then(response =>
+      spreeHandleFetchRequestResponse(response).then(data => {
         if (response.ok) {
           if (success != null) success(data, target)
         } else {
           spreeHandleFetchRequestError(data)
         }
-      }))
+      })
+    )
     .catch(err => console.log(err))
 }
 

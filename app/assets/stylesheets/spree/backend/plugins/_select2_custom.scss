@@ -5,7 +5,7 @@
 
 // Hides the empty <li> tag highlighted in open select2-dropdown.
 ul.select2-results__options {
-  li:empty  {
+  li:empty {
     display: none;
   }
 }

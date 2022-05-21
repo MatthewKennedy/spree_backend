@@ -85,13 +85,17 @@ $.fn.customerAutocomplete = function () {
             addresses_firstname_start: params.term,
             addresses_lastname_start: params.term
           },
-          include: 'ship_address.country,ship_address.state,bill_address.country,bill_address.state'
+          include:
+            'ship_address.country,ship_address.state,bill_address.country,bill_address.state'
         }
       },
       success: function (data) {
-        new Deserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, users) {
-          jsonApiUsers = users
-        })
+        new Deserializer({ keyForAttribute: 'snake_case' }).deserialize(
+          data,
+          function (_err, users) {
+            jsonApiUsers = users
+          }
+        )
       },
       processResults: function (_data) {
         return { results: jsonApiUsers } // we need to return deserialized json api data
@@ -108,7 +112,9 @@ document.addEventListener('spree:load', function () {
   $('#customer_search').customerAutocomplete()
 
   if ($('#customer_autocomplete_template').length > 0) {
-    window.customerTemplate = Handlebars.compile($('#customer_autocomplete_template').text())
+    window.customerTemplate = Handlebars.compile(
+      $('#customer_autocomplete_template').text()
+    )
   }
 
   // Handle Billing Shipping Address

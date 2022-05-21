@@ -65,4 +65,6 @@ function appendToFlashAlertsContainer (message, type) {
   parnetNode.appendChild(node)
 }
 
-if (!window.SpreeDash.showFlash) { window.SpreeDash.showFlash = showFlash }
+if (!window.SpreeDash.showFlash) {
+  window.SpreeDash.showFlash = showFlash
+}

@@ -16,7 +16,9 @@ document.addEventListener('spree:load', function () {
     liveViewCont.classList.add(value)
   }
 
-  const cmsSectionEditorFullScreen = document.getElementById('cmsSectionEditorFullScreen')
+  const cmsSectionEditorFullScreen = document.getElementById(
+    'cmsSectionEditorFullScreen'
+  )
 
   cmsSectionEditorFullScreen.addEventListener('click', function (event) {
     if (this.getAttribute('aria-pressed') === 'true') {

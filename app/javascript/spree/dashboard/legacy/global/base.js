@@ -1,7 +1,9 @@
 import Uri from 'jsuri'
 
 const SpreeDash = {}
-if (!window.SpreeDash) { window.SpreeDash = SpreeDash }
+if (!window.SpreeDash) {
+  window.SpreeDash = SpreeDash
+}
 
 SpreeDash.mountedAt = function () {
   return window.SpreePaths.mounted_at
@@ -12,13 +14,23 @@ SpreeDash.adminPath = function () {
 }
 
 SpreeDash.pathFor = function (path) {
-  const locationOrigin = (window.location.protocol + '//' + window.location.hostname) + (window.location.port ? ':' + window.location.port : '')
+  const locationOrigin =
+    window.location.protocol +
+    '//' +
+    window.location.hostname +
+    (window.location.port ? ':' + window.location.port : '')
 
-  return this.url('' + locationOrigin + (this.mountedAt()) + path, this.url_params).toString()
+  return this.url(
+    '' + locationOrigin + this.mountedAt() + path,
+    this.url_params
+  ).toString()
 }
 
 SpreeDash.localizedPathFor = function (path) {
-  if (typeof (SPREE_LOCALE) !== 'undefined' && typeof (SPREE_CURRENCY) !== 'undefined') {
+  if (
+    typeof SPREE_LOCALE !== 'undefined' &&
+    typeof SPREE_CURRENCY !== 'undefined'
+  ) {
     const fullUrl = new URL(SpreeDash.pathFor(path))
     const params = fullUrl.searchParams
     let pathName = fullUrl.pathname
@@ -28,7 +40,7 @@ SpreeDash.localizedPathFor = function (path) {
     if (pathName.match(/api\/v/)) {
       params.set('locale', SPREE_LOCALE)
     } else {
-      pathName = (this.mountedAt()) + SPREE_LOCALE + '/' + path
+      pathName = this.mountedAt() + SPREE_LOCALE + '/' + path
     }
     return fullUrl.origin + pathName + '?' + params.toString()
   }
@@ -36,7 +48,7 @@ SpreeDash.localizedPathFor = function (path) {
 }
 
 SpreeDash.adminPathFor = function (path) {
-  return this.pathFor('' + (this.adminPath()) + path)
+  return this.pathFor('' + this.adminPath() + path)
 }
 
 SpreeDash.url = function (uri, query) {

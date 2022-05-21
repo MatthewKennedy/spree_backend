@@ -3,7 +3,9 @@
 function initProductActions () {
   'use strict'
 
-  $('#promotion-filters').find('.variant_autocomplete').variantAutocomplete()
+  $('#promotion-filters')
+    .find('.variant_autocomplete')
+    .variantAutocomplete()
 
   $('.calculator-fields').each(function () {
     const $fieldsContainer = $(this)
@@ -32,8 +34,12 @@ function initProductActions () {
   // Option Value Promo Rule
   //
   if ($('#promo-rule-option-value-template').length) {
-    const optionValueSelectNameTemplate = Handlebars.compile($('#promo-rule-option-value-option-values-select-name-template').html())
-    const optionValueTemplate = Handlebars.compile($('#promo-rule-option-value-template').html())
+    const optionValueSelectNameTemplate = Handlebars.compile(
+      $('#promo-rule-option-value-option-values-select-name-template').html()
+    )
+    const optionValueTemplate = Handlebars.compile(
+      $('#promo-rule-option-value-template').html()
+    )
     const optionValuesList = $('.js-promo-rule-option-values')
 
     const addOptionValue = function (productId, values) {
@@ -49,13 +55,25 @@ function initProductActions () {
       }
       const optionValue = optionValuesList.find(optionValueId)
 
-      const productSelect = optionValue.find('.js-promo-rule-option-value-product-select')
-      const valuesSelect = optionValue.find('.js-promo-rule-option-value-option-values-select')
+      const productSelect = optionValue.find(
+        '.js-promo-rule-option-value-product-select'
+      )
+      const valuesSelect = optionValue.find(
+        '.js-promo-rule-option-value-option-values-select'
+      )
 
       productSelect.productAutocomplete({ multiple: false, values: productId })
       productSelect.on('select2:select', function (e) {
-        valuesSelect.attr('disabled', false).removeClass('d-none').addClass('d-block')
-        valuesSelect.attr('name', optionValueSelectNameTemplate({ productId: productSelect.val() }).trim())
+        valuesSelect
+          .attr('disabled', false)
+          .removeClass('d-none')
+          .addClass('d-block')
+        valuesSelect.attr(
+          'name',
+          optionValueSelectNameTemplate({
+            productId: productSelect.val()
+          }).trim()
+        )
         valuesSelect.optionValueAutocomplete({
           productId: productId,
           productSelect: productSelect,
@@ -66,7 +84,9 @@ function initProductActions () {
       })
     }
 
-    const originalOptionValues = $('.js-original-promo-rule-option-values').data('original-option-values')
+    const originalOptionValues = $(
+      '.js-original-promo-rule-option-values'
+    ).data('original-option-values')
     if (!$('.js-original-promo-rule-option-values').data('loaded')) {
       if ($.isEmptyObject(originalOptionValues)) {
         addOptionValue(null, null)
@@ -76,13 +96,17 @@ function initProductActions () {
     }
     $('.js-original-promo-rule-option-values').data('loaded', true)
 
-    $(document).on('click', '.js-add-promo-rule-option-value', function (event) {
+    $(document).on('click', '.js-add-promo-rule-option-value', function (
+      event
+    ) {
       event.preventDefault()
       addOptionValue(null, null)
     })
 
     $(document).on('click', '.js-remove-promo-rule-option-value', function () {
-      $(this).parents('.promo-rule-option-value').remove()
+      $(this)
+        .parents('.promo-rule-option-value')
+        .remove()
     })
   }
 
@@ -90,16 +114,22 @@ function initProductActions () {
   // Tiered Calculator
   //
   if ($('#tier-fields-template').length && $('#tier-input-name').length) {
-    const tierFieldsTemplate = Handlebars.compile($('#tier-fields-template').html())
-    const tierInputNameTemplate = Handlebars.compile($('#tier-input-name').html())
+    const tierFieldsTemplate = Handlebars.compile(
+      $('#tier-fields-template').html()
+    )
+    const tierInputNameTemplate = Handlebars.compile(
+      $('#tier-input-name').html()
+    )
 
     const originalTiers = $('.js-original-tiers').data('original-tiers')
     $.each(originalTiers, function (base, value) {
       const fieldName = tierInputNameTemplate({ base: base }).trim()
-      $('.js-tiers').append(tierFieldsTemplate({
-        baseField: { value: base },
-        valueField: { name: fieldName, value: value }
-      }))
+      $('.js-tiers').append(
+        tierFieldsTemplate({
+          baseField: { value: base },
+          valueField: { name: fieldName, value: value }
+        })
+      )
     })
 
     $(document).on('click', '.js-add-tier', function (event) {
@@ -108,19 +138,26 @@ function initProductActions () {
     })
 
     $(document).on('click', '.js-remove-tier', function (event) {
-      $(this).parents('.tier').remove()
+      $(this)
+        .parents('.tier')
+        .remove()
     })
 
     $(document).on('change', '.js-base-input', function (event) {
-      const valueInput = $(this).parents('.tier').find('.js-value-input')
-      valueInput.attr('name', tierInputNameTemplate({ base: $(this).val() }).trim())
+      const valueInput = $(this)
+        .parents('.tier')
+        .find('.js-value-input')
+      valueInput.attr(
+        'name',
+        tierInputNameTemplate({ base: $(this).val() }).trim()
+      )
     })
   }
 
   //
   // CreateLineItems Promotion Action
   //
-  (function () {
+  ;(function () {
     function hideOrShowItemTables () {
       $('.promotion_action table').each(function () {
         if ($(this).find('td').length === 0) {
@@ -138,30 +175,43 @@ function initProductActions () {
         const lineItemsEl = $($('.line_items_string')[0])
         const finder = new RegExp($(this).data('variant-id') + 'x\\d+')
         lineItemsEl.val(lineItemsEl.val().replace(finder, ''))
-        $(this).parents('tr').remove()
+        $(this)
+          .parents('tr')
+          .remove()
         hideOrShowItemTables()
       })
     }
 
     setupRemoveLineItems()
     // Add line item to list
-    $('.promotion_action.create_line_items button.add').off('click').click(function () {
-      const $container = $(this).parents('.promotion_action')
-      const product_name = $container.find('input[name="add_product_name"]').val()
-      const variant_id = $container.find('input[name="add_variant_id"]').val()
-      const quantity = $container.find('input[name="add_quantity"]').val()
-      if (variant_id) {
-        // Add to the table
-        const newRow = '<tr><td>' + product_name + '</td><td>' + quantity + '</td><td><i class="icon icon-cancel"></i></td></tr>'
-        $container.find('table').append(newRow)
-        // Add to serialized string in hidden text field
-        const $hiddenField = $container.find('.line_items_string')
-        $hiddenField.val($hiddenField.val() + ',' + variantId + 'x' + quantity)
-        setupRemoveLineItems()
-        hideOrShowItemTables()
-      }
-      return false
-    })
+    $('.promotion_action.create_line_items button.add')
+      .off('click')
+      .click(function () {
+        const $container = $(this).parents('.promotion_action')
+        const product_name = $container
+          .find('input[name="add_product_name"]')
+          .val()
+        const variant_id = $container.find('input[name="add_variant_id"]').val()
+        const quantity = $container.find('input[name="add_quantity"]').val()
+        if (variant_id) {
+          // Add to the table
+          const newRow =
+            '<tr><td>' +
+            product_name +
+            '</td><td>' +
+            quantity +
+            '</td><td><i class="icon icon-cancel"></i></td></tr>'
+          $container.find('table').append(newRow)
+          // Add to serialized string in hidden text field
+          const $hiddenField = $container.find('.line_items_string')
+          $hiddenField.val(
+            $hiddenField.val() + ',' + variantId + 'x' + quantity
+          )
+          setupRemoveLineItems()
+          hideOrShowItemTables()
+        }
+        return false
+      })
   })()
 }
 

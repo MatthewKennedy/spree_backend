@@ -4,7 +4,9 @@ document.addEventListener('spree:load', function () {
 
   // handle variant selection, show stock level.
   $('#add_line_item_variant_id').change(function () {
-    const variantId = $(this).val().toString()
+    const variantId = $(this)
+      .val()
+      .toString()
 
     const variant = _.find(window.variants, function (variant) {
       return variant.id.toString() == variantId
@@ -36,10 +38,12 @@ const adjustLineItems = function (order_id, variant_id, quantity) {
       }
     },
     headers: SpreeDash.apiV2Authentication()
-  }).done(function () {
-    window.SpreeDash.advanceOrder()
-    window.location.reload()
-  }).fail(function (response) {
-    SpreeDash.showFlash('error', response.responseJSON.error)
   })
+    .done(function () {
+      window.SpreeDash.advanceOrder()
+      window.location.reload()
+    })
+    .fail(function (response) {
+      SpreeDash.showFlash('error', response.responseJSON.error)
+    })
 }

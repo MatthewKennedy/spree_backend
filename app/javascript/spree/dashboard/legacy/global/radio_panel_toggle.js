@@ -4,15 +4,21 @@
 **/
 document.addEventListener('spree:load', function () {
   $.fn.radioControlsVisibilityOfElement = function (dependentElementSelector) {
-    if (!this.get(0)) { return }
+    if (!this.get(0)) {
+      return
+    }
     const showValue = this.get(0).value
     const radioGroup = $("input[name='" + this.get(0).name + "']")
     radioGroup.each(function () {
       $(this).click(function () {
         // eslint-disable-next-line eqeqeq
-        $(dependentElementSelector).visible(this.checked && this.value == showValue)
+        $(dependentElementSelector).visible(
+          this.checked && this.value == showValue
+        )
       })
-      if (this.checked) { this.click() }
+      if (this.checked) {
+        this.click()
+      }
     })
   }
 })

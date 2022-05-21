@@ -18,7 +18,10 @@ window.Stimulus = Application.start()
 Stimulus.register('upload-button', UploadButtonController)
 Stimulus.register('spree', SpreeController)
 Stimulus.register('sortable-tree', SortableTreeController)
-Stimulus.register('webhooks_subscriber_events', WebhooksSubscriberEventsController)
+Stimulus.register(
+  'webhooks_subscriber_events',
+  WebhooksSubscriberEventsController
+)
 Stimulus.register('password-toggle', PasswordToggleController)
 Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('product-edit', ProductEditController)

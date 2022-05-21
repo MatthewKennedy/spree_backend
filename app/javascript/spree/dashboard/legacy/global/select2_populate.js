@@ -40,7 +40,8 @@ const populateSelectOptionsFromApi = function (params) {
 }
 
 const handleErrors = function (response) {
-  if (!response.ok) throw new Error((response.status + ': ' + response.statusText))
+  if (!response.ok)
+    throw new Error(response.status + ': ' + response.statusText)
 
   return response.json()
 }
@@ -54,15 +55,29 @@ const createRequest = function (params, succeed, fail) {
   const selectEl = document.querySelector(targetElement)
 
   fetch(apiUrl, { headers: SpreeDash.apiV2Authentication() })
-    .then((response) => handleErrors(response))
-    .then((json) => succeed(json.data, returnValueFromAttributes, returnOptionText, selectEl, selectedOption))
-    .catch((error) => fail(error, selectEl))
+    .then(response => handleErrors(response))
+    .then(json =>
+      succeed(
+        json.data,
+        returnValueFromAttributes,
+        returnOptionText,
+        selectEl,
+        selectedOption
+      )
+    )
+    .catch(error => fail(error, selectEl))
 }
 
-const updateSelectSuccess = function (parsedData, returnValueFromAttributes, returnOptionText, selectEl, selectedOption) {
+const updateSelectSuccess = function (
+  parsedData,
+  returnValueFromAttributes,
+  returnOptionText,
+  selectEl,
+  selectedOption
+) {
   const selectedOpt = selectEl.querySelector('option[selected]')
 
-  parsedData.forEach((object) => {
+  parsedData.forEach(object => {
     const optionEl = document.createElement('option')
 
     if (returnValueFromAttributes == null) {

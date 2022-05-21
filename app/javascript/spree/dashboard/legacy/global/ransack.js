@@ -5,15 +5,21 @@ document.addEventListener('spree:load', function () {
 
   if (QuickSearchInput) {
     const QuickSearchPlaceHolder = QuickSearchInput.placeholder
-    const TargetSearchFieldId = document.querySelector('input.js-quick-search-target').id
-    const AssociatedLabelName = document.querySelector(`label[for="${TargetSearchFieldId}"]`).innerHTML
+    const TargetSearchFieldId = document.querySelector(
+      'input.js-quick-search-target'
+    ).id
+    const AssociatedLabelName = document.querySelector(
+      `label[for="${TargetSearchFieldId}"]`
+    ).innerHTML
 
     QuickSearchInput.placeholder = `${QuickSearchPlaceHolder} ${AssociatedLabelName}`
   }
 
   $('.js-show-index-filters').click(function () {
     $('.filter-well').slideToggle()
-    $(this).parents('.filter-wrap').toggleClass('collapsed')
+    $(this)
+      .parents('.filter-wrap')
+      .toggleClass('collapsed')
   })
 
   // TODO: remove this js temp behavior and fix this decent
@@ -38,7 +44,9 @@ document.addEventListener('spree:load', function () {
   })
 
   $(document).on('click', '.js-delete-filter', function () {
-    const ransackField = $(this).parents('.js-filter').data('ransack-field')
+    const ransackField = $(this)
+      .parents('.js-filter')
+      .data('ransack-field')
 
     $('#' + ransackField).val('')
     $('#table-filter form').submit()
@@ -60,15 +68,23 @@ document.addEventListener('spree:load', function () {
   $('[id^="q_"].js-filterable').each(function () {
     const $this = $(this)
 
-    if ($this.val() !== null && $this.val() !== '' && $this.val().length !== 0) {
+    if (
+      $this.val() !== null &&
+      $this.val() !== '' &&
+      $this.val().length !== 0
+    ) {
       let ransackValue, filter
       const ransackFieldId = $this.attr('id')
       let label = $('label[for="' + ransackFieldId + '"]')
 
       if ($this.is('select')) {
-        ransackValue = $this.find('option:selected').toArray().map(function (option) {
-          return option.text
-        }).join(', ')
+        ransackValue = $this
+          .find('option:selected')
+          .toArray()
+          .map(function (option) {
+            return option.text
+          })
+          .join(', ')
       } else {
         ransackValue = $this.val()
       }
@@ -77,8 +93,15 @@ document.addEventListener('spree:load', function () {
 
       const cleanLabel = DOMPurify.sanitize(label)
 
-      filter = '<span class="js-filter badge badge-secondary d-inline-flex align-items-center" data-ransack-field="' + ransackFieldId + '">' + cleanLabel + '<i class="icon icon-cancel ml-2 js-delete-filter"></i></span>'
-      $('.js-filters').append(filter).show()
+      filter =
+        '<span class="js-filter badge badge-secondary d-inline-flex align-items-center" data-ransack-field="' +
+        ransackFieldId +
+        '">' +
+        cleanLabel +
+        '<i class="icon icon-cancel ml-2 js-delete-filter"></i></span>'
+      $('.js-filters')
+        .append(filter)
+        .show()
     }
   })
 
@@ -88,7 +111,9 @@ document.addEventListener('spree:load', function () {
   $('.js-per-page-select').change(function () {
     const form = $(this).closest('.js-per-page-form')
     let url = form.attr('action')
-    const value = $(this).val().toString()
+    const value = $(this)
+      .val()
+      .toString()
     if (url.match(/\?/)) {
       url += '&per_page=' + value
     } else {
@@ -103,7 +128,10 @@ document.addEventListener('spree:load', function () {
     const perPageDropdown = $('.js-per-page-select:first')
     if (perPageDropdown.length) {
       const perPageValue = perPageDropdown.val().toString()
-      const perPageInput = '<input class="hidden_per_page_input" type="hidden" name="per_page" value=' + perPageValue + ' />'
+      const perPageInput =
+        '<input class="hidden_per_page_input" type="hidden" name="per_page" value=' +
+        perPageValue +
+        ' />'
 
       $('.hidden_per_page_input').remove()
       $('#table-filter form').append(perPageInput)

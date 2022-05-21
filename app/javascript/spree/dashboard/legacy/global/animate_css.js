@@ -3,7 +3,7 @@
 //
 // Handle clearing out of animation styles from complete animation.
 const animateCSS = (element, animation, speed, prefix = 'animate__') =>
-  new Promise((resolve) => {
+  new Promise(resolve => {
     const animationName = `${prefix}${animation}`
     const node = document.querySelector(element)
 

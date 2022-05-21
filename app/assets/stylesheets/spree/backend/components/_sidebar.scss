@@ -13,7 +13,7 @@ aside#main-sidebar {
 body.sidebar-open {
   overflow-x: hidden;
   aside#main-sidebar {
-    left:0;
+    left: 0;
     transition: 0.3s ease;
   }
   .disable-when-main-menu-is-open {
@@ -25,7 +25,8 @@ body.sidebar-open {
 }
 a.sidebar-submenu-item {
   text-decoration: none;
-  &:hover, a.sidebar-submenu-item:focus {
+  &:hover,
+  a.sidebar-submenu-item:focus {
     color: var(--bs-primary) !important;
   }
 }
@@ -45,7 +46,7 @@ ul.nav-sidebar {
       text-decoration: none;
 
       &:hover,
-      &[aria-expanded="true"] {
+      &[aria-expanded='true'] {
         text-decoration: none;
       }
 
@@ -53,17 +54,17 @@ ul.nav-sidebar {
         right: 1rem;
       }
 
-      &[aria-expanded="true"] {
+      &[aria-expanded='true'] {
         .drop-menu-indicator {
           transform: rotate(90deg);
-          transition: .3s ease-in-out;
+          transition: 0.3s ease-in-out;
         }
       }
 
-      &[aria-expanded="false"] {
+      &[aria-expanded='false'] {
         .drop-menu-indicator {
           transform: rotate(0deg);
-          transition: .3s ease-in-out;
+          transition: 0.3s ease-in-out;
         }
       }
     }
@@ -75,10 +76,10 @@ ul.nav-sidebar {
   overflow-x: auto;
   background-color: var(--bs-body-bg);
   position: fixed;
-  left:0;
+  left: 0;
   top: -100%;
   z-index: 1041;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
   .page-actions__close {
     margin: -1.5rem 1.5rem;
   }
@@ -86,8 +87,8 @@ ul.nav-sidebar {
 
 #contextual-menu-toggle {
   & svg {
-    transform:rotate(0deg);
-    transition: transform .3s ease-in-out;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
   }
 }
 
@@ -97,18 +98,18 @@ ul.nav-sidebar {
 
 body.contextualSideMenu-open #contextualSideMenu {
   top: 0;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 body.contextualSideMenu-open #contextual-menu-toggle {
   svg {
-    transform:rotate(180deg);
-    transition: transform .3s ease-in-out;
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
   }
 }
 
 .contextual-title {
-  font-size:1.25rem;
+  font-size: 1.25rem;
 }
 
 @include media-breakpoint-up(sm) {
@@ -118,7 +119,6 @@ body.contextualSideMenu-open #contextual-menu-toggle {
 }
 
 @include media-breakpoint-up(lg) {
-
   aside#main-sidebar {
     width: 50%;
   }
@@ -140,17 +140,16 @@ body.contextualSideMenu-open #contextual-menu-toggle {
     transition: none;
     body.sidebar-open {
       aside#main-sidebar {
-        left:0;
+        left: 0;
         transition: none;
       }
     }
   }
 
   .contextual-title {
-    font-size:1.5rem;
+    font-size: 1.5rem;
   }
 }
-
 
 @include media-breakpoint-up(xl) {
   aside#main-sidebar {

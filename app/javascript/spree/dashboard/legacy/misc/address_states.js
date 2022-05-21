@@ -4,14 +4,19 @@ export function updateAddressState (region, successCallback) {
   const stateSelect = $('#' + region + 'state select')
   const stateInput = $('#' + region + 'state input.state_name')
 
-  if (!countryId) { return }
+  if (!countryId) {
+    return
+  }
 
-  fetch(SpreeDash.routes.countries_api_v2 + '/' + countryId + '?include=states', {
-    headers: SpreeDash.apiV2Authentication()
-  }).then((response) => {
+  fetch(
+    SpreeDash.routes.countries_api_v2 + '/' + countryId + '?include=states',
+    {
+      headers: SpreeDash.apiV2Authentication()
+    }
+  ).then(response => {
     switch (response.status) {
       case 200:
-        response.json().then((json) => {
+        response.json().then(json => {
           const states = json.included
           const statesRequired = json.data.attributes.states_required
           const stateSelectValue = stateSelect.val()

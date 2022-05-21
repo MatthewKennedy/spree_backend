@@ -5,7 +5,8 @@ $.fn.optionValueAutocomplete = function (options) {
 
   // Default options
   options = options || {}
-  const multiple = typeof (options.multiple) !== 'undefined' ? options.multiple : true
+  const multiple =
+    typeof options.multiple !== 'undefined' ? options.multiple : true
   const productSelect = options.productSelect
   const productId = options.productId
   const values = options.values
@@ -36,7 +37,8 @@ $.fn.optionValueAutocomplete = function (options) {
       dataType: 'json',
       headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
-        const selectedProductId = typeof (productSelect) !== 'undefined' ? productSelect.val() : null
+        const selectedProductId =
+          typeof productSelect !== 'undefined' ? productSelect.val() : null
 
         return {
           filter: {

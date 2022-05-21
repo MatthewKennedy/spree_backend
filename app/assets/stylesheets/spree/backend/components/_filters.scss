@@ -4,13 +4,13 @@
 
 .index-filter-button .icon-chevron-right {
   transform: rotate(0);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
   margin-bottom: 0;
 }
 
 .collapsed .icon-chevron-right {
   transform: rotate(90deg);
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .default-filter-icon {
@@ -22,7 +22,8 @@ i.js-delete-filter {
 }
 
 .sort_link {
-  .icon, svg {
+  .icon,
+  svg {
     margin-left: 5px;
     margin-bottom: 2px;
     width: 0.8rem;

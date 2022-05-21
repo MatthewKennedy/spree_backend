@@ -1,7 +1,7 @@
 // Custom SCSS Standard SweetAlerts
 body.swal2-shown {
   .swal2-popup {
-    border-radius:var(--bs-border-radius);
+    border-radius: var(--bs-border-radius);
   }
   .swal2-html-container {
     text-align: left;
@@ -11,9 +11,9 @@ body.swal2-shown {
       font-weight: 400;
     }
   }
-    .swal2-content {
-      padding: 0 !important;
-    }
+  .swal2-content {
+    padding: 0 !important;
+  }
   .swal2-header {
     .swal2-icon {
       width: 2.5em;
@@ -52,9 +52,9 @@ body.swal2-toast-shown .swal2-container.swal2-bottom {
     }
 
     button.swal2-close {
-        min-width: .8em;
-        padding-bottom: 0.1em;
-        &:hover {
+      min-width: 0.8em;
+      padding-bottom: 0.1em;
+      &:hover {
         opacity: 0.75;
       }
     }

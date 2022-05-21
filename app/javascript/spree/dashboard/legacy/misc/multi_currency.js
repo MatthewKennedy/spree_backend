@@ -16,8 +16,14 @@ document.addEventListener('spree:load', function () {
       .change(function () {
         const filter = $(this).val()
         if (filter) {
-          $(list).find('.panel-title:not(:Contains(' + filter + '))').parent().hide()
-          $(list).find('.panel-title:Contains(' + filter + ')').parent().show()
+          $(list)
+            .find('.panel-title:not(:Contains(' + filter + '))')
+            .parent()
+            .hide()
+          $(list)
+            .find('.panel-title:Contains(' + filter + ')')
+            .parent()
+            .show()
         } else {
           $(list)
             .find('.panel')

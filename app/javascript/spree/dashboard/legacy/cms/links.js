@@ -4,8 +4,12 @@ document.addEventListener('spree:load', function () {
   linkSwitcher.on('change', function () {
     const selectedLinkToValue = $(this).val()
     const linkSwitcherTarget = this.dataset.targetField || 'menu_item_link'
-    const activePanel = document.querySelector(`div[data-panel-id='${linkSwitcherTarget}']`)
-    const messagePanel = document.querySelector(`div[data-target-message-pannel='${linkSwitcherTarget}']`)
+    const activePanel = document.querySelector(
+      `div[data-panel-id='${linkSwitcherTarget}']`
+    )
+    const messagePanel = document.querySelector(
+      `div[data-target-message-pannel='${linkSwitcherTarget}']`
+    )
     const panelType = activePanel.dataset.panelType
 
     if (selectedLinkToValue === panelType) {

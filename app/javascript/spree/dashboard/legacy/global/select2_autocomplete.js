@@ -28,12 +28,16 @@ document.addEventListener('spree:load', function () {
 // we need to delete select2 instances before document is saved to cache
 // https://stackoverflow.com/questions/36497723/select2-with-ajax-gets-initialized-several-times-with-rails-turbolinks-events
 document.addEventListener('turbo:before-cache', function () {
-  const select2Autocompletes = document.querySelectorAll('select[data-autocomplete-url-value]')
+  const select2Autocompletes = document.querySelectorAll(
+    'select[data-autocomplete-url-value]'
+  )
   select2Autocompletes.forEach(element => $(element).select2('destroy'))
 })
 
 function loadAutoCompleteParams () {
-  const select2Autocompletes = document.querySelectorAll('select[data-autocomplete-url-value]')
+  const select2Autocompletes = document.querySelectorAll(
+    'select[data-autocomplete-url-value]'
+  )
   select2Autocompletes.forEach(element => buildParamsFromDataAttrs(element))
 }
 

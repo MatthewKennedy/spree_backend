@@ -1,9 +1,15 @@
 document.addEventListener('SpreeDash:load', function () {
   const variantAutocompleteTemplate = $('#variant_autocomplete_template')
   if (variantAutocompleteTemplate.length > 0) {
-    window.variantTemplate = Handlebars.compile(variantAutocompleteTemplate.text())
-    window.variantStockTemplate = Handlebars.compile($('#variant_autocomplete_stock_template').text())
-    window.variantLineItemTemplate = Handlebars.compile($('#variant_line_items_autocomplete_stock_template').text())
+    window.variantTemplate = Handlebars.compile(
+      variantAutocompleteTemplate.text()
+    )
+    window.variantStockTemplate = Handlebars.compile(
+      $('#variant_autocomplete_stock_template').text()
+    )
+    window.variantLineItemTemplate = Handlebars.compile(
+      $('#variant_line_items_autocomplete_stock_template').text()
+    )
   }
 })
 
@@ -12,12 +18,17 @@ function formatVariantResult (variant) {
     return variant.text
   }
 
-  if (variant.images[0] !== undefined && variant.images[0].transformed_url !== undefined) {
+  if (
+    variant.images[0] !== undefined &&
+    variant.images[0].transformed_url !== undefined
+  ) {
     variant.image = variant.images[0].transformed_url
   }
-  return $(variantTemplate({
-    variant: variant
-  }))
+  return $(
+    variantTemplate({
+      variant: variant
+    })
+  )
 }
 
 $.fn.variantAutocomplete = function () {
@@ -45,9 +56,12 @@ $.fn.variantAutocomplete = function () {
       headers: SpreeDash.apiV2Authentication(),
       success: function (data) {
         const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
-        new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
-          window.variants = variants
-        })
+        new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(
+          data,
+          function (_err, variants) {
+            window.variants = variants
+          }
+        )
       },
       processResults: function (_data) {
         return { results: variants } // we need to return deserialized json api data

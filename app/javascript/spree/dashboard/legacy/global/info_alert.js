@@ -16,7 +16,12 @@ document.addEventListener('spree:load', function () {
 })
 
 // eslint-disable-next-line no-unused-vars
-function showInfoAlert (type = null, title = null, message = null, html = null) {
+function showInfoAlert (
+  type = null,
+  title = null,
+  message = null,
+  html = null
+) {
   const infoAlert = Swal.mixin({
     showConfirmButton: false,
     showCloseButton: true,

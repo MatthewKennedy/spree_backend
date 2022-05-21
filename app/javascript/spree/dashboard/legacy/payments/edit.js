@@ -30,7 +30,10 @@ document.addEventListener('spree:load', function () {
     Payment.prototype.if_editable = function (callback) {
       return this.json.done(function (data) {
         let ref
-        if ((ref = data.data.attributes.state) === 'checkout' || ref === 'pending') {
+        if (
+          (ref = data.data.attributes.state) === 'checkout' ||
+          ref === 'pending'
+        ) {
           return callback()
         }
       })
@@ -46,15 +49,20 @@ document.addEventListener('spree:load', function () {
         },
         headers: SpreeDash.apiV2Authentication()
       })
-      jqXHR.always(function () {
-        this.updating = false
-      }.bind(this))
-      jqXHR.done(function (data) {
-        this.data = data.data
-        onDone()
-      }.bind(this))
+      jqXHR.always(
+        function () {
+          this.updating = false
+        }.bind(this)
+      )
+      jqXHR.done(
+        function (data) {
+          this.data = data.data
+          onDone()
+        }.bind(this)
+      )
       jqXHR.fail(function () {
-        const response = (jqXHR.responseJSON && jqXHR.responseJSON.error) || jqXHR.statusText
+        const response =
+          (jqXHR.responseJSON && jqXHR.responseJSON.error) || jqXHR.statusText
         SpreeDash.showFlash('error', response)
         onDone()
       })
@@ -101,23 +109,29 @@ document.addEventListener('spree:load', function () {
     }
 
     PaymentView.prototype.$new_button = function (action) {
-      return $('<a><i class="icon icon-' + action + '"></i></a>').attr({
-        class: 'payment-action-' + action + ' btn btn-secondary btn-sm no-filter',
-        title: SpreeDash.translations[action]
-      }).data({
-        action: action
-      }).one({
-        click: function (event) {
-          event.preventDefault()
-        },
-        mouseup: function () {
-          this[action]()
-        }.bind(this)
-      })
+      return $('<a><i class="icon icon-' + action + '"></i></a>')
+        .attr({
+          class:
+            'payment-action-' + action + ' btn btn-secondary btn-sm no-filter',
+          title: SpreeDash.translations[action]
+        })
+        .data({
+          action: action
+        })
+        .one({
+          click: function (event) {
+            event.preventDefault()
+          },
+          mouseup: function () {
+            this[action]()
+          }.bind(this)
+        })
     }
 
     PaymentView.prototype.$buttons = function () {
-      return this.$actions().find('.payment-action-' + this.action + ', .payment-action-cancel')
+      return this.$actions().find(
+        '.payment-action-' + this.action + ', .payment-action-cancel'
+      )
     }
 
     PaymentView.prototype.$actions = function () {
@@ -148,17 +162,28 @@ document.addEventListener('spree:load', function () {
 
     ShowPaymentView.prototype.set_actions_display = function () {
       const width = this.$actions().width()
-      return this.$actions().width(width).css('text-align', 'left')
+      return this.$actions()
+        .width(width)
+        .css('text-align', 'left')
     }
 
     ShowPaymentView.prototype.show_actions = function () {
-      return this.$actions().find('a').show()
+      return this.$actions()
+        .find('a')
+        .show()
     }
 
     ShowPaymentView.prototype.show_amount = function () {
-      const amount = $('<span />').html(this.payment.display_amount()).one('click', function () {
-        this.edit().$input().focus()
-      }.bind(this))
+      const amount = $('<span />')
+        .html(this.payment.display_amount())
+        .one(
+          'click',
+          function () {
+            this.edit()
+              .$input()
+              .focus()
+          }.bind(this)
+        )
       return this.$amount().html(amount)
     }
 
@@ -185,7 +210,10 @@ document.addEventListener('spree:load', function () {
     }
 
     EditPaymentView.prototype.hide_actions = function () {
-      return this.$actions().find('a').not(this.$buttons()).hide()
+      return this.$actions()
+        .find('a')
+        .not(this.$buttons())
+        .hide()
     }
 
     EditPaymentView.prototype.edit_amount = function () {
@@ -209,14 +237,19 @@ document.addEventListener('spree:load', function () {
     EditPaymentView.prototype.cancel = EditPaymentView.prototype.show
 
     EditPaymentView.prototype.$new_input = function (width) {
-      const amount = this.constructor.normalize_amount(this.payment.display_amount())
-      return $('<input />').prop({
-        id: 'amount',
-        class: 'form-control',
-        value: amount
-      }).width(width * 2).css({
-        'text-align': 'right'
-      })
+      const amount = this.constructor.normalize_amount(
+        this.payment.display_amount()
+      )
+      return $('<input />')
+        .prop({
+          id: 'amount',
+          class: 'form-control',
+          value: amount
+        })
+        .width(width * 2)
+        .css({
+          'text-align': 'right'
+        })
     }
 
     EditPaymentView.prototype.$input = function () {

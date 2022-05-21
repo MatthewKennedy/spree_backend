@@ -2,7 +2,9 @@
 
 document.addEventListener('spree:load', function () {
   $('.stock_item_backorderable').on('click', function () {
-    $(this).parent('form').submit()
+    $(this)
+      .parent('form')
+      .submit()
   })
   $('.toggle_stock_item_backorderable').on('submit', function () {
     $.ajax({

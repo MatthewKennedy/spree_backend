@@ -33,7 +33,10 @@ function initHorizontalNav (containerEl) {
   })
 
   function setOverscrollIndicators () {
-    navContainer.setAttribute('data-overflowing', determineOverflow(navContent, navContainer))
+    navContainer.setAttribute(
+      'data-overflowing',
+      determineOverflow(navContent, navContainer)
+    )
   }
 
   navAdvanceLeft.addEventListener('click', function () {
@@ -41,7 +44,10 @@ function initHorizontalNav (containerEl) {
     if (SETTINGS.navBarTravelling === true) return
 
     // If we have content overflowing both sides or on the left
-    if (determineOverflow(navContent, navContainer) === 'left' || determineOverflow(navContent, navContainer) === 'both') {
+    if (
+      determineOverflow(navContent, navContainer) === 'left' ||
+      determineOverflow(navContent, navContainer) === 'both'
+    ) {
       // Find how far this panel has been scrolled
       const availableScrollLeft = navContainer.scrollLeft
       // If the space available is less than two lots of our desired distance, just move the whole amount
@@ -58,7 +64,10 @@ function initHorizontalNav (containerEl) {
       SETTINGS.navBarTravelling = true
     }
     // Now update the attribute in the DOM
-    navContainer.setAttribute('data-overflowing', determineOverflow(navContent, navContainer))
+    navContainer.setAttribute(
+      'data-overflowing',
+      determineOverflow(navContent, navContainer)
+    )
   })
 
   navAdvanceRight.addEventListener('click', function () {
@@ -66,12 +75,17 @@ function initHorizontalNav (containerEl) {
     if (SETTINGS.navBarTravelling === true) return
 
     // If we have content overflowing both sides or on the right
-    if (determineOverflow(navContent, navContainer) === 'right' || determineOverflow(navContent, navContainer) === 'both') {
+    if (
+      determineOverflow(navContent, navContainer) === 'right' ||
+      determineOverflow(navContent, navContainer) === 'both'
+    ) {
       // Get the right edge of the container and content
       const navBarRightEdge = navContent.getBoundingClientRect().right
       const navBarScrollerRightEdge = navContainer.getBoundingClientRect().right
       // Now we know how much space we have available to scroll
-      const availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge)
+      const availableScrollRight = Math.floor(
+        navBarRightEdge - navBarScrollerRightEdge
+      )
       // If the space available is less than two lots of our desired distance, just move the whole amount
       // otherwise, move by the amount in the settings
       if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
@@ -86,13 +100,18 @@ function initHorizontalNav (containerEl) {
       SETTINGS.navBarTravelling = true
     }
     // Now update the attribute in the DOM
-    navContainer.setAttribute('data-overflowing', determineOverflow(navContent, navContainer))
+    navContainer.setAttribute(
+      'data-overflowing',
+      determineOverflow(navContent, navContainer)
+    )
   })
 
   navContent.addEventListener('transitionend', function () {
     // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
     const styleOfTransform = window.getComputedStyle(navContent, null)
-    const tr = styleOfTransform.getPropertyValue('transform') || styleOfTransform.getPropertyValue('transform')
+    const tr =
+      styleOfTransform.getPropertyValue('transform') ||
+      styleOfTransform.getPropertyValue('transform')
     // If there is no transition we want to default to 0 and not null
 
     const amount = Math.abs(parseInt(tr.split(',')[4]) || 0)
@@ -125,7 +144,10 @@ function determineOverflow (content, container) {
   const contentMetricsRight = Math.floor(contentMetrics.right)
   const contentMetricsLeft = Math.floor(contentMetrics.left)
 
-  if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
+  if (
+    containerMetricsLeft > contentMetricsLeft &&
+    containerMetricsRight < contentMetricsRight
+  ) {
     return 'both'
   } else if (contentMetricsLeft < containerMetricsLeft) {
     return 'left'

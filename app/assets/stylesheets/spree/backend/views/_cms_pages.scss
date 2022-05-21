@@ -20,7 +20,7 @@
   }
 }
 
-[aria-expanded="false"] {
+[aria-expanded='false'] {
   span.more {
     display: inline;
   }
@@ -29,7 +29,7 @@
   }
 }
 
-[aria-expanded="true"] {
+[aria-expanded='true'] {
   span.more {
     display: none;
   }
@@ -73,8 +73,8 @@ button#cmsSectionEditorFullScreen {
 
   // Hide scroll-bar in live preview
   // sidebar.
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none;
   }
@@ -107,7 +107,7 @@ button#cmsSectionEditorFullScreen {
     #draggableSectionsHolder {
       max-width: 350px;
     }
-   }
+  }
 }
 
 #pageLivePreview {
@@ -118,7 +118,7 @@ button#cmsSectionEditorFullScreen {
 .desktopLiveView {
   #pageLivePreview {
     width: 200.5%;
-    height:200.5%;
+    height: 200.5%;
     inset: 50%;
     transform: scale(0.5) translate(-50%, -50%);
     max-width: 2600px;
@@ -137,7 +137,7 @@ button#cmsSectionEditorFullScreen {
 }
 
 .mobileLiveView {
-    #pageLivePreview {
+  #pageLivePreview {
     width: 60%;
     height: 133.5%;
     inset: 50%;

@@ -28,7 +28,9 @@ document.addEventListener('spree:load', function () {
         $.ajax({
           type: 'POST',
           dataType: 'json',
-          url: $(itemEl).closest('table.sortable').data('sortable-link'),
+          url: $(itemEl)
+            .closest('table.sortable')
+            .data('sortable-link'),
           data: positions
         })
       }

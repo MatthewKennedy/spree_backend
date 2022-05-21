@@ -3,7 +3,8 @@ document.addEventListener('spree:load', function () {
     // refactor variant1
     this.variant = variant1
     this.id = this.variant[0].variant.id
-    this.name = this.variant[0].variant.name + ' - ' + this.variant[0].variant.sku
+    this.name =
+      this.variant[0].variant.name + ' - ' + this.variant[0].variant.sku
     this.quantity = 0
   }
   TransferVariant.prototype.add = function (quantity) {
@@ -26,25 +27,27 @@ document.addEventListener('spree:load', function () {
         }
       },
       headers: SpreeDash.apiV2Authentication()
-    }).then(function (json) {
-      this.locations = (function () {
-        const ref = json.data
-        const results = []
-        let i, len
-        for (i = 0, len = ref.length; i < len; i++) {
-          results.push({
-            id: ref[i].id,
-            name: ref[i].attributes.name
-          })
+    }).then(
+      function (json) {
+        this.locations = (function () {
+          const ref = json.data
+          const results = []
+          let i, len
+          for (i = 0, len = ref.length; i < len; i++) {
+            results.push({
+              id: ref[i].id,
+              name: ref[i].attributes.name
+            })
+          }
+          return results
+        })()
+        if (this.locations.length < 2) {
+          this.force_receive_stock()
         }
-        return results
-      })()
-      if (this.locations.length < 2) {
-        this.force_receive_stock()
-      }
-      this.populate_source()
-      this.populate_destination()
-    }.bind(this))
+        this.populate_source()
+        this.populate_destination()
+      }.bind(this)
+    )
   }
 
   TransferLocations.prototype.force_receive_stock = function () {
@@ -54,7 +57,9 @@ document.addEventListener('spree:load', function () {
   }
 
   TransferLocations.prototype.is_source_location_hidden = function () {
-    return $('#transfer_source_location_id_field').css('visibility') === 'hidden'
+    return (
+      $('#transfer_source_location_id_field').css('visibility') === 'hidden'
+    )
   }
 
   TransferLocations.prototype.toggle_source_location = function (hide) {
@@ -62,7 +67,9 @@ document.addEventListener('spree:load', function () {
       hide = false
     }
     this.source.trigger('change')
-    const transferSourceLocationIdField = $('#transfer_source_location_id_field')
+    const transferSourceLocationIdField = $(
+      '#transfer_source_location_id_field'
+    )
     if (this.is_source_location_hidden() && !hide) {
       transferSourceLocationIdField.css('visibility', 'visible')
       transferSourceLocationIdField.show()
@@ -100,7 +107,11 @@ document.addEventListener('spree:load', function () {
     for (i = 0, len = ref.length; i < len; i++) {
       location = ref[i]
       if (location.id !== except) {
-        select.append($('<option></option>').text(location.name).attr('value', location.id))
+        select.append(
+          $('<option></option>')
+            .text(location.name)
+            .attr('value', location.id)
+        )
       }
     }
     return select.select2()
@@ -123,12 +134,21 @@ document.addEventListener('spree:load', function () {
   }
 
   TransferVariants.prototype._search_transfer_variants = function () {
-    return this.build_select(SpreeDash.url(SpreeDash.routes.variants_api_v2), 'product_name_or_sku_cont')
+    return this.build_select(
+      SpreeDash.url(SpreeDash.routes.variants_api_v2),
+      'product_name_or_sku_cont'
+    )
   }
 
   TransferVariants.prototype._search_transfer_stock_items = function () {
     const stockLocationId = $('#transfer_source_location_id').val()
-    return this.build_select(SpreeDash.routes.stock_items_api_v2 + '?filter[stock_location_id_eq]=' + stockLocationId + '&include=variant', 'variant_product_name_or_variant_sku_cont')
+    return this.build_select(
+      SpreeDash.routes.stock_items_api_v2 +
+        '?filter[stock_location_id_eq]=' +
+        stockLocationId +
+        '&include=variant',
+      'variant_product_name_or_variant_sku_cont'
+    )
   }
 
   TransferVariants.prototype.format_variant_result = function (result) {
@@ -171,7 +191,9 @@ document.addEventListener('spree:load', function () {
         headers: SpreeDash.apiV2Authentication(),
         success: function (data) {
           const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
-          new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
+          new JSONAPIDeserializer({
+            keyForAttribute: 'snake_case'
+          }).deserialize(data, function (_err, variants) {
             jsonApiVariants = variants
           })
         },
@@ -197,7 +219,14 @@ document.addEventListener('spree:load', function () {
       },
       templateResult: function (variant) {
         if (variant.options_text !== '') {
-          return variant.name + ' - ' + variant.sku + ' (' + variant.options_text + ')'
+          return (
+            variant.name +
+            ' - ' +
+            variant.sku +
+            ' (' +
+            variant.options_text +
+            ')'
+          )
         } else {
           return variant.name + ' - ' + variant.sku
         }
@@ -205,7 +234,11 @@ document.addEventListener('spree:load', function () {
       templateSelection: function (variant) {
         // eslint-disable-next-line no-extra-boolean-cast
         if (!!variant.options_text) {
-          return variant.name + (' (' + variant.options_text + ')') + (' - ' + variant.sku)
+          return (
+            variant.name +
+            (' (' + variant.options_text + ')') +
+            (' - ' + variant.sku)
+          )
         } else {
           return variant.name + (' - ' + variant.sku)
         }
@@ -217,24 +250,32 @@ document.addEventListener('spree:load', function () {
     this.variants = []
     this.template = Handlebars.compile($('#transfer_variant_template').html())
     $('#transfer_source_location_id').change(this.clear_variants.bind(this))
-    $('button.transfer_add_variant').click(function (event) {
-      event.preventDefault()
-      if ($('#transfer_variant').select2('data') != null) {
-        this.add_variant()
-      } else {
-        alert('Please select a variant first')
-      }
-    }.bind(this))
-    $('#transfer-variants-table').on('click', '.transfer_remove_variant', function (event) {
-      event.preventDefault()
-      this.remove_variant($(event.target))
-    }.bind(this))
-    $('button.transfer_transfer').click(function () {
-      if (!(this.variants.length > 0)) {
-        alert('no variants to transfer')
-        return false
-      }
-    }.bind(this))
+    $('button.transfer_add_variant').click(
+      function (event) {
+        event.preventDefault()
+        if ($('#transfer_variant').select2('data') != null) {
+          this.add_variant()
+        } else {
+          alert('Please select a variant first')
+        }
+      }.bind(this)
+    )
+    $('#transfer-variants-table').on(
+      'click',
+      '.transfer_remove_variant',
+      function (event) {
+        event.preventDefault()
+        this.remove_variant($(event.target))
+      }.bind(this)
+    )
+    $('button.transfer_transfer').click(
+      function () {
+        if (!(this.variants.length > 0)) {
+          alert('no variants to transfer')
+          return false
+        }
+      }.bind(this)
+    )
   }
 
   TransferAddVariants.prototype.add_variant = function () {
@@ -262,7 +303,7 @@ document.addEventListener('spree:load', function () {
     let v
     const variantId = target.data('variantId').toString()
 
-    this.variants = (function () {
+    this.variants = function () {
       const ref = this.variants
       const results = []
       let i, len
@@ -273,7 +314,7 @@ document.addEventListener('spree:load', function () {
         }
       }
       return results
-    }.call(this))
+    }.call(this)
     return this.render()
   }
 
@@ -293,9 +334,11 @@ document.addEventListener('spree:load', function () {
     } else {
       $('#transfer-variants-table').show()
       $('.no-objects-found').hide()
-      return $('#transfer_variants_tbody').html(this.template({
-        variants: this.variants
-      }))
+      return $('#transfer_variants_tbody').html(
+        this.template({
+          variants: this.variants
+        })
+      )
     }
   }
 

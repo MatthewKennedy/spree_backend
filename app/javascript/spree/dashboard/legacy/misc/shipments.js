@@ -6,7 +6,9 @@ document.addEventListener('spree:load', function () {
 
   // handle variant selection, show stock level.
   $('#add_variant_id').change(function () {
-    const variantId = $(this).val().toString()
+    const variantId = $(this)
+      .val()
+      .toString()
     const variant = _.find(window.variants, function (variant) {
       return variant.id.toString() === variantId
     })
@@ -32,7 +34,12 @@ document.addEventListener('spree:load', function () {
     const shipmentNumber = save.data('shipment-number')
     const variantId = save.data('variant-id')
 
-    const quantity = parseInt(save.parents('tr').find('input.line_item_quantity').val())
+    const quantity = parseInt(
+      save
+        .parents('tr')
+        .find('input.line_item_quantity')
+        .val()
+    )
 
     toggleItemEdit()
     adjustShipmentItems(shipmentNumber, variantId, quantity)
@@ -46,7 +53,11 @@ document.addEventListener('spree:load', function () {
       const shipmentNumber = del.data('shipment-number')
       const variantId = del.data('variant-id')
       // eslint-disable-next-line
-      var url = SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber + '/remove_item'
+      var url =
+        SpreeDash.routes.shipments_api_v2 +
+        '/' +
+        shipmentNumber +
+        '/remove_item'
 
       toggleItemEdit()
 
@@ -59,11 +70,13 @@ document.addEventListener('spree:load', function () {
           }
         },
         headers: SpreeDash.apiV2Authentication()
-      }).done(function (msg) {
-        window.location.reload()
-      }).fail(function (msg) {
-        alert(msg.responseJSON.error)
       })
+        .done(function (msg) {
+          window.location.reload()
+        })
+        .fail(function (msg) {
+          alert(msg.responseJSON.error)
+        })
     }
     return false
   })
@@ -71,16 +84,23 @@ document.addEventListener('spree:load', function () {
   // handle ship click
   $('[data-hook=admin_shipment_form] a.ship').on('click', function () {
     const link = $(this)
-    const url = SpreeDash.url(SpreeDash.routes.shipments_api_v2 + '/' + link.data('shipment-number') + '/ship')
+    const url = SpreeDash.url(
+      SpreeDash.routes.shipments_api_v2 +
+        '/' +
+        link.data('shipment-number') +
+        '/ship'
+    )
     $.ajax({
       type: 'PATCH',
       url: url,
       headers: SpreeDash.apiV2Authentication()
-    }).done(function () {
-      window.location.reload()
-    }).fail(function (msg) {
-      alert(msg.responseJSON.error)
     })
+      .done(function () {
+        window.location.reload()
+      })
+      .fail(function (msg) {
+        alert(msg.responseJSON.error)
+      })
   })
 
   // handle shipping method edit click
@@ -88,14 +108,32 @@ document.addEventListener('spree:load', function () {
   $('a.cancel-method').click(toggleMethodEdit)
 
   // handle shipping method save
-  $('[data-hook=admin_shipment_form] a.save-method').on('click', function (event) {
+  $('[data-hook=admin_shipment_form] a.save-method').on('click', function (
+    event
+  ) {
     event.preventDefault()
 
     const link = $(this)
     const shipmentNumber = link.data('shipment-number')
-    const selectedShippingRateId = link.parents('tbody').find("select#selected_shipping_rate_id[data-shipment-number='" + shipmentNumber + "']").val()
-    const unlock = link.parents('tbody').find("input[name='open_adjustment'][data-shipment-number='" + shipmentNumber + "']:checked").val()
-    const url = SpreeDash.url(SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber + '.json')
+    const selectedShippingRateId = link
+      .parents('tbody')
+      .find(
+        "select#selected_shipping_rate_id[data-shipment-number='" +
+          shipmentNumber +
+          "']"
+      )
+      .val()
+    const unlock = link
+      .parents('tbody')
+      .find(
+        "input[name='open_adjustment'][data-shipment-number='" +
+          shipmentNumber +
+          "']:checked"
+      )
+      .val()
+    const url = SpreeDash.url(
+      SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber + '.json'
+    )
 
     $.ajax({
       type: 'PATCH',
@@ -107,19 +145,27 @@ document.addEventListener('spree:load', function () {
         }
       },
       headers: SpreeDash.apiV2Authentication()
-    }).done(function () {
-      window.location.reload()
-    }).fail(function (msg) {
-      alert(msg.responseJSON.error)
     })
+      .done(function () {
+        window.location.reload()
+      })
+      .fail(function (msg) {
+        alert(msg.responseJSON.error)
+      })
   })
 
   function toggleTrackingEdit (event) {
     event.preventDefault()
 
     const link = $(this)
-    link.parents('tbody').find('tr.edit-tracking').toggle()
-    link.parents('tbody').find('tr.show-tracking').toggle()
+    link
+      .parents('tbody')
+      .find('tr.edit-tracking')
+      .toggle()
+    link
+      .parents('tbody')
+      .find('tr.show-tracking')
+      .toggle()
   }
 
   // handle tracking edit click
@@ -128,20 +174,33 @@ document.addEventListener('spree:load', function () {
 
   function createTrackingValueContent (data) {
     if (data.attributes.tracking_url && data.attributes.tracking) {
-      return '<a target="_blank" href="' + data.attributes.tracking_url + '">' + data.attributes.tracking + '<a>'
+      return (
+        '<a target="_blank" href="' +
+        data.attributes.tracking_url +
+        '">' +
+        data.attributes.tracking +
+        '<a>'
+      )
     }
 
     return data.attributes.tracking
   }
 
   // handle tracking save
-  $('[data-hook=admin_shipment_form] a.save-tracking').on('click', function (event) {
+  $('[data-hook=admin_shipment_form] a.save-tracking').on('click', function (
+    event
+  ) {
     event.preventDefault()
 
     const link = $(this)
     const shipmentNumber = link.data('shipment-number')
-    const tracking = link.parents('tbody').find('input#tracking').val()
-    const url = SpreeDash.url(SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber + '.json')
+    const tracking = link
+      .parents('tbody')
+      .find('input#tracking')
+      .val()
+    const url = SpreeDash.url(
+      SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber + '.json'
+    )
 
     $.ajax({
       type: 'PATCH',
@@ -153,15 +212,23 @@ document.addEventListener('spree:load', function () {
       },
       headers: SpreeDash.apiV2Authentication()
     }).done(function (json) {
-      link.parents('tbody').find('tr.edit-tracking').toggle()
+      link
+        .parents('tbody')
+        .find('tr.edit-tracking')
+        .toggle()
 
       const show = link.parents('tbody').find('tr.show-tracking')
       show.toggle()
 
       if (json.data.attributes.tracking) {
-        show.find('.tracking-value').html($('<strong>').html(SpreeDash.translations.tracking + ': ')).append(createTrackingValueContent(json.data))
+        show
+          .find('.tracking-value')
+          .html($('<strong>').html(SpreeDash.translations.tracking + ': '))
+          .append(createTrackingValueContent(json.data))
       } else {
-        show.find('.tracking-value').html(SpreeDash.translations.no_tracking_present)
+        show
+          .find('.tracking-value')
+          .html(SpreeDash.translations.no_tracking_present)
       }
     })
   })
@@ -169,19 +236,27 @@ document.addEventListener('spree:load', function () {
 
 function adjustShipmentItems (shipmentNumber, variantId, quantity) {
   const shipment = _.findWhere(shipments, { number: shipmentNumber + '' })
-  const inventoryUnits = _.where(shipment.inventory_units, { variant_id: variantId })
+  const inventoryUnits = _.where(shipment.inventory_units, {
+    variant_id: variantId
+  })
   let url = SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber
-  const previousQuantity = inventoryUnits.reduce(function (accumulator, currentUnit, _index, _array) {
+  const previousQuantity = inventoryUnits.reduce(function (
+    accumulator,
+    currentUnit,
+    _index,
+    _array
+  ) {
     return accumulator + currentUnit.quantity
-  }, 0)
+  },
+  0)
   let newQuantity = 0
 
   if (previousQuantity < quantity) {
     url += '/add_item'
-    newQuantity = (quantity - previousQuantity)
+    newQuantity = quantity - previousQuantity
   } else if (previousQuantity > quantity) {
     url += '/remove_item'
-    newQuantity = (previousQuantity - quantity)
+    newQuantity = previousQuantity - quantity
   }
   url += '.json'
 
@@ -196,18 +271,26 @@ function adjustShipmentItems (shipmentNumber, variantId, quantity) {
         }
       },
       headers: SpreeDash.apiV2Authentication()
-    }).done(function (msg) {
-      window.location.reload()
-    }).fail(function (msg) {
-      alert(msg.responseJSON.error)
     })
+      .done(function (msg) {
+        window.location.reload()
+      })
+      .fail(function (msg) {
+        alert(msg.responseJSON.error)
+      })
   }
 }
 
 function toggleMethodEdit () {
   const link = $(this)
-  link.parents('tbody').find('tr.edit-method').toggle()
-  link.parents('tbody').find('tr.show-method').toggle()
+  link
+    .parents('tbody')
+    .find('tr.edit-method')
+    .toggle()
+  link
+    .parents('tbody')
+    .find('tr.show-method')
+    .toggle()
 
   return false
 }
@@ -220,8 +303,14 @@ function toggleItemEdit () {
   linkParent.find('a.split-item').toggle()
   linkParent.find('a.save-item').toggle()
   linkParent.find('a.delete-item').toggle()
-  link.parents('tr').find('td.item-qty-show').toggle()
-  link.parents('tr').find('td.item-qty-edit').toggle()
+  link
+    .parents('tr')
+    .find('td.item-qty-show')
+    .toggle()
+  link
+    .parents('tr')
+    .find('td.item-qty-edit')
+    .toggle()
 
   return false
 }
@@ -232,9 +321,18 @@ function startItemSplit (event) {
     $(this).click()
   })
   const link = $(this)
-  link.parent().find('a.edit-item').toggle()
-  link.parent().find('a.split-item').toggle()
-  link.parent().find('a.delete-item').toggle()
+  link
+    .parent()
+    .find('a.edit-item')
+    .toggle()
+  link
+    .parent()
+    .find('a.split-item')
+    .toggle()
+  link
+    .parent()
+    .find('a.delete-item')
+    .toggle()
   const variantId = link.data('variant-id')
 
   let variant = {}
@@ -246,23 +344,41 @@ function startItemSplit (event) {
       include: 'stock_items.stock_location'
     },
     headers: SpreeDash.apiV2Authentication()
-  }).done(function (json) {
-    const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
-    new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(json, function (_err, deserializedJson) {
-      variant = deserializedJson
-
-      const maxQuantity = link.closest('tr').data('item-quantity')
-      const splitItemTemplate = Handlebars.compile($('#variant_split_template').text())
-
-      link.closest('tr').after(splitItemTemplate({ variant: variant, shipments: shipments, max_quantity: maxQuantity }))
-      $('a.cancel-split').click(cancelItemSplit)
-      $('a.save-split').click(completeItemSplit)
-
-      $('#item_stock_location').select2({ width: 'resolve', placeholder: SpreeDash.translations.item_stock_placeholder })
-    })
-  }).fail(function (msg) {
-    alert(msg.responseJSON.error)
   })
+    .done(function (json) {
+      const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
+      new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(
+        json,
+        function (_err, deserializedJson) {
+          variant = deserializedJson
+
+          const maxQuantity = link.closest('tr').data('item-quantity')
+          const splitItemTemplate = Handlebars.compile(
+            $('#variant_split_template').text()
+          )
+
+          link
+            .closest('tr')
+            .after(
+              splitItemTemplate({
+                variant: variant,
+                shipments: shipments,
+                max_quantity: maxQuantity
+              })
+            )
+          $('a.cancel-split').click(cancelItemSplit)
+          $('a.save-split').click(completeItemSplit)
+
+          $('#item_stock_location').select2({
+            width: 'resolve',
+            placeholder: SpreeDash.translations.item_stock_placeholder
+          })
+        }
+      )
+    })
+    .fail(function (msg) {
+      alert(msg.responseJSON.error)
+    })
 }
 
 function completeItemSplit (event) {
@@ -281,7 +397,9 @@ function completeItemSplit (event) {
   const stockLocationId = stockItemRow.find('#item_stock_location').val()
   const originalShipmentNumber = link.closest('tbody').data('shipment-number')
 
-  const selectedShipment = stockItemRow.find('#item_stock_location option:selected')
+  const selectedShipment = stockItemRow.find(
+    '#item_stock_location option:selected'
+  )
   const targetShipmentNumber = selectedShipment.data('shipment-number')
   const newShipment = selectedShipment.data('new-shipment')
 
@@ -305,16 +423,20 @@ function completeItemSplit (event) {
     $.ajax({
       type: 'PATCH',
       async: false,
-      url: SpreeDash.url(SpreeDash.routes.shipments_api_v2 + '/' + originalShipmentNumber + path),
+      url: SpreeDash.url(
+        SpreeDash.routes.shipments_api_v2 + '/' + originalShipmentNumber + path
+      ),
       data: {
         shipment: $.extend(data, additionalData)
       },
       headers: SpreeDash.apiV2Authentication()
-    }).fail(function (msg) {
-      alert(msg.responseJSON.error)
-    }).done(function (msg) {
-      window.location.reload()
     })
+      .fail(function (msg) {
+        alert(msg.responseJSON.error)
+      })
+      .done(function (msg) {
+        window.location.reload()
+      })
   }
 }
 
@@ -335,10 +457,15 @@ function addVariantFromStockLocation (event) {
 
   const variantId = $('select.variant_autocomplete').val()
   const stockLocationId = $(this).data('stock-location-id')
-  const quantity = $("input.quantity[data-stock-location-id='" + stockLocationId + "']").val()
+  const quantity = $(
+    "input.quantity[data-stock-location-id='" + stockLocationId + "']"
+  ).val()
 
   const shipment = _.find(shipments, function (shipment) {
-    return shipment.stock_location_id === stockLocationId && (shipment.state === 'ready' || shipment.state === 'pending')
+    return (
+      shipment.stock_location_id === stockLocationId &&
+      (shipment.state === 'ready' || shipment.state === 'pending')
+    )
   })
 
   if (shipment === undefined) {
@@ -354,11 +481,13 @@ function addVariantFromStockLocation (event) {
         }
       },
       headers: SpreeDash.apiV2Authentication()
-    }).done(function (msg) {
-      window.location.reload()
-    }).fail(function (msg) {
-      alert(msg.responseJSON.error)
     })
+      .done(function (msg) {
+        window.location.reload()
+      })
+      .fail(function (msg) {
+        alert(msg.responseJSON.error)
+      })
   } else {
     // add to existing shipment
     adjustShipmentItems(shipment.number, variantId, quantity)

@@ -15,7 +15,9 @@ span.or {
 .form-group {
   margin-bottom: 0.5rem;
   &.withError {
-    label, .formError, .required {
+    label,
+    .formError,
+    .required {
       color: var(--bs-danger);
     }
 
@@ -35,6 +37,6 @@ input.hide-number-toggle::-webkit-inner-spin-button {
 }
 
 // Firefox
-input[type=number].hide-number-toggle {
+input[type='number'].hide-number-toggle {
   -moz-appearance: textfield;
 }

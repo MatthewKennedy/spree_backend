@@ -22,7 +22,7 @@ document.addEventListener('spree:load', function () {
   $('.spree_add_fields').click(function () {
     const target = $(this).data('target')
     const newTableRow = $(target + ' tr:visible:last').clone()
-    const newId = new Date().getTime() + (uniqueId++)
+    const newId = new Date().getTime() + uniqueId++
     newTableRow.find('input, select').each(function () {
       const el = $(this)
       el.val('')
@@ -57,21 +57,27 @@ document.addEventListener('spree:load', function () {
         complete: function () {
           el.blur()
         }
-      }).done(function () {
-        const $flashElement = $('#FlashAlertsContainer span[data-alert-type="success"]')
-        if ($flashElement.length) {
-          el.parents('tr').fadeOut('hide', function () {
-            $(this).remove()
-          })
-          el.closest('.removable-dom-element').fadeOut('hide', function () {
-            $(this).remove()
-          })
-          const livePreview = document.getElementById('pageLivePreview')
-          if (livePreview) { livePreview.contentWindow.location.reload() }
-        }
-      }).fail(function (response) {
-        SpreeDash.showFlash('error', response.responseText)
       })
+        .done(function () {
+          const $flashElement = $(
+            '#FlashAlertsContainer span[data-alert-type="success"]'
+          )
+          if ($flashElement.length) {
+            el.parents('tr').fadeOut('hide', function () {
+              $(this).remove()
+            })
+            el.closest('.removable-dom-element').fadeOut('hide', function () {
+              $(this).remove()
+            })
+            const livePreview = document.getElementById('pageLivePreview')
+            if (livePreview) {
+              livePreview.contentWindow.location.reload()
+            }
+          }
+        })
+        .fail(function (response) {
+          SpreeDash.showFlash('error', response.responseText)
+        })
     } else {
       el.blur()
     }
@@ -95,13 +101,15 @@ document.addEventListener('spree:load', function () {
           _method: 'delete',
           authenticity_token: SpreeDash.AUTH_TOKEN
         }
-      }).done(function () {
-        el.parents('tr').fadeOut('hide', function () {
-          $(this).remove()
-        })
-      }).fail(function (response) {
-        SpreeDash.showFlash('error', response.responseText)
       })
+        .done(function () {
+          el.parents('tr').fadeOut('hide', function () {
+            $(this).remove()
+          })
+        })
+        .fail(function (response) {
+          SpreeDash.showFlash('error', response.responseText)
+        })
     }
     return false
   })
@@ -117,7 +125,10 @@ document.addEventListener('spree:load', function () {
       url: clickedLink.prop('href'),
       type: 'GET'
     }).done(function () {
-      clickedLink.parent('td').parent('tr').hide()
+      clickedLink
+        .parent('td')
+        .parent('tr')
+        .hide()
       $('#busy_indicator').hide()
     })
     return false
@@ -131,7 +142,9 @@ document.addEventListener('spree:load', function () {
       type: 'PATCH',
       async: false,
       headers: SpreeDash.apiV2Authentication(),
-      url: SpreeDash.url(SpreeDash.routes.orders_api_v2 + '/' + order_number + '/advance')
+      url: SpreeDash.url(
+        SpreeDash.routes.orders_api_v2 + '/' + order_number + '/advance'
+      )
     }).done(function () {
       window.location.reload()
     })

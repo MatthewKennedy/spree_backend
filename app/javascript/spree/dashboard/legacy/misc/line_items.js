@@ -7,7 +7,12 @@ document.addEventListener('spree:load', function () {
   $('a.save-line-item').click(function () {
     const save = $(this)
     const lineItemId = save.data('line-item-id')
-    const quantity = parseInt(save.parents('tr').find('input.line_item_quantity').val())
+    const quantity = parseInt(
+      save
+        .parents('tr')
+        .find('input.line_item_quantity')
+        .val()
+    )
     toggleItemEdit()
     adjustLineItem(lineItemId, quantity)
   })

@@ -5,7 +5,11 @@ document.addEventListener('spree:load', function () {
   // Fail safe on screen resize
   let resizeTimer
   window.addEventListener('resize', function () {
-    document.body.classList.remove('modal-open', 'sidebar-open', 'contextualSideMenu-open')
+    document.body.classList.remove(
+      'modal-open',
+      'sidebar-open',
+      'contextualSideMenu-open'
+    )
     document.body.classList.add('resize-animation-stopper')
     clearTimeout(resizeTimer)
     resizeTimer = setTimeout(function () {

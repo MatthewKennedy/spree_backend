@@ -1,17 +1,17 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = [ "eventsCheckboxesContainer", "subscribeToAll" ]
+  static targets = ['eventsCheckboxesContainer', 'subscribeToAll']
 
-  hideCheckboxes() {
+  hideCheckboxes () {
     this.eventsCheckboxesContainerTarget.hidden = true
   }
 
-  showCheckboxes() {
+  showCheckboxes () {
     this.eventsCheckboxesContainerTarget.hidden = false
   }
 
-  initialize() {
+  initialize () {
     if (this.subscribeToAllTarget.checked) {
       this.hideCheckboxes()
     }

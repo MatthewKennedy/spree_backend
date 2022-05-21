@@ -25,7 +25,7 @@ div.admin-product-image-container {
   margin: auto;
 
   a {
-    display: flex
+    display: flex;
   }
 
   img {
@@ -86,7 +86,7 @@ div.admin-product-image-container {
 }
 
 [data-show-info] {
-  color:  var(--bs-primary);
+  color: var(--bs-primary);
   cursor: pointer;
 }
 
