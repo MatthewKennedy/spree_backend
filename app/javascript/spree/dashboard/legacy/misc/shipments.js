@@ -401,7 +401,7 @@ function completeItemSplit (event) {
   const targetShipmentNumber = selectedShipment.data('shipment-number')
   const newShipment = selectedShipment.data('new-shipment')
 
-  if (stockLocationId != 'new_shipment') {
+  if (stockLocationId !== 'new_shipment') {
     let path, additionalData
     if (newShipment !== undefined) {
       // transfer to a new location data

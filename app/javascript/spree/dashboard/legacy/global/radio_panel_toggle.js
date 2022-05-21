@@ -7,13 +7,13 @@ document.addEventListener('spree:load', function () {
     if (!this.get(0)) {
       return
     }
+
     const showValue = this.get(0).value
     const radioGroup = $("input[name='" + this.get(0).name + "']")
     radioGroup.each(function () {
       $(this).click(function () {
-        // eslint-disable-next-line eqeqeq
         $(dependentElementSelector).visible(
-          this.checked && this.value == showValue
+          this.checked && this.value === showValue
         )
       })
       if (this.checked) {
