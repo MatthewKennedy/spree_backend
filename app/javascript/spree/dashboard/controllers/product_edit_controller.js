@@ -5,7 +5,7 @@ export default class extends Controller {
 
   initialize () {
     $(this.statusTarget).on('select2:select', function (e) {
-      let event = new Event('change')
+      const event = new Event('change')
       e.target.dispatchEvent(event)
     })
   }
@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   switchAvailabilityDatesFields (event) {
-    let status = event.target.value
+    const status = event.target.value
     if (status === 'draft') {
       this.show(this.availableOnTarget)
       this.show(this.makeActiveAtTarget)

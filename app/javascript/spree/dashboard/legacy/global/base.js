@@ -52,7 +52,7 @@ SpreeDash.adminPathFor = function (path) {
 }
 
 SpreeDash.url = function (uri, query) {
-  if (uri.path === void 0) {
+  if (uri.path === undefined) {
     uri = new Uri(uri)
   }
   if (query) {
