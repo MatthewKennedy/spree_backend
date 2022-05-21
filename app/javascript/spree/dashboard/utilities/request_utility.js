@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 import { RequestInterceptor, FetchRequest } from '@rails/request.js'
 
 //

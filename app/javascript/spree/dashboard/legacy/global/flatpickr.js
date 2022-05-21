@@ -15,7 +15,7 @@ document.addEventListener('spree:load', function () {
     }
   })
 
-  var dateTo = Flatpickr('.datePickerTo', {
+  const dateTo = Flatpickr('.datePickerTo', {
     onChange: function (selectedDates) {
       dateFrom.set('maxDate', selectedDates[0])
     }

@@ -33,8 +33,7 @@ document.addEventListener('spree:load', function () {
     'product_option_type_ids'
   )
   if (productOptionTypeSelector == null) return
-  if (productOptionTypeSelector.hasAttribute('data-autocomplete-url-value'))
-    return
+  if (productOptionTypeSelector.hasAttribute('data-autocomplete-url-value')) return
 
   $('#product_option_type_ids').optionTypeAutocomplete()
 })

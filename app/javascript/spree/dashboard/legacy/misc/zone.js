@@ -1,19 +1,19 @@
 document.addEventListener('spree:load', function () {
   const countryBased = $('#country_based')
   const stateBased = $('#state_based')
-  countryBased.click(show_country)
-  stateBased.click(show_state)
+  countryBased.click(showCountry)
+  stateBased.click(showState)
   if (countryBased.is(':checked')) {
-    show_country()
+    showCountry()
   } else if (stateBased.is(':checked')) {
-    show_state()
+    showState()
   } else {
-    show_state()
+    showState()
     stateBased.click()
   }
 })
 
-function show_country () {
+function showCountry () {
   $('#state_members :input').each(function () {
     $(this).prop('disabled', true)
   })
@@ -28,7 +28,7 @@ function show_country () {
   $('#country_members').show()
 }
 
-function show_state () {
+function showState () {
   $('#country_members :input').each(function () {
     $(this).prop('disabled', true)
   })

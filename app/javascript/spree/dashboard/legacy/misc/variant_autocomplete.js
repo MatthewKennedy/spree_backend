@@ -26,7 +26,7 @@ function formatVariantResult (variant) {
   }
   return $(
     variantTemplate({
-      variant: variant
+      variant
     })
   )
 }

@@ -13,7 +13,7 @@ function clearAddressFields (addressKinds) {
 
 function formatCustomerResult (customer) {
   const escapedResult = window.customerTemplate({
-    customer: customer,
+    customer,
     bill_address: customer.bill_address,
     ship_address: customer.ship_address
   })

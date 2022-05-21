@@ -28,7 +28,7 @@ $.fn.productAutocomplete = function (options) {
   }
 
   this.select2({
-    multiple: multiple,
+    multiple,
     minimumInputLength: 3,
     ajax: {
       url: SpreeDash.routes.products_api_v2,

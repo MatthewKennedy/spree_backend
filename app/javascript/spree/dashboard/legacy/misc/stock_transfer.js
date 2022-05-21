@@ -98,12 +98,12 @@ document.addEventListener('spree:load', function () {
   }
 
   TransferLocations.prototype.populate_select = function (select, except) {
-    let i, len, location, ref
+    let i, len, location
     if (except == null) {
       except = 0
     }
     select.children('option').remove()
-    ref = this.locations
+    const ref = this.locations
     for (i = 0, len = ref.length; i < len; i++) {
       location = ref[i]
       if (location.id !== except) {
@@ -175,14 +175,14 @@ document.addEventListener('spree:load', function () {
     return $('#transfer_variant').select2({
       minimumInputLength: 3,
       ajax: {
-        url: url,
+        url,
         datatype: 'json',
         data: function (params) {
           const filter = {}
           filter[query] = params.term
 
           return {
-            filter: filter,
+            filter,
             fields: {
               variant: 'name,sku,options_text'
             }
@@ -303,7 +303,7 @@ document.addEventListener('spree:load', function () {
     let v
     const variantId = target.data('variantId').toString()
 
-    this.variants = function () {
+    this.variants = (function () {
       const ref = this.variants
       const results = []
       let i, len
@@ -314,7 +314,7 @@ document.addEventListener('spree:load', function () {
         }
       }
       return results
-    }.call(this)
+    }.call(this))
     return this.render()
   }
 

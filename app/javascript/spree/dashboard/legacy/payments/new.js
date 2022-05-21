@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 import Cleave from 'cleave.js'
 
 document.addEventListener('spree:load', function () {

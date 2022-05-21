@@ -73,7 +73,7 @@ document.addEventListener('spree:load', function () {
       $this.val() !== '' &&
       $this.val().length !== 0
     ) {
-      let ransackValue, filter
+      let ransackValue
       const ransackFieldId = $this.attr('id')
       let label = $('label[for="' + ransackFieldId + '"]')
 
@@ -93,7 +93,7 @@ document.addEventListener('spree:load', function () {
 
       const cleanLabel = DOMPurify.sanitize(label)
 
-      filter =
+      const filter =
         '<span class="js-filter badge badge-secondary d-inline-flex align-items-center" data-ransack-field="' +
         ransackFieldId +
         '">' +

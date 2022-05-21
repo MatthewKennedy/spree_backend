@@ -13,7 +13,7 @@ document.addEventListener('spree:load', function () {
       return variant.id.toString() === variantId
     })
 
-    $('#stock_details').html(variantStockTemplate({ variant: variant }))
+    $('#stock_details').html(variantStockTemplate({ variant }))
     $('#stock_details').show()
 
     $('button.add_variant').click(addVariantFromStockLocation)
@@ -92,7 +92,7 @@ document.addEventListener('spree:load', function () {
     )
     $.ajax({
       type: 'PATCH',
-      url: url,
+      url,
       headers: SpreeDash.apiV2Authentication()
     })
       .done(function () {
@@ -137,11 +137,11 @@ document.addEventListener('spree:load', function () {
 
     $.ajax({
       type: 'PATCH',
-      url: url,
+      url,
       data: {
         shipment: {
           selected_shipping_rate_id: selectedShippingRateId,
-          unlock: unlock
+          unlock
         }
       },
       headers: SpreeDash.apiV2Authentication()
@@ -204,10 +204,10 @@ document.addEventListener('spree:load', function () {
 
     $.ajax({
       type: 'PATCH',
-      url: url,
+      url,
       data: {
         shipment: {
-          tracking: tracking
+          tracking
         }
       },
       headers: SpreeDash.apiV2Authentication()
@@ -359,8 +359,8 @@ function startItemSplit (event) {
 
           link.closest('tr').after(
             splitItemTemplate({
-              variant: variant,
-              shipments: shipments,
+              variant,
+              shipments,
               max_quantity: maxQuantity
             })
           )
@@ -415,7 +415,7 @@ function completeItemSplit (event) {
 
     const data = {
       variant_id: variantId,
-      quantity: quantity
+      quantity
     }
 
     $.ajax({
@@ -472,9 +472,9 @@ function addVariantFromStockLocation (event) {
       url: SpreeDash.routes.shipments_api_v2,
       data: {
         shipment: {
-          order_id: order_id,
+          order_id,
           variant_id: variantId,
-          quantity: quantity,
+          quantity,
           stock_location_id: stockLocationId
         }
       },

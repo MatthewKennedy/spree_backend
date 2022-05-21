@@ -11,7 +11,7 @@ document.addEventListener('spree:load', function () {
     const variant = _.find(window.variants, function (variant) {
       return variant.id.toString() == variantId
     })
-    $('#stock_details').html(variantLineItemTemplate({ variant: variant }))
+    $('#stock_details').html(variantLineItemTemplate({ variant }))
     $('#stock_details').show()
     $('button.add_variant').click(addVariant)
   })
@@ -32,9 +32,9 @@ const adjustLineItems = function (order_id, variant_id, quantity) {
     url: SpreeDash.routes.line_items_api_v2,
     data: {
       line_item: {
-        order_id: order_id,
-        variant_id: variant_id,
-        quantity: quantity
+        order_id,
+        variant_id,
+        quantity
       }
     },
     headers: SpreeDash.apiV2Authentication()

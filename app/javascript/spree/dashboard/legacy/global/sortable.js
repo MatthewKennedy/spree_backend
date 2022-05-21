@@ -2,8 +2,9 @@ import Sortable from 'sortablejs'
 
 document.addEventListener('spree:load', function () {
   const parentEl = document.getElementsByClassName('sortable')[0]
+  let element
   if (parentEl) {
-    var element = parentEl.querySelector('tbody')
+    element = parentEl.querySelector('tbody')
   }
 
   if (element) {

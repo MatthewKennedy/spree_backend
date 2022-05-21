@@ -18,15 +18,9 @@ SpreeDash.routes.line_items_api_v2 = SpreeDash.pathFor(
   'api/v2/platform/line_items'
 )
 SpreeDash.routes.menus_api_v2 = SpreeDash.pathFor('api/v2/platform/menus')
-SpreeDash.routes.menus_items_api_v2 = SpreeDash.pathFor(
-  'api/v2/platform/menu_items'
-)
-SpreeDash.routes.option_types_api_v2 = SpreeDash.pathFor(
-  'api/v2/platform/option_types'
-)
-SpreeDash.routes.option_values_api_v2 = SpreeDash.pathFor(
-  'api/v2/platform/option_values'
-)
+SpreeDash.routes.menus_items_api_v2 = SpreeDash.pathFor('api/v2/platform/menu_items')
+SpreeDash.routes.option_types_api_v2 = SpreeDash.pathFor('api/v2/platform/option_types')
+SpreeDash.routes.option_values_api_v2 = SpreeDash.pathFor('api/v2/platform/option_values')
 SpreeDash.routes.orders_api_v2 = SpreeDash.pathFor('api/v2/platform/orders')
 SpreeDash.routes.pages_api_v2 = SpreeDash.pathFor('api/v2/platform/cms_pages')
 SpreeDash.routes.payments_api_v2 = SpreeDash.pathFor(

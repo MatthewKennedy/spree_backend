@@ -49,7 +49,7 @@ function adjustLineItem (lineItemId, quantity) {
     url: SpreeDash.url(lineItemURL(lineItemId)),
     data: {
       line_item: {
-        quantity: quantity
+        quantity
       }
     },
     headers: SpreeDash.apiV2Authentication()

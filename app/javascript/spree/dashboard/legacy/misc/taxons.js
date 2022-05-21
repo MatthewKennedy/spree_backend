@@ -48,7 +48,7 @@ document.addEventListener('spree:load', function () {
           data: function (params, page) {
             return {
               per_page: 50,
-              page: page,
+              page,
               filter: {
                 name_cont: params.term
               }
@@ -65,9 +65,9 @@ document.addEventListener('spree:load', function () {
             })
 
             return {
-              results: results,
+              results,
               pagination: {
-                more: more
+                more
               }
             }
           }
@@ -126,8 +126,8 @@ document.addEventListener('spree:load', function () {
                 results.push(
                   taxonProducts.append(
                     productTemplate({
-                      product: product,
-                      classification: classification,
+                      product,
+                      classification,
                       image: imageUrl
                     })
                   )

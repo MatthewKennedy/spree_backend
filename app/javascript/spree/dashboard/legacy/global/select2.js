@@ -35,7 +35,7 @@ $.fn.addSelect2Options = function (data) {
 
   if (Array.isArray(data)) {
     data.map(function (row) {
-      appendOption(select, row)
+      return appendOption(select, row)
     })
   } else {
     appendOption(select, data)
@@ -43,7 +43,7 @@ $.fn.addSelect2Options = function (data) {
   select.trigger({
     type: 'select2:select',
     params: {
-      data: data
+      data
     }
   })
 }
@@ -60,5 +60,5 @@ function formatSelect2Options (data) {
     }
   })
 
-  return { results: results }
+  return { results }
 }

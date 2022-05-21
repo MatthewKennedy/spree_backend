@@ -37,8 +37,8 @@ function showInfoAlert (
 
   infoAlert.fire({
     icon: type,
-    title: title,
+    title,
     text: message,
-    html: html
+    html
   })
 }

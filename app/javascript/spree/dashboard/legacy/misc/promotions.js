@@ -44,7 +44,7 @@ function initProductActions () {
 
     const addOptionValue = function (productId, values) {
       const template = optionValueTemplate({
-        productId: productId
+        productId
       })
 
       optionValuesList.append(template)
@@ -75,11 +75,11 @@ function initProductActions () {
           }).trim()
         )
         valuesSelect.optionValueAutocomplete({
-          productId: productId,
-          productSelect: productSelect,
+          productId,
+          productSelect,
           multiple: true,
-          values: values,
-          clearSelection: productId != productSelect.val()
+          values,
+          clearSelection: productId !== productSelect.val()
         })
       })
     }
@@ -123,11 +123,11 @@ function initProductActions () {
 
     const originalTiers = $('.js-original-tiers').data('original-tiers')
     $.each(originalTiers, function (base, value) {
-      const fieldName = tierInputNameTemplate({ base: base }).trim()
+      const fieldName = tierInputNameTemplate({ base }).trim()
       $('.js-tiers').append(
         tierFieldsTemplate({
           baseField: { value: base },
-          valueField: { name: fieldName, value: value }
+          valueField: { name: fieldName, value }
         })
       )
     })
@@ -188,16 +188,16 @@ function initProductActions () {
       .off('click')
       .click(function () {
         const $container = $(this).parents('.promotion_action')
-        const product_name = $container
+        const productName = $container
           .find('input[name="add_product_name"]')
           .val()
-        const variant_id = $container.find('input[name="add_variant_id"]').val()
+        const variantId = $container.find('input[name="add_variant_id"]').val()
         const quantity = $container.find('input[name="add_quantity"]').val()
-        if (variant_id) {
+        if (variantId) {
           // Add to the table
           const newRow =
             '<tr><td>' +
-            product_name +
+            productName +
             '</td><td>' +
             quantity +
             '</td><td><i class="icon icon-cancel"></i></td></tr>'
@@ -216,9 +216,9 @@ function initProductActions () {
 }
 
 document.addEventListener('spree:load', function () {
-  const promotion_form = $('form.edit_promotion')
+  const promotionForm = $('form.edit_promotion')
 
-  if (promotion_form.length) {
+  if (promotionForm.length) {
     initProductActions()
   }
 })

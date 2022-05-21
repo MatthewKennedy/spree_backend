@@ -40,8 +40,7 @@ const populateSelectOptionsFromApi = function (params) {
 }
 
 const handleErrors = function (response) {
-  if (!response.ok)
-    throw new Error(response.status + ': ' + response.statusText)
+  if (!response.ok) throw new Error(response.status + ': ' + response.statusText)
 
   return response.json()
 }

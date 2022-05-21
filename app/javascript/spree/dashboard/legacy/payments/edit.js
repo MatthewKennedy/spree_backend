@@ -11,9 +11,8 @@ document.addEventListener('spree:load', function () {
     child.__super__ = parent.prototype
     return child
   }
-  var hasProp = {}.hasOwnProperty
-  let EditPaymentView, Payment, PaymentView, ShowPaymentView
-  Payment = (function () {
+  const hasProp = {}.hasOwnProperty
+  const Payment = (function () {
     function Payment (id) {
       this.url = SpreeDash.routes.payments_api_v2 + '/' + id
       this.json = $.ajax({
@@ -79,7 +78,7 @@ document.addEventListener('spree:load', function () {
     return Payment
   })()
 
-  PaymentView = (function () {
+  const PaymentView = (function () {
     function PaymentView ($el1, payment1) {
       this.$el = $el1
       this.payment = payment1
@@ -116,7 +115,7 @@ document.addEventListener('spree:load', function () {
           title: SpreeDash.translations[action]
         })
         .data({
-          action: action
+          action
         })
         .one({
           click: function (event) {
@@ -144,7 +143,7 @@ document.addEventListener('spree:load', function () {
 
     return PaymentView
   })()
-  ShowPaymentView = (function (superClass) {
+  const ShowPaymentView = (function (superClass) {
     extend(ShowPaymentView, superClass)
 
     function ShowPaymentView () {
@@ -189,7 +188,7 @@ document.addEventListener('spree:load', function () {
 
     return ShowPaymentView
   })(PaymentView)
-  EditPaymentView = (function (superClass) {
+  const EditPaymentView = (function (superClass) {
     extend(EditPaymentView, superClass)
 
     function EditPaymentView () {

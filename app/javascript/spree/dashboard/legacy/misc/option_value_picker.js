@@ -30,7 +30,7 @@ $.fn.optionValueAutocomplete = function (options) {
   }
 
   this.select2({
-    multiple: multiple,
+    multiple,
     minimumInputLength: 1,
     ajax: {
       url: SpreeDash.routes.option_values_api_v2,

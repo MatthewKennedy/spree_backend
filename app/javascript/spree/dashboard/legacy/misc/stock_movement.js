@@ -25,7 +25,7 @@ document.addEventListener('spree:load', function () {
             variant: 'name,sku,options_text,images'
           },
           per_page: 50,
-          page: page
+          page
         }
       },
       headers: SpreeDash.apiV2Authentication(),
@@ -54,7 +54,7 @@ document.addEventListener('spree:load', function () {
         const more = page * 50 < data.count
         return {
           results: data.stock_items,
-          more: more
+          more
         }
       }
     },
@@ -72,7 +72,7 @@ document.addEventListener('spree:load', function () {
       }
       return $(
         variantTemplate({
-          variant: variant
+          variant
         })
       )
     },
