@@ -21,11 +21,7 @@ export default [
       inlineDynamicImports: true,
       sourcemap: false
     },
-    plugins: [
-      resolve(),
-      commonjs(),
-      terser(terserOptions)
-    ]
+    plugins: [resolve(), commonjs(), terser(terserOptions)]
   },
 
   {
@@ -37,10 +33,6 @@ export default [
       inlineDynamicImports: true,
       sourcemap: false
     },
-    plugins: [
-      resolve(),
-      commonjs(),
-      terser(terserOptions)
-    ]
+    plugins: [resolve(), commonjs(), terser(terserOptions)]
   }
 ]

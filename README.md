@@ -4,7 +4,7 @@
 
 # Spree Admin Dashboard
 
-This is the default Spree Admin Dashboard. 
+This is the default Spree Admin Dashboard.
 
 ## Developed by
 
@@ -14,26 +14,26 @@ This is the default Spree Admin Dashboard.
 
 ## Key Features
 
-* Mobile-first - works great on any device!
-* Manage Product Catalog, Orders, Customers, Returns, Shipments and all other eCommerce crucial activities
-* Multi-Store support out of the box
-* Built-in CMS for Pages and Navigation
-* Easily add 3rd party integrations such as Payments, Tax calculation services and Shipping couriers
-* Easy customization to suit your needs
-* Modern tech-stack based on [Hotwire](https://hotwired.dev/) (Stimulus & Turbo)
+- Mobile-first - works great on any device!
+- Manage Product Catalog, Orders, Customers, Returns, Shipments and all other eCommerce crucial activities
+- Multi-Store support out of the box
+- Built-in CMS for Pages and Navigation
+- Easily add 3rd party integrations such as Payments, Tax calculation services and Shipping couriers
+- Easy customization to suit your needs
+- Modern tech-stack based on [Hotwire](https://hotwired.dev/) (Stimulus & Turbo)
 
 ## Demo
 
 Fire up your own instance in the cloud:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/spree/spree_starter) <a href="https://render.com/deploy?repo=https://github.com/spree/spree_starter/tree/main">
-  <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height=32>
+<img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height=32>
 </a>
 
 Default credentials:
 
-* login: `spree@example.com`
-* password: `spree123`
+- login: `spree@example.com`
+- password: `spree123`
 
 ## Installation
 
@@ -43,7 +43,7 @@ You can also [add Spree and Admin Dashboard to an existing Ruby on Rails applica
 
 ## Documentation
 
-* [Developer Documentation](https://dev-docs.spreecommerce.org/)
+- [Developer Documentation](https://dev-docs.spreecommerce.org/)
 
 ## Contributing
 
@@ -54,7 +54,6 @@ Please review the [Spree Contributing Guide](https://dev-docs.spreecommerce.org/
 ### Development Setup (JavaScript)
 
 When working on the JavaScript in Spree Dashboard locally, you will need to yarn link your local development copy of `@spree/dashboard`, to the Rails app you are working in, so that your changes are picked up and represented live in the view.
-
 
 From the root of `spree_backend` run:
 
@@ -68,7 +67,7 @@ Next, from the root of the Rails app you are using to develop run:
 yarn link "@spree/dashboard"
 ```
 
-Once your local Spree Dashboard is linked with the Rails app you are using for development you will need two terminal tabs open, 
+Once your local Spree Dashboard is linked with the Rails app you are using for development you will need two terminal tabs open,
 one at the root of your Rails app, and one at the root of `spree_backend`.
 
 In the terminal window at the root of the `spree_backend` run:
@@ -82,6 +81,7 @@ And from the Rails app you are using to run Spree and develop in run the followi
 ```bash
 bin/dev
 ```
+
 Any changes made to the JavaScript files in `spree_backend` will be processed by yarn and picked up in the Rails app you are running for development.
 
 ### Local setup
@@ -90,11 +90,11 @@ Any changes made to the JavaScript files in `spree_backend` will be processed by
 2. Clone the repository
 3. Create test application:
 
-    ```bash
-    cd spree_backend
-    bundle install
-    bundle exec rake test_app
-    ```
+   ```bash
+   cd spree_backend
+   bundle install
+   bundle exec rake test_app
+   ```
 
 ### Running tests
 
@@ -116,9 +116,8 @@ bundle exec rspec spec/features/admin/users_spec.rb
 brew install chromedriver
 ```
 
-
 ## License
 
 Spree Admin Dashboard is released under the [New BSD License](https://github.com/spree/spree_backend/blob/main/license.md).
 
-[spark]:https://sparksolutions.co?utm_source=github
+[spark]: https://sparksolutions.co?utm_source=github
