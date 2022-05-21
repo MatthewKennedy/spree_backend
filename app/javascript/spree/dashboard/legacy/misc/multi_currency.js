@@ -1,26 +1,26 @@
 /* eslint-disable no-undef */
 
-document.addEventListener("spree:load", function() {
-  $.expr[":"].Contains = function (a, i, m) {
+document.addEventListener('spree:load', function () {
+  $.expr[':'].Contains = function (a, i, m) {
     return (
-      (a.textContent || a.innerText || "")
+      (a.textContent || a.innerText || '')
         .toUpperCase()
         .indexOf(m[3].toUpperCase()) >= 0
     )
   }
 
   function listFilter (list) {
-    var input = $("#variant-price-search")
+    const input = $('#variant-price-search')
 
     $(input)
       .change(function () {
-        var filter = $(this).val()
+        const filter = $(this).val()
         if (filter) {
-          $(list).find(".panel-title:not(:Contains(" + filter + "))").parent().hide()
-          $(list).find(".panel-title:Contains(" + filter + ")").parent().show()
+          $(list).find('.panel-title:not(:Contains(' + filter + '))').parent().hide()
+          $(list).find('.panel-title:Contains(' + filter + ')').parent().show()
         } else {
           $(list)
-            .find(".panel")
+            .find('.panel')
             .parent()
             .show()
         }
@@ -31,7 +31,7 @@ document.addEventListener("spree:load", function() {
       })
   }
 
-  document.addEventListener("spree:load", function() {
-    listFilter($("#variant-prices"))
+  document.addEventListener('spree:load', function () {
+    listFilter($('#variant-prices'))
   })
 })

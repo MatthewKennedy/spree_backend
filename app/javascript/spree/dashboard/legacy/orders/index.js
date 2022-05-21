@@ -1,1 +1,1 @@
-import "./edit"
+import './edit'

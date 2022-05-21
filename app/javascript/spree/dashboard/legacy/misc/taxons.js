@@ -1,17 +1,17 @@
-import Sortable from "sortablejs"
+import Sortable from 'sortablejs'
 
-document.addEventListener("spree:load", function() {
-  window.productTemplate = Handlebars.compile($("#product_template").text())
-  var taxonProducts = $("#taxon_products")
-  var taxonId = $("#taxon_id")
+document.addEventListener('spree:load', function () {
+  window.productTemplate = Handlebars.compile($('#product_template').text())
+  const taxonProducts = $('#taxon_products')
+  const taxonId = $('#taxon_id')
 
-  var el = document.getElementById("taxon_products")
+  const el = document.getElementById('taxon_products')
   if (el) {
     Sortable.create(el, {
-      handle: ".sort-handle",
-      ghostClass: "moving-this",
+      handle: '.sort-handle',
+      ghostClass: 'moving-this',
       animation: 550,
-      easing: "cubic-bezier(1, 0, 0, 1)",
+      easing: 'cubic-bezier(1, 0, 0, 1)',
       swapThreshold: 0.9,
       forceFallback: true,
       onEnd: function (evt) {
@@ -20,17 +20,17 @@ document.addEventListener("spree:load", function() {
     })
   }
 
-  function handleClassificationReposition(evt) {
-    var classificationId = evt.item.getAttribute("data-classification-id")
-    var data = {
+  function handleClassificationReposition (evt) {
+    const classificationId = evt.item.getAttribute('data-classification-id')
+    const data = {
       classification: {
         position: parseInt(evt.newIndex, 10) + 1
       }
     }
-    var requestData = {
-      uri: SpreeDash.routes.classifications_api_v2 + "/" + classificationId,
-      method: "PATCH",
-      dataBody: data,
+    const requestData = {
+      uri: SpreeDash.routes.classifications_api_v2 + '/' + classificationId,
+      method: 'PATCH',
+      dataBody: data
     }
     SpreeDash.fetchRequestUtil(requestData)
   }
@@ -42,7 +42,7 @@ document.addEventListener("spree:load", function() {
       multiple: false,
       ajax: {
         url: SpreeDash.routes.taxons_api_v2,
-        datatype: "json",
+        datatype: 'json',
         headers: SpreeDash.apiV2Authentication(),
         data: function (params, page) {
           return {
@@ -54,9 +54,9 @@ document.addEventListener("spree:load", function() {
           }
         },
         processResults: function (data, page) {
-          var more = page < data.meta.total_pages
+          const more = page < data.meta.total_pages
 
-          var results = data.data.map(function (obj) {
+          const results = data.data.map(function (obj) {
             return {
               id: obj.id,
               text: obj.attributes.pretty_name
@@ -71,7 +71,7 @@ document.addEventListener("spree:load", function() {
           }
         }
       }
-    }).on("select2:select", function (e) {
+    }).on('select2:select', function (e) {
       $.ajax({
         url: SpreeDash.routes.classifications_api_v2,
         headers: SpreeDash.apiV2Authentication(),
@@ -79,35 +79,35 @@ document.addEventListener("spree:load", function() {
           filter: {
             taxon_id_eq: e.params.data.id
           },
-          include: "product.images",
+          include: 'product.images',
           per_page: 150,
-          sort: "position"
+          sort: 'position'
         }
       }).done(function (json) {
         taxonProducts.empty()
 
         if (json.meta.total_count === 0) {
-          return taxonProducts.html("<p class=\"text-center w-100 p-4\">" + SpreeDash.translations.no_results + "</p>")
+          return taxonProducts.html('<p class="text-center w-100 p-4">' + SpreeDash.translations.no_results + '</p>')
         } else {
-          var results = []
+          const results = []
 
           json.data.forEach(function (classification) {
-            var productId = classification.relationships.product.data.id.toString()
+            const productId = classification.relationships.product.data.id.toString()
 
-            var product = json.included.find(function(included) {
-              if (included.type === "product" && included.id === productId) {
+            const product = json.included.find(function (included) {
+              if (included.type === 'product' && included.id === productId) {
                 return included
               }
             })
 
             if (product && classification) {
-              var imageUrl = null
+              let imageUrl = null
 
               if (product.relationships.images.data.length > 0) {
-                var imageId = product.relationships.images.data[0].id
+                const imageId = product.relationships.images.data[0].id
 
-                var image = json.included.find(function(included) {
-                  if (included.type === "image" && included.id === imageId) {
+                const image = json.included.find(function (included) {
+                  if (included.type === 'image' && included.id === imageId) {
                     return included
                   }
                 })
@@ -131,13 +131,13 @@ document.addEventListener("spree:load", function() {
     })
   }
 
-  taxonProducts.on("click", ".js-delete-product", function (e) {
-    var product = $(this).parents(".product")
-    var classificationId = product.data("classification-id")
+  taxonProducts.on('click', '.js-delete-product', function (e) {
+    const product = $(this).parents('.product')
+    const classificationId = product.data('classification-id')
     $.ajax({
-      url: SpreeDash.routes.classifications_api_v2 + "/" + classificationId.toString(),
+      url: SpreeDash.routes.classifications_api_v2 + '/' + classificationId.toString(),
       headers: SpreeDash.apiV2Authentication(),
-      type: "DELETE"
+      type: 'DELETE'
     }).done(function () {
       product.fadeOut(400, function (e) {
         product.remove()
@@ -145,5 +145,5 @@ document.addEventListener("spree:load", function() {
     })
   })
 
-  $(".variant_autocomplete").variantAutocomplete()
+  $('.variant_autocomplete').variantAutocomplete()
 })

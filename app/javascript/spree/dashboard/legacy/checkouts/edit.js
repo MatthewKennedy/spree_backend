@@ -1,18 +1,18 @@
-import Deserializer from "jsonapi-serializer"
+import Deserializer from 'jsonapi-serializer'
 
-function clearAddressFields(addressKinds) {
+function clearAddressFields (addressKinds) {
   if (addressKinds === undefined) {
-    addressKinds = ["ship", "bill"]
+    addressKinds = ['ship', 'bill']
   }
-  addressKinds.forEach(function(addressKind) {
-    SpreeDash.ADDRESS_FIELDS.forEach(function(field) {
-      $("#order_" + addressKind + "_address_attributes_" + field).val("")
+  addressKinds.forEach(function (addressKind) {
+    SpreeDash.ADDRESS_FIELDS.forEach(function (field) {
+      $('#order_' + addressKind + '_address_attributes_' + field).val('')
     })
   })
 }
 
-function formatCustomerResult(customer) {
-  var escapedResult = window.customerTemplate({
+function formatCustomerResult (customer) {
+  const escapedResult = window.customerTemplate({
     customer: customer,
     bill_address: customer.bill_address,
     ship_address: customer.ship_address
@@ -20,76 +20,76 @@ function formatCustomerResult(customer) {
   return $(escapedResult)
 }
 
-function formatCustomerAddress(address, kind) {
-  $("#order_" + kind + "_address_attributes_firstname").val(address.firstname)
-  $("#order_" + kind + "_address_attributes_lastname").val(address.lastname)
-  $("#order_" + kind + "_address_attributes_address1").val(address.address1)
-  $("#order_" + kind + "_address_attributes_company").val(address.company)
-  $("#order_" + kind + "_address_attributes_address2").val(address.address2)
-  $("#order_" + kind + "_address_attributes_city").val(address.city)
-  $("#order_" + kind + "_address_attributes_zipcode").val(address.zipcode)
-  $("#order_" + kind + "_address_attributes_phone").val(address.phone)
-  $("#order_" + kind + "_address_attributes_phone").val(address.phone)
-  $("#order_" + kind + "_address_attributes_country_id").val(address.country.id)
-  $("#order_" + kind + "_address_attributes_country_id").trigger("change")
+function formatCustomerAddress (address, kind) {
+  $('#order_' + kind + '_address_attributes_firstname').val(address.firstname)
+  $('#order_' + kind + '_address_attributes_lastname').val(address.lastname)
+  $('#order_' + kind + '_address_attributes_address1').val(address.address1)
+  $('#order_' + kind + '_address_attributes_company').val(address.company)
+  $('#order_' + kind + '_address_attributes_address2').val(address.address2)
+  $('#order_' + kind + '_address_attributes_city').val(address.city)
+  $('#order_' + kind + '_address_attributes_zipcode').val(address.zipcode)
+  $('#order_' + kind + '_address_attributes_phone').val(address.phone)
+  $('#order_' + kind + '_address_attributes_phone').val(address.phone)
+  $('#order_' + kind + '_address_attributes_country_id').val(address.country.id)
+  $('#order_' + kind + '_address_attributes_country_id').trigger('change')
 
-  var stateSelect = $("#order_" + kind + "_address_attributes_state_id")
+  const stateSelect = $('#order_' + kind + '_address_attributes_state_id')
 
-  SpreeDash.updateAddressState(kind.charAt(0), function() {
+  SpreeDash.updateAddressState(kind.charAt(0), function () {
     if (address.state) {
-      stateSelect.val(address.state.id).trigger("change")
+      stateSelect.val(address.state.id).trigger('change')
     }
   })
 }
 
-function formatCustomerSelection(customer) {
-  $("#order_email").val(customer.email)
-  $("#order_user_id").val(customer.id)
-  $("#guest_checkout_true").prop("checked", false)
-  $("#guest_checkout_false").prop("checked", true)
-  $("#guest_checkout_false").prop("disabled", false)
+function formatCustomerSelection (customer) {
+  $('#order_email').val(customer.email)
+  $('#order_user_id').val(customer.id)
+  $('#guest_checkout_true').prop('checked', false)
+  $('#guest_checkout_false').prop('checked', true)
+  $('#guest_checkout_false').prop('disabled', false)
 
-  var billAddress = customer.bill_address
-  var shipAddress = customer.ship_address
+  const billAddress = customer.bill_address
+  const shipAddress = customer.ship_address
 
   if (billAddress) {
-    formatCustomerAddress(billAddress, "bill")
+    formatCustomerAddress(billAddress, 'bill')
   } else {
-    clearAddressFields(["bill"])
+    clearAddressFields(['bill'])
   }
 
   if (shipAddress) {
-    formatCustomerAddress(shipAddress, "ship")
+    formatCustomerAddress(shipAddress, 'ship')
   } else {
-    clearAddressFields(["ship"])
+    clearAddressFields(['ship'])
   }
 
   return customer.email
 }
 
-$.fn.customerAutocomplete = function() {
-  var jsonApiUsers = {}
+$.fn.customerAutocomplete = function () {
+  let jsonApiUsers = {}
 
   this.select2({
     minimumInputLength: 3,
     placeholder: SpreeDash.translations.choose_a_customer,
     ajax: {
       url: SpreeDash.routes.users_api_v2,
-      datatype: "json",
+      datatype: 'json',
       headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
         return {
           filter: {
-            "m": "or",
+            m: 'or',
             email_i_cont: params.term,
             addresses_firstname_start: params.term,
             addresses_lastname_start: params.term
           },
-          include: "ship_address.country,ship_address.state,bill_address.country,bill_address.state"
+          include: 'ship_address.country,ship_address.state,bill_address.country,bill_address.state'
         }
       },
-      success: function(data) {
-        new Deserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, users) {
+      success: function (data) {
+        new Deserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, users) {
           jsonApiUsers = users
         })
       },
@@ -98,27 +98,27 @@ $.fn.customerAutocomplete = function() {
       }
     },
     templateResult: formatCustomerResult
-  }).on("select2:select", function (e) {
-    var data = e.params.data;
+  }).on('select2:select', function (e) {
+    const data = e.params.data
     formatCustomerSelection(data)
   })
 }
 
-document.addEventListener("spree:load", function() {
-  $("#customer_search").customerAutocomplete()
+document.addEventListener('spree:load', function () {
+  $('#customer_search').customerAutocomplete()
 
-  if ($("#customer_autocomplete_template").length > 0) {
-    window.customerTemplate = Handlebars.compile($("#customer_autocomplete_template").text())
+  if ($('#customer_autocomplete_template').length > 0) {
+    window.customerTemplate = Handlebars.compile($('#customer_autocomplete_template').text())
   }
 
   // Handle Billing Shipping Address
-  var orderUseBillingInput = $("input#order_use_billing")
+  const orderUseBillingInput = $('input#order_use_billing')
 
-  var orderUseBilling = function () {
-    if (!orderUseBillingInput.is(":checked")) {
-      $("#shipping").show()
+  const orderUseBilling = function () {
+    if (!orderUseBillingInput.is(':checked')) {
+      $('#shipping').show()
     } else {
-      $("#shipping").hide()
+      $('#shipping').hide()
     }
   }
 
@@ -129,10 +129,10 @@ document.addEventListener("spree:load", function() {
   orderUseBillingInput.click(orderUseBilling)
 
   // If guest checkout clear fields
-  $("#guest_checkout_true").change(function () {
-    $("#customer_search").val("")
-    $("#order_user_id").val("")
-    $("#order_email").val("")
+  $('#guest_checkout_true').change(function () {
+    $('#customer_search').val('')
+    $('#order_user_id').val('')
+    $('#order_email').val('')
     clearAddressFields()
   })
 })

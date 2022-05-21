@@ -1,8 +1,8 @@
-import Swal from "sweetalert2/dist/sweetalert2"
-import DOMPurify from "dompurify"
+import Swal from 'sweetalert2/dist/sweetalert2'
+import DOMPurify from 'dompurify'
 
-document.addEventListener("spree:load", function() {
-  const alertEl = document.querySelectorAll("[data-alert-type]")
+document.addEventListener('spree:load', function () {
+  const alertEl = document.querySelectorAll('[data-alert-type]')
 
   if (!alertEl) return
 
@@ -14,29 +14,29 @@ document.addEventListener("spree:load", function() {
   })
 })
 
-export function showFlash(type, message) {
+export function showFlash (type, message) {
   let sanitizedType = DOMPurify.sanitize(type)
   const sanitizedMessage = DOMPurify.sanitize(message)
 
-  if (sanitizedType === "notice") sanitizedType = "info"
+  if (sanitizedType === 'notice') sanitizedType = 'info'
 
   // Set up Swal toast alert defaults
   const Toast = Swal.mixin({
     toast: true,
-    position: "bottom",
+    position: 'bottom',
     showConfirmButton: false,
     showCloseButton: true,
     timer: 4500,
     timerProgressBar: false,
     showClass: {
-      popup: "animate__animated animate__fadeInUp animate__faster",
-      backdrop: "-",
-      icon: "-"
+      popup: 'animate__animated animate__fadeInUp animate__faster',
+      backdrop: '-',
+      icon: '-'
     },
     hideClass: {
-      popup: "animate__animated animate__fadeOutDown animate__faster",
-      backdrop: "-",
-      icon: "-"
+      popup: 'animate__animated animate__fadeOutDown animate__faster',
+      backdrop: '-',
+      icon: '-'
     }
   })
 
@@ -49,20 +49,20 @@ export function showFlash(type, message) {
 }
 
 function appendToFlashAlertsContainer (message, type) {
-  if (type === "info") type = "notice"
+  if (type === 'info') type = 'notice'
 
-  const parnetNode = document.querySelector("#FlashAlertsContainer")
-  const node = document.createElement("SPAN")
+  const parnetNode = document.querySelector('#FlashAlertsContainer')
+  const node = document.createElement('SPAN')
   const textNode = document.createTextNode(message)
 
   // Only the most recent alert should be left in the #FlashAlertsContainer.
-  parnetNode.innerHTML = ""
+  parnetNode.innerHTML = ''
 
-  node.classList.add("d-none")
-  node.setAttribute("data-alert-type", type)
+  node.classList.add('d-none')
+  node.setAttribute('data-alert-type', type)
   node.appendChild(textNode)
 
   parnetNode.appendChild(node)
 }
 
-if (!window.SpreeDash.showFlash)  { window.SpreeDash.showFlash = showFlash }
+if (!window.SpreeDash.showFlash) { window.SpreeDash.showFlash = showFlash }

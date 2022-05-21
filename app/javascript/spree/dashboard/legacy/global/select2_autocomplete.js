@@ -21,23 +21,23 @@
 //  EXAMPLE:
 //  data-autocomplete-additional-url-params-value="filter[type_not_eq]=Spree::Cms::Pages::Homepage"
 
-document.addEventListener("spree:load", function() {
+document.addEventListener('spree:load', function () {
   loadAutoCompleteParams()
 })
 
 // we need to delete select2 instances before document is saved to cache
 // https://stackoverflow.com/questions/36497723/select2-with-ajax-gets-initialized-several-times-with-rails-turbolinks-events
-document.addEventListener("turbo:before-cache", function() {
-  const select2Autocompletes = document.querySelectorAll("select[data-autocomplete-url-value]")
-  select2Autocompletes.forEach(element => $(element).select2("destroy"))
+document.addEventListener('turbo:before-cache', function () {
+  const select2Autocompletes = document.querySelectorAll('select[data-autocomplete-url-value]')
+  select2Autocompletes.forEach(element => $(element).select2('destroy'))
 })
 
-function loadAutoCompleteParams() {
-  const select2Autocompletes = document.querySelectorAll("select[data-autocomplete-url-value]")
+function loadAutoCompleteParams () {
+  const select2Autocompletes = document.querySelectorAll('select[data-autocomplete-url-value]')
   select2Autocompletes.forEach(element => buildParamsFromDataAttrs(element))
 }
 
-function buildParamsFromDataAttrs(element) {
+function buildParamsFromDataAttrs (element) {
   $(element).select2Autocomplete({
     apiUrl: SpreeDash.routes[element.dataset.autocompleteUrlValue],
     placeholder: element.dataset.autocompletePlaceholderValue,
@@ -52,7 +52,7 @@ function buildParamsFromDataAttrs(element) {
   })
 }
 
-$.fn.select2Autocomplete = function(params) {
+$.fn.select2Autocomplete = function (params) {
   let apiUrl = null
   let returnedFields
 
@@ -61,9 +61,9 @@ $.fn.select2Autocomplete = function(params) {
   const select2placeHolder = params.placeholder || SpreeDash.translations.search
   const select2Multiple = params.multiple || false
   const select2allowClear = params.allow_clear || false
-  const returnAttribute = params.return_attribute || "name"
+  const returnAttribute = params.return_attribute || 'name'
   const minimumInput = params.minimum_input || 3
-  const searchQuery = params.search_query || "name_i_cont"
+  const searchQuery = params.search_query || 'name_i_cont'
   const customReturnId = params.custom_return_id || null
   const additionalUrlParams = params.additional_url_params || null
   const DebugMode = params.debug_mode || null
@@ -87,20 +87,20 @@ $.fn.select2Autocomplete = function(params) {
     apiUrl = `${params.apiUrl}?${sparseFields}`
   }
 
-  if (DebugMode != null) console.log("Request URL:" + apiUrl)
+  if (DebugMode != null) console.log('Request URL:' + apiUrl)
 
   //
   // Format the returned values.
-  function formatList(values) {
+  function formatList (values) {
     if (customReturnId) {
-      return values.map(function(obj) {
+      return values.map(function (obj) {
         return {
           id: obj.attributes[customReturnId],
           text: obj.attributes[returnAttribute]
         }
       })
     } else {
-      return values.map(function(obj) {
+      return values.map(function (obj) {
         return {
           id: obj.id,
           text: obj.attributes[returnAttribute]
@@ -119,14 +119,14 @@ $.fn.select2Autocomplete = function(params) {
     ajax: {
       url: apiUrl,
       headers: SpreeDash.apiV2Authentication(),
-      data: function(params) {
+      data: function (params) {
         return {
           filter: {
             [searchQuery]: params.term
           }
         }
       },
-      processResults: function(json) {
+      processResults: function (json) {
         if (DebugMode != null) console.log(json)
 
         return {

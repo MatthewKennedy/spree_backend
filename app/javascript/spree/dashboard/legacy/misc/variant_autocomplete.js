@@ -1,5 +1,5 @@
-document.addEventListener("SpreeDash:load", function() {
-  var variantAutocompleteTemplate = $('#variant_autocomplete_template')
+document.addEventListener('SpreeDash:load', function () {
+  const variantAutocompleteTemplate = $('#variant_autocomplete_template')
   if (variantAutocompleteTemplate.length > 0) {
     window.variantTemplate = Handlebars.compile(variantAutocompleteTemplate.text())
     window.variantStockTemplate = Handlebars.compile($('#variant_autocomplete_stock_template').text())
@@ -7,12 +7,12 @@ document.addEventListener("SpreeDash:load", function() {
   }
 })
 
-function formatVariantResult(variant) {
+function formatVariantResult (variant) {
   if (variant.loading) {
     return variant.text
   }
 
-  if (variant['images'][0] !== undefined && variant['images'][0].transformed_url !== undefined) {
+  if (variant.images[0] !== undefined && variant.images[0].transformed_url !== undefined) {
     variant.image = variant.images[0].transformed_url
   }
   return $(variantTemplate({
@@ -21,7 +21,6 @@ function formatVariantResult(variant) {
 }
 
 $.fn.variantAutocomplete = function () {
-
   // deal with initSelection
   return this.select2({
     placeholder: SpreeDash.translations.variant_placeholder,
@@ -31,7 +30,7 @@ $.fn.variantAutocomplete = function () {
       url: SpreeDash.url(SpreeDash.routes.variants_api_v2),
       dataType: 'json',
       data: function (params) {
-        var query = {
+        const query = {
           filter: {
             search_by_product_name_or_sku: params.term
           },
@@ -41,11 +40,11 @@ $.fn.variantAutocomplete = function () {
           }
         }
 
-        return query;
+        return query
       },
       headers: SpreeDash.apiV2Authentication(),
-      success: function(data) {
-        var JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
+      success: function (data) {
+        const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
         new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
           window.variants = variants
         })
@@ -55,13 +54,12 @@ $.fn.variantAutocomplete = function () {
       }
     },
     templateResult: formatVariantResult,
-    templateSelection: function(variant) {
-      if (!!variant.options_text) {
+    templateSelection: function (variant) {
+      if (variant.options_text) {
         return variant.name + '(' + variant.options_text + ')'
       } else {
         return variant.name
       }
     }
   })
-
 }

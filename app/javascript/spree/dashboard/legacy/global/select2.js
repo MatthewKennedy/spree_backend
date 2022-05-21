@@ -1,59 +1,59 @@
-import select2 from "select2"
+import select2 from 'select2'
 
 select2($)
 
 // we need to delete select2 instances before document is saved to cache
 // https://stackoverflow.com/questions/36497723/select2-with-ajax-gets-initialized-several-times-with-rails-turbolinks-events
-document.addEventListener("turbo:before-cache", function() {
-  $("select.select2").select2("destroy")
-  $("select.select2-clear").select2("destroy")
+document.addEventListener('turbo:before-cache', function () {
+  $('select.select2').select2('destroy')
+  $('select.select2-clear').select2('destroy')
 })
 
-document.addEventListener("spree:load", function() {
+document.addEventListener('spree:load', function () {
   // Initiate a standard Select2 on any select element with the class .select2
   // Remember to add a place holder in the HTML as needed.
-  $("select.select2").select2({})
+  $('select.select2').select2({})
 
   // Initiate a Select2 with the option to clear, on any select element with the class .select2-clear
   // Set: include_blank: true in the ERB.
   // A placeholder is auto-added here as it is required to clear the Select2.
-  $("select.select2-clear").select2({
+  $('select.select2-clear').select2({
     placeholder: SpreeDash.translations.select_an_option,
     allowClear: true
   })
 })
 
 $.fn.addSelect2Options = function (data) {
-  var select = this
+  const select = this
 
-  function appendOption(select, data) {
-    var option = null
+  function appendOption (select, data) {
+    let option = null
     option = new Option(data.attributes.name, data.id, true, true)
 
-    select.append(option).trigger("change")
+    select.append(option).trigger('change')
   }
 
   if (Array.isArray(data)) {
-    data.map(function(row) {
+    data.map(function (row) {
       appendOption(select, row)
     })
   } else {
     appendOption(select, data)
   }
   select.trigger({
-    type: "select2:select",
+    type: 'select2:select',
     params: {
       data: data
     }
   })
 }
 
-$.fn.select2.defaults.set("width", "style")
-$.fn.select2.defaults.set("dropdownAutoWidth", false)
-$.fn.select2.defaults.set("theme", "bootstrap-5")
+$.fn.select2.defaults.set('width', 'style')
+$.fn.select2.defaults.set('dropdownAutoWidth', false)
+$.fn.select2.defaults.set('theme', 'bootstrap-5')
 
-function formatSelect2Options(data) {
-  var results = data.data.map(function (obj) {
+function formatSelect2Options (data) {
+  const results = data.data.map(function (obj) {
     return {
       id: obj.id,
       text: obj.attributes.name

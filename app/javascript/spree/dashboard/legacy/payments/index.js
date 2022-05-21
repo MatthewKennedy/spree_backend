@@ -1,2 +1,2 @@
-import "./edit"
-import "./new"
+import './edit'
+import './new'

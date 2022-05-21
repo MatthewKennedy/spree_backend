@@ -1,7 +1,7 @@
 $.fn.userAutocomplete = function () {
-  "use strict"
+  'use strict'
 
-  function formatUserList(values) {
+  function formatUserList (values) {
     return values.map(function (obj) {
       return {
         id: obj.id,
@@ -15,7 +15,7 @@ $.fn.userAutocomplete = function () {
     minimumInputLength: 1,
     ajax: {
       url: SpreeDash.routes.users_api_v2,
-      dataType: "json",
+      dataType: 'json',
       headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
         return {
@@ -24,7 +24,7 @@ $.fn.userAutocomplete = function () {
           }
         }
       },
-      processResults: function(data) {
+      processResults: function (data) {
         return {
           results: formatUserList(data.data)
         }
@@ -33,6 +33,6 @@ $.fn.userAutocomplete = function () {
   })
 }
 
-document.addEventListener("spree:load", function() {
-  $(".user_picker").userAutocomplete()
+document.addEventListener('spree:load', function () {
+  $('.user_picker').userAutocomplete()
 })

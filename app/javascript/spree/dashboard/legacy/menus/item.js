@@ -1,26 +1,26 @@
-document.addEventListener("spree:load", function() {
-  const menuItemType = $("#menu_item_item_type").select2()
+document.addEventListener('spree:load', function () {
+  const menuItemType = $('#menu_item_item_type').select2()
 
   updateContainerMessage()
 
-  menuItemType.on("change", function() {
+  menuItemType.on('change', function () {
     updateContainerMessage()
-  });
+  })
 
   function updateContainerMessage () {
-    const linkSettingsPanel = document.getElementById("LinkSettings")
+    const linkSettingsPanel = document.getElementById('LinkSettings')
 
     if (!linkSettingsPanel) return
 
-    const selectedLinkType = $("#menu_item_item_type").val()
-    const usingConainerMessage = document.getElementById("usingContainerInfo")
+    const selectedLinkType = $('#menu_item_item_type').val()
+    const usingConainerMessage = document.getElementById('usingContainerInfo')
 
-    if (selectedLinkType === "Container") {
-      linkSettingsPanel.classList.add("d-none")
-      usingConainerMessage.classList.remove("d-none")
+    if (selectedLinkType === 'Container') {
+      linkSettingsPanel.classList.add('d-none')
+      usingConainerMessage.classList.remove('d-none')
     } else {
-      linkSettingsPanel.classList.remove("d-none")
-      usingConainerMessage.classList.add("d-none")
+      linkSettingsPanel.classList.remove('d-none')
+      usingConainerMessage.classList.add('d-none')
     }
   }
 })

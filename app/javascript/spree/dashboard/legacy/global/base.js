@@ -1,4 +1,4 @@
-import Uri from "jsuri"
+import Uri from 'jsuri'
 
 const SpreeDash = {}
 if (!window.SpreeDash) { window.SpreeDash = SpreeDash }
@@ -12,31 +12,31 @@ SpreeDash.adminPath = function () {
 }
 
 SpreeDash.pathFor = function (path) {
-  var locationOrigin = (window.location.protocol + "//" + window.location.hostname) + (window.location.port ? ":" + window.location.port : "")
+  const locationOrigin = (window.location.protocol + '//' + window.location.hostname) + (window.location.port ? ':' + window.location.port : '')
 
-  return this.url("" + locationOrigin + (this.mountedAt()) + path, this.url_params).toString()
+  return this.url('' + locationOrigin + (this.mountedAt()) + path, this.url_params).toString()
 }
 
-SpreeDash.localizedPathFor = function(path) {
-  if (typeof (SPREE_LOCALE) !== "undefined" && typeof (SPREE_CURRENCY) !== "undefined") {
-    var fullUrl = new URL(SpreeDash.pathFor(path))
-    var params = fullUrl.searchParams
-    var pathName = fullUrl.pathname
+SpreeDash.localizedPathFor = function (path) {
+  if (typeof (SPREE_LOCALE) !== 'undefined' && typeof (SPREE_CURRENCY) !== 'undefined') {
+    const fullUrl = new URL(SpreeDash.pathFor(path))
+    const params = fullUrl.searchParams
+    let pathName = fullUrl.pathname
 
-    params.set("currency", SPREE_CURRENCY)
+    params.set('currency', SPREE_CURRENCY)
 
     if (pathName.match(/api\/v/)) {
-      params.set("locale", SPREE_LOCALE)
+      params.set('locale', SPREE_LOCALE)
     } else {
-      pathName = (this.mountedAt()) + SPREE_LOCALE + "/" + path
+      pathName = (this.mountedAt()) + SPREE_LOCALE + '/' + path
     }
-    return fullUrl.origin + pathName + "?" + params.toString()
+    return fullUrl.origin + pathName + '?' + params.toString()
   }
   return SpreeDash.pathFor(path)
 }
 
 SpreeDash.adminPathFor = function (path) {
-  return this.pathFor("" + (this.adminPath()) + path)
+  return this.pathFor('' + (this.adminPath()) + path)
 }
 
 SpreeDash.url = function (uri, query) {
@@ -52,12 +52,12 @@ SpreeDash.url = function (uri, query) {
 }
 
 SpreeDash.ajax = function (urlOrSettings, settings) {
-  var url
-  if (typeof urlOrSettings === "string") {
+  let url
+  if (typeof urlOrSettings === 'string') {
     return $.ajax(SpreeDash.url(urlOrSettings).toString(), settings)
   } else {
-    url = urlOrSettings["url"]
-    delete urlOrSettings["url"]
+    url = urlOrSettings.url
+    delete urlOrSettings.url
     return $.ajax(SpreeDash.url(url).toString(), urlOrSettings)
   }
 }

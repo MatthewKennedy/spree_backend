@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 
-$.fn.taxonAutocomplete = function() {
-  "use strict"
+$.fn.taxonAutocomplete = function () {
+  'use strict'
 
-  function formatTaxonList(values) {
+  function formatTaxonList (values) {
     return values.map(function (obj) {
       return {
         id: obj.id,
@@ -18,19 +18,19 @@ $.fn.taxonAutocomplete = function() {
     minimumInputLength: 2,
     ajax: {
       url: SpreeDash.routes.taxons_api_v2,
-      dataType: "json",
+      dataType: 'json',
       data: function (params) {
         return {
           filter: {
             name_cont: params.term
           },
           fields: {
-            taxon: "pretty_name"
+            taxon: 'pretty_name'
           }
         }
       },
       headers: SpreeDash.apiV2Authentication(),
-      processResults: function(data) {
+      processResults: function (data) {
         return {
           results: formatTaxonList(data.data)
         }
@@ -39,10 +39,10 @@ $.fn.taxonAutocomplete = function() {
   })
 }
 
-document.addEventListener("spree:load", function() {
-  var productTaxonSelector = document.getElementById("product_taxon_ids")
+document.addEventListener('spree:load', function () {
+  const productTaxonSelector = document.getElementById('product_taxon_ids')
   if (productTaxonSelector == null) return
-  if (productTaxonSelector.hasAttribute("data-autocomplete-url-value")) return
+  if (productTaxonSelector.hasAttribute('data-autocomplete-url-value')) return
 
-  $("#product_taxon_ids").taxonAutocomplete()
+  $('#product_taxon_ids').taxonAutocomplete()
 })

@@ -15,7 +15,7 @@ const hideProgressIndicator = () => {
 // Handles the fetch request response.
 // If the response has content it is returned, else if the response is a 204 no-content,
 // the resolved text is returned.
-const spreeHandleFetchRequestResponse = function(response) {
+const spreeHandleFetchRequestResponse = function (response) {
   hideProgressIndicator()
 
   if (response.status === 204) {
@@ -28,21 +28,21 @@ const spreeHandleFetchRequestResponse = function(response) {
 //
 // Handles fetch request errors by triggering the appropriate flash alert type and displaying
 // the response message.
-const spreeHandleFetchRequestError = function(data) {
+const spreeHandleFetchRequestError = function (data) {
   if (data.error != null) {
-    SpreeDash.showFlash("error", data.error)
+    SpreeDash.showFlash('error', data.error)
   } else if (data.message != null) {
-    SpreeDash.showFlash("success", data.message)
+    SpreeDash.showFlash('success', data.message)
   } else if (data.exception != null) {
-    SpreeDash.showFlash("info", data.exception)
+    SpreeDash.showFlash('info', data.exception)
   } else if (data.detail != null) {
-    SpreeDash.showFlash("info", data.detail)
+    SpreeDash.showFlash('info', data.detail)
   }
 }
 
 //
 // Reloads the window.
-const spreeWindowReload = function() {
+const spreeWindowReload = function () {
   window.location.reload()
 }
 
@@ -73,14 +73,14 @@ const spreeWindowReload = function() {
 //    }
 //    SpreeDash.fetchRequestUtil(requestData, someCallbackFunction, this)
 //
-const fetchRequestUtil = function(requstData, success = null, target = null) {
+const fetchRequestUtil = function (requstData, success = null, target = null) {
   if (!requstData.disableProgressIndicator === true) showProgressIndicator()
 
   let requestDataBody
 
   const requestUri = requstData.uri || null
-  const requestMethod = requstData.method || "GET"
-  const requestContentType = requstData.ContentType || "application/json"
+  const requestMethod = requstData.method || 'GET'
+  const requestContentType = requstData.ContentType || 'application/json'
 
   if (requstData.formatDataBody === false) {
     requestDataBody = requstData.dataBody
@@ -93,8 +93,8 @@ const fetchRequestUtil = function(requstData, success = null, target = null) {
   fetch(requestUri, {
     method: requestMethod,
     headers: {
-      "Authorization": "Bearer " + SpreeDash.OAUTH_TOKEN,
-      "Content-Type": requestContentType
+      Authorization: 'Bearer ' + SpreeDash.OAUTH_TOKEN,
+      'Content-Type': requestContentType
     },
     body: requestDataBody
   })
@@ -112,4 +112,3 @@ const fetchRequestUtil = function(requstData, success = null, target = null) {
 if (!window.SpreeDash.fetchRequestUtil) {
   window.SpreeDash.fetchRequestUtil = fetchRequestUtil
 }
-

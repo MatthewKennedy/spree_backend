@@ -1,11 +1,11 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = [ "source" ]
+  static targets = ['source']
 
-  copy(event) {
+  copy (event) {
     event.preventDefault()
     this.sourceTarget.select()
-    document.execCommand("copy")
+    document.execCommand('copy')
   }
 }

@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
 
-import JSONAPIDeserializer from "jsonapi-serializer"
+import JSONAPIDeserializer from 'jsonapi-serializer'
 
-document.addEventListener("spree:load", function() {
-  var el = $("#stock_movement_stock_item_id")
-  var jsonApiVariants = {}
+document.addEventListener('spree:load', function () {
+  const el = $('#stock_movement_stock_item_id')
+  let jsonApiVariants = {}
   el.select2({
-    placeholder: "Find a stock item", // translate
+    placeholder: 'Find a stock item', // translate
     minimumInputLength: 3,
     quietMillis: 200,
     ajax: {
@@ -15,27 +15,27 @@ document.addEventListener("spree:load", function() {
         return {
           filter: {
             variant_product_name_cont: params.term,
-            stock_location_id_eq: el.data("stock-location-id")
+            stock_location_id_eq: el.data('stock-location-id')
           },
-          include: "variant",
+          include: 'variant',
           image_transformation: {
-            size: "100x100"
+            size: '100x100'
           },
           fields: {
-            "variant": "name,sku,options_text,images"
+            variant: 'name,sku,options_text,images'
           },
           per_page: 50,
           page: page
         }
       },
       headers: SpreeDash.apiV2Authentication(),
-      success: function(data) {
-        new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {
+      success: function (data) {
+        new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
           jsonApiVariants = variants
         })
       },
       processResults: function (json) {
-        var res = jsonApiVariants.map(function (stockItem) {
+        const res = jsonApiVariants.map(function (stockItem) {
           return {
             id: stockItem.id,
             text: stockItem.variant.name,
@@ -48,7 +48,7 @@ document.addEventListener("spree:load", function() {
         }
       },
       results: function (data, page) {
-        var more = (page * 50) < data.count
+        const more = (page * 50) < data.count
         return {
           results: data.stock_items,
           more: more
@@ -60,20 +60,20 @@ document.addEventListener("spree:load", function() {
         return stockItem.text
       }
 
-      let variant = stockItem.variant
-      if (variant["images"][0] !== undefined && variant["images"][0].transformed_url !== undefined) {
+      const variant = stockItem.variant
+      if (variant.images[0] !== undefined && variant.images[0].transformed_url !== undefined) {
         variant.image = variant.images[0].transformed_url
       }
       return $(variantTemplate({
         variant: variant
       }))
     },
-    templateSelection: function(stockItem) {
+    templateSelection: function (stockItem) {
       const variant = stockItem.variant
       if (variant === undefined) {
         return stockItem.text
-      } else if (!!variant.options_text && variant.options_text !== "") {
-        return variant.name + "(" + variant.options_text + ")"
+      } else if (!!variant.options_text && variant.options_text !== '') {
+        return variant.name + '(' + variant.options_text + ')'
       } else {
         return variant.name
       }

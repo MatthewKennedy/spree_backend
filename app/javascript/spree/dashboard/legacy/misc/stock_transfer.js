@@ -1,9 +1,9 @@
-document.addEventListener("spree:load", function() {
+document.addEventListener('spree:load', function () {
   function TransferVariant (variant1) {
     // refactor variant1
     this.variant = variant1
     this.id = this.variant[0].variant.id
-    this.name = this.variant[0].variant.name + " - " + this.variant[0].variant.sku
+    this.name = this.variant[0].variant.name + ' - ' + this.variant[0].variant.sku
     this.quantity = 0
   }
   TransferVariant.prototype.add = function (quantity) {
@@ -12,25 +12,25 @@ document.addEventListener("spree:load", function() {
   }
 
   function TransferLocations () {
-    this.source = $("#transfer_source_location_id")
-    this.destination = $("#transfer_destination_location_id")
+    this.source = $('#transfer_source_location_id')
+    this.destination = $('#transfer_destination_location_id')
     this.source.change(this.populate_destination.bind(this))
-    $("#transfer_receive_stock").change(this.receive_stock_change.bind(this))
+    $('#transfer_receive_stock').change(this.receive_stock_change.bind(this))
 
     $.ajax({
-      url: SpreeDash.routes.stock_locations_api_v2 + "?per_page=1000",
-      type: "GET",
+      url: SpreeDash.routes.stock_locations_api_v2 + '?per_page=1000',
+      type: 'GET',
       data: {
         fields: {
-          stock_location: "name"
+          stock_location: 'name'
         }
       },
       headers: SpreeDash.apiV2Authentication()
     }).then(function (json) {
       this.locations = (function () {
-        var ref = json.data
-        var results = []
-        var i, len
+        const ref = json.data
+        const results = []
+        let i, len
         for (i = 0, len = ref.length; i < len; i++) {
           results.push({
             id: ref[i].id,
@@ -48,26 +48,26 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferLocations.prototype.force_receive_stock = function () {
-    $("#receive_stock_field").hide()
-    $("#transfer_receive_stock").prop("checked", true)
+    $('#receive_stock_field').hide()
+    $('#transfer_receive_stock').prop('checked', true)
     this.toggle_source_location(true)
   }
 
   TransferLocations.prototype.is_source_location_hidden = function () {
-    return $("#transfer_source_location_id_field").css("visibility") === "hidden"
+    return $('#transfer_source_location_id_field').css('visibility') === 'hidden'
   }
 
   TransferLocations.prototype.toggle_source_location = function (hide) {
     if (hide == null) {
       hide = false
     }
-    this.source.trigger("change")
-    var transferSourceLocationIdField = $("#transfer_source_location_id_field")
+    this.source.trigger('change')
+    const transferSourceLocationIdField = $('#transfer_source_location_id_field')
     if (this.is_source_location_hidden() && !hide) {
-      transferSourceLocationIdField.css("visibility", "visible")
+      transferSourceLocationIdField.css('visibility', 'visible')
       transferSourceLocationIdField.show()
     } else {
-      transferSourceLocationIdField.css("visibility", "hidden")
+      transferSourceLocationIdField.css('visibility', 'hidden')
       transferSourceLocationIdField.hide()
     }
   }
@@ -79,7 +79,7 @@ document.addEventListener("spree:load", function() {
 
   TransferLocations.prototype.populate_source = function () {
     this.populate_select(this.source)
-    this.source.trigger("change")
+    this.source.trigger('change')
   }
 
   TransferLocations.prototype.populate_destination = function () {
@@ -91,27 +91,27 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferLocations.prototype.populate_select = function (select, except) {
-    var i, len, location, ref
+    let i, len, location, ref
     if (except == null) {
       except = 0
     }
-    select.children("option").remove()
+    select.children('option').remove()
     ref = this.locations
     for (i = 0, len = ref.length; i < len; i++) {
       location = ref[i]
       if (location.id !== except) {
-        select.append($("<option></option>").text(location.name).attr("value", location.id))
+        select.append($('<option></option>').text(location.name).attr('value', location.id))
       }
     }
     return select.select2()
   }
 
   function TransferVariants () {
-    $("#transfer_source_location_id").change(this.refresh_variants.bind(this))
+    $('#transfer_source_location_id').change(this.refresh_variants.bind(this))
   }
 
   TransferVariants.prototype.receiving_stock = function () {
-    return $("#transfer_receive_stock:checked").length > 0
+    return $('#transfer_receive_stock:checked').length > 0
   }
 
   TransferVariants.prototype.refresh_variants = function () {
@@ -123,24 +123,24 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferVariants.prototype._search_transfer_variants = function () {
-    return this.build_select(SpreeDash.url(SpreeDash.routes.variants_api_v2), "product_name_or_sku_cont")
+    return this.build_select(SpreeDash.url(SpreeDash.routes.variants_api_v2), 'product_name_or_sku_cont')
   }
 
   TransferVariants.prototype._search_transfer_stock_items = function () {
-    var stockLocationId = $("#transfer_source_location_id").val()
-    return this.build_select(SpreeDash.routes.stock_items_api_v2 + "?filter[stock_location_id_eq]=" + stockLocationId + "&include=variant", "variant_product_name_or_variant_sku_cont")
+    const stockLocationId = $('#transfer_source_location_id').val()
+    return this.build_select(SpreeDash.routes.stock_items_api_v2 + '?filter[stock_location_id_eq]=' + stockLocationId + '&include=variant', 'variant_product_name_or_variant_sku_cont')
   }
 
   TransferVariants.prototype.format_variant_result = function (result) {
     // eslint-disable-next-line no-extra-boolean-cast
     if (!!result.options_text) {
-      return result.name + " - " + result.sku + " (" + result.options_text + ")"
+      return result.name + ' - ' + result.sku + ' (' + result.options_text + ')'
     } else {
-      return result.name + " - " + result.sku
+      return result.name + ' - ' + result.sku
     }
   }
 
-  function formattedVariantList(obj) {
+  function formattedVariantList (obj) {
     return {
       id: obj.id,
       text: obj.name,
@@ -152,32 +152,32 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferVariants.prototype.build_select = function (url, query) {
-    return $("#transfer_variant").select2({
+    return $('#transfer_variant').select2({
       minimumInputLength: 3,
       ajax: {
         url: url,
-        datatype: "json",
+        datatype: 'json',
         data: function (params) {
-          var filter = {}
+          const filter = {}
           filter[query] = params.term
 
           return {
             filter: filter,
             fields: {
-              "variant": "name,sku,options_text"
+              variant: 'name,sku,options_text'
             }
           }
         },
         headers: SpreeDash.apiV2Authentication(),
-        success: function(data) {
-          var JSONAPIDeserializer = require("jsonapi-serializer").Deserializer
-          new JSONAPIDeserializer({ keyForAttribute: "snake_case" }).deserialize(data, function (_err, variants) {
+        success: function (data) {
+          const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer
+          new JSONAPIDeserializer({ keyForAttribute: 'snake_case' }).deserialize(data, function (_err, variants) {
             jsonApiVariants = variants
           })
         },
         processResults: function (json) {
           if (json && json.data && jsonApiVariants) {
-            var res = {}
+            let res = {}
 
             if (json.links.self.match(/platform\/variants/)) {
               res = jsonApiVariants.map(function (variant) {
@@ -195,19 +195,19 @@ document.addEventListener("spree:load", function() {
           }
         }
       },
-      templateResult: function(variant) {
-        if (variant.options_text !== "") {
-          return variant.name + " - " + variant.sku + " (" + variant.options_text + ")"
+      templateResult: function (variant) {
+        if (variant.options_text !== '') {
+          return variant.name + ' - ' + variant.sku + ' (' + variant.options_text + ')'
         } else {
-          return variant.name + " - " + variant.sku
+          return variant.name + ' - ' + variant.sku
         }
       },
       templateSelection: function (variant) {
         // eslint-disable-next-line no-extra-boolean-cast
         if (!!variant.options_text) {
-          return variant.name + (" (" + variant.options_text + ")") + (" - " + variant.sku)
+          return variant.name + (' (' + variant.options_text + ')') + (' - ' + variant.sku)
         } else {
-          return variant.name + (" - " + variant.sku)
+          return variant.name + (' - ' + variant.sku)
         }
       }
     })
@@ -215,38 +215,38 @@ document.addEventListener("spree:load", function() {
 
   function TransferAddVariants () {
     this.variants = []
-    this.template = Handlebars.compile($("#transfer_variant_template").html())
-    $("#transfer_source_location_id").change(this.clear_variants.bind(this))
-    $("button.transfer_add_variant").click(function (event) {
+    this.template = Handlebars.compile($('#transfer_variant_template').html())
+    $('#transfer_source_location_id').change(this.clear_variants.bind(this))
+    $('button.transfer_add_variant').click(function (event) {
       event.preventDefault()
-      if ($("#transfer_variant").select2("data") != null) {
+      if ($('#transfer_variant').select2('data') != null) {
         this.add_variant()
       } else {
-        alert("Please select a variant first")
+        alert('Please select a variant first')
       }
     }.bind(this))
-    $("#transfer-variants-table").on("click", ".transfer_remove_variant", function (event) {
+    $('#transfer-variants-table').on('click', '.transfer_remove_variant', function (event) {
       event.preventDefault()
       this.remove_variant($(event.target))
     }.bind(this))
-    $("button.transfer_transfer").click(function () {
+    $('button.transfer_transfer').click(function () {
       if (!(this.variants.length > 0)) {
-        alert("no variants to transfer")
+        alert('no variants to transfer')
         return false
       }
     }.bind(this))
   }
 
   TransferAddVariants.prototype.add_variant = function () {
-    var variant = $("#transfer_variant").select2("data")
-    var quantity = parseInt($("#transfer_variant_quantity").val())
+    let variant = $('#transfer_variant').select2('data')
+    const quantity = parseInt($('#transfer_variant_quantity').val())
     variant = this.find_or_add(variant)
     variant.add(quantity)
     return this.render()
   }
 
   TransferAddVariants.prototype.find_or_add = function (variant) {
-    var existing = _.find(this.variants, function (v) {
+    const existing = _.find(this.variants, function (v) {
       return v.id.toString() === variant[0].id
     })
     if (existing) {
@@ -259,13 +259,13 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferAddVariants.prototype.remove_variant = function (target) {
-    var v
-    var variantId = target.data("variantId").toString()
+    let v
+    const variantId = target.data('variantId').toString()
 
     this.variants = (function () {
-      var ref = this.variants
-      var results = []
-      var i, len
+      const ref = this.variants
+      const results = []
+      let i, len
       for (i = 0, len = ref.length; i < len; i++) {
         v = ref[i]
         if (v.id.toString() !== variantId) {
@@ -283,23 +283,23 @@ document.addEventListener("spree:load", function() {
   }
 
   TransferAddVariants.prototype.contains = function (id) {
-    return _.contains(_.pluck(this.variants, "id"), id)
+    return _.contains(_.pluck(this.variants, 'id'), id)
   }
 
   TransferAddVariants.prototype.render = function () {
     if (this.variants.length === 0) {
-      $("#transfer-variants-table").hide()
-      return $(".no-objects-found").show()
+      $('#transfer-variants-table').hide()
+      return $('.no-objects-found').show()
     } else {
-      $("#transfer-variants-table").show()
-      $(".no-objects-found").hide()
-      return $("#transfer_variants_tbody").html(this.template({
+      $('#transfer-variants-table').show()
+      $('.no-objects-found').hide()
+      return $('#transfer_variants_tbody').html(this.template({
         variants: this.variants
       }))
     }
   }
 
-  if ($("#transfer_source_location_id").length > 0) {
+  if ($('#transfer_source_location_id').length > 0) {
     /* eslint-disable no-new */
     new TransferLocations()
     new TransferVariants()

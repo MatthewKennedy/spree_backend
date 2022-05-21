@@ -1,22 +1,22 @@
 /* eslint-disable no-undef */
 
 $.fn.optionValueAutocomplete = function (options) {
-  "use strict"
+  'use strict'
 
   // Default options
   options = options || {}
-  var multiple = typeof (options.multiple) !== "undefined" ? options.multiple : true
-  var productSelect = options.productSelect
-  var productId = options.productId
-  var values = options.values
-  var clearSelection = options.clearSelection
+  const multiple = typeof (options.multiple) !== 'undefined' ? options.multiple : true
+  const productSelect = options.productSelect
+  const productId = options.productId
+  const values = options.values
+  const clearSelection = options.clearSelection
 
-  function addOptions(select, productId, values) {
+  function addOptions (select, productId, values) {
     $.ajax({
-      type: "GET",
+      type: 'GET',
       url: SpreeDash.routes.option_values_api_v2,
       headers: SpreeDash.apiV2Authentication(),
-      dataType: "json",
+      dataType: 'json',
       data: {
         filter: {
           id_in: values,
@@ -33,10 +33,10 @@ $.fn.optionValueAutocomplete = function (options) {
     minimumInputLength: 1,
     ajax: {
       url: SpreeDash.routes.option_values_api_v2,
-      dataType: "json",
+      dataType: 'json',
       headers: SpreeDash.apiV2Authentication(),
       data: function (params) {
-        var selectedProductId = typeof (productSelect) !== "undefined" ? productSelect.val() : null
+        const selectedProductId = typeof (productSelect) !== 'undefined' ? productSelect.val() : null
 
         return {
           filter: {
@@ -45,7 +45,7 @@ $.fn.optionValueAutocomplete = function (options) {
           }
         }
       },
-      processResults: function(data) {
+      processResults: function (data) {
         return formatSelect2Options(data)
       }
     }
@@ -56,7 +56,6 @@ $.fn.optionValueAutocomplete = function (options) {
   }
 
   if (clearSelection) {
-    this.val(null).trigger("change")
+    this.val(null).trigger('change')
   }
 }
-

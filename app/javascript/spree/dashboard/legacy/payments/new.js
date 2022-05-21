@@ -1,12 +1,12 @@
 import Cleave from 'cleave.js'
 
-document.addEventListener("spree:load", function() {
-  if ($("#new_payment").length) {
-    var cardCodeCleave;
-    var updateCardCodeCleave = function (length) {
+document.addEventListener('spree:load', function () {
+  if ($('#new_payment').length) {
+    let cardCodeCleave
+    const updateCardCodeCleave = function (length) {
       if (cardCodeCleave) cardCodeCleave.destroy()
 
-      cardCodeCleave = new Cleave(".cardCode", {
+      cardCodeCleave = new Cleave('.cardCode', {
         numericOnly: true,
         blocks: [length]
       })
@@ -14,12 +14,12 @@ document.addEventListener("spree:load", function() {
 
     updateCardCodeCleave(3)
 
-    new Cleave(".cardNumber", {
+    new Cleave('.cardNumber', {
       creditCard: true,
       onCreditCardTypeChanged: function (type) {
-        $(".ccType").val(type)
+        $('.ccType').val(type)
 
-        if (type === "amex") {
+        if (type === 'amex') {
           updateCardCodeCleave(4)
         } else {
           updateCardCodeCleave(3)
@@ -27,34 +27,34 @@ document.addEventListener("spree:load", function() {
       }
     })
 
-    new Cleave(".cardExpiry", {
+    new Cleave('.cardExpiry', {
       date: true,
-      datePattern: ["m", "Y"]
+      datePattern: ['m', 'Y']
     })
 
-    $(".payment_methods_radios").click(
+    $('.payment_methods_radios').click(
       function () {
-        $(".payment-methods").hide()
-        $(".payment-methods :input").prop("disabled", true)
+        $('.payment-methods').hide()
+        $('.payment-methods :input').prop('disabled', true)
         if (this.checked) {
-          $("#payment_method_" + this.value + " :input").prop("disabled", false)
-          $("#payment_method_" + this.value).show()
+          $('#payment_method_' + this.value + ' :input').prop('disabled', false)
+          $('#payment_method_' + this.value).show()
         }
       }
     )
 
-    $(".payment_methods_radios").each(
+    $('.payment_methods_radios').each(
       function () {
         if (this.checked) {
-          $("#payment_method_" + this.value + " :input").prop("disabled", false)
-          $("#payment_method_" + this.value).show()
+          $('#payment_method_' + this.value + ' :input').prop('disabled', false)
+          $('#payment_method_' + this.value).show()
         } else {
-          $("#payment_method_" + this.value).hide()
-          $("#payment_method_" + this.value + " :input").prop("disabled", true)
+          $('#payment_method_' + this.value).hide()
+          $('#payment_method_' + this.value + ' :input').prop('disabled', true)
         }
 
-        if ($("#card_new" + this.value).is("*")) {
-          $("#card_new" + this.value).radioControlsVisibilityOfElement("#card_form" + this.value)
+        if ($('#card_new' + this.value).is('*')) {
+          $('#card_new' + this.value).radioControlsVisibilityOfElement('#card_form' + this.value)
         }
       }
     )

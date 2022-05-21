@@ -35,17 +35,17 @@
 **/
 
 // eslint-disable-next-line no-unused-vars
-const populateSelectOptionsFromApi = function(params) {
+const populateSelectOptionsFromApi = function (params) {
   createRequest(params, updateSelectSuccess, updateSelectError)
 }
 
-const handleErrors = function(response) {
-  if (!response.ok) throw new Error((response.status + ": " + response.statusText))
+const handleErrors = function (response) {
+  if (!response.ok) throw new Error((response.status + ': ' + response.statusText))
 
   return response.json()
 }
 
-const createRequest = function(params, succeed, fail) {
+const createRequest = function (params, succeed, fail) {
   const targetElement = params.targetElement
   const apiUrl = params.apiUrl
   const returnOptionText = params.returnOptionText
@@ -59,11 +59,11 @@ const createRequest = function(params, succeed, fail) {
     .catch((error) => fail(error, selectEl))
 }
 
-const updateSelectSuccess = function(parsedData, returnValueFromAttributes, returnOptionText, selectEl, selectedOption) {
-  const selectedOpt = selectEl.querySelector("option[selected]")
+const updateSelectSuccess = function (parsedData, returnValueFromAttributes, returnOptionText, selectEl, selectedOption) {
+  const selectedOpt = selectEl.querySelector('option[selected]')
 
   parsedData.forEach((object) => {
-    const optionEl = document.createElement("option")
+    const optionEl = document.createElement('option')
 
     if (returnValueFromAttributes == null) {
       optionEl.value = object.id
@@ -73,7 +73,7 @@ const updateSelectSuccess = function(parsedData, returnValueFromAttributes, retu
       if (selectedOpt.value === object.attributes[returnValueFromAttributes]) {
         selectedOpt.remove()
 
-        optionEl.setAttribute("selected", "selected")
+        optionEl.setAttribute('selected', 'selected')
       }
     }
 
@@ -82,6 +82,6 @@ const updateSelectSuccess = function(parsedData, returnValueFromAttributes, retu
   })
 }
 
-const updateSelectError = function(error, selectEl) {
+const updateSelectError = function (error, selectEl) {
   console.log(error)
 }

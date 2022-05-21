@@ -1,10 +1,10 @@
-import Swal from "sweetalert2/dist/sweetalert2"
+import Swal from 'sweetalert2/dist/sweetalert2'
 
-document.addEventListener("spree:load", function() {
-  const infoToggle = document.querySelectorAll("[data-show-info]")
+document.addEventListener('spree:load', function () {
+  const infoToggle = document.querySelectorAll('[data-show-info]')
 
-  infoToggle.forEach(function(infoElem) {
-    infoElem.addEventListener("click", function() {
+  infoToggle.forEach(function (infoElem) {
+    infoElem.addEventListener('click', function () {
       const alertType = infoElem.dataset.alertKind
       const alertTitle = infoElem.dataset.alertTitle
       const alertHtml = infoElem.dataset.alertHtml
@@ -16,17 +16,17 @@ document.addEventListener("spree:load", function() {
 })
 
 // eslint-disable-next-line no-unused-vars
-function showInfoAlert(type = null, title = null, message = null, html = null) {
+function showInfoAlert (type = null, title = null, message = null, html = null) {
   const infoAlert = Swal.mixin({
     showConfirmButton: false,
     showCloseButton: true,
     timer: null,
     timerProgressBar: false,
     showClass: {
-      popup: "animate__animated animate__fadeInUp animate__faster"
+      popup: 'animate__animated animate__fadeInUp animate__faster'
     },
     hideClass: {
-      popup: "animate__animated animate__fadeOutDown animate__faster"
+      popup: 'animate__animated animate__fadeOutDown animate__faster'
     }
   })
 

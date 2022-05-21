@@ -1,26 +1,26 @@
 /* eslint-disable no-undef */
 
 $.fn.productAutocomplete = function (options) {
-  "use strict"
+  'use strict'
 
   // Default options
   options = options || {}
-  var multiple = typeof (options.multiple) !== "undefined" ? options.multiple : true
-  var values = typeof (options.values) !== "undefined" ? options.values : null
+  const multiple = typeof (options.multiple) !== 'undefined' ? options.multiple : true
+  const values = typeof (options.values) !== 'undefined' ? options.values : null
 
-  function addOptions(select, values) {
+  function addOptions (select, values) {
     $.ajax({
       url: SpreeDash.routes.products_api_v2,
-      dataType: "json",
+      dataType: 'json',
       data: {
         filter: {
           id_in: values
         },
         fields: {
-          product: "name"
+          product: 'name'
         }
       },
-      headers: SpreeDash.apiV2Authentication(),
+      headers: SpreeDash.apiV2Authentication()
     }).then(function (data) {
       select.addSelect2Options(data.data)
     })
@@ -31,19 +31,19 @@ $.fn.productAutocomplete = function (options) {
     minimumInputLength: 3,
     ajax: {
       url: SpreeDash.routes.products_api_v2,
-      dataType: "json",
+      dataType: 'json',
       data: function (params) {
         return {
           filter: {
             name_or_master_sku_cont: params.term
           },
           fields: {
-            product: "name"
+            product: 'name'
           }
         }
       },
       headers: SpreeDash.apiV2Authentication(),
-      processResults: function(data) {
+      processResults: function (data) {
         return formatSelect2Options(data)
       }
     }
@@ -54,6 +54,6 @@ $.fn.productAutocomplete = function (options) {
   }
 }
 
-document.addEventListener("spree:load", function() {
-  $(".product_picker").productAutocomplete()
+document.addEventListener('spree:load', function () {
+  $('.product_picker').productAutocomplete()
 })

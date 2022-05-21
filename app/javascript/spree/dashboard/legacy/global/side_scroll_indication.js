@@ -1,47 +1,47 @@
-document.addEventListener("spree:load", function () {
-  const navWrapper = document.querySelectorAll("[data-nav-x-wrapper]")
+document.addEventListener('spree:load', function () {
+  const navWrapper = document.querySelectorAll('[data-nav-x-wrapper]')
   navWrapper.forEach(el => initHorizontalNav(el))
 })
 
 const SETTINGS = {
   navBarTravelling: false,
-  navBarTravelDirection: "",
+  navBarTravelDirection: '',
   navBarTravelDistance: 150
 }
 
 function initHorizontalNav (containerEl) {
-  const navAdvanceLeft = containerEl.querySelector(".nav-x_Advancer_Left")
-  const navAdvanceRight = containerEl.querySelector(".nav-x_Advancer_Right")
-  const navContainer = containerEl.querySelector("[data-nav-x-container]")
-  const navContent = navContainer.querySelector("[data-nav-x-content]")
-  const activeNavItem = navContent.querySelector(".active")
+  const navAdvanceLeft = containerEl.querySelector('.nav-x_Advancer_Left')
+  const navAdvanceRight = containerEl.querySelector('.nav-x_Advancer_Right')
+  const navContainer = containerEl.querySelector('[data-nav-x-container]')
+  const navContent = navContainer.querySelector('[data-nav-x-content]')
+  const activeNavItem = navContent.querySelector('.active')
 
   // Trigger on spree:load
   setOverscrollIndicators()
 
   if (activeNavItem) focusActiveItem(navContainer, activeNavItem)
 
-  window.addEventListener("resize", function () {
+  window.addEventListener('resize', function () {
     // Trigger on window resize
     setOverscrollIndicators()
     focusActiveItem(navContainer, activeNavItem)
   })
 
-  navContainer.addEventListener("scroll", function () {
+  navContainer.addEventListener('scroll', function () {
     // Trigger on Side Scrolling
     setOverscrollIndicators()
   })
 
   function setOverscrollIndicators () {
-    navContainer.setAttribute("data-overflowing", determineOverflow(navContent, navContainer))
+    navContainer.setAttribute('data-overflowing', determineOverflow(navContent, navContainer))
   }
 
-  navAdvanceLeft.addEventListener("click", function () {
+  navAdvanceLeft.addEventListener('click', function () {
     // If in the middle of a move return
     if (SETTINGS.navBarTravelling === true) return
 
     // If we have content overflowing both sides or on the left
-    if (determineOverflow(navContent, navContainer) === "left" || determineOverflow(navContent, navContainer) === "both") {
+    if (determineOverflow(navContent, navContainer) === 'left' || determineOverflow(navContent, navContainer) === 'both') {
       // Find how far this panel has been scrolled
       const availableScrollLeft = navContainer.scrollLeft
       // If the space available is less than two lots of our desired distance, just move the whole amount
@@ -52,21 +52,21 @@ function initHorizontalNav (containerEl) {
         navContent.style.transform = `translateX(${SETTINGS.navBarTravelDistance}px)`
       }
       // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
-      navContent.classList.remove("nav-x_Transition_None")
+      navContent.classList.remove('nav-x_Transition_None')
       // Update our settings
-      SETTINGS.navBarTravelDirection = "left"
+      SETTINGS.navBarTravelDirection = 'left'
       SETTINGS.navBarTravelling = true
     }
     // Now update the attribute in the DOM
-    navContainer.setAttribute("data-overflowing", determineOverflow(navContent, navContainer))
+    navContainer.setAttribute('data-overflowing', determineOverflow(navContent, navContainer))
   })
 
-  navAdvanceRight.addEventListener("click", function () {
+  navAdvanceRight.addEventListener('click', function () {
     // If in the middle of a move return
     if (SETTINGS.navBarTravelling === true) return
 
     // If we have content overflowing both sides or on the right
-    if (determineOverflow(navContent, navContainer) === "right" || determineOverflow(navContent, navContainer) === "both") {
+    if (determineOverflow(navContent, navContainer) === 'right' || determineOverflow(navContent, navContainer) === 'both') {
       // Get the right edge of the container and content
       const navBarRightEdge = navContent.getBoundingClientRect().right
       const navBarScrollerRightEdge = navContainer.getBoundingClientRect().right
@@ -80,27 +80,27 @@ function initHorizontalNav (containerEl) {
         navContent.style.transform = `translateX(-${SETTINGS.navBarTravelDistance}px)`
       }
       // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
-      navContent.classList.remove("nav-x_Transition_None")
+      navContent.classList.remove('nav-x_Transition_None')
       // Update our settings
-      SETTINGS.navBarTravelDirection = "right"
+      SETTINGS.navBarTravelDirection = 'right'
       SETTINGS.navBarTravelling = true
     }
     // Now update the attribute in the DOM
-    navContainer.setAttribute("data-overflowing", determineOverflow(navContent, navContainer))
+    navContainer.setAttribute('data-overflowing', determineOverflow(navContent, navContainer))
   })
 
-  navContent.addEventListener("transitionend", function () {
+  navContent.addEventListener('transitionend', function () {
     // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
     const styleOfTransform = window.getComputedStyle(navContent, null)
-    const tr = styleOfTransform.getPropertyValue("transform") || styleOfTransform.getPropertyValue("transform")
+    const tr = styleOfTransform.getPropertyValue('transform') || styleOfTransform.getPropertyValue('transform')
     // If there is no transition we want to default to 0 and not null
 
-    const amount = Math.abs(parseInt(tr.split(",")[4]) || 0)
+    const amount = Math.abs(parseInt(tr.split(',')[4]) || 0)
 
-    navContent.style.transform = "none"
-    navContent.classList.add("nav-x_Transition_None")
+    navContent.style.transform = 'none'
+    navContent.classList.add('nav-x_Transition_None')
     // Now lets set the scroll position
-    if (SETTINGS.navBarTravelDirection === "left") {
+    if (SETTINGS.navBarTravelDirection === 'left') {
       navContainer.scrollLeft = navContainer.scrollLeft - amount
     } else {
       navContainer.scrollLeft = navContainer.scrollLeft + amount
@@ -126,12 +126,12 @@ function determineOverflow (content, container) {
   const contentMetricsLeft = Math.floor(contentMetrics.left)
 
   if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
-    return "both"
+    return 'both'
   } else if (contentMetricsLeft < containerMetricsLeft) {
-    return "left"
+    return 'left'
   } else if (contentMetricsRight > containerMetricsRight) {
-    return "right"
+    return 'right'
   } else {
-    return "none"
+    return 'none'
   }
 }

@@ -1,53 +1,53 @@
-document.addEventListener("spree:load", function() {
-  var body = $("body")
-  var modalBackdrop = $("#multi-backdrop")
+document.addEventListener('spree:load', function () {
+  const body = $('body')
+  const modalBackdrop = $('#multi-backdrop')
 
   // Fail safe on screen resize
-  var resizeTimer
-  window.addEventListener("resize", function() {
-    document.body.classList.remove("modal-open", "sidebar-open", "contextualSideMenu-open")
-    document.body.classList.add("resize-animation-stopper")
+  let resizeTimer
+  window.addEventListener('resize', function () {
+    document.body.classList.remove('modal-open', 'sidebar-open', 'contextualSideMenu-open')
+    document.body.classList.add('resize-animation-stopper')
     clearTimeout(resizeTimer)
-    resizeTimer = setTimeout(function() {
-      document.body.classList.remove("resize-animation-stopper")
+    resizeTimer = setTimeout(function () {
+      document.body.classList.remove('resize-animation-stopper')
     }, 400)
   })
 
-  function closeAllMenus() {
+  function closeAllMenus () {
     body.removeClass()
-    body.addClass("admin")
-    modalBackdrop.removeClass("show")
+    body.addClass('admin')
+    modalBackdrop.removeClass('show')
   }
 
   modalBackdrop.click(closeAllMenus)
 
   // Main Menu Functionality
-  var sidebarOpen = $("#sidebar-open")
-  var sidebarClose = $("#sidebar-close")
-  var activeItem = $("#main-sidebar").find(".selected")
+  const sidebarOpen = $('#sidebar-open')
+  const sidebarClose = $('#sidebar-close')
+  const activeItem = $('#main-sidebar').find('.selected')
 
-  activeItem.closest(".nav-sidebar").addClass("active-option")
-  activeItem.closest(".nav-pills").addClass("in show")
+  activeItem.closest('.nav-sidebar').addClass('active-option')
+  activeItem.closest('.nav-pills').addClass('in show')
 
-  function openMenu() {
+  function openMenu () {
     closeAllMenus()
-    body.addClass("sidebar-open modal-open")
-    modalBackdrop.addClass("show")
+    body.addClass('sidebar-open modal-open')
+    modalBackdrop.addClass('show')
   }
   sidebarOpen.click(openMenu)
   sidebarClose.click(closeAllMenus)
 
   // Contextual Sidebar Menu
-  var contextualSidebarMenuToggle = $("#contextual-menu-toggle")
-  var contextualSidebarMenuClose = $("#contextual-menu-close")
+  const contextualSidebarMenuToggle = $('#contextual-menu-toggle')
+  const contextualSidebarMenuClose = $('#contextual-menu-close')
 
-  function toggleContextualMenu() {
-    if (document.body.classList.contains("contextualSideMenu-open")) {
+  function toggleContextualMenu () {
+    if (document.body.classList.contains('contextualSideMenu-open')) {
       closeAllMenus()
     } else {
       closeAllMenus()
-      body.addClass("contextualSideMenu-open modal-open")
-      modalBackdrop.addClass("show")
+      body.addClass('contextualSideMenu-open modal-open')
+      modalBackdrop.addClass('show')
     }
   }
 

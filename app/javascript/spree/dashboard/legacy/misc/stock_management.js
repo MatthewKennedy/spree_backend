@@ -1,15 +1,15 @@
 /* eslint-disable no-undef */
 
-document.addEventListener("spree:load", function() {
-  $(".stock_item_backorderable").on("click", function () {
-    $(this).parent("form").submit()
+document.addEventListener('spree:load', function () {
+  $('.stock_item_backorderable').on('click', function () {
+    $(this).parent('form').submit()
   })
-  $(".toggle_stock_item_backorderable").on("submit", function () {
+  $('.toggle_stock_item_backorderable').on('submit', function () {
     $.ajax({
       type: this.method,
       url: this.action,
       data: $(this).serialize(),
-      dataType: "json"
+      dataType: 'json'
     })
     return false
   })

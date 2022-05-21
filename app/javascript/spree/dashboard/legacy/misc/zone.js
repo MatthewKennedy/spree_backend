@@ -1,11 +1,11 @@
-document.addEventListener("spree:load", function() {
-  var countryBased = $("#country_based")
-  var stateBased = $("#state_based")
+document.addEventListener('spree:load', function () {
+  const countryBased = $('#country_based')
+  const stateBased = $('#state_based')
   countryBased.click(show_country)
   stateBased.click(show_state)
-  if (countryBased.is(":checked")) {
+  if (countryBased.is(':checked')) {
     show_country()
-  } else if (stateBased.is(":checked")) {
+  } else if (stateBased.is(':checked')) {
     show_state()
   } else {
     show_state()
@@ -14,31 +14,31 @@ document.addEventListener("spree:load", function() {
 })
 
 function show_country () {
-  $("#state_members :input").each(function () {
-    $(this).prop("disabled", true)
+  $('#state_members :input').each(function () {
+    $(this).prop('disabled', true)
   })
-  $("#state_members").hide()
-  $("#zone_members :input").each(function () {
-    $(this).prop("disabled", true)
+  $('#state_members').hide()
+  $('#zone_members :input').each(function () {
+    $(this).prop('disabled', true)
   })
-  $("#zone_members").hide()
-  $("#country_members :input").each(function () {
-    $(this).prop("disabled", false)
+  $('#zone_members').hide()
+  $('#country_members :input').each(function () {
+    $(this).prop('disabled', false)
   })
-  $("#country_members").show()
+  $('#country_members').show()
 }
 
 function show_state () {
-  $("#country_members :input").each(function () {
-    $(this).prop("disabled", true)
+  $('#country_members :input').each(function () {
+    $(this).prop('disabled', true)
   })
-  $("#country_members").hide()
-  $("#zone_members :input").each(function () {
-    $(this).prop("disabled", true)
+  $('#country_members').hide()
+  $('#zone_members :input').each(function () {
+    $(this).prop('disabled', true)
   })
-  $("#zone_members").hide()
-  $("#state_members :input").each(function () {
-    $(this).prop("disabled", false)
+  $('#zone_members').hide()
+  $('#state_members :input').each(function () {
+    $(this).prop('disabled', false)
   })
-  $("#state_members").show()
+  $('#state_members').show()
 }
