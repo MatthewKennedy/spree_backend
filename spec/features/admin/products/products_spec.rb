@@ -598,7 +598,9 @@ describe "Products", type: :feature do
         click_on "Search"
         click_link(product.name, match: :first)
         expect(page).to have_field(id: "product_price") do |field|
+          # standard:disable Lint/FloatComparison
           field.value.to_f == product.price.to_f
+          # standard:enable Lint/FloatComparison
         end
       end
     end

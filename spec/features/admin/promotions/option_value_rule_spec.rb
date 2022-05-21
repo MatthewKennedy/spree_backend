@@ -47,8 +47,8 @@ describe "Promotion with option value rule", type: :feature do
     before do
       rule = Spree::Promotion::Rules::OptionValue.new
       rule.promotion = promotion
-      rule.preferred_eligible_values(= {variant1.product_id => variant1.option_values.pluck(:id),
-        variant2.product_id => variant2.option_values.pluck(:id)})
+      rule.preferred_eligible_values = ({variant1.product_id => variant1.option_values.pluck(:id),
+                                         variant2.product_id => variant2.option_values.pluck(:id)})
       rule.save!
 
       visit spree.edit_admin_promotion_path(promotion)

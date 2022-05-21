@@ -96,18 +96,23 @@ describe Spree::Admin::NavigationHelper, type: :helper do
     end
 
     it "returns correct klass for non-spree model" do
+      # standard:disable Lint/ConstantDefinitionInBlock
       class MyUser
       end
+      # standard:enable Lint/ConstantDefinitionInBlock
+
       expect(klass_for(:my_users)).to eq(MyUser)
 
       Object.send(:remove_const, "MyUser")
     end
 
     it "returns correct namespaced klass for non-spree model" do
+      # standard:disable Lint/ConstantDefinitionInBlock
       module My
         class User
         end
       end
+      # standard:enable Lint/ConstantDefinitionInBlock
 
       expect(klass_for(:my_users)).to eq(My::User)
 

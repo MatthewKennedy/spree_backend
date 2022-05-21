@@ -96,8 +96,8 @@ describe "Prototypes", type: :feature, js: true do
 
   context "editing a prototype" do
     it "allows to empty its properties" do
-      model_property = create(:property, name: "model", presentation: "Model")
-      brand_property = create(:property, name: "brand", presentation: "Brand")
+      create(:property, name: "model", presentation: "Model")
+      create(:property, name: "brand", presentation: "Brand")
 
       shirt_prototype = create(:prototype, name: "Shirt", properties: [])
       %w[brand model].each do |prop|

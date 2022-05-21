@@ -42,6 +42,7 @@ describe Spree::Admin::ReturnAuthorizationsController, type: :controller do
     end
   end
 
+  # standard:disable Performance/Count
   describe "#load_return_items" do
     shared_context "without existing return items" do
       context "without existing return items" do
@@ -65,6 +66,7 @@ describe Spree::Admin::ReturnAuthorizationsController, type: :controller do
         end
       end
     end
+    # standard:enable Performance/Count
 
     context "#new" do
       subject { get :new, params: {order_id: order.to_param} }

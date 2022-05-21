@@ -93,17 +93,8 @@ module Spree
       # the per_page_dropdown is used on index pages like orders, products, promotions etc.
       # this method generates the select_tag
       def per_page_dropdown
-        # there is a config setting for admin_products_per_page, only for the orders page
-        if @products && per_page_default = Spree::Backend::Config.admin_products_per_page
-          per_page_options = []
-          5.times do |amount|
-            per_page_options << (amount + 1) * Spree::Backend::Config.admin_products_per_page
-          end
-        else
-          per_page_default = Spree::Backend::Config.admin_orders_per_page
-          per_page_options = %w[25 50 75]
-        end
-
+        per_page_default = Spree::Backend::Config.admin_orders_per_page
+        per_page_options = %w[25 50 75]
         selected_option = params[:per_page].try(:to_i) || per_page_default
 
         select_tag(:per_page,
@@ -113,14 +104,14 @@ module Spree
 
       # helper method to create proper url to apply per page ing
       # fixes https://github.com/spree/spree/issues/6888
-      def per_page_dropdown_params(args = nil)
+      def per_page_dropdown_params
         args = params.permit!.to_h.clone
         args.delete(:page)
         args.delete(:per_page)
         args
       end
 
-      # finds class for a given symbol / string
+      # Finds class for a given symbol / string
       #
       # Example :
       # :products returns Spree::Product
@@ -223,7 +214,9 @@ module Spree
           end
         else
           if html_options["data-update"].nil? && html_options[:remote]
+            # standard:disable Style/SlicingWithRange
             object_name, action = url.split("/")[-2..-1]
+            # standard:enable Style/SlicingWithRange
             html_options["data-update"] = [action, object_name.singularize].join("_")
           end
 
