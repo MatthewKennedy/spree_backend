@@ -191,7 +191,7 @@ function initProductActions () {
         const productName = $container
           .find('input[name="add_product_name"]')
           .val()
-        const variantId = $container.find('input[name="add_variant_id"]').val()
+        const variantId = $container.find('input[name="add_variantId"]').val()
         const quantity = $container.find('input[name="add_quantity"]').val()
         if (variantId) {
           // Add to the table

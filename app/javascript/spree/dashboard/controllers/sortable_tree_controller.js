@@ -16,7 +16,8 @@ export default class extends Controller {
     )
 
     for (let i = 0; i < containers.length; i++) {
-      new Sortable(containers[i], itemSortable)
+      const sTb = new Sortable(containers[i], itemSortable)
+      console.log(sTb)
     }
   }
 

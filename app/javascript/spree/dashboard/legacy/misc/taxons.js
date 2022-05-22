@@ -103,6 +103,8 @@ document.addEventListener('spree:load', function () {
               const product = json.included.find(function (included) {
                 if (included.type === 'product' && included.id === productId) {
                   return included
+                } else {
+                  return null
                 }
               })
 
@@ -115,6 +117,8 @@ document.addEventListener('spree:load', function () {
                   const image = json.included.find(function (included) {
                     if (included.type === 'image' && included.id === imageId) {
                       return included
+                    } else {
+                      return null
                     }
                   })
 

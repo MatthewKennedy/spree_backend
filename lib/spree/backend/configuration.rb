@@ -2,6 +2,7 @@ module Spree
   module Backend
     class Configuration < Preferences::Configuration
       preference :admin_path, :string, default: "/admin"
+      preference :admin_products_per_page, :integer, default: Kaminari.config.default_per_page
       preference :admin_orders_per_page, :integer, default: Kaminari.config.default_per_page
       preference :admin_properties_per_page, :integer, default: Kaminari.config.default_per_page
       preference :admin_promotions_per_page, :integer, default: Kaminari.config.default_per_page

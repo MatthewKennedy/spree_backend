@@ -3,14 +3,11 @@
     "browser": true,
     "es2022": true
   },
-  "extends": [
-    "prettier",
-    "standard"
-  ],
   "parserOptions": {
-    "ecmaVersion": 2022,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "extends": ["standard"],
   "globals": {
     "SpreeDash": "readonly",
     "Turbo": "readonly",

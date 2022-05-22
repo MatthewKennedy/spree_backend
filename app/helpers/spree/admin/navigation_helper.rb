@@ -93,8 +93,17 @@ module Spree
       # the per_page_dropdown is used on index pages like orders, products, promotions etc.
       # this method generates the select_tag
       def per_page_dropdown
-        per_page_default = Spree::Backend::Config.admin_orders_per_page
-        per_page_options = %w[25 50 75]
+        # there is a config setting for admin_products_per_page, only for the orders page
+        if @products && per_page_default = Spree::Backend::Config.admin_products_per_page
+          per_page_options = []
+          5.times do |amount|
+            per_page_options << (amount + 1) * Spree::Backend::Config.admin_products_per_page
+          end
+        else
+          per_page_default = Spree::Backend::Config.admin_orders_per_page
+          per_page_options = %w[25 50 75]
+        end
+
         selected_option = params[:per_page].try(:to_i) || per_page_default
 
         select_tag(:per_page,

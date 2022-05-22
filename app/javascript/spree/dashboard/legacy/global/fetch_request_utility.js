@@ -55,8 +55,8 @@ const spreeWindowReload = function () {
 //
 // EXAMPLE SENDING A POST REQUEST TO CREATE A NEW SHIPMENT:
 //    const data = {
-//      order_id: 'H8213728798',
-//      variant_id: 2,
+//      orderId: 'H8213728798',
+//      variantId: 2,
 //      quantity: 4,
 //      stock_location_id: 1
 //    }
@@ -113,3 +113,5 @@ const fetchRequestUtil = function (requstData, success = null, target = null) {
 if (!window.SpreeDash.fetchRequestUtil) {
   window.SpreeDash.fetchRequestUtil = fetchRequestUtil
 }
+
+export { spreeWindowReload }

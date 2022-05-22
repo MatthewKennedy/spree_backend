@@ -7,7 +7,7 @@ document.addEventListener('spree:load', function () {
       }
       $.ajax({
         type: 'PATCH',
-        url: SpreeDash.routes.apply_coupon_code(order_number),
+        url: SpreeDash.routes.apply_coupon_code(orderNumber),
         data: {
           coupon_code: couponCode
         },

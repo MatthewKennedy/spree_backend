@@ -3,13 +3,13 @@ document.addEventListener('spree:load', function () {
   'use strict'
 
   // handle variant selection, show stock level.
-  $('#add_line_item_variant_id').change(function () {
+  $('#add_line_item_variantId').change(function () {
     const variantId = $(this)
       .val()
       .toString()
 
     const variant = _.find(window.variants, function (variant) {
-      return variant.id.toString() == variantId
+      return variant.id.toString() === variantId
     })
     $('#stock_details').html(variantLineItemTemplate({ variant }))
     $('#stock_details').show()
@@ -22,18 +22,18 @@ function addVariant () {
   const variantId = $('select.variant_autocomplete').val()
   const quantity = parseInt($('input#variant_quantity').val())
 
-  adjustLineItems(order_id, variantId, quantity)
+  adjustLineItems(orderId, variantId, quantity)
   return 1
 }
 
-const adjustLineItems = function (order_id, variant_id, quantity) {
+const adjustLineItems = function (orderId, variantId, quantity) {
   $.ajax({
     type: 'POST',
     url: SpreeDash.routes.line_items_api_v2,
     data: {
       line_item: {
-        order_id,
-        variant_id,
+        orderId,
+        variantId,
         quantity
       }
     },

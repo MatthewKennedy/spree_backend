@@ -143,7 +143,7 @@ document.addEventListener('spree:load', function () {
       async: false,
       headers: SpreeDash.apiV2Authentication(),
       url: SpreeDash.url(
-        SpreeDash.routes.orders_api_v2 + '/' + order_number + '/advance'
+        SpreeDash.routes.orders_api_v2 + '/' + orderNumber + '/advance'
       )
     }).done(function () {
       window.location.reload()

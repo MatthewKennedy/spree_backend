@@ -5,7 +5,7 @@ document.addEventListener('spree:load', function () {
   'use strict'
 
   // handle variant selection, show stock level.
-  $('#add_variant_id').change(function () {
+  $('#add_variantId').change(function () {
     const variantId = $(this)
       .val()
       .toString()
@@ -66,7 +66,7 @@ document.addEventListener('spree:load', function () {
         url: SpreeDash.url(url),
         data: {
           shipment: {
-            variant_id: variantId
+            variantId
           }
         },
         headers: SpreeDash.apiV2Authentication()
@@ -237,7 +237,7 @@ document.addEventListener('spree:load', function () {
 function adjustShipmentItems (shipmentNumber, variantId, quantity) {
   const shipment = _.findWhere(shipments, { number: shipmentNumber + '' })
   const inventoryUnits = _.where(shipment.inventory_units, {
-    variant_id: variantId
+    variantId
   })
   let url = SpreeDash.routes.shipments_api_v2 + '/' + shipmentNumber
   const previousQuantity = inventoryUnits.reduce(function (
@@ -266,7 +266,7 @@ function adjustShipmentItems (shipmentNumber, variantId, quantity) {
       url: SpreeDash.url(url),
       data: {
         shipment: {
-          variant_id: variantId,
+          variantId,
           quantity: newQuantity
         }
       },
@@ -414,7 +414,7 @@ function completeItemSplit (event) {
     }
 
     const data = {
-      variant_id: variantId,
+      variantId,
       quantity
     }
 
@@ -472,8 +472,8 @@ function addVariantFromStockLocation (event) {
       url: SpreeDash.routes.shipments_api_v2,
       data: {
         shipment: {
-          order_id,
-          variant_id: variantId,
+          orderId,
+          variantId,
           quantity,
           stock_location_id: stockLocationId
         }

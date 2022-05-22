@@ -62,3 +62,5 @@ function formatSelect2Options (data) {
 
   return { results }
 }
+
+export { formatSelect2Options }
