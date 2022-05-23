@@ -13,9 +13,13 @@ aside#main-sidebar {
     z-index: 1042;
   }
 
+  #navFooter {
+    height: var(--nav-bar-height)
+  }
+
   #carouselMainNavigation {
-    margin-bottom: 50px;
-    margin-top: 50px;
+    margin-bottom: var(--nav-bar-height);
+    margin-top: var(--nav-bar-height);
   }
 }
 
