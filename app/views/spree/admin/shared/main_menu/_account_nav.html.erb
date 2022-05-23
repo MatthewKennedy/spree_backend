@@ -1,17 +1,11 @@
-<% if try_spree_current_user %>
-  <nav class="pb-3 pt-lg-3 px-1">
-    <%= render partial: 'spree/admin/shared/main_menu/close_mobile_menu_button' %>
+<% if spree.respond_to? :root_path %>
+  <ul class="nav nav-sidebar" id="sidebarDashboard">
+    <%= tab Spree.t('admin.home'), url: spree.root_path, match_path: nil, icon: 'shop.svg' %>
+  </ul>
+<% end %>
 
-    <% if spree.respond_to? :root_path %>
-      <ul class="nav nav-sidebar" id="sidebarDashboard">
-        <%= tab Spree.t('admin.home'), url: spree.root_path, match_path: nil, icon: 'shop.svg' %>
-      </ul>
-    <% end %>
-
-    <% if admin_logout_link %>
-      <ul class="nav nav-sidebar" id="logout">
-        <%= tab Spree.t(:logout), url: admin_logout_link, match_path: nil, icon: 'box-arrow-right.svg' %>
-      </ul>
-    <% end %>
-  </nav>
+<% if admin_logout_link %>
+  <ul class="nav nav-sidebar" id="logout">
+    <%= tab Spree.t(:logout), url: admin_logout_link, match_path: nil, icon: 'box-arrow-right.svg' %>
+  </ul>
 <% end %>

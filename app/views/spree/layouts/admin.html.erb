@@ -19,7 +19,6 @@
         <%#-------------------------------------------------%>
         <%= render partial: 'spree/admin/shared/menu' %>
 
-
         <%#-------------------------------------------------%>
         <%# Content                                         %>
         <%#-------------------------------------------------%>
@@ -53,7 +52,6 @@
               <% end %>
             </div>
 
-            <%= render partial: 'spree/admin/shared/main_menu/toggle_main_menu_button' %>
           </div>
         </main>
       </div>
@@ -71,5 +69,14 @@
     <div id="FlashAlertsContainer" class="d-none">
       <%= flash_alert(flash) %>
     </div>
+
+    <button
+      id="sidebar-open"
+      class="btn btn-light position-fixed bottom-0 left-0 m-3 d-lg-none"
+      type="button"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <%= svg_icon name: "list.svg", width: '25', height: '25' %>
+    </button>
   </body>
 </html>
