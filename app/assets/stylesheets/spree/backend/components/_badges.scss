@@ -51,8 +51,10 @@
 }
 
 // light
-.bg-disabled,
-.bg-invited {
+.badge.bg-disabled,
+.badge.bg-invited
+.bg-light {
+  color: red;
   background: var(--bs-light);
 }
 
