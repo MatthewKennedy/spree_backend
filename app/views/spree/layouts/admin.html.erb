@@ -6,11 +6,6 @@
 
   <body class="admin" data-controller="spree">
     <%#-------------------------------------------------%>
-    <%# Header navbar                                   %>
-    <%#-------------------------------------------------%>
-    <%#= render partial: 'spree/admin/shared/header' %>
-
-    <%#-------------------------------------------------%>
     <%# Main content                                    %>
     <%#-------------------------------------------------%>
     <div id="mainWrapper" class="container-fluid
@@ -20,51 +15,10 @@
       <div class="row">
 
         <%#-------------------------------------------------%>
-        <%# Sidebar                                         %>
+        <%# Menu                                            %>
         <%#-------------------------------------------------%>
-        <aside
-          class="col-12 col-lg-3 col-xl-2 sidebar position-fixed d-flex justify-content-between flex-column px-0"
-          id="main-sidebar"
-          data-hook="admin_tabs">
-          <div id="carouselMainNavigation" class="carousel slide" data-bs-ride="false">
-            <div class="carousel-inner">
-              <div class="carousel-item">
-                <%= render partial: 'spree/admin/shared/settings_menu' %>
-              </div>
-              <div class="carousel-item">
-                <%= render partial: 'spree/admin/shared/settings_menu' %>
-              </div>
-              <div class="carousel-item">
-                <%= render partial: 'spree/admin/shared/settings_menu' %>
-              </div>
-              <div class="carousel-item">
-                <%= render partial: 'spree/admin/shared/account_nav' %>
-              </div>
-              <div class="carousel-item active">
-                <%= render partial: 'spree/admin/shared/main_menu' %>
-              </div>
-            </div>
-            <div class="d-flex position-fixed bottom-0 py-2 col-12 col-lg-3 col-xl-2 justify-content-center">
-              <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="0" class="p-2" aria-current="true" aria-label="Search">
-                <%= svg_icon name: "search.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
-              </button>
-              <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="1" class="p-2" aria-current="true" aria-label="Store Switch">
-                <%= svg_icon name: "shuffle.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
-              </button>
-              <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="2" class="p-2" aria-current="true" aria-label="Settings">
-                <%= svg_icon name: "gear.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
-              </button>
-              <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="3" class="p-2" aria-label="Account">
-                <%= svg_icon name: "person-square.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
-              </button>
-              <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="4" class="active p-2" aria-label="Main Menu">
-                <%= svg_icon name: "list.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
-              </button>
-            </div>
-          </div>
+        <%= render partial: 'spree/admin/shared/menu' %>
 
-          <%#= render partial: 'spree/admin/shared/main_menu' %>
-        </aside>
 
         <%#-------------------------------------------------%>
         <%# Content                                         %>
@@ -99,6 +53,7 @@
               <% end %>
             </div>
 
+            <%= render partial: 'spree/admin/shared/main_menu/toggle_main_menu_button' %>
           </div>
         </main>
       </div>

@@ -8,6 +8,15 @@ aside#main-sidebar {
   z-index: 1041;
   background: var(--bs-body-bg);
   top: 0;
+
+  #navHeader {
+    z-index: 1042;
+  }
+
+  #carouselMainNavigation {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
 }
 
 body.sidebar-open {
