@@ -15,8 +15,5 @@ require: []
 domains: []
 reporters:
   - rubocop
-  - require_not_found:
-    exclude:
-      - /*
 require_paths: []
 max_files: 50_000
