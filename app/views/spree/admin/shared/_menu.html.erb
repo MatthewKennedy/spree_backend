@@ -1,6 +1,11 @@
+<% main_panel_manifest = ["/dashboard", "/orders", "/return_authorizations", "/customer_returns", "/products", "/stock", "/reports", "/promotion", "/users", "/menus", "/cms_pages" ] %>
+<% settings_panel_manifest = ["/store", "/tax", "/zones", "/countries", "/shipping", "/refund", "/reimbursement", "/return_authorization_reasons",
+                              "/roles", "/oauth_applications", "/payment_methods", "/webhooks_subscribers"] %>
+
 <aside class="col-12 col-lg-3 col-xl-2 sidebar position-fixed d-flex flex-column px-0 overflow-hidden"
        id="main-sidebar"
        data-hook="admin_tabs">
+
   <div id="navHeader" class="d-flex p-2 position-absolute top-0 w-100 bg-light align-items-center">
     <div class="col">
       <%= svg_icon name: "spree-logo.svg", width: '100', height: '35' %>
@@ -11,7 +16,7 @@
             class="btn btn-light col-auto d-none d-lg-flex"
             aria-label="Search">
 
-      <%= svg_icon name: "search.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
+      <%= svg_icon name: "search.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
 
     <button id="sidebar-close"
@@ -20,7 +25,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation">
 
-      <%= svg_icon name: "x-lg.svg", width: '20', height: '20', classes: 'p-0 m-0' %>
+      <%= svg_icon name: "x-lg.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
   </div>
 
@@ -31,7 +36,7 @@
           <%= render partial: 'spree/admin/shared/main_menu/store_nav' %>
         </nav>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item <%= "active" if active_nav_panel?(manifest: settings_panel_manifest) %>">
         <nav class="pb-3 pt-lg-3 px-1">
           <%= render partial: 'spree/admin/shared/main_menu/settings_nav' %>
         </nav>
@@ -43,7 +48,7 @@
           </nav>
         </div>
       <% end %>
-      <div class="carousel-item active">
+      <div class="carousel-item <%= "active" if active_nav_panel?(manifest: main_panel_manifest) %>">
         <nav class="pb-3 pt-lg-3 px-1">
           <%= render partial: 'spree/admin/shared/main_menu/main_nav' %>
         </nav>
@@ -55,7 +60,7 @@
     <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="0" class="btn btn-light p-2" aria-current="true" aria-label="Store Switch">
       <%= svg_icon name: "shuffle.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
-    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="1" class="btn btn-light p-2" aria-current="true" aria-label="Settings">
+    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="1" class="btn btn-light p-2 <%= "active" if active_nav_panel?(manifest: settings_panel_manifest) %>" aria-current="true" aria-label="Settings">
       <%= svg_icon name: "gear.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
     <% if try_spree_current_user %>
@@ -63,7 +68,7 @@
         <%= svg_icon name: "person-square.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
       </button>
     <% end %>
-    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="3" class="btn btn-light p-2 active " aria-label="Main Menu">
+    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="3" class="btn btn-light p-2 <%= "active" if active_nav_panel?(manifest: main_panel_manifest) %>" aria-label="Main Menu">
       <%= svg_icon name: "list.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
   </div>

@@ -19,6 +19,22 @@ module Spree
       ICON_SIZE = 16
       MENU_ICON_SIZE = 18
 
+      def active_nav_panel?(manifest:)
+        result = manifest.map do |path|
+          check_nav_panel(path)
+        end
+
+        result.include?(true)
+      end
+
+      def check_nav_panel(path)
+        if path.is_a? Regexp
+          request.fullpath match? path
+        else
+          request.fullpath.starts_with?("#{spree.admin_path}#{path}")
+        end
+      end
+
       def tab(*args)
         options = {label: args.first.to_s}
 
