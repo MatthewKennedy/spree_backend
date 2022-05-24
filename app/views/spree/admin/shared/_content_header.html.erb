@@ -2,7 +2,7 @@
      class="row mb-3 position-fixed top-0 <%= "tabsAndActions" if content_for?(:page_tabs) %>">
   <% if content_for?(:page_title) || content_for?(:page_actions) %>
     <div class="contentHeader col <%= "d-flex align-items-center" unless content_for?(:page_tabs) %>">
-      <div class="d-flex align-items-center my-2">
+      <div class="d-flex align-items-center my-2 w-100">
         <% if content_for?(:page_title) %>
           <h2 class="px-0 mb-0 col d-flex">
             <%= yield :page_title %>
