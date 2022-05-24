@@ -2,7 +2,7 @@ module Spree
   module Backend
     module Generators
       class InstallGenerator < Rails::Generators::Base
-        desc "Installs Spree Dashboard"
+        desc "Installs Spree Dash"
 
         def self.source_paths
           [
@@ -13,10 +13,7 @@ module Spree
         end
 
         def install
-          template "app/javascript/spree-dashboard.js"
-          template "vendor/assets/javascripts/spree/backend/all.js"
-          template "vendor/assets/stylesheets/spree/backend/all.css"
-          run "yarn add @spree/dashboard"
+          template "app/javascript/spree_dash.js"
         end
       end
     end

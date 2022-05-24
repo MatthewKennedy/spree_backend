@@ -55,7 +55,6 @@ group :test, :development do
 end
 
 group :development do
-  gem "github_fast_changelog"
   gem "solargraph"
 end
 

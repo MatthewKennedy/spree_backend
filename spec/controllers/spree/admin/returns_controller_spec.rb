@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Spree
   module Admin
-    describe ReturnIndexController, type: :controller do
+    describe ReturnsController, type: :controller do
       stub_authorization!
 
       describe "#return_authorizations" do
