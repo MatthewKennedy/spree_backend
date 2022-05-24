@@ -2,30 +2,22 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:starting_from) %>
 
-<div class="input-group datePickerFrom"
-     <% if date_time %>
-        data-enable-time="true"
-        data-alt-format="<%= Spree.t(:fpr_human_friendly_date_time_format, scope: 'date_picker', default: 'M j, Y H:i') %>"
-     <% else %>
-        data-alt-format="<%= Spree.t(:fpr_human_friendly_date_format, scope: 'date_picker', default: 'M j, Y') %>"
-     <% end %>
-     data-wrap="true"
-     data-max-date="<%= data_max_date %>">
-
+<div id="<%= "datePickerFrom_#{from_field.to_s}" %>" class="input-group datePickerFrom" data-controller="flatpickr"
+                                        data-wrap="true"
+                                        data-flatpickr-enable-time="<%= date_time %>"
+                                        data-flatpickr-max-date="<%= data_max_date %>"
+                                        data-target-pair-id=<%= "datePickerTo_#{to_field.to_s}" %>>
   <% if date_time %>
-    <%= f.datetime_field from_field.to_sym,
-                         class: 'form-control rounded-start js-filterable',
-                         value: value,
-                         placeholder: placeholder,
-                         'data-input':'' %>
+    <%= f.datetime_field from_field.to_sym, class: 'js-filterable',
+                                            value: value,
+                                            placeholder: placeholder,
+                                            data: { input:'' } %>
   <% else %>
-    <%= f.text_field from_field.to_sym,
-                     class: 'form-control rounded-start js-filterable',
-                     value: value,
-                     placeholder: placeholder,
-                     'data-input':'' %>
+    <%= f.text_field from_field.to_sym, class: 'js-filterable',
+                                        value: value,
+                                        placeholder: placeholder,
+                                        data: { input:'' } %>
   <% end %>
 
   <%= render partial: 'spree/admin/shared/cal_close' %>
 </div>
-

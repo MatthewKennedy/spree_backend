@@ -2,27 +2,19 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:select_a_date) %>
 
-<div class="input-group datepicker"
-     <% if date_time %>
-        data-enable-time="true"
-        data-alt-format="<%= Spree.t(:fpr_human_friendly_date_time_format, scope: 'date_picker', default: 'M j, Y H:i') %>"
-     <% else %>
-        data-alt-format="<%= Spree.t(:fpr_human_friendly_date_format, scope: 'date_picker', default: 'M j, Y') %>"
-     <% end %>
-     data-wrap="true">
-
+<div class="input-group datepicker" data-controller="flatpickr"
+                                    data-wrap="true"
+                                    data-flatpickr-enable-time="<%= date_time %>" >
   <% if date_time %>
-    <%= f.datetime_field field.to_sym,
-                         class: 'form-control rounded-start js-filterable',
-                         value: value,
-                         placeholder: placeholder,
-                         'data-input':'' %>
+    <%= f.datetime_field field.to_sym, class: 'js-filterable',
+                                       placeholder: placeholder,
+                                       value: value,
+                                       data: { input:'' } %>
   <% else %>
-    <%= f.text_field field.to_sym,
-                     class: 'form-control rounded-start js-filterable',
-                     value: value,
-                     placeholder: placeholder,
-                     'data-input':'' %>
+    <%= f.send(:text_field) field.to_sym, class: "js-filterable",
+                                   placeholder: placeholder,
+                                   value: value,
+                                   data: { input:'' } %>
   <% end %>
 
   <%= render partial: 'spree/admin/shared/cal_close' %>

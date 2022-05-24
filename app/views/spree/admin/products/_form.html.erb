@@ -73,6 +73,7 @@
 
           <%= render partial: 'spree/admin/shared/date_picker_from', locals: { f: f,
                                                                                from_field: :available_on,
+                                                                               to_field: :discontinue_on,
                                                                                value: datepicker_field_value(@product.available_on),
                                                                                data_max_date: @product.discontinue_on,
                                                                                placeholder: Spree.t(:available_on) } %>
@@ -86,6 +87,7 @@
 
           <%= render partial: 'spree/admin/shared/date_picker_to',  locals: { f: f,
                                                                               to_field: :discontinue_on,
+                                                                              from_field: :available_on,
                                                                               value: datepicker_field_value(@product.discontinue_on),
                                                                               data_min_date: @product.available_on,
                                                                               placeholder: Spree.t(:discontinue_on) } %>
