@@ -1,6 +1,6 @@
 module Spree
   module Admin
-    class ReturnIndexController < BaseController
+    class ReturnsController < BaseController
       def return_authorizations
         collection(Spree::ReturnAuthorization.for_store(current_store).accessible_by(current_ability, :index))
         respond_with(@collection)

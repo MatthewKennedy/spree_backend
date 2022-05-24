@@ -119,8 +119,8 @@ Spree::Core::Engine.add_routes do
       end
     end
 
-    get "/return_authorizations", to: "return_index#return_authorizations", as: :return_authorizations
-    get "/customer_returns", to: "return_index#customer_returns", as: :customer_returns
+    get "/return_authorizations", to: "returns#return_authorizations", as: :return_authorizations
+    get "/customer_returns", to: "returns#customer_returns", as: :customer_returns
 
     resources :return_items, only: [:update]
 

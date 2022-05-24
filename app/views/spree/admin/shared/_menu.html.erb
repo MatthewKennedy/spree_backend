@@ -1,6 +1,5 @@
-<% main_panel_manifest = [ "/dashboard", "/orders", "/return_authorizations", "/customer_returns", "/products", "/properties", "/prototypes", "/taxonomies", "/taxons", "/stock", "/reports", "/promotion", "/users", "/menus", "/cms_pages", "/option_types" ] %>
-<% settings_panel_manifest = ["/store", "/tax_categories", "/tax_rates", "/zones", "/countries", "/shipping", "/refund", "/reimbursement", "/return_authorization_reasons",
-                              "/roles", "/oauth_applications", "/payment_methods", "/webhooks_subscribers"] %>
+<% main_menu_controller_names = [:dashboard, :orders, :products, :return_authorizations, :returns, :customer_returns, :properties, :prototypes, :taxonomies, :taxons, :stock_transfers, :stock_locations, :reports, :promotions, :promotion_categories, :users, :menus, :cms_pages, :option_types ] %>
+<% settings_controller_names = [:stores, :states, :roles, :tax_categories, :tax_rates, :zones, :countries, :shipping_methods, :shipping_categories, :store_credit_categories, :refund_reasons, :reimbursements, :reimbursement_types, :return_authorization_reasons, :rolses, :oauth_applications, :payment_methods, :webhooks_subscribers ] %>
 
 <aside class="col-12 col-lg-3 col-xl-2 sidebar position-fixed d-flex flex-column px-0 overflow-hidden"
        id="main-sidebar"
@@ -36,7 +35,7 @@
           <%= render partial: 'spree/admin/shared/main_menu/store_nav' %>
         </nav>
       </div>
-      <div class="carousel-item <%= "active" if active_nav_panel?(manifest: settings_panel_manifest) %>">
+      <div class="carousel-item <%= "active" if active_panel?(settings_controller_names) %>">
         <nav class="pb-3 pt-lg-3 px-1">
           <%= render partial: 'spree/admin/shared/main_menu/settings_nav' %>
         </nav>
@@ -48,7 +47,7 @@
           </nav>
         </div>
       <% end %>
-      <div class="carousel-item <%= "active" if active_nav_panel?(manifest: main_panel_manifest) %>">
+      <div class="carousel-item <%= "active" if active_panel?(main_menu_controller_names) %>">
         <nav class="pb-3 pt-lg-3 px-1">
           <%= render partial: 'spree/admin/shared/main_menu/main_nav' %>
         </nav>
@@ -60,7 +59,7 @@
     <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="0" class="btn btn-light p-2rounded-0 " aria-current="true" aria-label="Store Switch">
       <%= svg_icon name: "shuffle.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
-    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="1" class="btn btn-light p-2 rounded-0 <%= "active" if active_nav_panel?(manifest: settings_panel_manifest) %>" aria-current="true" aria-label="Settings">
+    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="1" class="btn btn-light p-2 rounded-0 <%= "active" if active_panel?(settings_controller_names) %>" aria-current="true" aria-label="Settings">
       <%= svg_icon name: "gear.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
     <% if try_spree_current_user %>
@@ -68,7 +67,7 @@
         <%= svg_icon name: "person-square.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
       </button>
     <% end %>
-    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="3" class="btn btn-light p-2 rounded-0 <%= "active" if active_nav_panel?(manifest: main_panel_manifest) %>" aria-label="Main Menu">
+    <button type="button" data-bs-target="#carouselMainNavigation" data-bs-slide-to="3" class="btn btn-light p-2 rounded-0 <%= "active" if active_panel?(main_menu_controller_names) %>" aria-label="Main Menu">
       <%= svg_icon name: "list.svg", width: '16', height: '16', classes: 'p-0 m-0' %>
     </button>
   </div>
