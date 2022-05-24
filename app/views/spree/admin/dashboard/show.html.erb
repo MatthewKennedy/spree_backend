@@ -1,3 +1,5 @@
+<% content_for :page_title do %>
+  <%= Spree.t("dashboard") %>
+<% end %>
 <%= render 'getting_started' unless @onboarding_complete %>
-
 <%= render 'apis' %>

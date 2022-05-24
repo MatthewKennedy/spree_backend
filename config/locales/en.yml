@@ -3,6 +3,7 @@ en:
     admin:
       url: URL
       active: Active
+      dashboard: Dashboard
       name: Name
       successful: Successful
       created_at: Created At

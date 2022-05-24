@@ -3,10 +3,22 @@
   height: 36px;
 }
 
+#content {
+  margin-top: 75px;
+}
+
+#content.tabsAndActionsShim {
+  margin-top: calc(100px + 20px);
+}
+
 #multi-backdrop {
   z-index: 0;
   height: 0;
   width: 0;
+}
+
+#mobileButtons {
+  z-index: 1000;
 }
 
 body.modal-open #multi-backdrop {
