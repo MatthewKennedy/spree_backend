@@ -6,7 +6,7 @@ require "generators/spree/dummy/dummy_generator"
 require "generators/spree/dummy_model/dummy_model_generator"
 
 desc "Generates a dummy app for testing"
-namespace :commonz do
+namespace :spree_dash do
   task :test_app, :user_class do |_t, args|
     args.with_defaults(user_class: "Spree::LegacyUser", install_storefront: "false", install_admin: "false")
     require ENV["LIB_NAME"].to_s
@@ -50,11 +50,14 @@ namespace :commonz do
 
     unless ["spree/api", "spree/core", "spree/sample"].include?(ENV["LIB_NAME"])
       if ENV["LIB_NAME"] == "spree/backend"
-        $stdout.puts "Installing node dependencies..."
-        system("yarn add file:./../spree_backend")
+        $stdout.puts "Installing Spree Backend node dependencies..."
+        system("yarn add file:./../../../spree_backend")
         system("yarn link @spree/dash")
         system("yarn install")
+
+        File.write("config/initializers/assets.rb", "Rails.application.config.assets.paths << Rails.root.join('node_modules')", mode: "a+")
       end
+
       $stdout.puts "Precompiling assets..."
       system("bundle exec rake assets:precompile")
     end

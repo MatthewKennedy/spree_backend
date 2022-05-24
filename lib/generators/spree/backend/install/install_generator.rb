@@ -13,7 +13,10 @@ module Spree
         end
 
         def install
+          template "vendor/assets/javascripts/spree/backend/all.js"
+          template "vendor/assets/stylesheets/spree/backend/all.css"
           template "app/javascript/spree_dash.js"
+          template "app/assets/stylesheets/spree/backend.scss"
         end
       end
     end
