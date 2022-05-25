@@ -2,11 +2,14 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:ending_at) %>
 
-<div id="<%= "datePickerTo_#{to_field.to_s}" %>" class="input-group datePickerTo" data-controller="datepicker"
-                                      data-wrap="true"
-                                      data-flatpickr-enable-time="<%= date_time %>"
-                                      data-flatpickr-min-date="<%= data_min_date %>"
-                                      data-target-pair-id=<%= "datePickerFrom_#{from_field.to_s}" %>>
+<div id="<%= "datePickerTo_#{to_field.to_s}" %>" class="input-group" data-controller="datepicker"
+                                                                     data-datepicker-to="true"
+                                                                     data-wrap="true"
+                                                                     <% if date_time %>
+                                                                       data-enable-time="true"
+                                                                     <% end %>
+                                                                     data-min-date="<%= data_min_date %>"
+                                                                     data-target-pair-id=<%= "datePickerFrom_#{from_field.to_s}" %>>
   <% if date_time %>
     <%= f.datetime_field to_field.to_sym, class: 'form-control rounded-start js-filterable',
                                           value: value,
@@ -21,4 +24,3 @@
 
   <%= render partial: 'spree/admin/shared/cal_close' %>
 </div>
-

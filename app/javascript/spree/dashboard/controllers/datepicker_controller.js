@@ -16,12 +16,12 @@ export default class extends Flatpickr {
   }
 
   change (selectedDates, dateStr, instance) {
-    if (this.element.classList.contains('datePickerFrom')) {
+    if (this.element.dataset.datepickerFrom) {
       const toCal = document.getElementById(this.element.dataset.targetPairId)
       toCal._flatpickr.set('minDate', selectedDates[0])
     }
 
-    if (this.element.classList.contains('datePickerTo')) {
+    if (this.element.dataset.datepickerTo) {
       const fromCal = document.getElementById(this.element.dataset.targetPairId)
       fromCal._flatpickr.set('maxDate', selectedDates[0])
     }

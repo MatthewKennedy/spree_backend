@@ -2,9 +2,11 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:select_a_date) %>
 
-<div class="input-group datepicker" data-controller="datepicker"
-                                    data-wrap="true"
-                                    data-flatpickr-enable-time="<%= date_time %>" >
+<div class="input-group" data-controller="datepicker"
+                         data-wrap="true"
+                         <% if date_time %>
+                           data-enable-time="true"
+                         <% end %>>
   <% if date_time %>
     <%= f.datetime_field field.to_sym, class: 'js-filterable',
                                        placeholder: placeholder,

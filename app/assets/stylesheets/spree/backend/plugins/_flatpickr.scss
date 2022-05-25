@@ -69,9 +69,7 @@
   }
 }
 
-.input-group.datePickerFrom,
-.input-group.datePickerTo,
-.input-group.datepicker {
+[data-controller="datepicker"] {
   input.flatpickr-alt-input[readonly] {
     // Flatpickr alternate input is read-only,
     // style it as an active input field.
