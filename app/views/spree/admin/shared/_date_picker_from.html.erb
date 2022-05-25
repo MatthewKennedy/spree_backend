@@ -2,7 +2,7 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:starting_from) %>
 
-<div id="<%= "datePickerFrom_#{from_field.to_s}" %>" class="input-group datePickerFrom" data-controller="flatpickr"
+<div id="<%= "datePickerFrom_#{from_field.to_s}" %>" class="input-group datePickerFrom" data-controller="datepicker"
                                         data-wrap="true"
                                         data-flatpickr-enable-time="<%= date_time %>"
                                         data-flatpickr-max-date="<%= data_max_date %>"

@@ -2,7 +2,7 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:select_a_date) %>
 
-<div class="input-group datepicker" data-controller="flatpickr"
+<div class="input-group datepicker" data-controller="datepicker"
                                     data-wrap="true"
                                     data-flatpickr-enable-time="<%= date_time %>" >
   <% if date_time %>
@@ -11,7 +11,7 @@
                                        value: value,
                                        data: { input:'' } %>
   <% else %>
-    <%= f.send(:text_field) field.to_sym, class: "js-filterable",
+    <%= f.text_field field.to_sym, class: "js-filterable",
                                    placeholder: placeholder,
                                    value: value,
                                    data: { input:'' } %>

@@ -2,7 +2,7 @@
 <% value ||= nil  %>
 <% placeholder ||= Spree.t(:ending_at) %>
 
-<div id="<%= "datePickerTo_#{to_field.to_s}" %>" class="input-group datePickerTo" data-controller="flatpickr"
+<div id="<%= "datePickerTo_#{to_field.to_s}" %>" class="input-group datePickerTo" data-controller="datepicker"
                                       data-wrap="true"
                                       data-flatpickr-enable-time="<%= date_time %>"
                                       data-flatpickr-min-date="<%= data_min_date %>"

@@ -10,7 +10,7 @@ import WebhooksSubscriberEventsController from './webhooks_subscriber_events_con
 import PasswordToggleController from './password_toggle_controller'
 import ClipboardController from './clipboard_controller'
 import ProductEditController from './product_edit_controller'
-import FlatpickrController from './flatpickr_controller'
+import DatePickerController from './datepicker_controller'
 
 // Stimulus - Setup
 window.Stimulus = Application.start()
@@ -25,4 +25,4 @@ Stimulus.register(
 Stimulus.register('password-toggle', PasswordToggleController)
 Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('product-edit', ProductEditController)
-Stimulus.register('flatpickr', FlatpickrController)
+Stimulus.register('datepicker', DatePickerController)

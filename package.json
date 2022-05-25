@@ -40,6 +40,7 @@
     "stimulus-sortable": "^3.1.0",
     "sweetalert2": "^11.4.14",
     "tinymce": "^6.0.2",
+    "tom-select": "^2.0.3",
     "underscore": "^1.13.3"
   },
   "devDependencies": {
