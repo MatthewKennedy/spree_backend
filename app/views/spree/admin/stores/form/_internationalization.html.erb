@@ -7,12 +7,12 @@
   <div class="card-body">
     <%= f.field_container :default_currency do %>
       <%= f.label :default_currency %>
-      <%= f.select :default_currency, currency_options(@store.default_currency), {}, { class: 'select2' } %>
+      <%= f.select :default_currency, currency_options(@store.default_currency), {}, { data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :default_currency %>
     <% end %>
     <%= f.field_container :supported_currencies do %>
       <%= f.label :supported_currencies, Spree.t(:supported_currencies) %>
-      <%= f.select :supported_currencies, currency_options(@store.supported_currencies&.split(',')), { prompt: false }, { multiple: true, class: 'select2' } %>
+      <%= f.select :supported_currencies, currency_options(@store.supported_currencies&.split(',')), { prompt: false }, { multiple: true, data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :supported_currencies %>
       <small class="form-text text-muted">
         <%= Spree.t('admin.store_form.currencies_help') %>
@@ -21,7 +21,7 @@
     <hr />
     <%= f.field_container :checkout_zone_id do %>
       <%= f.label :checkout_zone_id, Spree.t(:shipping_zone) %>
-      <%= f.select :checkout_zone_id, options_for_select(@zones), { include_blank: Spree.t(:no_limits_zone) }, { class: 'select2' } %>
+      <%= f.select :checkout_zone_id, options_for_select(@zones), { include_blank: Spree.t(:no_limits_zone) }, { data: {controller: 'ts--select'} } %>
       <small class="form-text text-muted">
         <%= raw(Spree.t('admin.store_form.checkout_zone_help')) %>
       </small>
@@ -29,7 +29,7 @@
     <% end %>
     <%= f.field_container :default_country_id do %>
       <%= f.label :default_country_id, Spree.t('i18n.default_country') %>
-      <%= f.select :default_country_id, options_for_select(@countries, @store.default_country_id), {}, { class: 'select2' } %>
+      <%= f.select :default_country_id, options_for_select(@countries, @store.default_country_id), {}, { data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :default_country_id %>
       <small class="form-text text-muted">
         <%= Spree.t('admin.store_form.default_country_help') %>
@@ -38,7 +38,7 @@
     <hr />
     <%= f.field_container :default_locale do %>
       <%= f.label :default_locale %>
-      <%= f.select :default_locale, options_from_collection_for_select(all_locales_options, :last, :first, @store.default_locale || I18n.locale), {}, { class: 'select2' } %>
+      <%= f.select :default_locale, options_from_collection_for_select(all_locales_options, :last, :first, @store.default_locale || I18n.locale), {}, { data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :default_locale %>
       <% unless defined?(SpreeI18n) %>
         <small class="form-text text-muted">
@@ -48,7 +48,7 @@
     <% end %>
     <%= f.field_container :supported_locales do %>
       <%= f.label :supported_locales, Spree.t(:supported_locales) %>
-      <%= f.select :supported_locales, options_from_collection_for_select(all_locales_options, :last, :first, @store.supported_locales&.split(',')), {}, { multiple: true, class: 'select2' } %>
+      <%= f.select :supported_locales, options_from_collection_for_select(all_locales_options, :last, :first, @store.supported_locales&.split(',')), {}, { multiple: true, data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :supported_locales %>
     <% end %>
   </div>

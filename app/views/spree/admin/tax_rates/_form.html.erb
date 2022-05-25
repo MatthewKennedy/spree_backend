@@ -35,11 +35,11 @@
       <div class="col-12 col-lg-6">
         <div data-hook="zone" class="form-group">
           <%= f.label :zone, Spree.t(:zone) %>
-          <%= f.collection_select(:zone_id, @available_zones, :id, :name, {}, {class: 'select2'}) %>
+          <%= f.collection_select(:zone_id, @available_zones, :id, :name, {}, {data: {controller: 'ts--select'}}) %>
         </div>
         <div data-hook="category" class="form-group">
           <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-          <%= f.collection_select(:tax_category_id, @available_categories,:id, :name, {}, {class: 'select2'}) %>
+          <%= f.collection_select(:tax_category_id, @available_categories,:id, :name, {}, {data: {controller: 'ts--select'}}) %>
         </div>
         <div data-hook="show_rate" class="form-group">
           <%= f.label :show_rate_in_label do %>

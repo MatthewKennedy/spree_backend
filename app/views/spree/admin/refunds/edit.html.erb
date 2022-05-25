@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <%= f.label :refund_reason_id, Spree.t(:reason) %><br>
-        <%= f.collection_select(:refund_reason_id, refund_reasons, :id, :name, {}, {class: 'select2'}) %>
+        <%= f.collection_select(:refund_reason_id, refund_reasons, :id, :name, {}, {data: {controller: 'ts--select'}}) %>
       </div>
     </div>
 

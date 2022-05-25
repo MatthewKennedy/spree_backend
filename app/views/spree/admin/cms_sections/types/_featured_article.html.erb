@@ -20,7 +20,7 @@
 
     <%= f.field_container :gutters do %>
       <%= f.label :gutters, Spree.t('admin.cms.gutters') %>
-      <%= f.select(:gutters, @cms_section.gutters_sizes, {include_blank: false}, class: 'select2') %>
+      <%= f.select(:gutters, @cms_section.gutters_sizes, {include_blank: false}, data: {controller: 'ts--select'}) %>
       <%= f.error_message_on :gutters %>
     <% end %>
 

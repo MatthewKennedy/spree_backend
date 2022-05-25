@@ -38,7 +38,7 @@
                 <%= item_fields.select(:override_reimbursement_type_id,
                   reimbursement_types.collect { |r| [r.name.humanize, r.id] },
                   {include_blank: true},
-                  {class: 'select2'}
+                  {data: {controller: 'ts--select'}}
                 ) %>
               </td>
               <td>

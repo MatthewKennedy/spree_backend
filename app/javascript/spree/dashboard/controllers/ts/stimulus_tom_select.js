@@ -33,16 +33,6 @@ class StimulusTomSelect extends Controller {
   disconnect () {
     this.ts.destroy()
   }
-
-  render_option (data, escape) {
-    if (data.sub) {
-      return `
-      <div>
-        <div class="text">${escape(data.text)}</div>
-        <div class="sub">${escape(data.sub)}</div>
-      </div>`
-    } else { return `<div>${escape(data.text)}</div>` }
-  }
 }
 
 export default StimulusTomSelect

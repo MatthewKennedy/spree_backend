@@ -10,7 +10,7 @@
         <div class="card-body">
           <div class="form-group">
             <%= f.label :type, Spree.t(:provider) %>
-            <%= collection_select(:payment_method, :type, @providers, :to_s, :name, {}, {id: 'gtwy-type', class: 'select2'}) %>
+            <%= collection_select(:payment_method, :type, @providers, :to_s, :name, {}, {id: 'gtwy-type', data: {controller: 'ts--select'}}) %>
           </div>
           <hr class="my-4">
           <%= field_container :payment_method, :name, 'data-hook' => 'name' do %>
@@ -27,17 +27,17 @@
           <% if @stores.count > 1 %>
             <div data-hook="store" class="form-group">
               <%= label_tag :payment_method_stores, Spree.t(:stores) %>
-              <%= collection_select(:payment_method, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, class: 'select2' }) %>
+              <%= collection_select(:payment_method, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: {controller: 'ts--select'} }) %>
             </div>
           <% end %>
 
           <div data-hook="display" class="form-group">
             <%= label_tag :payment_method_display_on, Spree.t(:display) %>
-            <%= select(:payment_method, :display_on, Spree::PaymentMethod::DISPLAY.collect { |display| [Spree.t("admin.display_on.#{display}"), display.to_s] }, { selected: :both }, {class: 'select2'}) %>
+            <%= select(:payment_method, :display_on, Spree::PaymentMethod::DISPLAY.collect { |display| [Spree.t("admin.display_on.#{display}"), display.to_s] }, { selected: :both }, {data: {controller: 'ts--select'}}) %>
           </div>
           <div data-hook="auto_capture" class="form-group">
             <%= label_tag :payment_method_auto_capture, Spree.t(:auto_capture) %>
-            <%= select(:payment_method, :auto_capture, [["#{Spree.t(:use_app_default)} (#{Spree::Config[:auto_capture]})", ''], [Spree.t(:say_yes), true], [Spree.t(:say_no), false]], {}, {class: 'select2'}) %>
+            <%= select(:payment_method, :auto_capture, [["#{Spree.t(:use_app_default)} (#{Spree::Config[:auto_capture]})", ''], [Spree.t(:say_yes), true], [Spree.t(:say_no), false]], {}, {data: {controller: 'ts--select'}}) %>
           </div>
 
           <div data-hook="active" class="form-group">

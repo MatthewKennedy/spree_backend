@@ -4,11 +4,7 @@ import StimulusTomSelect from './stimulus_tom_select'
 export default class extends StimulusTomSelect {
   initialize () {
     this.config = {
-      plugins: [],
-      render: {
-        option: this.render_option,
-        item: this.render_option
-      }
+      plugins: []
     }
   }
 }

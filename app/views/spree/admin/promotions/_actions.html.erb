@@ -9,7 +9,7 @@
 
     <%= label_tag :action_type, Spree.t(:add_action_of_type) %>
     <div class="input-group mb-3">
-      <%= select_tag 'action_type', options, class: 'select2' %>
+      <%= select_tag 'action_type', options, data: {controller: 'ts--select'} %>
       <%= button Spree.t(:add), 'plus-square.svg', 'submit', class: "btn btn-secondary" %>
     </div>
 
