@@ -106,7 +106,7 @@
       <div data-hook="admin_product_form_cost_currency" class="omega two columns">
         <%= f.field_container :cost_currency do %>
           <%= f.label :cost_currency, Spree.t(:cost_currency) %>
-          <%= f.select :cost_currency, currency_options(@product.cost_currency), {}, { class: 'select2' } %>
+          <%= f.select :cost_currency, currency_options(@product.cost_currency), {}, { data: {controller: 'ts--select'} } %>
           <%= f.error_message_on :cost_currency %>
         <% end %>
       </div>
@@ -185,7 +185,7 @@
       <div data-hook="admin_product_form_shipping_categories">
         <%= f.field_container :shipping_category do %>
           <%= f.label :shipping_category_id, Spree.t(:shipping_category) %>
-          <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+          <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { data: {controller: 'ts--select'} }) %>
           <%= f.error_message_on :shipping_category %>
         <% end %>
       </div>
@@ -193,7 +193,7 @@
       <div data-hook="admin_product_form_tax_category">
         <%= f.field_container :tax_category do %>
           <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-          <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+          <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { data: {controller: 'ts--select'} }) %>
           <%= f.error_message_on :tax_category %>
         <% end %>
       </div>
@@ -219,6 +219,7 @@
                                               ts__search_lab_value: 'pretty_name',
                                               ts__search_array_value: ['name'],
                                              } %>
+
       <% elsif @product.taxons.any? %>
         <ul class="text_list">
           <% @product.taxons.each do |taxon| %>
@@ -238,11 +239,13 @@
 
       <% if can? :modify, Spree::ProductOptionType %>
       <%= f.select :option_type_ids, options_from_collection_for_select(@product.option_types, :id, :name, @product.option_type_ids),
-                                      { include_hidden: true },
-                                        multiple: true,
-                                        data: { autocomplete_url_value: 'option_types_api_v2',
-                                                autocomplete_return_attr_value: 'name',
-                                                autocomplete_multiple_value: true } %>
+                                { include_hidden: true },
+                                  multiple: true,
+                                  data: { controller: 'ts--search',
+                                          ts__search_plugins_value: ['remove_button'],
+                                          ts__search_uri_value: '/api/v2/platform/option_types'
+                                         } %>
+
       <% elsif @product.option_types.any? %>
         <ul class="text_list">
           <% @product.option_types.each do |type| %>
@@ -260,7 +263,7 @@
     <div data-hook="admin_product_form_stores">
       <%= f.field_container :stores do %>
         <%= f.label :product_stores, Spree.t(:stores) %>
-        <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, class: 'select2' }) %>
+        <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: {controller: 'ts--select'} }) %>
       <% end %>
     </div>
   <% end %>

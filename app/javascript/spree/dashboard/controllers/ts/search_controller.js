@@ -1,7 +1,7 @@
 import StimulusTomSelect from './stimulus_tom_select'
 import { get } from '../../utilities/request_utility'
 
-// Connects to data-controller="ts--select"
+// Connects to data-controller="ts--search"
 export default class extends StimulusTomSelect {
   initialize () {
     const value = this.valValue || 'id'
