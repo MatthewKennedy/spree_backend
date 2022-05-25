@@ -46,7 +46,7 @@
             <td class="actions">
               <span class="d-flex justify-content-center">
                 <% if can? :update, shipment %>
-                  <%= link_to_with_icon 'cancel.svg', Spree.t('actions.cancel'), "#", class: 'cancel-method btn btn-secondary btn-sm', data: {action: 'cancel'}, title: Spree.t('actions.cancel'), no_text: true %>
+                  <%= link_to_with_icon 'x-lg.svg', Spree.t('actions.cancel'), "#", class: 'cancel-method btn btn-secondary btn-sm', data: {action: 'cancel'}, title: Spree.t('actions.cancel'), no_text: true %>
                   <%= link_to_with_icon 'save.svg', Spree.t('actions.save'), "#", class: 'save-method btn btn-success  btn-sm', data: {'shipment-number' => shipment.number, action: 'save'}, title: Spree.t('actions.save'), no_text: true %>
                 <% end %>
               </span>
@@ -83,7 +83,7 @@
           <td class="actions">
             <span class="d-flex justify-content-center">
               <% if can? :update, shipment %>
-                <%= link_to_with_icon 'cancel.svg', Spree.t('actions.cancel'), "#", class: 'cancel-tracking btn btn-secondary btn-sm', data: {action: 'cancel'}, title: Spree.t('actions.cancel'), no_text: true %>
+                <%= link_to_with_icon 'x-lg.svg', Spree.t('actions.cancel'), "#", class: 'cancel-tracking btn btn-secondary btn-sm', data: {action: 'cancel'}, title: Spree.t('actions.cancel'), no_text: true %>
                 <%= link_to_with_icon 'save.svg', Spree.t('actions.save'), "#", class: 'save-tracking btn btn-success  btn-sm', data: {'shipment-number' => shipment.number, action: 'save'}, title: Spree.t('actions.save'), no_text: true %>
               <% end %>
             </span>

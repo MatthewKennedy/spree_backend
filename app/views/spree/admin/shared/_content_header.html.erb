@@ -4,12 +4,9 @@
     <div class="contentHeader col <%= "d-flex align-items-center" unless content_for?(:page_tabs) %>">
       <div class="d-flex align-items-center my-2 w-100">
         <% if content_for?(:page_title) %>
-          <h2 class="px-0 mb-0 col d-flex">
+          <h4 class="px-0 mb-0 col d-flex">
             <%= yield :page_title %>
-            <% if content_for?(:page_title_small) %>
-              <small><%= yield :page_title_small %></small>
-            <% end %>
-          </h2>
+          </h4>
         <% end %>
 
         <% if content_for?(:page_actions) %>
