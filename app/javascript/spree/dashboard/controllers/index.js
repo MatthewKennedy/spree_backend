@@ -11,6 +11,7 @@ import PasswordToggleController from './password_toggle_controller'
 import ClipboardController from './clipboard_controller'
 import ProductEditController from './product_edit_controller'
 import DatePickerController from './datepicker_controller'
+import SelectController from './select_controller'
 
 // Stimulus - Setup
 window.Stimulus = Application.start()
@@ -18,11 +19,9 @@ window.Stimulus = Application.start()
 Stimulus.register('upload-button', UploadButtonController)
 Stimulus.register('spree', SpreeController)
 Stimulus.register('sortable-tree', SortableTreeController)
-Stimulus.register(
-  'webhooks_subscriber_events',
-  WebhooksSubscriberEventsController
-)
+Stimulus.register('webhooks_subscriber_events', WebhooksSubscriberEventsController)
 Stimulus.register('password-toggle', PasswordToggleController)
 Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('product-edit', ProductEditController)
 Stimulus.register('datepicker', DatePickerController)
+Stimulus.register('selector', SelectController)
