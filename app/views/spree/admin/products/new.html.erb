@@ -29,7 +29,7 @@
           <div data-hook="new_product_prototype" class="col-12 col-md-4">
             <%= f.field_container :prototype do %>
               <%= f.label :prototype_id, Spree.t(:prototype) %>
-              <%= f.collection_select :prototype_id, Spree::Prototype.all, :id, :name, { include_blank: true }, { class: 'select2-clear w-100' } %>
+              <%= f.collection_select :prototype_id, Spree::Prototype.all, :id, :name, { include_blank: true }, { data: {controller: 'ts--select'} } %>
             <% end %>
           </div>
 
@@ -49,7 +49,7 @@
           <div data-hook="new_product_shipping_category" class="col-12 col-md-4">
             <%= f.field_container :shipping_category do %>
               <%= f.label :shipping_category_id, raw(Spree.t(:shipping_categories) + required_span_tag) %>
-              <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { selected: @product.shipping_category_id }, { class: 'select2 w-100' }) %>
+              <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { selected: @product.shipping_category_id }, { data: {controller: 'ts--select'} }) %>
               <%= f.error_message_on :shipping_category_id %>
             <% end %>
           </div>

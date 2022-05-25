@@ -6,21 +6,12 @@ select2($)
 // https://stackoverflow.com/questions/36497723/select2-with-ajax-gets-initialized-several-times-with-rails-turbolinks-events
 document.addEventListener('turbo:before-cache', function () {
   $('select.select2').select2('destroy')
-  $('select.select2-clear').select2('destroy')
 })
 
 document.addEventListener('spree:load', function () {
   // Initiate a standard Select2 on any select element with the class .select2
   // Remember to add a place holder in the HTML as needed.
   $('select.select2').select2({})
-
-  // Initiate a Select2 with the option to clear, on any select element with the class .select2-clear
-  // Set: include_blank: true in the ERB.
-  // A placeholder is auto-added here as it is required to clear the Select2.
-  $('select.select2-clear').select2({
-    placeholder: SpreeDash.translations.select_an_option,
-    allowClear: true
-  })
 })
 
 $.fn.addSelect2Options = function (data) {

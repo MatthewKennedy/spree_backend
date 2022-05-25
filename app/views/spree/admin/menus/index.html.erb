@@ -20,14 +20,14 @@
         </div>
         <div class="col-12 col-lg-4">
           <div class="form-group">
-            <%= label_tag :q_location_eq, Spree.t(:location) %><%= f.select :location_eq, spree_humanize_dropdown_values('Spree::Menu', { const: 'MENU_LOCATIONS', paramterize_values: true }), { include_blank: true }, class: 'select2-clear js-filterable' %>
+            <%= label_tag :q_location_eq, Spree.t(:location) %><%= f.select :location_eq, spree_humanize_dropdown_values('Spree::Menu', { const: 'MENU_LOCATIONS', paramterize_values: true }), { include_blank: true }, class: 'js-filterable', data: {controller: 'ts--select'} %>
           </div>
         </div>
 
         <div class="col-12 col-lg-4">
          <div class="form-group">
            <%= label_tag :q_locale_eq, Spree.t(:language) %>
-           <%= f.select :locale_eq, all_locales_options, { include_blank: true }, class: 'select2-clear js-filterable' %>
+           <%= f.select :locale_eq, all_locales_options, { include_blank: true }, class: 'js-filterable', data: {controller: 'ts--select'} %>
          </div>
         </div>
       </div>
