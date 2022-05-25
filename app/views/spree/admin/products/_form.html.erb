@@ -202,23 +202,20 @@
   </div>
 
   <div data-hook="admin_product_form_taxons">
-
-
-
     <%= f.field_container :taxons do %>
       <%= f.label :taxon_ids, Spree.t(:taxons) %>
 
       <% if can? :modify, Spree::Classification %>
         <%= f.select :taxon_ids, options_from_collection_for_select(@product.taxons, :id, :pretty_name, @product.taxon_ids),
                                   { include_hidden: false },
-                                   multiple: true,
-                                      data: { controller: 'ts--search',
-                                              ts__search_plugins_value: ['remove_button'],
-                                              ts__search_uri_value: '/api/v2/platform/taxons',
-                                              ts__search_val_value: 'id',
-                                              ts__search_lab_value: 'pretty_name',
-                                              ts__search_array_value: ['name'],
-                                             } %>
+                                    multiple: true,
+                                    data: { controller: 'ts--search',
+                                            ts__search_plugins_value: ['remove_button'],
+                                            ts__search_uri_value: '/api/v2/platform/taxons',
+                                            ts__search_val_value: 'id',
+                                            ts__search_lab_value: 'pretty_name',
+                                            ts__search_array_value: ['name'],
+                                           } %>
 
       <% elsif @product.taxons.any? %>
         <ul class="text_list">
@@ -229,7 +226,6 @@
       <% else %>
         <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :taxons) %></div>
       <% end %>
-
     <% end %>
   </div>
 
