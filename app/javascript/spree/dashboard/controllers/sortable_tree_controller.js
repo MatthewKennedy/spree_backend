@@ -16,9 +16,12 @@ export default class extends Controller {
     )
 
     for (let i = 0; i < containers.length; i++) {
-      const sTb = new Sortable(containers[i], itemSortable)
-      console.log(sTb)
+      this.sTb = new Sortable(containers[i], itemSortable)
     }
+  }
+
+  disconnect () {
+    this.sTb.destroy()
   }
 
   async end ({ item, newIndex, to }) {
