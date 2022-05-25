@@ -33,12 +33,13 @@
           <%= f.label :status, Spree.t(:status) %>
           <% options = ['draft', 'active', 'archived'] %>
           <% options.delete('active') if cannot? :activate, @product %>
-          <% select_html = { class: 'select2',
-                             data: {
-                               action: 'change->product-edit#switchAvailabilityDatesFields',
-                               'product-edit-target': 'status'
-                             } } %>
-          <%= f.select(:status, options.each_slice(1), { selected: @product.status }, select_html) %>
+          <% select_html = { data: {
+                              controller: 'ts--select',
+                              action: 'change->product-edit#switchAvailabilityDatesFields', 'product-edit-target': 'status',
+                              # ts__select_plugins_value: ['clear_button']
+                             }
+                           } %>
+          <%= f.select :status, options.each_slice(1), { include_blank: false, selected: @product.status }, select_html %>
           <%= f.error_message_on :status %>
         <% end %>
       </div>
