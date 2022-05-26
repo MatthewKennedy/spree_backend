@@ -17,6 +17,19 @@ ul.select2-results__options {
   }
 }
 
+.dropdown-input-wrap {
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.plugin-dropdown_input.focus .ts-dropdown .dropdown-input {
+  border-radius: 5px;
+}
+.plugin-dropdown_input.focus .ts-dropdown .dropdown-input {
+  border-width: 1px;
+}
+
 input::-webkit-contacts-auto-fill-button {
   visibility: hidden;
   display: none !important;
@@ -24,3 +37,36 @@ input::-webkit-contacts-auto-fill-button {
   position: absolute;
   right: 0;
 }
+
+
+.ts-dropdown .option[data-selectable] {
+  padding: 7.5px;
+  margin: 5px 7.5px;
+  border-radius: 5px;
+  overflow: visible;
+  position: relative;
+}
+
+.ts-dropdown .active {
+  background-color: transparent;
+}
+
+
+.ts-dropdown .create:hover, .ts-dropdown .option:hover, .ts-dropdown .selected {
+  background-color: rgba(242, 247, 254, 1);
+}
+
+.ts-dropdown .selected:before {
+  background-color: var(--bs-primary);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  content: "";
+  display: block;
+  height: 100%;
+  left: -8px;
+  position: absolute;
+  top: 0;
+  width: 5px;
+}
+
+

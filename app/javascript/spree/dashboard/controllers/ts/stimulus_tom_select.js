@@ -14,7 +14,7 @@ class StimulusTomSelect extends Controller {
 
   initialize () {
     this.config = {
-      plugins: []
+      plugins: ['dropdown_input', 'no_backspace_delete']
     }
   }
 
