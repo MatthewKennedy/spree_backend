@@ -145,6 +145,12 @@ body.contextualSideMenu-open #contextual-menu-toggle {
     transition: none;
   }
 
+.tabsAndActionsShim {
+  #contextualSideMenu {
+    top: 118px;
+  }
+}
+
   aside#main-sidebar {
     left: 0;
     z-index: 999;

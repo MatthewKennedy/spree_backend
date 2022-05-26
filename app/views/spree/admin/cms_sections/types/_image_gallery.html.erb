@@ -132,7 +132,7 @@
         spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
                                         { const: 'LABEL_OPTIONS' }),
                                         { include_blank: false },
-                                        class:'select2') %>
+                                        data: { controller: 'ts--select' }) %>
     <%= f.error_message_on :display_labels %>
   <% end %>
 </div>

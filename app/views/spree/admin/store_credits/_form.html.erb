@@ -6,13 +6,13 @@
   <% end %>
   <%= f.field_container :currency do %>
     <%= f.label :currency, raw(Spree.t(:currency) + required_span_tag) %>
-    <%= f.select :currency, currency_options(f.object.currency) %>
+    <%= f.select :currency, currency_options(f.object.currency), {}, data: { controller: 'ts--select' } %>
     <%= f.error_message_on :currency %>
   <% end %>
   <%= f.field_container :category do %>
     <%= f.label :category, raw(Spree.t(:category) + required_span_tag) %>
     <%= f.select :category_id, options_from_collection_for_select(@credit_categories, :id, :name, f.object.category.try(:id)),
-        { include_blank: true }, { class: 'select2 fullwidth', placeholder: Spree.t(:select_a_store_credit_reason) } %>
+        { include_blank: true }, { data: { controller: 'ts--select' }, placeholder: Spree.t(:select_a_store_credit_reason) } %>
     <%= f.error_message_on :category %>
   <% end %>
   <%= f.field_container :memo do %>
@@ -21,7 +21,3 @@
     <%= f.error_message_on :memo %>
   <% end %>
 </div>
-
-<script>
-  $('#store_credit_currency').select2();
-</script>

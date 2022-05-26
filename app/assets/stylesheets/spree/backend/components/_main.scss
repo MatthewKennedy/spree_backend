@@ -7,9 +7,12 @@
   margin-top: 75px;
 }
 
-#content.tabsAndActionsShim {
-  margin-top: calc(100px + 20px);
+.tabsAndActionsShim {
+  #content {
+    margin-top: calc(100px + 20px);
+  }
 }
+
 
 #multi-backdrop {
   z-index: 0;
