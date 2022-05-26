@@ -9,6 +9,7 @@ export default class extends StimulusTomSelect {
     const search = this.arrayValue || 'name'
 
     this.config = {
+      plugins: [],
       valueField: value,
       labelField: label,
       searchField: search,
