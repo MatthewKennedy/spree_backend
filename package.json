@@ -4,6 +4,7 @@
   "description": "Admin UI for Spree",
   "main": "app/assets/javascripts/spree_dash.js",
   "type": "module",
+  "license": "MIT",
   "files": [
     "app/assets/javascripts/*.js",
     "src/*.js"
@@ -17,7 +18,6 @@
     "url": "https://github.com/spree/spree_backend/issues"
   },
   "author": "Spark Solutions <hi@sparksolutions.co>",
-  "license": "MIT",
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
