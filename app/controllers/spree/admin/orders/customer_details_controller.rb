@@ -15,6 +15,8 @@ module Spree
         def edit
           @order.build_bill_address(country: current_store.default_country) if @order.bill_address.nil?
           @order.build_ship_address(country: current_store.default_country) if @order.ship_address.nil?
+
+          @order.assign_attributes(order_params)
         end
 
         def update
@@ -38,7 +40,7 @@ module Spree
         private
 
         def order_params
-          params.require(:order).permit(
+          params.fetch(:order, {}).permit(
             :email, :user_id, :use_billing,
             bill_address_attributes: permitted_address_attributes,
             ship_address_attributes: permitted_address_attributes

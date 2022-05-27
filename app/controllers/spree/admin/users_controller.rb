@@ -43,6 +43,8 @@ module Spree
           else
             render :addresses, status: :unprocessable_entity
           end
+        elsif request.get?
+          @user.assign_attributes(user_params)
         end
       end
 
@@ -79,7 +81,7 @@ module Spree
       private
 
       def user_params
-        params.require(:user).permit(permitted_user_attributes |
+        params.fetch(:user, {}).permit(permitted_user_attributes |
                                      [:use_billing,
                                        spree_role_ids: [],
                                        ship_address_attributes: permitted_address_attributes,

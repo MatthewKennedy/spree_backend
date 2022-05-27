@@ -7,9 +7,10 @@
         </h5>
       </div>
 
-      <div class="card-body">
+      <div class="card-body" data-controller="form-validation">
         <%= f.fields_for :bill_address, @user.bill_address || @user.addresses.new(country: current_store.default_country) do |ba_form| %>
           <%= render partial: 'spree/admin/shared/address_form', locals: { f: ba_form, type: "billing" } %>
+          <%= f.button "Validate", formaction: spree.addresses_admin_user_path(@user), formmethod: "get", data: { turbo_frame: :billing_country_select, form_validation_target: "submitBtn" } %>
         <% end %>
       </div>
     </div>
@@ -29,9 +30,12 @@
             <%= check_box_tag 'user[use_billing]', '1', checked, class: 'checkbox' %>
             <%= label_tag :use_billing, Spree.t(:use_billing_address), for: 'user_use_billing', id: 'use_billing', class: 'form-check-label' %>
           </p>
-        <%= f.fields_for :ship_address, @user.ship_address || @user.addresses.new(country: current_store.default_country) do |sa_form| %>
-          <%= render partial: 'spree/admin/shared/address_form', locals: { f: sa_form, type: "shipping" } %>
-        <% end %>
+        <div data-controller="form-validation">
+          <%= f.fields_for :ship_address, @user.ship_address || @user.addresses.new(country: current_store.default_country) do |sa_form| %>
+            <%= render partial: 'spree/admin/shared/address_form', locals: { f: sa_form, type: "shipping" } %>
+            <%= f.button "Validate", formaction: spree.addresses_admin_user_path(@user), formmethod: "get", data: { turbo_frame: :shipping_country_select, form_validation_target: "submitBtn" } %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

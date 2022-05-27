@@ -61,7 +61,7 @@
           <h5 class="card-title mb-0 h6"><%= Spree.t(:billing_address) %></h5>
         </div>
 
-        <div class="card-body">
+        <div class="card-body" data-controller="form-validation">
           <% if can? :edit, @order.user %>
             <%= f.fields_for :bill_address do |ba_form| %>
               <%= render 'spree/admin/shared/address_form', f: ba_form, type: "billing" %>
@@ -69,6 +69,7 @@
           <% else %>
             <%= render 'spree/admin/shared/address', address: @order.bill_address %>
           <% end %>
+          <%= f.button "Validate", formaction: spree.edit_admin_order_customer_path(@order), formmethod: "get", data: { turbo_frame: :billing_country_select, form_validation_target: "submitBtn" } %>
         </div>
       </div>
     </div>
@@ -78,7 +79,7 @@
         <div class="card-header">
           <h5 class="card-title mb-0 h6"><%= Spree.t(:shipping_address) %></h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" data-controller="form-validation">
           <% if can? :edit, @order.user %>
             <%= f.fields_for :ship_address do |sa_form| %>
               <div class="form-group">
@@ -93,6 +94,8 @@
           <% else %>
             <%= render 'spree/admin/shared/address', address: @order.ship_address %>
           <% end %>
+
+          <%= f.button "Validate", id: 'ship_val', formaction: spree.edit_admin_order_customer_path(@order), formmethod: "get", data: { turbo_frame: :shipping_country_select, form_validation_target: "submitBtn" } %>
         </div>
       </div>
     </div>
