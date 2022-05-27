@@ -14,9 +14,14 @@ export default class extends Controller {
     const requiredEls = formEl.querySelectorAll('[required]')
     requiredEls.forEach(target => (target.removeAttribute('required')))
 
+    // Empty any field with the emptyField target.
     this.emptyFieldTargets.forEach(target => (target.value = ''))
+
+    // Empty any field with the emptyField target.
     this.hideTargets.forEach(target => (target.style.display = 'none'))
-    this.disableTargets.forEach(target => target.setAttribute('disabled', ''))
+
+    // Disable any input with the disabled target.
+    this.disableTargets.forEach(target => target.setAttribute('disabled', 'disabled'))
     this.submitBtnTarget.click()
   }
 }

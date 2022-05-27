@@ -7,7 +7,7 @@
   <!-- COUNTRY -->
   <%= field_container (s_or_b + '_country'), nil, class: ["#{type}-row"] do %>
     <%= f.label :country, raw(Spree.t(:country) + required_span_tag), class: 'form-label' %>
-    <%= f.collection_select :country_id, all_countries, :id, :name, {}, { data: { controller: 'ts--select', action: 'change->form-validation#validate' } } %>
+    <%= f.collection_select :country_id, all_countries, :id, :name, {  }, { data: { controller: 'ts--select', action: 'change->form-validation#validate' } } %>
     <hr class="mt-4 mb-3">
   <% end %>
   <!-- COUNTRY -->
@@ -23,21 +23,25 @@
         <%= field_container (s_or_b + '_' + field), :state, class: ["#{type}-row"], data: { form_validation_target: "hide" } do %>
 
           <% if f.object.country.states_required? || f.object.country.states.present? %>
-            <%= f.label :state_id, Spree.t(:state), class: 'form-label' %>
+            <% if f.object.country.states_required? %>
+              <%= f.label :state_id, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
+            <% else %>
+              <%= f.label :state_id, Spree.t(:state), class: 'form-label' %>
+            <% end %>
           <% end %>
 
           <% if f.object.country.try(:states) %>
-            <%= f.text_field :state_name, style: "display: #{ f.object.country.states.empty? && f.object.country.states_required? ? 'block' : 'none' };",
-                                          required: f.object.country.states_required?,
-                                          disabled: ( f.object.country.states.present? || !f.object.country.states_required? ),
-                                          class: 'form-control',
-                                          data: { form_validation_target: "disable", form_validation_target: "emptyField" } %>
+            <% if !f.object.country.states.present? && f.object.country.states_required? %>
+              <%= f.text_field :state_name, style: "display: #{ f.object.country.states.empty? && f.object.country.states_required? ? 'block' : 'none' };",
+                                            required: true,
+                                            class: 'form-control',
+                                            data: { form_validation_target: "disable", form_validation_target: "emptyField" } %>
+            <% end %>
 
+            <% if f.object.country.states.present?  %>
+              <%= f.collection_select :state_id, f.object.country.states.sort, :id, :name, { include_blank: true }, { data: { controller: f.object.country.states.empty? ? '' : 'ts--select', form_validation_target: "disable" }}  %>
+            <% end %>
 
-            <%= f.collection_select :state_id, f.object.country.states.sort, :id, :name, { include_blank: true }, { data: { controller: f.object.country.states.empty? ? '' : 'ts--select', form_validation_target: "disable" },
-                                                                                                          style: "display: #{ f.object.country.states.empty? ? 'none' : 'block' };",
-                                                                                                                    disabled: f.object.country.states.empty?,
-                                                                                                                    required: f.object.country.states_required? } %>
           <% else %>
             <div>
               <em><%= Spree.t(:no_country) %></em>
@@ -57,7 +61,7 @@
             <%= f.label field, Spree.t(field), class: 'form-label' %>
           <% end %>
 
-          <%= f.text_field field, class: 'form-control', data: { form_validation_target: "disable", form_validation_target: "emptyField"  } %>
+          <%= f.text_field field, class: 'form-control', data: { form_validation_target: "disable", form_validation_target: "emptyField" } %>
         <% end %>
         <!-- ZIPCODE -->
 
