@@ -69,6 +69,7 @@
           <% else %>
             <%= render 'spree/admin/shared/address', address: @order.bill_address %>
           <% end %>
+
           <%= f.button "Validate", formaction: spree.edit_admin_order_customer_path(@order), formmethod: "get", data: { turbo_frame: :billing_country_select, form_validation_target: "submitBtn" } %>
         </div>
       </div>

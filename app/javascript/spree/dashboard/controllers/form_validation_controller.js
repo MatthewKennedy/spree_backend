@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['submitBtn', 'disable', 'hide', 'emptyField']
+  static targets = ['submitBtn', 'disableOnSubmit', 'hideOnSubmit', 'emptyOnSubmit', 'removeRequiredOnSubmit']
 
   connect () {
     this.submitBtnTarget.hidden = true
@@ -14,14 +14,11 @@ export default class extends Controller {
     const requiredEls = formEl.querySelectorAll('[required]')
     requiredEls.forEach(target => (target.removeAttribute('required')))
 
-    // Empty any field with the emptyField target.
-    this.emptyFieldTargets.forEach(target => (target.value = ''))
+    this.removeRequiredOnSubmitTargets.forEach(target => target.removeAttribute('required'))
+    this.emptyOnSubmitTargets.forEach(target => (target.value = ''))
+    this.hideOnSubmitTargets.forEach(target => (target.style.display = 'none'))
+    this.disableOnSubmitTargets.forEach(target => target.setAttribute('disabled', 'disabled'))
 
-    // Empty any field with the emptyField target.
-    this.hideTargets.forEach(target => (target.style.display = 'none'))
-
-    // Disable any input with the disabled target.
-    this.disableTargets.forEach(target => target.setAttribute('disabled', 'disabled'))
     this.submitBtnTarget.click()
   }
 }

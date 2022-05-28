@@ -74,4 +74,21 @@ input::-webkit-contacts-auto-fill-button {
   width: 5px;
 }
 
+.form-floating {
+  .ts-wrapper {
+    min-height: calc(3em + 0.75rem + 2px);
+  }
+
+  .ts-control {
+    align-items: end;
+
+    .item {
+      margin-bottom: 4px;
+    }
+  }
+
+  .plugin-clear_button .clear-button {
+    top:  1rem;
+  }
+}
 
