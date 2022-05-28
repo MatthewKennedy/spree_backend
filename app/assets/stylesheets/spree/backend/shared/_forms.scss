@@ -6,6 +6,10 @@ label {
   }
 }
 
+.form-floating > label, .form-floating > span.or {
+  opacity: 0.4;
+}
+
 span.or {
   @extend label;
 
