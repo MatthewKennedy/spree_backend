@@ -3,11 +3,6 @@ import TomSelect from 'tom-select'
 
 class StimulusTomSelect extends Controller {
   static values = {
-    uri: String,
-    val: String,
-    lab: String,
-    array: Array,
-    response_kind: String,
     options: Array,
     plugins: Array
   }

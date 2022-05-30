@@ -48,6 +48,16 @@
   <%= turbo_frame_tag country_frame_type.to_sym do %>
     <% Spree::Address::ADDRESS_FIELDS.each do |field| %>
       <% if field == "state" %>
+
+      <% state_lable = case f.object.country.iso3
+         when 'ARE'
+            'Emirate'
+         when 'AUS'
+          'State / Territory'
+         else
+            Spree.t(field)
+         end %>
+
         <!-- STATE -->
         <%= field_container (s_or_b + '_' + field), :state, class: ['form-floating', "#{type}-row"], data: { form_validation_target: "hideOnSubmit" } do %>
           <% if f.object.country.try(:states) %>
@@ -65,9 +75,9 @@
 
             <% if f.object.country.states_required? || f.object.country.states.present? %>
               <% if f.object.country.states_required? %>
-                <%= f.label :state_id, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
+                <%= f.label :state_id, raw(state_lable + required_span_tag), class: 'form-label' %>
               <% else %>
-                <%= f.label :state_id, Spree.t(:state), class: 'form-label' %>
+                <%= f.label :state_id, state_lable, class: 'form-label' %>
               <% end %>
             <% end %>
 
@@ -79,14 +89,22 @@
         <% end %>
         <!-- STATE -->
       <% elsif field == "zipcode" %>
+
+      <% zip_lable = case f.object.country.iso3
+         when 'GBR'
+            'Post Code'
+         else
+            Spree.t(field)
+         end %>
+
         <!-- ZIPCODE -->
         <%= field_container (s_or_b + '_' + field), nil, class: ['form-floating',"#{type}-row"], data: { form_validation_target: "hideOnSubmit" } do %>
           <%= f.text_field field, class: 'form-control', placeholder: Spree.t(field),  data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
 
           <% if f.object.country.zipcode_required? %>
-            <%= f.label field, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
+            <%= f.label field, (raw(zip_lable) + required_span_tag), class: 'form-label' %>
           <% else %>
-            <%= f.label field, Spree.t(field), class: 'form-label' %>
+            <%= f.label field, zip_lable, class: 'form-label' %>
           <% end %>
         <% end %>
         <!-- ZIPCODE -->

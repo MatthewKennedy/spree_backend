@@ -108,37 +108,37 @@ $.fn.customerAutocomplete = function () {
   })
 }
 
-document.addEventListener('spree:load', function () {
-  $('#customer_search').customerAutocomplete()
+// document.addEventListener('spree:load', function () {
+//   $('#customer_search').customerAutocomplete()
 
-  if ($('#customer_autocomplete_template').length > 0) {
-    window.customerTemplate = Handlebars.compile(
-      $('#customer_autocomplete_template').text()
-    )
-  }
+//   if ($('#customer_autocomplete_template').length > 0) {
+//     window.customerTemplate = Handlebars.compile(
+//       $('#customer_autocomplete_template').text()
+//     )
+//   }
 
-  // Handle Billing Shipping Address
-  const orderUseBillingInput = $('input#order_use_billing')
+//   // Handle Billing Shipping Address
+//   const orderUseBillingInput = $('input#order_use_billing')
 
-  const orderUseBilling = function () {
-    if (!orderUseBillingInput.is(':checked')) {
-      $('#shipping').show()
-    } else {
-      $('#shipping').hide()
-    }
-  }
+//   const orderUseBilling = function () {
+//     if (!orderUseBillingInput.is(':checked')) {
+//       $('#shipping').show()
+//     } else {
+//       $('#shipping').hide()
+//     }
+//   }
 
-  // On page load hide shipping address from
-  orderUseBilling()
+//   // On page load hide shipping address from
+//   orderUseBilling()
 
-  // On click toggle shipping address from
-  orderUseBillingInput.click(orderUseBilling)
+//   // On click toggle shipping address from
+//   orderUseBillingInput.click(orderUseBilling)
 
-  // If guest checkout clear fields
-  $('#guest_checkout_true').change(function () {
-    $('#customer_search').val('')
-    $('#order_user_id').val('')
-    $('#order_email').val('')
-    clearAddressFields()
-  })
-})
+//   // If guest checkout clear fields
+//   $('#guest_checkout_true').change(function () {
+//     $('#customer_search').val('')
+//     $('#order_user_id').val('')
+//     $('#order_email').val('')
+//     clearAddressFields()
+//   })
+// })

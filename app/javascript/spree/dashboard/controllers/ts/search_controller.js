@@ -3,6 +3,19 @@ import { get } from '../../utilities/request_utility'
 
 // Connects to data-controller="ts--search"
 export default class extends StimulusTomSelect {
+  static values = {
+    uri: String,
+    val: String,
+    lab: String,
+    array: Array,
+    ransack: Array,
+    include: String,
+    debug: String,
+    response_kind: String,
+    options: Array,
+    plugins: Array
+  }
+
   initialize () {
     const value = this.valValue || 'id'
     const label = this.labValue || 'name'
@@ -19,12 +32,11 @@ export default class extends StimulusTomSelect {
   }
 
   async search (q, callback) {
-    const response = await get(this.uriValue, {
-      query: { q }
-    })
+    const response = await get(this.buildRequestURL(q))
 
     if (response.ok) {
       const body = await response.json
+      if (this.debugValue) console.log(body)
 
       const data = body.data.map(row => {
         const data = row.attributes
@@ -32,11 +44,28 @@ export default class extends StimulusTomSelect {
 
         return data
       })
+      if (this.debugValue) console.log(data)
 
       callback(data)
     } else {
       console.log(response)
       callback()
     }
+  }
+
+  buildRequestURL (q) {
+    const urlWithParams = new URL(SpreeDash.pathFor(this.uriValue))
+
+    if (this.hasRansackValue) {
+      this.ransackValue.forEach(target => {
+        urlWithParams.searchParams.append(`[filter]${target}`, q)
+      })
+    }
+
+    if (this.hasIncludeValue) {
+      urlWithParams.searchParams.append('include', this.includeValue)
+    }
+
+    return urlWithParams
   }
 }

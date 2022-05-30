@@ -8,7 +8,16 @@
       </h5>
     </div>
     <div class="card-body" id="customer-search-field">
-      <%= select_tag :customer_search, nil, class: 'd-block w-100' %>
+      <%= select_tag :customer_search, nil, class: 'd-block w-100', data: { controller: 'ts--search',
+                                                                            ts__search_uri_value: '/api/v2/platform/users',
+                                                                            ts__search_debug_value: 'true',
+                                                                            ts__search_val_value: 'id',
+                                                                            ts__search_lab_value: 'email',
+                                                                            ts__search_array_value: ['email', 'first_name', 'last_name'],
+                                                                            ts__search_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
+                                                                            ts__search_include_value: 'ship_address,bill_address' } %>
+
+
       <%= render partial: "spree/admin/orders/customer_details/autocomplete", formats: :js %>
     </div>
   </div>
