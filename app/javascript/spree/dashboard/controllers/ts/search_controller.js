@@ -9,6 +9,7 @@ export default class extends StimulusTomSelect {
     lab: String,
     array: Array,
     ransack: Array,
+    sparse: String,
     include: String,
     debug: String,
     response_kind: String,
@@ -36,17 +37,14 @@ export default class extends StimulusTomSelect {
 
     if (response.ok) {
       const body = await response.json
+
       if (this.debugValue) console.log(body)
 
-      const data = body.data.map(row => {
-        const data = row.attributes
-        data.id = row.id
+      const presentedData = this.formatResponseData(body)
 
-        return data
-      })
-      if (this.debugValue) console.log(data)
+      if (this.debugValue) console.log(presentedData)
 
-      callback(data)
+      callback(presentedData)
     } else {
       console.log(response)
       callback()
@@ -66,6 +64,21 @@ export default class extends StimulusTomSelect {
       urlWithParams.searchParams.append('include', this.includeValue)
     }
 
+    if (this.hasSparseValue) {
+      urlWithParams.searchParams.append('fields', `[${this.sparseValue}]`)
+    }
+
     return urlWithParams
+  }
+
+  formatResponseData (body) {
+    const data = body.data.map(row => {
+      const da = row.attributes
+      da.id = row.id
+
+      return da
+    })
+
+    return data
   }
 }

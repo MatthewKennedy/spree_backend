@@ -15,7 +15,8 @@
                                                                             ts__search_lab_value: 'email',
                                                                             ts__search_array_value: ['email', 'first_name', 'last_name'],
                                                                             ts__search_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
-                                                                            ts__search_include_value: 'ship_address,bill_address' } %>
+                                                                            ts__search_include_value: 'ship_address,bill_address',
+                                                                            ts__search_sparse_value: 'email' } %>
 
 
       <%= render partial: "spree/admin/orders/customer_details/autocomplete", formats: :js %>
