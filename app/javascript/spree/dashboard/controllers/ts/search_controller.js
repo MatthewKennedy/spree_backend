@@ -6,21 +6,20 @@ export default class extends StimulusTomSelect {
   static values = {
     uri: String,
     val: String,
-    lab: String,
-    array: Array,
+    txt: String,
+    fields: Array,
     ransack: Array,
-    sparse: String,
     include: String,
-    debug: String,
-    response_kind: String,
+    debug: Boolean,
+
     options: Array,
     plugins: Array
   }
 
   initialize () {
     const value = this.valValue || 'id'
-    const label = this.labValue || 'name'
-    const search = this.arrayValue || 'name'
+    const label = this.txtValue || 'name'
+    const search = this.fieldsValue || ['name']
 
     this.config = {
       plugins: [],
@@ -33,16 +32,18 @@ export default class extends StimulusTomSelect {
   }
 
   async search (q, callback) {
+    const debugMode = this.debugValue || false
+
     const response = await get(this.buildRequestURL(q))
 
     if (response.ok) {
       const body = await response.json
 
-      if (this.debugValue) console.log(body)
+      if (debugMode) console.log(body)
 
       const presentedData = this.formatResponseData(body)
 
-      if (this.debugValue) console.log(presentedData)
+      if (debugMode) console.log(presentedData)
 
       callback(presentedData)
     } else {
@@ -62,10 +63,6 @@ export default class extends StimulusTomSelect {
 
     if (this.hasIncludeValue) {
       urlWithParams.searchParams.append('include', this.includeValue)
-    }
-
-    if (this.hasSparseValue) {
-      urlWithParams.searchParams.append('fields', `[${this.sparseValue}]`)
     }
 
     return urlWithParams
