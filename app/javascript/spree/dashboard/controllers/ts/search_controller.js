@@ -11,6 +11,7 @@ export default class extends StimulusTomSelect {
     ransack: Array,
     include: String,
     debug: Boolean,
+    load_throttle: Number,
 
     options: Array,
     plugins: Array
@@ -27,13 +28,16 @@ export default class extends StimulusTomSelect {
       labelField: label,
       searchField: search,
       loadThrottle: 400,
-      load: (q, callback) => this.search(q, callback)
+      load: (q, callback) => this.search(q, callback),
+      render: {
+        option: this.render_option,
+        item: this.render_item
+      }
     }
   }
 
   async search (q, callback) {
     const debugMode = this.debugValue || false
-
     const response = await get(this.buildRequestURL(q))
 
     if (response.ok) {

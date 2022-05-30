@@ -17,6 +17,8 @@ import FormValidationController from './form_validation_controller'
 import TsSearchController from './ts/search_controller.js'
 import TsSelectController from './ts/select_controller.js'
 
+import userSearchController from './ts/templates/user_controller.js'
+
 // Stimulus - Setup
 window.Stimulus = Application.start()
 
@@ -32,3 +34,5 @@ Stimulus.register('form-validation', FormValidationController)
 
 Stimulus.register('ts--search', TsSearchController)
 Stimulus.register('ts--select', TsSelectController)
+
+Stimulus.register('ts--search-user', userSearchController)
