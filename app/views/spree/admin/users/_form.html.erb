@@ -6,6 +6,16 @@
       <%= f.error_message_on :email %>
     <% end %>
 
+    <%= f.field_container :first_name, class: ['form-floating'] do %>
+      <%= f.text_field :first_name, class: 'form-control', placeholder: Spree.t(:first_name) %>
+      <%= f.label :first_name, Spree.t(:first_name), class: 'form-label' %>
+    <% end %>
+
+    <%= f.field_container :last_name, class: ['form-floating'] do %>
+      <%= f.text_field :last_name, class: 'form-control', placeholder: Spree.t(:last_name) %>
+      <%= f.label :last_name, Spree.t(:last_name), class: 'form-label' %>
+    <% end %>
+
     <div data-hook="admin_user_form_roles" class="form-group">
       <strong><%= Spree.t(:roles) %></strong>
       <%= f.collection_check_boxes :spree_role_ids, Spree::Role.all, :id, :name do |role_form| %>

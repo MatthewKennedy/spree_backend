@@ -10,15 +10,8 @@
     <div class="card-body" id="customer-search-field">
       <%= select_tag :customer_search, nil, class: 'd-block w-100', data: { controller: 'ts--search-user',
                                                                         ts__search_user_uri_value: '/api/v2/platform/users',
-                                                                        ts__search_user_debug_value: 'false',
-                                                                        ts__search_user_val_value: 'id',
-                                                                        ts__search_user_txt_value: 'email',
-                                                                        ts__search_user_fields_value: ['email', 'first_name', 'last_name'],
                                                                         ts__search_user_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
                                                                         ts__search_user_include_value: 'ship_address,bill_address' } %>
-
-
-      <%= render partial: "spree/admin/orders/customer_details/autocomplete", formats: :js %>
     </div>
   </div>
 <% end %>
