@@ -1,5 +1,6 @@
 import StimulusTomSelect from './stimulus_tom_select'
 import { get } from '../../utilities/request_utility'
+import { deserialize } from 'deserialize-json-api'
 
 // Connects to data-controller="ts--search"
 export default class extends StimulusTomSelect {
@@ -28,11 +29,7 @@ export default class extends StimulusTomSelect {
       labelField: label,
       searchField: search,
       loadThrottle: 400,
-      load: (q, callback) => this.search(q, callback),
-      render: {
-        option: this.render_option,
-        item: this.render_item
-      }
+      load: (q, callback) => this.search(q, callback)
     }
   }
 
@@ -42,14 +39,11 @@ export default class extends StimulusTomSelect {
 
     if (response.ok) {
       const body = await response.json
+      const deserializedData = deserialize(body)
 
-      if (debugMode) console.log(body)
+      if (debugMode) console.log(deserializedData)
 
-      const presentedData = this.formatResponseData(body)
-
-      if (debugMode) console.log(presentedData)
-
-      callback(presentedData)
+      callback(deserializedData)
     } else {
       console.log(response)
       callback()
@@ -70,16 +64,5 @@ export default class extends StimulusTomSelect {
     }
 
     return urlWithParams
-  }
-
-  formatResponseData (body) {
-    const data = body.data.map(row => {
-      const da = row.attributes
-      da.id = row.id
-
-      return da
-    })
-
-    return data
   }
 }

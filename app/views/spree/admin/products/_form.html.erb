@@ -212,8 +212,9 @@
                                     data: { controller: 'ts--search',
                                             ts__search_uri_value: '/api/v2/platform/taxons',
                                             ts__search_val_value: 'id',
-                                            ts__search_lab_value: 'email',
-                                            ts__search_array_value: ['email_i_cont']
+                                            ts__search_txt_value: 'pretty_name',
+                                            ts__search_fields_value: ['pretty_name'],
+                                            ts__search_ransack_value: ['pretty_name_i_cont']
                                            } %>
 
       <% elsif @product.taxons.any? %>

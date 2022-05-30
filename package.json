@@ -27,6 +27,7 @@
     "bootstrap": "5.2.0-beta1",
     "bootstrap-icons": "^1.8.2",
     "cleave.js": "^1.6.0",
+    "deserialize-json-api": "^1.4.0",
     "dompurify": "^2.3.8",
     "flatpickr": "4.6.9",
     "jquery": "^3.6.0",

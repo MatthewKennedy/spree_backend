@@ -23,7 +23,6 @@ export default class extends TsSearchController {
   }
 
   render_option (data, escape) {
-    console.log(data)
     if (data.first_name && data.last_name) {
       return `
           <div>
