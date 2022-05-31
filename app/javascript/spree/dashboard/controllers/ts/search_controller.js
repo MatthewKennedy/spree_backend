@@ -39,7 +39,7 @@ export default class extends StimulusTomSelect {
 
     if (response.ok) {
       const body = await response.json
-      const deserializedData = deserialize(body)
+      const deserializedData = this.requestFormatted(body)
 
       if (debugMode) console.log(deserializedData)
 
@@ -64,5 +64,11 @@ export default class extends StimulusTomSelect {
     }
 
     return urlWithParams
+  }
+
+  requestFormatted (body) {
+    const formatted = deserialize(body)
+
+    return formatted
   }
 }
