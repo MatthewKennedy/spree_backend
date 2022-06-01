@@ -29,7 +29,10 @@ export default class extends StimulusTomSelect {
       labelField: label,
       searchField: search,
       loadThrottle: 400,
-      load: (q, callback) => this.search(q, callback)
+      load: (q, callback) => this.search(q, callback),
+      shouldLoad: function (query) {
+        return query.length > 2
+      }
     }
   }
 

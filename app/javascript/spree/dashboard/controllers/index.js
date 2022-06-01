@@ -14,10 +14,10 @@ import DatePickerController from './datepicker_controller'
 
 import FormValidationController from './form_validation_controller'
 
-import TsSearchController from './ts/search_controller.js'
-import TsSelectController from './ts/select_controller.js'
+import TsSearchController from './ts/search_controller'
+import TsSelectController from './ts/select_controller'
 
-import userSearchController from './ts/templates/user_controller.js'
+import userSearchController from './ts/templates/user_controller'
 
 // Stimulus - Setup
 window.Stimulus = Application.start()

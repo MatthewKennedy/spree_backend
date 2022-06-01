@@ -13,11 +13,14 @@ export default class extends TsSearchController {
       labelField,
       searchField,
       loadThrottle,
-      load: (q, callback) => this.search(q, callback),
       render: {
         option: this.render_option,
         item: this.render_item
       },
+      shouldLoad: function (query) {
+        return query.length > 4
+      },
+      load: (q, callback) => this.search(q, callback),
       onChange: (value) => this.doNext(value)
     }
   }

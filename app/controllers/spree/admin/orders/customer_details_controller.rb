@@ -20,9 +20,11 @@ module Spree
         end
 
         def update
-          params[:order][:user_id] = nil if guest_checkout?
+          reset_address if guest_checkout?
+
           if @order.update(order_params)
-            @order.associate_user!(@user, @order.email.blank?) unless guest_checkout?
+            @order.associate_user!(@user) if @user.present?
+
             @order.next if @order.address?
             @order.refresh_shipment_rates(Spree::ShippingMethod::DISPLAY_ON_BACK_END)
 
@@ -52,6 +54,8 @@ module Spree
         end
 
         def load_user
+          return if guest_checkout?
+
           @user = (Spree.user_class.find_by(id: order_params[:user_id]) ||
             Spree.user_class.find_by(email: order_params[:email]))
 
@@ -62,7 +66,13 @@ module Spree
         end
 
         def guest_checkout?
-          params[:guest_checkout] == "true"
+          return true if params[:order][:user_id].blank?
+        end
+
+        def reset_address
+          @order.email = nil if params[:order][:email].blank?
+          @order.bill_address_id = nil
+          @order.ship_address_id = nil
         end
       end
     end

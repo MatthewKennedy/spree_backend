@@ -7,15 +7,28 @@
         <%= Spree.t(:customer_search) %>
       </h5>
     </div>
-    <div class="card-body" id="customer-search-field">
-      <%= select_tag :customer_search, nil, class: 'd-block w-100', data: { controller: 'ts--search-user',
-                                                                        ts__search_user_uri_value: '/api/v2/platform/users',
-                                                                        ts__search_user_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
-                                                                        ts__search_user_include_value: 'ship_address,bill_address' } %>
+    <div class="card-body " id="customer-search-field">
+      <% if @order.user_id %>
+        <% selected_user = [[@order.email, @order.user_id]]%>
+      <% else %>
+        <% selected_user = [] %>
+      <% end %>
+
+      <%= form_for @order, url: spree.admin_order_customer_url(@order), data: { turbo: false } do |f| %>
+        <div class="form-group form-floating">
+          <%= f.select :user_id, selected_user, { include_blank: true }, class: 'form-select', data: {controller: 'ts--search-user',
+                                                                                                          ts__search_user_plugins_value: ['clear_button'],
+                                                                                                          ts__search_user_uri_value: '/api/v2/platform/users',
+                                                                                                          ts__search_user_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
+                                                                                                          ts__search_user_include_value: 'ship_address,bill_address' } %>
+          <%= f.label :user_id, raw(Spree.t(:user_id) + required_span_tag), class: 'form-label' %>
+        </div>
+
+        <%= submit_tag %>
+      <% end %>
     </div>
   </div>
 <% end %>
-
 
 
 <%= form_for @order, url: spree.admin_order_customer_url(@order) do |f| %>
