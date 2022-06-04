@@ -1,36 +1,78 @@
 <%= render 'spree/admin/shared/order_tabs', current: :customer_details %>
 
-<% if can? :edit, @order.user %>
-  <div id="select-customer" class="card mb-3" data-hook>
-    <div class="card-header">
-      <h5 class="card-title mb-0 h6">
-        <%= Spree.t(:customer_search) %>
-      </h5>
-    </div>
-    <div class="card-body " id="customer-search-field">
-      <% if @order.user_id %>
-        <% selected_user = [[@order.email, @order.user_id]]%>
-      <% else %>
-        <% selected_user = [] %>
-      <% end %>
+<%= turbo_frame_tag dom_id(@order) do %>
+<% if (@order.user.present?) || (@order.user_id.nil? && @order.email.nil?) %>
+  <!-- User Search -->
+  <% if can? :edit, @order.user %>
+    <div id="select-customer" class="card mb-3" data-hook>
+      <div class="card-header">
+        <h5 class="card-title mb-0 h6">
+          <%= Spree.t(:customer_search) %>
+        </h5>
+      </div>
+      <div class="card-body " id="customer-search-field">
+        <%= form_for @order, url: spree.admin_order_associate_user_path(@order), data: { turbo_frame: dom_id(@order), controller: "form-validation" } do |f| %>
+          <div class="form-group form-floating">
+            <% if @order.user_id %>
+              <% selected_user = [[@order.email, @order.user_id]]%>
+            <% else %>
+              <% selected_user = [] %>
+            <% end %>
 
-      <%= form_for @order, url: spree.admin_order_customer_url(@order), data: { turbo: false } do |f| %>
-        <div class="form-group form-floating">
-          <%= f.select :user_id, selected_user, { include_blank: true }, class: 'form-select', data: {controller: 'ts--search-user',
-                                                                                                          ts__search_user_plugins_value: ['clear_button'],
-                                                                                                          ts__search_user_uri_value: '/api/v2/platform/users',
-                                                                                                          ts__search_user_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
-                                                                                                          ts__search_user_include_value: 'ship_address,bill_address' } %>
-          <%= f.label :user_id, raw(Spree.t(:user_id) + required_span_tag), class: 'form-label' %>
+            <%= f.select :user_id, selected_user, { include_blank: true }, class: 'form-select',
+                                                                placeholder: Spree.t('admin.order.search_users_by_name_or_email'),
+                                                                data: { action: 'change->form-validation#validate',
+                                                                        controller: 'ts--search-user',
+                                                                        ts__search_user_debug_value: true,
+                                                                        ts__search_user_plugins_value: ['clear_button'],
+                                                                        ts__search_user_uri_value: '/api/v2/platform/users',
+                                                                        ts__search_user_ransack_value: ['email_i_cont', 'addresses_firstname', 'addresses_lastname'],
+                                                                        ts__search_user_include_value: 'ship_address.country,bill_address.country' } %>
+
+            <%= f.label :user_id, raw(Spree.t(:user_id) + required_span_tag), class: 'form-label' %>
+          </div>
+
+          <%= f.submit Spree.t('admin.order.add_user_to_order'), class: 'btn btn-secondary', data: { form_validation_target: "submitBtn" } %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+
+  <% if @order.user_id.nil? %>
+    <!-- Guest User Email Details -->
+    <%= form_for @order, url: spree.admin_order_customer_url(@order) do |f| %>
+      <div class="card mb-3" data-hook="customer_guest">
+        <div class="card-header">
+          <h5 class="card-title mb-0 h6">
+            <%= Spree.t('admin.order.new_account') %>
+          </h5>
         </div>
 
-        <%= submit_tag %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+        <div class="card-body">
+          <div data-hook="customer_fields" class="row">
+            <div class="col-12">
+              <div class="input-group form-floating">
+                <% if can? :edit, @order.user %>
+                  <%= f.email_field :email, class: 'form-control', placeholder: Spree.t(:email), required: true, disabled: @order.user_id.present? %>
+                  <%= f.label :email, raw(Spree.t(:email) + required_span_tag) %>
+                  <%= link_to 'Reset', spree.admin_order_reset_form_path(@order), class: "btn btn-outline-secondary pad-as-btn", data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } %>
+                <% else %>
+                  <p><%= @order.user.try(:email) || @order.email %></p>
+                <% end %>
+              </div>
+              <%= f.submit %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 
-
-<%= form_for @order, url: spree.admin_order_customer_url(@order) do |f| %>
-  <%= render 'form', f: f %>
+  <% if @order.user.present? || @order.email.present? %>
+    <!-- Address Details -->
+    <%= form_for @order, url: spree.admin_order_customer_url(@order) do |f| %>
+      <%= render 'form', f: f %>
+    <% end %>
+  <% end %>
 <% end %>

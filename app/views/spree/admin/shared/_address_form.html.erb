@@ -31,86 +31,94 @@
 
   <hr class="my-4">
   <h6 class="text-muted">Address Location</h6>
+    <% Spree::Address::ADDRESS_FIELDS.each do |field| %>
+      <% next if dynamic_fields.include?(field) %>
+
+      <% if field == 'address1' %>
+        <% label_name = Spree.t('admin.address.street') %>
+      <% else %>
+        <% label_name = Spree.t(field) %>
+      <% end %>
+
+      <%= field_container (s_or_b + '_' + field), nil, class: ['form-floating',"#{type}-row"] do %>
+        <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
+        <% if requireds.include?(field) %>
+          <%= f.label field, raw(label_name + required_span_tag), class: 'form-label' %>
+        <% else %>
+          <%= f.label field, label_name, class: 'form-label' %>
+        <% end %>
+      <% end %>
+    <% end %>
 
   <% Spree::Address::ADDRESS_FIELDS.each do |field| %>
-    <% next if dynamic_fields.include?(field) %>
+    <% if field == "state" %>
 
-    <%= field_container (s_or_b + '_' + field), nil, class: ['form-floating',"#{type}-row"] do %>
-      <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
-      <% if requireds.include?(field) %>
-        <%= f.label field, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
-      <% else %>
-        <%= f.label field, Spree.t(field), class: 'form-label' %>
+    <% state_lable = case f.object.country.iso3
+       when 'ARE'
+           Spree.t('admin.address.emirate')
+       when 'AUS'
+        Spree.t('admin.address.state_territory')
+       else
+          Spree.t(field)
+       end %>
+
+      <!-- STATE -->
+      <%= field_container (s_or_b + '_' + field), :state, class: ['form-floating', "#{type}-row"], data: { form_validation_target: "hideOnSubmit" } do %>
+        <% if f.object.country.try(:states) %>
+          <% if !f.object.country.states.present? && f.object.country.states_required? %>
+            <%= f.text_field :state_name, style: "display: #{ f.object.country.states.empty? && f.object.country.states_required? ? 'block' : 'none' };",
+                                          required: true,
+                                          class: 'form-control',
+                                          data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
+          <% end %>
+
+          <% if f.object.country.states.present?  %>
+            <%= f.collection_select :state_id, f.object.country.states.sort, :id, :name, { include_blank: true }, {class: 'form-select', required: f.object.country.states_required?, data: { controller: f.object.country.states.empty? ? '' : 'ts--select',
+                                                                                                                                                                                              form_validation_target: "disableOnSubmit removeRequiredOnSubmit" }}  %>
+          <% end %>
+
+          <% if f.object.country.states_required? || f.object.country.states.present? %>
+            <% if f.object.country.states_required? %>
+              <%= f.label :state_id, raw(state_lable + required_span_tag), class: 'form-label' %>
+            <% else %>
+              <%= f.label :state_id, state_lable, class: 'form-label' %>
+            <% end %>
+          <% end %>
+
+        <% else %>
+          <div>
+            <em><%= Spree.t(:no_country) %></em>
+          </div>
+        <% end %>
       <% end %>
+      <!-- STATE -->
+    <% elsif field == "zipcode" %>
+
+    <% zip_lable = case f.object.country.iso3
+      when 'GBR'
+        Spree.t('admin.address.post_code')
+      when 'CAN'
+        Spree.t('admin.address.post_code')
+      when 'AUS'
+        Spree.t('admin.address.post_code')
+      else
+        Spree.t(field)
+      end %>
+
+      <!-- ZIPCODE -->
+      <%= field_container (s_or_b + '_' + field), nil, class: ['form-floating',"#{type}-row"], data: { form_validation_target: "hideOnSubmit" } do %>
+        <%= f.text_field field, class: 'form-control', placeholder: Spree.t(field),  data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
+
+        <% if f.object.country.zipcode_required? %>
+          <%= f.label field, (raw(zip_lable) + required_span_tag), class: 'form-label' %>
+        <% else %>
+          <%= f.label field, zip_lable, class: 'form-label' %>
+        <% end %>
+      <% end %>
+      <!-- ZIPCODE -->
     <% end %>
   <% end %>
 
-  <%= turbo_frame_tag country_frame_type.to_sym do %>
-    <% Spree::Address::ADDRESS_FIELDS.each do |field| %>
-      <% if field == "state" %>
-
-      <% state_lable = case f.object.country.iso3
-         when 'ARE'
-            'Emirate'
-         when 'AUS'
-          'State / Territory'
-         else
-            Spree.t(field)
-         end %>
-
-        <!-- STATE -->
-        <%= field_container (s_or_b + '_' + field), :state, class: ['form-floating', "#{type}-row"], data: { form_validation_target: "hideOnSubmit" } do %>
-          <% if f.object.country.try(:states) %>
-            <% if !f.object.country.states.present? && f.object.country.states_required? %>
-              <%= f.text_field :state_name, style: "display: #{ f.object.country.states.empty? && f.object.country.states_required? ? 'block' : 'none' };",
-                                            required: true,
-                                            class: 'form-control',
-                                            data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
-            <% end %>
-
-            <% if f.object.country.states.present?  %>
-              <%= f.collection_select :state_id, f.object.country.states.sort, :id, :name, { include_blank: true }, {class: 'form-select', required: f.object.country.states_required?, data: { controller: f.object.country.states.empty? ? '' : 'ts--select',
-                                                                                                                                                                                                form_validation_target: "disableOnSubmit removeRequiredOnSubmit" }}  %>
-            <% end %>
-
-            <% if f.object.country.states_required? || f.object.country.states.present? %>
-              <% if f.object.country.states_required? %>
-                <%= f.label :state_id, raw(state_lable + required_span_tag), class: 'form-label' %>
-              <% else %>
-                <%= f.label :state_id, state_lable, class: 'form-label' %>
-              <% end %>
-            <% end %>
-
-          <% else %>
-            <div>
-              <em><%= Spree.t(:no_country) %></em>
-            </div>
-          <% end %>
-        <% end %>
-        <!-- STATE -->
-      <% elsif field == "zipcode" %>
-
-      <% zip_lable = case f.object.country.iso3
-         when 'GBR'
-            'Post Code'
-         else
-            Spree.t(field)
-         end %>
-
-        <!-- ZIPCODE -->
-        <%= field_container (s_or_b + '_' + field), nil, class: ['form-floating',"#{type}-row"], data: { form_validation_target: "hideOnSubmit" } do %>
-          <%= f.text_field field, class: 'form-control', placeholder: Spree.t(field),  data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
-
-          <% if f.object.country.zipcode_required? %>
-            <%= f.label field, (raw(zip_lable) + required_span_tag), class: 'form-label' %>
-          <% else %>
-            <%= f.label field, zip_lable, class: 'form-label' %>
-          <% end %>
-        <% end %>
-        <!-- ZIPCODE -->
-      <% end %>
-    <% end %>
-  <% end %>
 
 
   <% Spree::Address::ADDRESS_FIELDS.each do |field| %>

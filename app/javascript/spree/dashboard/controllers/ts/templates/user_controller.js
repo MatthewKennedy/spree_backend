@@ -18,7 +18,7 @@ export default class extends TsSearchController {
         item: this.render_item
       },
       shouldLoad: function (query) {
-        return query.length > 4
+        return query.length > 2
       },
       load: (q, callback) => this.search(q, callback),
       onChange: (value) => this.doNext(value)
@@ -26,17 +26,36 @@ export default class extends TsSearchController {
   }
 
   render_option (data, escape) {
-    if (data.first_name && data.last_name) {
-      return `
-          <div>
-            <div>${escape(data.first_name)} ${escape(data.last_name)}</div>
-            <small class="text-muted">Email: ${escape(data.email)}</small>
-          </div>`
-    } else { return `<div>Email: ${escape(data.email)}</div>` }
+    if (data.first_name || data.last_name) {
+      return `<div>
+                <div>
+                  <span class="text-muted">Name:</span> ${data.first_name ? escape(data.first_name) : ''} ${data.last_name ? escape(data.last_name) : ''}
+                </div>
+                <div>
+                  <small><span class="text-muted">Email:</span> ${escape(data.email)} </small>
+                </div>
+                <div>
+                  ${data.bill_address ? `<div><small><span class="text-muted">Bill To:</span> ${escape(data.bill_address.address1)}, ${escape(data.bill_address.country.iso)}</small> </div>` : ''}
+                  ${data.ship_address ? `<div><small><span class="text-muted">Ship To:</span> ${escape(data.ship_address.address1)}, ${escape(data.ship_address.country.iso)}</small> </div>` : ''}
+                </div>
+              </div>`
+    } else {
+      return `<div>
+                <div>
+                  <span class="text-muted">Email:</span> ${escape(data.email)}
+                </div>
+                <div>
+                  ${data.bill_address ? `<div><small><span class="text-muted">Bill To:</span> ${escape(data.bill_address.address1)}, ${escape(data.bill_address.country.iso_name)}</small> </div>` : ''}
+                  ${data.ship_address ? `<div><small><span class="text-muted">Ship To:</span> ${escape(data.ship_address.address1)}, ${escape(data.ship_address.country.iso_name)}</small> </div>` : ''}
+                </div>
+              </div>`
+    }
   }
 
   render_item (data, escape) {
-    return `<div>${data.email}</div>`
+    return `<div>
+              ${data.email}
+            </div>`
   }
 
   doNext (value) {

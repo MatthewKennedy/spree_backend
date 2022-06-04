@@ -5,7 +5,7 @@ module Spree
         include Spree::Admin::OrderConcern
 
         before_action :load_order
-        before_action :load_user, only: :update, unless: :guest_checkout?
+        before_action :load_user, only: [:update, :associate_user], unless: :guest_checkout?
 
         def show
           edit
@@ -15,16 +15,55 @@ module Spree
         def edit
           @order.build_bill_address(country: current_store.default_country) if @order.bill_address.nil?
           @order.build_ship_address(country: current_store.default_country) if @order.ship_address.nil?
+        end
 
-          @order.assign_attributes(order_params)
+        def bill_address_change
+          @order.build_bill_address(country_id: order_params[:bill_address_attributes][:country_id])
+
+          render action: :edit
+        end
+
+        def ship_address_change
+          @order.build_ship_address(country_id: order_params[:ship_address_attributes][:country_id])
+
+          render action: :edit
+        end
+
+        def reset_form
+          @order.reset_address
+          @order.save!
+
+          @order.build_bill_address(country: current_store.default_country) if @order.bill_address.nil?
+          @order.build_ship_address(country: current_store.default_country) if @order.ship_address.nil?
+
+          render action: :edit
+        end
+
+        def associate_user
+          if @order.update(order_params)
+            if @user.present?
+              @order.associate_user!(@user)
+            else
+              @order.reset_address
+              @order.save!
+
+              @order.build_bill_address(country: current_store.default_country) if @order.bill_address.nil?
+              @order.build_ship_address(country: current_store.default_country) if @order.ship_address.nil?
+            end
+
+            if @order.errors.empty?
+              flash[:success] = Spree.t("customer_details_updated")
+              render action: :edit
+            else
+              render action: :edit, status: :unprocessable_entity
+            end
+          else
+            render action: :edit, status: :unprocessable_entity
+          end
         end
 
         def update
-          reset_address if guest_checkout?
-
           if @order.update(order_params)
-            @order.associate_user!(@user) if @user.present?
-
             @order.next if @order.address?
             @order.refresh_shipment_rates(Spree::ShippingMethod::DISPLAY_ON_BACK_END)
 
@@ -54,8 +93,6 @@ module Spree
         end
 
         def load_user
-          return if guest_checkout?
-
           @user = (Spree.user_class.find_by(id: order_params[:user_id]) ||
             Spree.user_class.find_by(email: order_params[:email]))
 
@@ -66,7 +103,7 @@ module Spree
         end
 
         def guest_checkout?
-          return true if params[:order][:user_id].blank?
+          params[:order][:user_id].blank?
         end
 
         def reset_address

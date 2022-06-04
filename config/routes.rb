@@ -91,6 +91,10 @@ Spree::Core::Engine.add_routes do
       resources :state_changes, only: [:index]
 
       resource :customer, controller: "orders/customer_details"
+      get :bill_address_change, controller: "orders/customer_details"
+      get :ship_address_change, controller: "orders/customer_details"
+      patch :associate_user, controller: "orders/customer_details"
+      patch :reset_form, controller: "orders/customer_details"
       resources :customer_returns, only: [:index, :new, :edit, :create, :update] do
         member do
           put :refund

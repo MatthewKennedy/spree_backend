@@ -1,6 +1,10 @@
 en:
   spree:
     admin:
+      address:
+        emirate: Emirate
+        state_territory: State / Territory
+        post_code: Post Code
       url: URL
       active: Active
       dashboard: Dashboard
@@ -150,6 +154,9 @@ en:
           cancel: cancel
           resume: resume
           resend: Resend
+        add_user_to_order: Add this User to the Order
+        search_users_by_name_or_email: Search users by name or email.
+        new_account: New Account
       orders:
         all: All
         unpaid: Unpaid
@@ -158,6 +165,7 @@ en:
         all_orders: All Orders
         draft_orders: Draft Orders
         abandoned_checkouts: Abandoned Checkouts
+
       oauth_applications:
         list: oAuth applications
         new: New oAuth application
