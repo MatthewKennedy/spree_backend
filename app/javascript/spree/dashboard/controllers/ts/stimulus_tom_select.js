@@ -3,7 +3,6 @@ import TomSelect from 'tom-select'
 
 class StimulusTomSelect extends Controller {
   static values = {
-    options: { type: Array, default: [] },
     plugins: { type: Array, default: [] }
   }
 
@@ -15,9 +14,6 @@ class StimulusTomSelect extends Controller {
 
   connect () {
     this.element.setAttribute('autocomplete', 'random')
-
-    if (this.hasOptionsValue) this.config.options = this.optionsValue
-    if (this.hasPluginsValue) this.config.plugins = this.pluginsValue
 
     // eslint-disable-next-line eqeqeq
     if (this.element.options.length && this.element.options[0].value == '') {

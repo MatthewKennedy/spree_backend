@@ -14,6 +14,7 @@ export default class extends StimulusTomSelect {
     include: String, // Set a string of included resources as you would in the api docs Example: 'images,stock_items.stock_location'
     debug: { type: Boolean, default: false }, // Debug mode can be set to log out your response helping you debug.
     loadThrottle: { type: Number, default: 400 },
+    queryCount: { type: Number, default: 2 },
     options: { type: Array, default: [] },
     plugins: { type: Array, default: [] } // Set an array of plugin names as per Tom Select docs.
   }
@@ -27,9 +28,7 @@ export default class extends StimulusTomSelect {
       loadThrottle: this.loadThrottleValue,
       load: (q, callback) => this.search(q, callback),
       onChange: (value) => this.doNext(value),
-      shouldLoad: function (query) {
-        return query.length > 2
-      }
+      shouldLoad: (query) => (query.length > this.queryCountValue)
     }
   }
 
