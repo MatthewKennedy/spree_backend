@@ -25,10 +25,6 @@ export default class extends StimulusTomSelect {
       labelField: this.txtValue,
       searchField: this.fieldsValue,
       loadThrottle: this.loadThrottleValue,
-      render: {
-        option: this.render_option,
-        item: this.render_item
-      },
       load: (q, callback) => this.search(q, callback),
       onChange: (value) => this.doNext(value),
       shouldLoad: function (query) {
