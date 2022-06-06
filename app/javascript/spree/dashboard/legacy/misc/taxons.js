@@ -162,5 +162,5 @@ document.addEventListener('spree:load', function () {
     })
   })
 
-  $('.variant_autocomplete').variantAutocomplete()
+  // $('.variant_autocomplete').variantAutocomplete()
 })

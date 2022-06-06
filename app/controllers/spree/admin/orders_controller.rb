@@ -4,10 +4,7 @@ module Spree
       include Spree::Admin::OrderConcern
 
       before_action :initialize_order_events
-      before_action :load_order, only: %i[
-        edit update cancel resume approve resend open_adjustments
-        close_adjustments cart channel set_channel
-      ]
+      before_action :load_order, only: %i[show edit update cancel resume approve resend open_adjustments close_adjustments set_channel]
 
       respond_to :html
 
@@ -63,7 +60,7 @@ module Spree
 
       def new
         @order = scope.create(order_params)
-        redirect_to cart_admin_order_url(@order)
+        redirect_to admin_order_path(@order)
       end
 
       def edit
@@ -72,11 +69,11 @@ module Spree
         @order.refresh_shipment_rates(ShippingMethod::DISPLAY_ON_BACK_END) unless @order.completed?
       end
 
-      def cart
+      def show
         @order.refresh_shipment_rates(ShippingMethod::DISPLAY_ON_BACK_END) unless @order.completed?
 
         if @order.shipments.shipped.exists?
-          redirect_to spree.edit_admin_order_url(@order)
+          redirect_to spree.admin_order_path(@order)
         end
       end
 

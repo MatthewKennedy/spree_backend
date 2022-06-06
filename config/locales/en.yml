@@ -157,6 +157,8 @@ en:
         add_user_to_order: Add this User to the Order
         search_users_by_name_or_email: Search users by name or email.
         new_account: New Account
+        products: Products
+        search_for_a_product_or_variant: Search for Products or Variants by name or SKU
       orders:
         all: All
         unpaid: Unpaid

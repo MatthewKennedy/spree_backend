@@ -1,7 +1,6 @@
 import './global'
 import './misc'
 import './cms'
-import './orders'
 import './payments'
 import './menus'
 import './returns'

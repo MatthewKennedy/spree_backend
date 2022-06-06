@@ -19,8 +19,6 @@ export default class extends Controller {
     this.hideOnSubmitTargets.forEach(target => (target.style.display = 'none'))
     this.disableOnSubmitTargets.forEach(target => target.setAttribute('disabled', 'disabled'))
 
-    console.log(this.submitBtnTarget)
-
     this.submitBtnTarget.click()
   }
 }

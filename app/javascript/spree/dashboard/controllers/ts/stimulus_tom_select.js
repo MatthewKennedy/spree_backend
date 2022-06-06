@@ -3,13 +3,13 @@ import TomSelect from 'tom-select'
 
 class StimulusTomSelect extends Controller {
   static values = {
-    options: Array,
-    plugins: Array
+    options: { type: Array, default: [] },
+    plugins: { type: Array, default: [] }
   }
 
   initialize () {
     this.config = {
-      plugins: []
+      plugins: this.pluginsValue
     }
   }
 
