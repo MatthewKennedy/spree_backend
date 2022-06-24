@@ -1,5 +1,11 @@
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
+    resources :addresses do
+      member do
+        get :edit_modal
+      end
+    end
+
     resources :promotions do
       resources :promotion_rules
       resources :promotion_actions
@@ -74,6 +80,14 @@ Spree::Core::Engine.add_routes do
       end
     end
 
+    resources :shipments do
+      member do
+        patch :add_item
+        patch :remove_item
+        patch :increment_item
+      end
+    end
+
     resources :orders do
       member do
         post :resend
@@ -87,11 +101,11 @@ Spree::Core::Engine.add_routes do
         get :reset_digitals
       end
 
+      resources :address, controller: "orders/customer_details"
+
       resources :state_changes, only: [:index]
 
       resources :line_items
-
-      # patch :add_line_items
 
       resource :customer, controller: "orders/customer_details"
       get :bill_address_change, controller: "orders/customer_details"

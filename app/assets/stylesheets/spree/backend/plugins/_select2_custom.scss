@@ -76,7 +76,7 @@ input::-webkit-contacts-auto-fill-button {
 
 .form-floating {
   .ts-wrapper {
-    min-height: calc(3em + 0.75rem + 2px);
+    min-height: calc(3em + 0.75rem - 2px);
   }
 
   .ts-control {

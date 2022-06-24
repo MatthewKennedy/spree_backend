@@ -4,7 +4,8 @@ module Spree
       include Spree::Admin::OrderConcern
 
       before_action :initialize_order_events
-      before_action :load_order, only: %i[show edit update cancel resume approve resend open_adjustments close_adjustments set_channel]
+      before_action :load_order, only: %i[reset_digitals show edit update cancel resume approve resend open_adjustments close_adjustments]
+      before_action :load_user, only: %i[update]
 
       respond_to :html
 
@@ -60,12 +61,11 @@ module Spree
 
       def new
         @order = scope.create(order_params)
-        redirect_to admin_order_path(@order)
+        redirect_to spree.admin_order_path(@order)
       end
 
       def edit
         can_not_transition_without_customer_info
-
         @order.refresh_shipment_rates(ShippingMethod::DISPLAY_ON_BACK_END) unless @order.completed?
       end
 
@@ -78,17 +78,14 @@ module Spree
       end
 
       def update
-        if @order.update(params[:order]) && @order.line_items.present?
+        if @order.update(permitted_resource_params)
+          @order.associate_user!(@user)
           @order.update_with_updater!
-          unless @order.completed?
-            # Jump to next step if order is not completed.
-            redirect_to spree.admin_order_customer_path(@order) and return
-          end
+
+          redirect_to spree.admin_order_path(@order)
         elsif @order.line_items.empty?
           @order.errors.add(:line_items, Spree.t("errors.messages.blank"))
         end
-
-        render action: :edit
       end
 
       def cancel
@@ -117,7 +114,6 @@ module Spree
       end
 
       def reset_digitals
-        load_order
         @order.digital_links.each(&:reset!)
         flash[:notice] = Spree.t("admin.digitals.downloads_reset")
 
@@ -140,20 +136,19 @@ module Spree
         redirect_back fallback_location: spree.admin_order_adjustments_url(@order)
       end
 
-      def set_channel
-        if @order.update(order_params)
-          flash[:success] = flash_message_for(@order, :successfully_updated)
-        else
-          flash[:error] = @order.errors.full_messages.join(", ")
-        end
-
-        redirect_to channel_admin_order_url(@order)
-      end
-
       private
+
+      def load_user
+        return if params[:order][:user_id].blank?
+        @user = Spree.user_class.find(params[:order][:user_id])
+      end
 
       def scope
         current_store.orders.accessible_by(current_ability, :index)
+      end
+
+      def model_class
+        Spree::Order
       end
 
       def order_params
@@ -161,18 +156,13 @@ module Spree
         params.permit(:created_by_id, :user_id, :store_id, :channel)
       end
 
-      def load_order
-        @order = scope.includes(:adjustments).find_by!(number: params[:id])
-        authorize! action, @order
+      def permitted_resource_params
+        params.require(:order).permit(permitted_order_attributes)
       end
 
       # Used for extensions which need to provide their own custom event links on the order details view.
       def initialize_order_events
         @order_events = %w[approve cancel resume]
-      end
-
-      def model_class
-        Spree::Order
       end
     end
   end

@@ -19,6 +19,14 @@ export default class extends TsSearchController {
   }
 
   render_option (data, escape) {
+    const stockLocations = document.createElement('div')
+
+    stockLocations.innerHTML = `
+      ${data.stock_locations.map((stockLocation, i) => `
+        <span class="badge text-bg-secondary">${stockLocation.name}</span>
+      `).join('')}
+    `
+
     if (data.images) {
       return `<div class="row">
                 <div class="col-auto">
@@ -27,6 +35,8 @@ export default class extends TsSearchController {
                 <div class="col">
                   <div>${escape(data.name)}</div>
                   ${data.sku ? `<div><span class="text-muted">SKU:</span> ${escape(data.sku)}</div>` : ''}
+                  ${data.total_on_hand ? `<div><span class="text-muted">On Hand:</span> ${escape(data.total_on_hand)}</div>` : '<div><span class="text-muted">On Hand:</span> Not Tracked</span></div>'}
+                  <div><span class="text-muted">Stock Locations:</span> ${stockLocations.innerHTML}</div>
                 </div>
               </div>`
     } else {
@@ -34,6 +44,7 @@ export default class extends TsSearchController {
                 <div class="col">
                   <div>${escape(data.name)}</div>
                   ${data.sku ? `<div><span class="text-muted">SKU:</span> ${escape(data.sku)}</div>` : ''}
+                  ${data.total_on_hand ? `<div><span class="text-muted">On Hand:</span> ${escape(data.total_on_hand)}</div>` : 'Not Tracked'}
                 </div>
               </div>`
     }

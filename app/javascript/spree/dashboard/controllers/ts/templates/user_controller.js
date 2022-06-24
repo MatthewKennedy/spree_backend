@@ -38,8 +38,6 @@ export default class extends TsSearchController {
   }
 
   render_item (data, escape) {
-    return `<div>
-              ${data.email}
-            </div>`
+    return `<div>${escape(data.email)}</div>`
   }
 }

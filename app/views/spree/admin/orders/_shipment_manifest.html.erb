@@ -1,4 +1,5 @@
 <% shipment.manifest.each do |item| %>
+
   <tr class="stock-item" data-item-quantity="<%= item.quantity %>">
     <td class="item-image image text-center">
       <%= link_to small_image(item.variant), edit_admin_product_path(item.variant.product) %>
@@ -15,17 +16,17 @@
 
     <td class="item-price text-center"><%= item.line_item.single_money.to_html %></td>
 
-    <td class="item-qty-show text-center">
-      <% item.states.each do |state,count| %>
-        <%= count %> x <%= Spree.t(state).downcase %>
+    <td class="item-qty-show text-center" style="width: 130px;" data-controller="number-increment form-validation">
+      <%= form_with model: shipment, url: spree.increment_item_admin_shipment_path(shipment.id), method: :patch do |f| %>
+        <%= f.hidden_field :variant_id, value: item.line_item.variant_id %>
+
+        <%= render partial: 'spree/admin/shared/number_toggle', locals: { value: item.quantity, attribute: 'shipment[quantity]' } %>
+      <% end %>
+
+      <% item.states.each do |state, count| %>
+        <%= Spree.t(state).downcase %>
       <% end %>
     </td>
-
-    <% unless shipment.shipped? %>
-      <td class="item-qty-edit d-none">
-        <%= number_field_tag :quantity, item.quantity, min: 0, class: "line_item_quantity form-control", size: 5 %>
-      </td>
-    <% end %>
 
     <td class="item-total text-center">
       <%= line_item_shipment_price(item.line_item, item.quantity) %>
@@ -34,11 +35,10 @@
     <td class="cart-item-delete actions" data-hook="cart_item_delete">
       <span class="d-flex justify-content-center">
         <% if((!shipment.shipped?) && can?(:update, item.line_item)) %>
-          <%= link_to_with_icon 'edit.svg', Spree.t('actions.edit'), "#", class: 'edit-item btn btn-secondary btn-sm', title: Spree.t('actions.edit'), no_text: true %>
-          <%= link_to_with_icon 'x-lg.svg', Spree.t('actions.cancel'), "#", class: 'cancel-item  btn btn-secondary btn-sm', data: { action: 'cancel' }, title: Spree.t('actions.cancel'), style: 'display: none', no_text: true %>
-          <%= link_to_with_icon 'save.svg', Spree.t('actions.save'), "#", class: 'save-item btn btn-success  btn-sm', data: {'shipment-number' => shipment.number, 'variant-id' => item.variant.id, action: 'save'}, title: Spree.t('actions.save'), style: 'display: none', no_text: true %>
-          <%= link_to_with_icon 'split.svg', Spree.t('split'), "#", class: 'split-item btn btn-secondary btn-sm', data: {action: 'split', 'variant-id' => item.variant.id}, title: Spree.t('split'), no_text: true %>
-          <%= link_to_with_icon 'delete.svg', Spree.t('delete'), "#", class: 'delete-item btn btn-danger btn-sm', data: { 'shipment-number' => shipment.number, 'variant-id' => item.variant.id, action: 'remove'}, title: Spree.t('delete'), no_text: true %>
+          <%= form_with model: shipment, url: spree.remove_item_admin_shipment_path(shipment.id), method: :patch do |f| %>
+            <%= f.hidden_field :variant_id, value: item.line_item.variant_id %>
+            <%= f.submit 'Delete', class: 'btn btn-danger' %>
+          <% end %>
         <% end %>
       </span>
     </td>

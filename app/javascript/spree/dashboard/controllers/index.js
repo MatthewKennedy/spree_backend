@@ -12,6 +12,7 @@ import ClipboardController from './clipboard_controller'
 import ProductEditController from './product_edit_controller'
 import DatePickerController from './datepicker_controller'
 import numberIncrementController from './number_increment_controller'
+import ModalController from './modal_controller'
 
 import FormValidationController from './form_validation_controller'
 
@@ -34,6 +35,7 @@ Stimulus.register('product-edit', ProductEditController)
 Stimulus.register('datepicker', DatePickerController)
 Stimulus.register('number-increment', numberIncrementController)
 Stimulus.register('form-validation', FormValidationController)
+Stimulus.register('modal', ModalController)
 
 Stimulus.register('ts--search', TsSearchController)
 Stimulus.register('ts--select', TsSelectController)

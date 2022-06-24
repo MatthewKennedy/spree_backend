@@ -30,7 +30,8 @@
 
 <div class="row">
   <div class="col-12 col-md-8">
-    <%= render 'add_line_item' if can?(:update, @order) %>
+    <%#= render 'add_line_item' if can?(:update, @order) %>
+    <%= render 'shipment' if can?(:update, @order) %>
     <%= render 'summary' %>
   </div>
   <div class="col-4">

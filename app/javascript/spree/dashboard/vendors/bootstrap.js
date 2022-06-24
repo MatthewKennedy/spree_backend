@@ -1,4 +1,5 @@
-import 'bootstrap'
+import * as Bootstrap from 'bootstrap'
+if (!window.bootstrap) { window.bootstrap = Bootstrap }
 
 document.addEventListener('spree:load', function () {
   $('.with-tip').each(function () {

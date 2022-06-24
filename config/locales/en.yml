@@ -1,6 +1,8 @@
 en:
   spree:
     admin:
+      cancel: Cancel
+      save: Save
       address:
         emirate: Emirate
         state_territory: State / Territory
@@ -147,6 +149,9 @@ en:
         add_new_taxon: Add a new Taxon
         no_taxons: '<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons.'
       order:
+        order: order
+        add: Add
+        add_new_shipping_location: Add New Shipping Location
         changing_store_warning: If you change the store this order belongs to, the order will be reset.
         once_an_order_is_complete_you_can_not_change_store: 'Sorry, once an order is complete, you can no longer change the store that the order belongs to.'
         events:
@@ -159,6 +164,8 @@ en:
         new_account: New Account
         products: Products
         search_for_a_product_or_variant: Search for products by name or SKU.
+        your_order_has_no_shipments: Your order has no shipments.
+        this_shipment_has_no_items: This shipment has no items.
       orders:
         all: All
         unpaid: Unpaid
@@ -167,7 +174,7 @@ en:
         all_orders: All Orders
         draft_orders: Draft Orders
         abandoned_checkouts: Abandoned Checkouts
-
+        your_order_has_no_shipments: Your order has no shipments, create a new shipment then add products to the shipment to generate shipping rates.
       oauth_applications:
         list: oAuth applications
         new: New oAuth application
