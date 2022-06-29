@@ -3,6 +3,7 @@ module Spree
     class LineItemsController < ResourceController
       include Spree::Admin::OrderConcern
       before_action :load_order, only: [:create]
+      before_action :load_order_form_line_item, only: [:update, :destroy]
 
       def create
         @variant = current_store.variants.find(permitted_resource_params[:variant_id])
@@ -14,20 +15,21 @@ module Spree
         )
 
         if result.success?
-          @order.update_with_updater!
-          redirect_to spree.admin_order_path(@order)
+          rebuild_order
+
+          redirect_back fallback_location: spree.edit_admin_order_url(@order)
         else
           flash[:error] = result.error.to_s
         end
       end
 
       def update
-        @order = @line_item.order
         result = update_service.call(line_item: @object, line_item_attributes: permitted_resource_params)
 
         if result.success?
-          @order.update_with_updater!
-          redirect_to spree.admin_order_path(@order)
+          rebuild_order
+
+          redirect_back fallback_location: spree.edit_admin_order_url(@order)
         else
           flash[:error] = result.error.to_s
         end
@@ -37,13 +39,25 @@ module Spree
         result = destroy_service.call(line_item: @object)
 
         if result.success?
-          redirect_to spree.admin_order_path(@line_item.order)
+          rebuild_order
+
+          redirect_back fallback_location: spree.edit_admin_order_url(@order)
         else
           flash[:error] = result.error.to_s
         end
       end
 
       private
+
+      def rebuild_order
+        @order.reload
+        @order.update_with_updater!
+        @order.create_proposed_shipments
+      end
+
+      def load_order_form_line_item
+        @order ||= @object.order
+      end
 
       def add_item_service
         Spree::Backend::Dependencies.platform_line_item_add_item_service.constantize

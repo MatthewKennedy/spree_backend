@@ -1,6 +1,8 @@
 module Spree
   module Admin
     class ShipmentsController < ResourceController
+      SHIPMENT_STATES = %w[ready ship cancel resume pend]
+
       def add_item
         result = add_item_service.call(
           shipment: @shipment,
@@ -28,6 +30,18 @@ module Spree
 
           params[:shipment][:quantity] = increment_by
           remove_item
+        end
+      end
+
+      SHIPMENT_STATES.each do |state|
+        define_method state do
+          result = change_state_service.call(shipment: @shipment, state: state)
+
+          if result.success?
+            redirect_back fallback_location: spree.edit_admin_order_url(@shipment.order)
+          else
+            flash[:error] = result.error.to_s
+          end
         end
       end
 

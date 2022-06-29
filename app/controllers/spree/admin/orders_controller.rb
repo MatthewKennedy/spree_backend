@@ -81,8 +81,9 @@ module Spree
         if @order.update(permitted_resource_params)
           @order.associate_user!(@user)
           @order.update_with_updater!
+          @order.create_proposed_shipments
 
-          redirect_to spree.admin_order_path(@order)
+          redirect_back fallback_location: spree.edit_admin_order_url(@order)
         elsif @order.line_items.empty?
           @order.errors.add(:line_items, Spree.t("errors.messages.blank"))
         end

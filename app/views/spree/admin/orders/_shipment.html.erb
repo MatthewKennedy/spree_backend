@@ -1,9 +1,8 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">Order Builder</h5>
+    <h5 class="card-title">Shipments</h5>
   </div>
   <div class="card-body">
-
     <%= form_with model: @order.shipments, url: spree.admin_shipments_path, method: :post, class: 'input-group' do |f| %>
       <%= f.hidden_field :order_id, value: @order.id %>
       <%= f.field_container :stock_location_id, class: ['form-floating col'] do %>
@@ -17,22 +16,32 @@
     <% end %>
 
     <% if @order.shipments.any? %>
+      <hr>
       <% @order.shipments.order(:id).each do |shipment| %>
         <div id="<%= "shipment_#{shipment.id}" %>" data-hook="admin_shipment_form" class="card">
-          <div class="card-header stock-location no-borderb" data-hook="stock-location">
-            <h5 class="card-title">
-              <span class="shipment-number"><%= shipment.number %></span>
-              -
-              <span class="shipment-state"><%= Spree.t("shipment_states.#{shipment.state}") %></span>
-              <%= Spree.t(:package_from) %>
-              <strong class="stock-location-name" data-hook="stock-location-name">
-                <%= link_to shipment.stock_location.name, spree.edit_admin_stock_location_url(shipment.stock_location) %>
-              </strong>
-              <% if shipment.ready? and can? :update, shipment %>
-                <%= link_to Spree.t(:ship), 'javascript:;', class: 'ship ms-auto btn btn-success ', data: { 'shipment-number' => shipment.number } %>
-                <div class='clearfix'></div>
+          <div class="card-header d-flex" data-hook="stock-location">
+            <div class="flex-fill">
+              <h6 class="card-title">
+                 <%= shipment.number %>
+              </h6>
+              <h6 class="card-title text-muted">
+               <%= Spree.t('admin.order.shipping_from') %> <%= link_to shipment.stock_location.name, spree.edit_admin_stock_location_url(shipment.stock_location) %>
+              </h6>
+            </div>
+
+            <% unless shipment.ready? and can? :update, shipment %>
+              <% if shipment.manifest.empty? %>
+                <div>
+                  <%= link_to_with_icon 'x-lg.svg', Spree.t('admin.order.delete_shipment'), spree.admin_shipment_path(shipment.id), class: 'btn btn-light btn-sm', data: { turbo_method: :delete, turbo_confirm: Spree.t('are_you_sure') } , title: Spree.t('admin.order.delete_shipment'), no_text: true %>
+                </div>
               <% end %>
-            </h5>
+            <% end %>
+
+            <% if shipment.ready? and can? :update, shipment %>
+              <div>
+                <%= link_to Spree.t('admin.order.mark_as_shipped'), spree.ship_admin_shipment_path(shipment.id), class: 'btn btn-light btn-sm', data: { turbo_method: :patch } , title: Spree.t('admin.order.mark_as_shipped') %>
+              </div>
+            <% end %>
           </div>
 
           <div class="card-body">
@@ -61,18 +70,15 @@
                 </div>
             <% end %>
 
-            <% if shipment.manifest.empty? %>
-              <div class="alert alert-warning mb-0">
-                <%= Spree.t('admin.order.this_shipment_has_no_items') %>
-              </div>
-            <% else %>
+            <% unless shipment.manifest.empty? %>
               <div class="table-responsive">
                 <table class="table stock-contents" data-hook="stock-contents">
                   <thead class="text-muted">
                     <tr>
-                      <th colspan="2"><%= Spree.t(:item_description) %></th>
+                      <th colspan="2"><%= Spree.t(:item) %></th>
                       <th width="15%" class="text-center"><%= Spree.t(:price) %></th>
                       <th width="20%" class="text-center"><%= Spree.t(:quantity) %></th>
+                      <th width="20%" class="text-center"><%= Spree.t(:available) %></th>
                       <th width="15%" class="text-center"><%= Spree.t(:total) %></th>
                       <th class="orders-actions actions text-center" data-hook="admin_order_form_line_items_header_actions"></th>
                     </tr>
@@ -85,7 +91,7 @@
               </div>
             <% end %>
 
-            <% unless shipment.shipped? %>
+            <% if !shipment.shipped? && shipment.shipping_rates.any? %>
               <div class="shipping-method">
                 <%= label_tag 'selected_shipping_rate_id', Spree.t(:shipping_method) %>
                 <%= select_tag :selected_shipping_rate_id,
@@ -94,10 +100,17 @@
               </div>
             <% end %>
 
-            <div class="tracking-number">
-              <label><%= Spree.t(:tracking_number) %>:</label>
-              <%= text_field_tag :tracking, shipment.tracking, class: "form-control" %>
-            </div>
+            <% if shipment.ready? %>
+              <div class="tracking-number">
+                <label><%= Spree.t(:tracking_number) %>:</label>
+                <%= text_field_tag :tracking, shipment.tracking, class: "form-control" %>
+              </div>
+            <% elsif shipment.tracking.present? %>
+              <div class="show-tracking">
+                <%= shipment.tracking %>
+                <strong><%= Spree.t(:tracking) %>:</strong> <%= link_to_tracking(shipment, target: '_blank') %>
+              </div>
+            <% end %>
 
             <% if @order.special_instructions.present? %>
               <div class='special_instructions'>
@@ -105,20 +118,12 @@
               </div>
             <% end %>
 
-            <div class="show-tracking">
-              <% if shipment.tracking.present? %>
-                <strong><%= Spree.t(:tracking) %>:</strong> <%= link_to_tracking(shipment, target: '_blank') %>
-              <% else %>
-                <%= Spree.t(:no_tracking_present) %>
-              <% end %>
-            </div>
-
           </div>
         </div>
       <% end %>
     <% else %>
       <div class="alert alert-warning mb-0">
-        <%= Spree.t('admin.order.your_order_has_no_shipments') %>
+        <%= Spree.t('admin.order.add_a_shipment_to_this_order_to_begin_adding_items').html_safe %>
       </div>
     <% end %>
   </div>

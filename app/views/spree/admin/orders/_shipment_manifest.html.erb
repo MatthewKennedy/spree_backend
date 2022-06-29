@@ -22,7 +22,9 @@
 
         <%= render partial: 'spree/admin/shared/number_toggle', locals: { value: item.quantity, attribute: 'shipment[quantity]' } %>
       <% end %>
+    </td>
 
+    <td class="text-center">
       <% item.states.each do |state, count| %>
         <%= Spree.t(state).downcase %>
       <% end %>
@@ -34,10 +36,13 @@
 
     <td class="cart-item-delete actions" data-hook="cart_item_delete">
       <span class="d-flex justify-content-center">
-        <% if((!shipment.shipped?) && can?(:update, item.line_item)) %>
+        <% unless shipment.shipped? and can? :update, item.line_item %>
           <%= form_with model: shipment, url: spree.remove_item_admin_shipment_path(shipment.id), method: :patch do |f| %>
             <%= f.hidden_field :variant_id, value: item.line_item.variant_id %>
-            <%= f.submit 'Delete', class: 'btn btn-danger' %>
+
+            <%= f.button :submit, class: "btn btn-danger btn-sm" do %>
+              <%= svg_icon name: "x-lg.svg", width: '16', height: '16' %>
+            <% end %>
           <% end %>
         <% end %>
       </span>

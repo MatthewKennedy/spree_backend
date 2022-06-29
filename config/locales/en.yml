@@ -149,8 +149,13 @@ en:
         add_new_taxon: Add a new Taxon
         no_taxons: '<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons.'
       order:
+        delete_shipment: Delete Shipment
+        package: "Package:"
+        mark_as_shipped: Mark as Shipped
+        shipping_from: "Shipping from:"
         order: order
         add: Add
+        add_a_shipment_to_this_order_to_begin_adding_items: Add a new shipping location to this order, and then add products to the shipment. Ideally, choose the location nearest the delivery address for faster and cheaper delivery.
         add_new_shipping_location: Add New Shipping Location
         changing_store_warning: If you change the store this order belongs to, the order will be reset.
         once_an_order_is_complete_you_can_not_change_store: 'Sorry, once an order is complete, you can no longer change the store that the order belongs to.'

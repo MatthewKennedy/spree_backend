@@ -1,6 +1,6 @@
 module Spree
   module Backend
-    class Dependencies
+    class DashDependencies
       include Spree::DependenciesHelper
 
       INJECTION_POINTS = [
