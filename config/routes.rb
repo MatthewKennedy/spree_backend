@@ -37,19 +37,17 @@ Spree::Core::Engine.add_routes do
       end
     end
 
-    # Option Types
+    # Options
     resources :option_types do
       collection do
         post :update_positions
         post :update_values_positions
       end
     end
-
-    # Option Values
     delete "/option_values/:id", to: "option_values#destroy", as: :option_value
 
     # Orders
-    resources :orders do
+    resources :orders, except: [:show] do
       member do
         post :resend
         get :open_adjustments

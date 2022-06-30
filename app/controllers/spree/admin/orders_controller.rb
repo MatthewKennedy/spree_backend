@@ -4,7 +4,7 @@ module Spree
       include Spree::Admin::OrderConcern
 
       before_action :initialize_order_events
-      before_action :load_order, only: %i[reset_digitals show edit update cancel resume approve resend open_adjustments close_adjustments]
+      before_action :load_order, only: %i[reset_digitals edit update cancel resume approve resend open_adjustments close_adjustments]
       before_action :load_user, only: %i[update]
 
       respond_to :html
@@ -61,20 +61,12 @@ module Spree
 
       def new
         @order = scope.create(order_params)
-        redirect_to spree.admin_order_path(@order)
+
+        redirect_to spree.edit_admin_order_url(@order)
       end
 
       def edit
-        can_not_transition_without_customer_info
         @order.refresh_shipment_rates(ShippingMethod::DISPLAY_ON_BACK_END) unless @order.completed?
-      end
-
-      def show
-        @order.refresh_shipment_rates(ShippingMethod::DISPLAY_ON_BACK_END) unless @order.completed?
-
-        if @order.shipments.shipped.exists?
-          redirect_to spree.admin_order_path(@order)
-        end
       end
 
       def update
