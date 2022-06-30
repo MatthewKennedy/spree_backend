@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">Shipments</h5>
+    <h5 class="card-title"><%= Spree.t('admin.shipments') %></h5>
   </div>
   <div class="card-body">
     <%= form_with model: @order.shipments, url: spree.admin_shipments_path, method: :post, class: 'input-group' do |f| %>

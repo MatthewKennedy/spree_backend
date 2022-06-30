@@ -325,6 +325,7 @@ en:
         both: All
         front_end: Storefront
         back_end: Admin Panel
+      shipment: Shipments
       product:
         all: All
         active: Active

@@ -1,56 +1,42 @@
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
+    # Addresses
     resources :addresses do
       member do
         get :edit_modal
       end
     end
 
-    resources :promotions do
-      resources :promotion_rules
-      resources :promotion_actions
-      member do
-        post :clone
-      end
-    end
+    # Authentication
+    resources :oauth_applications
 
-    resources :promotion_categories, except: [:show]
-
-    resources :zones
-
-    resources :stores, except: %i[index show]
-
+    # Countries
     resources :countries do
       resources :states
     end
-    resources :states
-    resources :tax_categories
 
-    resources :products do
-      resources :product_properties do
-        collection do
-          post :update_positions
-        end
-      end
-      resources :images do
-        collection do
-          post :update_positions
-        end
-      end
-      member do
-        post :clone
-        get :stock
-      end
-      resources :variants do
-        collection do
-          post :update_positions
-        end
-      end
-      resources :variants_including_master, only: [:update]
-      resources :prices, only: [:index, :create]
-      resources :digitals, only: [:index, :create, :destroy]
+    # CMS Pages
+    resources :cms_pages do
+      resources :cms_sections, except: :index
     end
 
+    # Dash
+    resource :dashboard, controller: "dashboard"
+    root to: "dashboard#show"
+
+    # Error forbidden
+    get "/forbidden", to: "errors#forbidden", as: :forbidden
+
+    # Menus
+    resources :menus do
+      resources :menu_items, except: :index do
+        member do
+          delete :remove_icon
+        end
+      end
+    end
+
+    # Option Types
     resources :option_types do
       collection do
         post :update_positions
@@ -58,42 +44,10 @@ Spree::Core::Engine.add_routes do
       end
     end
 
+    # Option Values
     delete "/option_values/:id", to: "option_values#destroy", as: :option_value
 
-    resources :oauth_applications
-
-    resources :properties do
-      collection do
-        get :filtered
-      end
-    end
-
-    delete "/product_properties/:id", to: "product_properties#destroy", as: :product_property
-
-    resources :prototypes do
-      member do
-        get :select
-      end
-
-      collection do
-        get :available
-      end
-    end
-
-    # Shipment
-    resources :shipments do
-      member do
-        %w[ready ship cancel resume pend].each do |state|
-          patch state.to_sym
-        end
-        patch :add_item
-        patch :remove_item
-        patch :increment_item
-        patch :transfer_to_location
-        patch :transfer_to_shipment
-      end
-    end
-
+    # Orders
     resources :orders do
       member do
         post :resend
@@ -106,18 +60,6 @@ Spree::Core::Engine.add_routes do
         put :set_channel
         get :reset_digitals
       end
-
-      resources :address, controller: "orders/customer_details"
-
-      resources :state_changes, only: [:index]
-
-      resources :line_items
-
-      resource :customer, controller: "orders/customer_details"
-      get :bill_address_change, controller: "orders/customer_details"
-      get :ship_address_change, controller: "orders/customer_details"
-      patch :associate_user, controller: "orders/customer_details"
-      patch :reset_form, controller: "orders/customer_details"
 
       resources :customer_returns, only: [:index, :new, :edit, :create, :update] do
         member do
@@ -147,11 +89,131 @@ Spree::Core::Engine.add_routes do
       end
     end
 
+    # Payment Methods
+    resources :payment_methods do
+      collection do
+        post :update_positions
+      end
+    end
+
+    # Products
+    resources :products do
+      resources :product_properties do
+        collection do
+          post :update_positions
+        end
+      end
+      resources :images do
+        collection do
+          post :update_positions
+        end
+      end
+      member do
+        post :clone
+        get :stock
+      end
+      resources :variants do
+        collection do
+          post :update_positions
+        end
+      end
+      resources :variants_including_master, only: [:update]
+      resources :prices, only: [:index, :create]
+      resources :digitals, only: [:index, :create, :destroy]
+    end
+
+    # Properties
+    resources :properties do
+      collection do
+        get :filtered
+      end
+    end
+
+    # Product Properties
+    delete "/product_properties/:id", to: "product_properties#destroy", as: :product_property
+
+    # Prototypes
+    resources :prototypes do
+      member do
+        get :select
+      end
+
+      collection do
+        get :available
+      end
+    end
+
+    # Promotions
+    resources :promotions do
+      resources :promotion_rules
+      resources :promotion_actions
+      member do
+        post :clone
+      end
+    end
+    resources :promotion_categories, except: [:show]
+
+    # Returns
     get "/return_authorizations", to: "returns#return_authorizations", as: :return_authorizations
     get "/customer_returns", to: "returns#customer_returns", as: :customer_returns
-
     resources :return_items, only: [:update]
 
+    # Reports
+    resources :reports, only: [:index] do
+      collection do
+        get :sales_total
+        post :sales_total
+      end
+    end
+
+    # Roles
+    resources :roles
+
+    # Refunds
+    resources :reimbursement_types
+    resources :refund_reasons, except: :show
+    resources :return_authorization_reasons, except: :show
+
+    # Shipping
+    resources :shipping_methods
+    resources :shipping_categories
+    resources :shipments do
+      member do
+        %w[ready ship cancel resume pend].each do |state|
+          patch state.to_sym
+        end
+        patch :add_item
+        patch :remove_item
+        patch :increment_item
+        patch :transfer_to_location
+        patch :transfer_to_shipment
+      end
+    end
+
+    # Stores
+    resources :stores, except: %i[index show]
+
+    # States
+    resources :states
+
+    # Stock
+    resources :stock_transfers, only: [:index, :show, :new, :create]
+    resources :stock_locations do
+      resources :stock_movements, except: [:edit, :update, :destroy]
+      collection do
+        post :transfer_stock
+      end
+    end
+    resources :stock_items, only: [:create, :update, :destroy]
+
+    # Store Credit
+    resources :store_credit_categories
+
+    # Tax
+    resources :tax_rates
+    resources :tax_categories
+
+    # Taxonomies / Taxons
     resources :taxonomies do
       collection do
         post :update_positions
@@ -162,40 +224,9 @@ Spree::Core::Engine.add_routes do
         end
       end
     end
-
     resources :taxons, only: [:index, :show]
 
-    resources :reports, only: [:index] do
-      collection do
-        get :sales_total
-        post :sales_total
-      end
-    end
-
-    resources :reimbursement_types
-    resources :refund_reasons, except: :show
-    resources :return_authorization_reasons, except: :show
-
-    resources :shipping_methods
-    resources :shipping_categories
-    resources :stock_transfers, only: [:index, :show, :new, :create]
-    resources :stock_locations do
-      resources :stock_movements, except: [:edit, :update, :destroy]
-      collection do
-        post :transfer_stock
-      end
-    end
-
-    resources :stock_items, only: [:create, :update, :destroy]
-    resources :store_credit_categories
-    resources :tax_rates
-    resources :payment_methods do
-      collection do
-        post :update_positions
-      end
-    end
-    resources :roles
-
+    # Users
     resources :users do
       member do
         get :addresses
@@ -206,24 +237,11 @@ Spree::Core::Engine.add_routes do
       resources :store_credits
     end
 
-    resources :cms_pages do
-      resources :cms_sections, except: :index
-    end
-
-    resources :menus do
-      resources :menu_items, except: :index do
-        member do
-          delete :remove_icon
-        end
-      end
-    end
-
+    # Webhooks
     resources :webhooks_subscribers
 
-    get "/forbidden", to: "errors#forbidden", as: :forbidden
-    resource :dashboard, controller: "dashboard"
-
-    root to: "dashboard#show"
+    # Zones
+    resources :zones
   end
 
   get Spree.admin_path, to: "admin/dashboard#show", as: :admin

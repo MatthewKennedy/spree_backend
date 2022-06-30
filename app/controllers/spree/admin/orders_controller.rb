@@ -79,9 +79,7 @@ module Spree
 
       def update
         if @order.update(permitted_resource_params)
-          @order.associate_user!(@user)
-          @order.update_with_updater!
-          @order.create_proposed_shipments
+          sync_order
 
           redirect_back fallback_location: spree.edit_admin_order_url(@order)
         elsif @order.line_items.empty?
@@ -138,6 +136,14 @@ module Spree
       end
 
       private
+
+      def sync_order
+        @order.associate_user!(@user)
+        @order.update_with_updater!
+        @order.create_proposed_shipments
+        @order.next
+        @order.reload
+      end
 
       def load_user
         return if params[:order][:user_id].blank?
