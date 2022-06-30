@@ -1,22 +1,22 @@
 <% shipment.manifest.each do |item| %>
-
   <tr class="stock-item" data-item-quantity="<%= item.quantity %>">
-    <td class="item-image image text-center">
+    <td style="width:50px" data-hook="item-image">
       <%= link_to small_image(item.variant), edit_admin_product_path(item.variant.product) %>
     </td>
 
-    <td class="item-name">
-      <%= link_to item.variant.product.name, edit_admin_product_path(item.variant.product) %>
-      <br>
-      <%= "(#{item.variant.options_text})" if item.variant.options_text.present? %>
-      <% if item.variant.sku.present? %>
-        <strong><%= Spree.t(:sku) %>:</strong> <%= item.variant.sku %>
-      <% end %>
+    <td>
+      <small><%= link_to item.variant.product.name, edit_admin_product_path(item.variant.product) %>
+        <br>
+        <%= "(#{item.variant.options_text})" if item.variant.options_text.present? %>
+        <% if item.variant.sku.present? %>
+          <strong><%= Spree.t(:sku) %>:</strong> <%= item.variant.sku %>
+        <% end %>
+        <br>
+        <%= item.line_item.single_money.to_html %>
+      </small>
     </td>
 
-    <td class="item-price text-center"><%= item.line_item.single_money.to_html %></td>
-
-    <td class="item-qty-show text-center" style="width: 130px;" data-controller="number-increment form-validation">
+    <td class="text-center" style="width: 130px;" data-controller="number-increment form-validation">
       <%= form_with model: shipment, url: spree.increment_item_admin_shipment_path(shipment.id), method: :patch do |f| %>
         <%= f.hidden_field :variant_id, value: item.line_item.variant_id %>
 
@@ -30,11 +30,11 @@
       <% end %>
     </td>
 
-    <td class="item-total text-center">
+    <td class="text-center">
       <%= line_item_shipment_price(item.line_item, item.quantity) %>
     </td>
 
-    <td class="cart-item-delete actions" data-hook="cart_item_delete">
+    <td class="cart-item-delete actions">
       <span class="d-flex justify-content-center">
         <% unless shipment.shipped? and can? :update, item.line_item %>
           <%= form_with model: shipment, url: spree.remove_item_admin_shipment_path(shipment.id), method: :patch do |f| %>
