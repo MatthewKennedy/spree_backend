@@ -1,5 +1,7 @@
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
+    root to: "dashboard#show"
+
     # Addresses
     resources :addresses do
       member do
@@ -20,9 +22,8 @@ Spree::Core::Engine.add_routes do
       resources :cms_sections, except: :index
     end
 
-    # Dash
-    resource :dashboard, controller: "dashboard"
-    root to: "dashboard#show"
+    # Dashboard
+    resource :dashboard
 
     # Error forbidden
     get "/forbidden", to: "errors#forbidden", as: :forbidden
