@@ -9,10 +9,7 @@
     <%#-------------------------------------------------%>
     <%# Main content                                    %>
     <%#-------------------------------------------------%>
-    <div id="mainWrapper" class="container-fluid
-                            <% if content_for?(:sidebar) || content_for?(:page_actions) %>
-                             mb-4 mb-lg-0
-                            <% end %>">
+    <div id="mainWrapper" class="container-fluid">
       <div class="row">
 
         <%#-------------------------------------------------%>
@@ -55,12 +52,9 @@
       </div>
     </div>
 
-
-
     <%#-------------------------------------------------%>
     <%# Insert footer scripts here                      %>
     <%#-------------------------------------------------%>
-    <div id="multi-backdrop" class="modal-backdrop fade"></div>
     <div data-hook="admin_footer_scripts"></div>
 
     <%#-------------------------------------------------%>
@@ -70,24 +64,15 @@
       <%= flash_alert(flash) %>
     </div>
 
-    <div id="mobileButtons" class="btn-group shadow position-fixed bottom-0 left-0 mb-4 ms-2 d-lg-none">
-      <button id="sidebar-open"
-              class="btn btn-secondary"
-              type="button"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <%= svg_icon name: "list.svg", width: '16', height: '16' %>
-      </button>
+    <%#-------------------------------------------------%>
+    <%# Mobile Buttons                                  %>
+    <%#-------------------------------------------------%>
+    <%= render partial: 'spree/admin/shared/mobile_only_controles' %>
 
-      <button id="search-open"
-              class="btn btn-secondary"
-              type="button"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <%= svg_icon name: "search.svg", width: '16', height: '16' %>
-      </button>
-    </div>
-
+    <%#-------------------------------------------------%>
+    <%# Universal Modal                                 %>
+    <%#-------------------------------------------------%>
     <%= turbo_frame_tag :modal %>
+    <div id="multi-backdrop" class="modal-backdrop fade"></div>
   </body>
 </html>
