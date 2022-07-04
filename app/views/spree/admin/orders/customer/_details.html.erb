@@ -9,12 +9,15 @@
       </h6>
       <%= pluralize( @order.user.order_count, Spree.t('admin.order.order') ) %>
     </div>
-    <div>
-      <%= form_for @order, url: spree.admin_order_path(@order), method: :patch do |f| %>
-        <%= f.hidden_field :user_id, value: nil %>
-        <%= f.button (svg_icon name: "x-lg.svg", width: '16', height: '16'), type: "submit", class: 'btn btn-light btn-sm' %>
-      <% end %>
-    </div>
+
+    <% unless @order.completed? %>
+      <div>
+        <%= form_for @order, url: spree.admin_order_path(@order), method: :patch do |f| %>
+          <%= f.hidden_field :user_id, value: nil %>
+          <%= f.button (svg_icon name: "x-lg.svg", width: '16', height: '16'), type: "submit", class: 'btn btn-light btn-sm' %>
+        <% end %>
+      </div>
+    <% end %>
 </div>
 <hr>
 
@@ -27,7 +30,7 @@
 </div>
 
 <% if (@order.bill_address.present? && @order.ship_address.present?) && @order.bill_address == @order.ship_address %>
-  <div class="my-3 ">
+  <div class="my-3">
     <h6 class="text-uppercase">Shipping Address</h6>
     <% if @order.ship_address.full_name.present? %>
       <%= @order.ship_address.full_name %><br>

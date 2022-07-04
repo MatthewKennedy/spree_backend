@@ -31,11 +31,12 @@
 <div class="row">
   <div class="col-12 col-md-8">
     <%#= render 'add_line_item' if can?(:update, @order) %>
-    <%= render 'spree/admin/orders/shipments/location' if can?(:update, @order) %>
+    <%= render 'spree/admin/orders/shipments/panel' if can?(:update, @order) %>
     <%= render 'summary' %>
   </div>
   <div class="col-4">
-    <%= render 'spree/admin/orders/customer/show' %>
+    <%= render 'currency' if can?(:update, @order) %>
+    <%= render 'spree/admin/orders/customer/panel' if can?(:update, @order) %>
   </div>
 </div>
 <% if @order.payments.exists? && @order.considered_risky? %>

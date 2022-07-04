@@ -149,6 +149,8 @@ en:
         add_new_taxon: Add a new Taxon
         no_taxons: '<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons.'
       order:
+        customer: Customer
+        currency: Currency
         delete_shipment: Delete Shipment
         package: "Package:"
         mark_as_shipped: Mark as Shipped
@@ -168,6 +170,7 @@ en:
         search_users_by_name_or_email: Search users by name or email.
         new_account: New Account
         products: Products
+        the_order_currency_is_locked_once_items_are_added: The currency of this order is locked.
         search_for_a_product_or_variant: Search for products by name or SKU.
         your_order_has_no_shipments: Your order has no shipments.
         this_shipment_has_no_items: This shipment has no items.
