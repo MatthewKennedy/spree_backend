@@ -27,7 +27,6 @@
   <%= render 'spree/admin/shared/error_messages', target: @order %>
 </div>
 
-
 <div class="row">
   <div class="col-12 col-md-8">
     <%#= render 'add_line_item' if can?(:update, @order) %>
@@ -39,6 +38,7 @@
     <%= render 'spree/admin/orders/customer/panel' if can?(:update, @order) %>
   </div>
 </div>
+
 <% if @order.payments.exists? && @order.considered_risky? %>
   <%= render 'spree/admin/orders/risk_analysis', latest_payment: @order.payments.order("created_at DESC").first %>
 <% end %>

@@ -17,7 +17,7 @@ module Spree
         if flash.present?
           type = flash.first[0]
           message = flash.first[1]
-          content_tag(:span, message, class: "d-none", data: {alert_type: type})
+          render partial: 'spree/admin/shared/toast', locals: { kind: type, message: message }
         end
       end
 

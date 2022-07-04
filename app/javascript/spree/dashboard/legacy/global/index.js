@@ -1,11 +1,9 @@
 import './base'
 import './api_routes'
 
-import './alerts'
 import './animate_css'
 import './fetch_request_utility'
 import './ransack'
-import './info_alert'
 import './radio_panel_toggle'
 import './responsive_menus'
 import './select2_autocomplete'

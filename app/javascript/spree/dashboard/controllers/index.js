@@ -12,13 +12,15 @@ import ClipboardController from './clipboard_controller'
 import ProductEditController from './product_edit_controller'
 import DatePickerController from './datepicker_controller'
 import numberIncrementController from './number_increment_controller'
-import ModalController from './modal_controller'
-
 import FormValidationController from './form_validation_controller'
 
+// Bootstrap
+import ModalController from './modal_controller'
+import ToastController from './toast_controller'
+
+// Tom Select
 import TsSearchController from './ts/search_controller'
 import TsSelectController from './ts/select_controller'
-
 import userSearchController from './ts/templates/user_controller'
 import variantSearchController from './ts/templates/variant_controller'
 
@@ -36,9 +38,8 @@ Stimulus.register('datepicker', DatePickerController)
 Stimulus.register('number-increment', numberIncrementController)
 Stimulus.register('form-validation', FormValidationController)
 Stimulus.register('modal', ModalController)
-
+Stimulus.register('toast', ToastController)
 Stimulus.register('ts--search', TsSearchController)
 Stimulus.register('ts--select', TsSelectController)
-
 Stimulus.register('ts--search-user', userSearchController)
 Stimulus.register('ts--search-variant', variantSearchController)

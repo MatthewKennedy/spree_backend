@@ -9,7 +9,7 @@ export default class extends Controller {
   }
 
   disconnect () {
-    this.modal.hide()
+    this.modal.dispose()
   }
 
   submitEnd (event) {
