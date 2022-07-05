@@ -1,15 +1,3 @@
-// Stop an open select2-dropdown from appearing over fixed nav bar.
-.select2-dropdown {
-  z-index: 1028;
-}
-
-// Hides the empty <li> tag highlighted in open select2-dropdown.
-ul.select2-results__options {
-  li:empty {
-    display: none;
-  }
-}
-
 .plugin-clear_button {
   &.focus.has-items .clear-button,
   &:not(.disabled).has-items .clear-button {
@@ -26,6 +14,7 @@ ul.select2-results__options {
 .plugin-dropdown_input.focus .ts-dropdown .dropdown-input {
   border-radius: 5px;
 }
+
 .plugin-dropdown_input.focus .ts-dropdown .dropdown-input {
   border-width: 1px;
 }
@@ -37,8 +26,6 @@ input::-webkit-contacts-auto-fill-button {
   position: absolute;
   right: 0;
 }
-
-
 
 .ts-dropdown-content {
   padding: 0;
