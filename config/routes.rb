@@ -72,6 +72,7 @@ Spree::Core::Engine.add_routes do
           put :cancel
         end
       end
+
       resources :payments do
         member do
           put :fire
