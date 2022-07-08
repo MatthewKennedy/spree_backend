@@ -1,7 +1,0 @@
-import './global'
-import './misc'
-import './cms'
-import './payments'
-import './menus'
-import './returns'
-import './users'
