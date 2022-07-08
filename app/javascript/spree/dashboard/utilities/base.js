@@ -38,3 +38,12 @@ SpreeDash.url = function (uri, query) {
 
 SpreeDash.routes = {}
 SpreeDash.url_params = { }
+
+// API v2 Authentication
+SpreeDash.apiV2Authentication = function () {
+  if (typeof SpreeDash.OAUTH_TOKEN !== 'undefined') {
+    return {
+      Authorization: `Bearer ${SpreeDash.OAUTH_TOKEN}`
+    }
+  }
+}
