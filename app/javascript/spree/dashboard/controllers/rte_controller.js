@@ -28,12 +28,10 @@ export default class extends Controller {
   }
 
   connect () {
-    this.editor = tinymce.init({
-      ...this.config
-    })
+    this.rte = tinymce.init({ ...this.config })
   }
 
   disconnect () {
-    this.editor.remove()
+    tinymce.remove()
   }
 }
