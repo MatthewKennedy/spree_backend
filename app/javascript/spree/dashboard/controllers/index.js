@@ -12,6 +12,8 @@ import ProductEditController from './product_edit_controller'
 import DatePickerController from './datepicker_controller'
 import numberIncrementController from './number_increment_controller'
 import FormValidationController from './form_validation_controller'
+import ResetController from './reset_controller'
+import RteController from './rte_controller'
 
 // Bootstrap
 import ModalController from './modal_controller'
@@ -35,6 +37,8 @@ Stimulus.register('product-edit', ProductEditController)
 Stimulus.register('datepicker', DatePickerController)
 Stimulus.register('number-increment', numberIncrementController)
 Stimulus.register('form-validation', FormValidationController)
+Stimulus.register('reset', ResetController)
+Stimulus.register('rte', RteController)
 Stimulus.register('modal', ModalController)
 Stimulus.register('toast', ToastController)
 Stimulus.register('ts--search', TsSearchController)
