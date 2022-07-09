@@ -2,7 +2,7 @@ import Cleave from 'cleave.js'
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['cardNumber', 'cardExp', 'cardCode', 'cardType']
+  static targets = ['number', 'exp', 'code', 'type']
   static values = {
     datePattern: { type: Array, default: ['m', 'Y'] }
   }
@@ -10,10 +10,10 @@ export default class extends Controller {
   connect () {
     let cardCodeCleave
 
-    const cardNumber = this.cardNumberTarget
-    const cardType = this.cardTypeTarget
-    const cardCode = this.cardCodeTarget
-    const cardExp = this.cardExpTarget
+    const cardNumber = this.numberTarget
+    const cardType = this.typeTarget
+    const cardCode = this.codeTarget
+    const cardExp = this.expTarget
 
     const updateCardCodeCleave = function (length) {
       if (cardCodeCleave) cardCodeCleave.destroy()
