@@ -15,6 +15,6 @@ export default class extends Controller {
   }
 
   submitEnd (event) {
-    if (event.detail.success) { this.modal.hide() }
+    if (event.detail.success) this.modal.hide()
   }
 }
