@@ -7,17 +7,18 @@ module Spree
       before_action :load_order
       before_action :load_payment, except: [:create, :new, :index]
       before_action :load_data
-      before_action :can_not_transition_without_customer_info
+      before_action :can_not_transition_without_customer_info, except: [:show, :index]
 
       respond_to :html
 
       def index
         @payments = @order.payments.includes(refunds: :reason)
         @refunds = @payments.flat_map(&:refunds)
-        redirect_to new_admin_order_payment_url(@order) if @payments.empty?
       end
 
       def new
+        @payment_method = Spree::PaymentMethod.find(params[:payment_method_id])
+
         # Move order to payment state in order to capture tax generated on shipments
         @order.next if @order.can_go_to_state?("payment")
         @payment = @order.payments.build
@@ -49,7 +50,8 @@ module Spree
 
             saved_payments.each { |payment| payment.process! if payment.reload.checkout? && @order.complete? }
             flash[:success] = flash_message_for(saved_payments.first, :successfully_created)
-            redirect_to spree.admin_order_payments_path(@order)
+
+            redirect_to spree.edit_admin_order_url(@order)
           else
             @payment ||= @order.payments.build(object_params)
             invoke_callbacks(:create, :fails)

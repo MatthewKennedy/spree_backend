@@ -174,6 +174,9 @@ Spree::Core::Engine.add_routes do
     resources :refund_reasons, except: :show
     resources :return_authorization_reasons, except: :show
 
+    # Search
+    resources :search
+
     # Shipping
     resources :shipping_methods
     resources :shipping_categories

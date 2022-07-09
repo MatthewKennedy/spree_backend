@@ -1,22 +1,33 @@
-<%= render partial: 'spree/admin/shared/order_tabs', locals: { current: :payments } %>
+<% content_for :modal_body do %>
+  <div class="container">
 
-<% if @payment_methods.any? %>
-  <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @payment } %>
+    <% if @payment_methods.any? %>
+      <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @payment } %>
 
-  <%= form_for @payment, url: admin_order_payments_path(@order) do |f| %>
-    <fieldset>
-      <%= render partial: 'form', locals: { f: f } %>
+      <%= form_for @payment, url: admin_order_payments_path(@order), data: { turbo: true, turbo_frame: '_top' } do |f| %>
+        <fieldset>
+          <%= render partial: 'form', locals: { f: f } %>
 
-      <div class="form-actions" data-hook="buttons">
-        <%= button @order.cart? ? Spree.t('actions.continue') : Spree.t('actions.update'), @order.cart? ? 'arrow-right.svg' : 'save.svg' %>
+          <div class="form-actions" data-hook="buttons">
+            <%= button @order.cart? ? Spree.t('actions.continue') : Spree.t('actions.update'), @order.cart? ? 'arrow-right.svg' : 'save.svg' %>
+          </div>
+        </fieldset>
+      <% end %>
+
+    <% else %>
+      <div class="text-center m-5">
+        <%= Spree.t(:cannot_create_payment_without_payment_methods) %>
+        <br />
+        <%= link_to Spree.t(:please_define_payment_methods), spree.admin_payment_methods_url %>
       </div>
-    </fieldset>
-  <% end %>
+    <% end %>
 
-<% else %>
-  <div class="text-center m-5">
-    <%= Spree.t(:cannot_create_payment_without_payment_methods) %>
-    <br />
-    <%= link_to Spree.t(:please_define_payment_methods), spree.admin_payment_methods_url %>
   </div>
 <% end %>
+
+<% content_for :modal_footer do %>
+  <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= I18n.t('spree.admin.cancel') %></button>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable' } %>
+

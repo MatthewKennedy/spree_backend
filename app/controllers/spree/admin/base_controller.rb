@@ -88,7 +88,7 @@ module Spree
       def can_not_transition_without_customer_info
         unless @order.billing_address.present?
           flash[:notice] = Spree.t(:fill_in_customer_info)
-          redirect_to spree.edit_admin_order_customer_url(@order)
+          redirect_to spree.edit_admin_order_url(@order)
         end
       end
 

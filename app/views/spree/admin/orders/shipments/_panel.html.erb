@@ -29,7 +29,7 @@
               </h6>
             </div>
 
-            <% unless shipment.ready? and can? :update, shipment %>
+            <% unless shipment.ready? and can?(:update, shipment) %>
               <% if shipment.manifest.empty? %>
                 <div>
                   <%= link_to_with_icon 'x-lg.svg', Spree.t('admin.order.delete_shipment'), spree.admin_shipment_path(shipment.id), class: 'btn btn-light btn-sm', data: { turbo_method: :delete, turbo_confirm: Spree.t('are_you_sure') } , title: Spree.t('admin.order.delete_shipment'), no_text: true %>
@@ -45,29 +45,36 @@
           </div>
 
           <div class="card-body">
-            <%= form_with model: shipment, url: spree.add_item_admin_shipment_path(shipment.id), method: :patch, class: 'input-group' do |f| %>
-                <div class="form-group form-floating col-2">
-                  <%= f.number_field :quantity, class: 'form-control rounded-start rounded-0', placeholder: Spree.t('quantity'), required: true %>
-                  <%= f.label :quantity %>
-                </div>
+            <% unless shipment.ready? || shipment.shipped? and can?(:update, shipment) %>
+              <%= form_with model: shipment, url: spree.add_item_admin_shipment_path(shipment.id), method: :patch, class: 'input-group' do |f| %>
+                  <div class="form-group form-floating col-2">
+                    <%= f.number_field :quantity, class: 'form-control rounded-start rounded-0',
+                                                  placeholder: Spree.t('quantity'),
+                                                  required: true,
+                                                  data: { controller: 'input-formatting',
+                                                          input_formatting_options_value: { numericOnly: true,
+                                                                                            blocks: [4] } } %>
+                    <%= f.label :quantity %>
+                  </div>
 
-                <div class="form-group form-floating col">
-                  <%= f.select :variant_id, [], {}, class: 'form-select rounded-0', required: true,
-                                                    placeholder: Spree.t('admin.order.search_for_a_product_or_variant'),
-                                                    data: { action: 'change->form-validation#validate',
-                                                    controller: 'ts--search-variant',
-                                                    ts__search_variant_debug_value: true,
-                                                    ts__search_variant_uri_value: '/api/v2/platform/variants',
-                                                    ts__search_variant_fields_value: ['name', 'sku'],
-                                                    ts__search_variant_ransack_value: ['search_by_product_name_or_sku_returning_eligable_variants_only'],
-                                                    ts__search_variant_custom_params_value: [ ['[image_transformation]size', '100x100'] ],
-                                                    ts__search_variant_include_value: 'images,stock_items.stock_location' } %>
+                  <div class="form-group form-floating col">
+                    <%= f.select :variant_id, [], {}, class: 'form-select rounded-0', required: true,
+                                                      placeholder: Spree.t('admin.order.search_for_a_product_or_variant'),
+                                                      data: { action: 'change->form-validation#validate',
+                                                      controller: 'ts--search-variant',
+                                                      ts__search_variant_debug_value: true,
+                                                      ts__search_variant_uri_value: '/api/v2/platform/variants',
+                                                      ts__search_variant_fields_value: ['name', 'sku'],
+                                                      ts__search_variant_ransack_value: ['search_by_product_name_or_sku_returning_eligable_variants_only'],
+                                                      ts__search_variant_custom_params_value: [ ['[image_transformation]size', '100x100'] ],
+                                                      ts__search_variant_include_value: 'images,stock_items.stock_location' } %>
 
-                  <%= label_tag :variant_id, Spree.t('admin.order.products'), class: 'form-label' %>
-                </div>
-                <div class="form-group form-floating col-auto">
-                  <%= f.submit Spree.t('admin.order.add'), class: 'btn btn-outline-secondary rounded-0 rounded-end w-100 h-100', data: { form_validation_target: "submitBtn" } %>
-                </div>
+                    <%= label_tag :variant_id, Spree.t('admin.order.products'), class: 'form-label' %>
+                  </div>
+                  <div class="form-group form-floating col-auto">
+                    <%= f.submit Spree.t('admin.order.add'), class: 'btn btn-outline-secondary rounded-0 rounded-end w-100 h-100', data: { form_validation_target: "submitBtn" } %>
+                  </div>
+              <% end %>
             <% end %>
 
             <% unless shipment.manifest.empty? %>
@@ -89,14 +96,16 @@
                 </table>
               </div>
             <% end %>
-
-            <% if !shipment.shipped? && shipment.shipping_rates.any? %>
-              <div class="shipping-method">
-                <%= label_tag 'selected_shipping_rate_id', Spree.t(:shipping_method) %>
-                <%= select_tag :selected_shipping_rate_id,
-                      options_for_select(shipment.shipping_rates.map {|sr| ["#{sr.name} #{sr.display_price}", sr.id] }, shipment.selected_shipping_rate_id),
-                      { data: {controller: 'ts--select', shipment_number: shipment.number } } %>
-              </div>
+            <% unless shipment.ready? || shipment.shipped? and can?(:update, shipment) %>
+              <% if !shipment.shipped? && shipment.shipping_rates.any? %>
+                <div class="shipping-method">
+                  <%= label_tag 'selected_shipping_rate_id', Spree.t(:shipping_method) %>
+                  <%= select_tag :selected_shipping_rate_id, options_for_select(shipment.shipping_rates.map {|sr| ["#{sr.name} #{sr.display_price}", sr.id] }, shipment.selected_shipping_rate_id),
+                        {data: {controller: 'ts--select', shipment_number: shipment.number } } %>
+                </div>
+              <% end %>
+            <% else %>
+              <%= shipment.selected_shipping_rate.name %>
             <% end %>
 
             <% if shipment.ready? %>

@@ -32,6 +32,8 @@
     <%#= render 'add_line_item' if can?(:update, @order) %>
     <%= render 'spree/admin/orders/shipments/panel' if can?(:update, @order) %>
     <%= render 'summary' %>
+    <%= render 'spree/admin/orders/payments/panel' %>
+
   </div>
   <div class="col-4">
     <%= render 'currency' if can?(:update, @order) %>

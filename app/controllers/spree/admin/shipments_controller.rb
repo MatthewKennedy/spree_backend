@@ -11,7 +11,7 @@ module Spree
         )
 
         if result.success?
-          redirect_to spree.admin_order_path(@shipment.order)
+          redirect_back fallback_location: location_after_save
         else
           flash[:error] = result.error.to_s
         end
@@ -38,7 +38,7 @@ module Spree
           result = change_state_service.call(shipment: @shipment, state: state)
 
           if result.success?
-            redirect_back fallback_location: spree.edit_admin_order_url(@shipment.order)
+            redirect_back fallback_location: location_after_save
           else
             flash[:error] = result.error.to_s
           end
@@ -53,13 +53,17 @@ module Spree
         )
 
         if result.success?
-          redirect_to spree.admin_order_path(@shipment.order)
+          redirect_to location_after_save
         else
           flash[:error] = result.error.to_s
         end
       end
 
       private
+
+      def location_after_save
+        spree.edit_admin_order_url(@shipment.order)
+      end
 
       def find_resource
         Spree::Shipment.find(params[:id])

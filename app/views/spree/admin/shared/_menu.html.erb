@@ -15,13 +15,7 @@
       <%= svg_icon name: "spree-logo.svg", width: '100', height: '35' %>
     </div>
 
-    <button type="button"
-            data-bs-target="#searchModal"
-            class="btn btn-light col-auto d-none d-lg-flex"
-            aria-label="Search">
-
-      <%= svg_icon name: "search.svg", width: '18', height: '18', classes: 'p-0 m-0' %>
-    </button>
+    <%= link_to_with_icon('search.svg', Spree.t('search'), spree.new_admin_search_path, no_text: true, data: { turbo_frame: :modal }, class: 'btn btn-light col-auto d-none d-lg-flex') %>
 
     <button id="sidebar-close"
             class="btn btn-light col-auto d-lg-none"
