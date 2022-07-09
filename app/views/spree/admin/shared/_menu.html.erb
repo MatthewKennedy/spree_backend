@@ -4,7 +4,12 @@
 <aside class="col-12 col-lg-3 col-xl-2 sidebar position-fixed d-flex flex-column px-0 overflow-hidden offcanvas-lg offcanvas-start"
        id="main-sidebar"
        data-hook="admin_tabs"
-       data-controller="bs-instance" data-action="resize@window->bs-instance#offCanvasHide">
+
+       data-controller="bs-instance"
+       data-action="resize@window->bs-instance#manipulate"
+       data-bs-instance-target-value='Offcanvas'
+       data-bs-instance-function-value='hide'
+       >
 
   <div id="navHeader" class="d-flex p-2 position-absolute top-0 w-100 align-items-center">
     <div class="col">
