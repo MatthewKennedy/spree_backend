@@ -23,7 +23,7 @@ Spree::Core::Engine.add_routes do
     end
 
     # Dashboard
-    resource :dashboard
+    resource :dashboard, only: [:show]
 
     # Error forbidden
     get "/forbidden", to: "errors#forbidden", as: :forbidden
