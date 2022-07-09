@@ -10,6 +10,7 @@ import NumberIncrementController from './number_increment_controller'
 import FormValidationController from './form_validation_controller'
 import ResetController from './reset_controller'
 import RteController from './rte_controller'
+import CardFormattingController from './card_formatting_controller'
 
 // Bootstrap
 import ModalController from './modal_controller'
@@ -31,6 +32,7 @@ Stimulus.register('number-increment', NumberIncrementController)
 Stimulus.register('form-validation', FormValidationController)
 Stimulus.register('reset', ResetController)
 Stimulus.register('rte', RteController)
+Stimulus.register('card-formatting', CardFormattingController)
 Stimulus.register('modal', ModalController)
 Stimulus.register('toast', ToastController)
 Stimulus.register('ts--search', TsSearchController)
