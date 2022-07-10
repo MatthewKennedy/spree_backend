@@ -50,14 +50,14 @@ Spree::Core::Engine.add_routes do
     resources :orders, except: [:show] do
       member do
         post :resend
-        get :open_adjustments
-        get :close_adjustments
+        put :open_adjustments
+        put :close_adjustments
         put :approve
         put :cancel
         put :resume
         get :channel
         put :set_channel
-        get :reset_digitals
+        put :reset_digitals
       end
 
       resources :customer_returns, only: [:index, :new, :edit, :create, :update] do
