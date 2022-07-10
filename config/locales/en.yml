@@ -336,3 +336,7 @@ en:
         deleted: Deleted
         draft: Draft
         pre_order: Pre-order
+      payments:
+        gateway:
+          cvc: CVC
+          card_code: Card Varification Code
