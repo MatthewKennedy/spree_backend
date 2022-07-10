@@ -4,7 +4,11 @@
   <div class="input-group">
     <span class="input-group-text"><%= currency_symbol(@order.currency) %></span>
       <div class="form-floating col" data-hook="amount">
-        <%= f.text_field :amount, value: @order.display_outstanding_balance.money, class: 'form-control rounded-0', placeholder: Spree.t(:amount), required: true %>
+        <%= f.text_field :amount, value: @order.display_outstanding_balance.money, class: 'form-control rounded-0',
+                                  placeholder: Spree.t(:amount),
+                                  required: true,
+                                  data: { controller: 'input-formatting',
+                                          input_formatting_options_value: { numeral: true, numeralThousandsGroupStyle: 'thousand'} } %>
         <%= f.label :amount, Spree.t(:amount), class: 'form-label' %>
       </div>
     <span class="input-group-text"><%= @order.currency %></span>

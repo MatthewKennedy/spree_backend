@@ -5,9 +5,9 @@
         <th><%= Spree::Payment.human_attribute_name(:number) %></th>
         <th><%= "#{Spree.t('date')}/#{Spree.t('time')}" %></th>
         <th class="text-center"><%= Spree.t(:amount) %></th>
-        <th class="text-center"><%= Spree.t(:payment_method) %></th>
-        <th class="text-center"><%= Spree.t(:transaction_id) %></th>
-        <th class="text-center"><%= Spree.t(:payment_state) %></th>
+        <th class="text-center"><%= Spree.t(:via) %></th>
+        <th class="text-center"><%= Spree.t(:id) %></th>
+        <th class="text-center"><%= Spree.t(:state) %></th>
         <th class="actions text-center"></th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
           <td><%= link_to payment.number, spree.admin_order_payment_path(@order, payment) %></td>
           <td><%= pretty_time(payment.created_at) %></td>
           <td class="amount text-center"><%= payment.display_amount %></td>
-          <td class="text-center"><%= payment_method_name(payment) %></td>
+          <td class="text-center"><%= payment.payment_method.name %></td>
           <td class="text-center"><%= payment.transaction_id %></td>
           <td class="text-center">
             <span class="badge rounded-pill bg-<%= payment.state %>">
@@ -30,7 +30,12 @@
                 <% if action == 'credit' %>
                   <%= link_to_with_icon('exit.svg', Spree.t(:refund), new_admin_order_payment_refund_path(@order, payment), no_text: true, class: 'btn btn-secondary btn-sm') if can?(:create, Spree::Refund) %>
                 <% else %>
-                  <%= link_to_with_icon(action + '.svg', Spree.t(action), fire_admin_order_payment_path(@order, payment, e: action), no_text: true, data: { turbo_method: :put, action: action, turbo_confirm: Spree.t('are_you_sure') }, class: 'btn btn-light btn-sm') if can?(action.to_sym, payment) %>
+                  <%= link_to_with_icon(action + '.svg', Spree.t(action), fire_admin_order_payment_path(@order, payment, e: action), no_text: true,
+                                                                                                                                     class: 'btn btn-light btn-sm',
+                                                                                                                                     data: { turbo_method: :put,
+                                                                                                                                             action: action,
+                                                                                                                                             turbo_confirm: Spree.t('are_you_sure'),
+                                                                                                                                             turbo_frame: '_top' } ) if can?(action.to_sym, payment) %>
                 <% end %>
               <% end %>
             </span>

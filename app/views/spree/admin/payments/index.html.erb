@@ -1,4 +1,5 @@
 <%= turbo_frame_tag :payments do %>
+
   <% if @order.outstanding_balance? %>
     <div class="alert alert-info outstanding-balance d-flex">
       <div class="flex-fill align-self-center">
@@ -13,8 +14,8 @@
           </div>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <% if @payments.any? %>
     <div data-hook="payment_list" class="mb-3 table-responsive">
@@ -28,4 +29,5 @@
       </fieldset>
     <% end %>
   <% end %>
+
 <% end %>

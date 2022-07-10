@@ -35,7 +35,7 @@
     <%= render 'spree/admin/orders/payments/panel' %>
 
   </div>
-  <div class="col-4">
+  <div class="col-12 col-md-4">
     <%= render 'currency' if can?(:update, @order) %>
     <%= render 'spree/admin/orders/customer/panel' if can?(:update, @order) %>
   </div>
