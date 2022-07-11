@@ -24,6 +24,15 @@ module Spree
         Spree::Money.new(line_item.price * quantity, currency: line_item.currency)
       end
 
+      def order_state_badge(order_state)
+        case order_state
+        when 'complete'
+          'bg-success'
+        else
+          'bg-secondary'
+        end
+      end
+
       def avs_response_code
         {
           "A" => "Street address matches, but 5-digit and 9-digit postal code do not match.",

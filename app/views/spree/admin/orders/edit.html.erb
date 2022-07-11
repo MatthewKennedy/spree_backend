@@ -3,12 +3,6 @@
     <% if can?(:fire, @order) %>
       <%= event_links(@order, @order_events) %>
     <% end %>
-    <% if can?(:resend, @order) %>
-      <%= button_link_to Spree.t(:resend, scope: 'admin.order.events', default: Spree.t(:resend)),
-            resend_admin_order_url(@order),
-            method: :post,
-            icon: 'envelope.svg', class: 'btn-secondary' %>
-    <% end %>
   <% end %>
 
   <% if (can? :update, @order) && @order.some_digital? %>
@@ -31,13 +25,14 @@
   <div class="col-12 col-md-8">
     <%#= render 'add_line_item' if can?(:update, @order) %>
     <%= render 'spree/admin/orders/shipments/panel' if can?(:update, @order) %>
-    <%= render 'summary' %>
+    <%= render 'invoice' %>
     <%= render 'spree/admin/orders/payments/panel' %>
 
   </div>
   <div class="col-12 col-md-4">
     <%= render 'currency' if can?(:update, @order) %>
     <%= render 'spree/admin/orders/customer/panel' if can?(:update, @order) %>
+    <%= render 'summary' %>
   </div>
 </div>
 
