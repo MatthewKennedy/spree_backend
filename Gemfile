@@ -49,8 +49,7 @@ group :test, :development do
   gem "puma"
   gem "redis"
   gem "rubocop", require: false
-  gem "rubocop-rspec", require: false
-  gem "standard"
+  gem 'standard', '~> 1.12', '>= 1.12.1'
   gem "webdrivers", "~> 4.1"
 end
 

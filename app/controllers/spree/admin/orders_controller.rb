@@ -155,7 +155,8 @@ module Spree
       end
 
       def order_params
-        params.permit(:created_by_id, :user_id, :store_id, :channel).with_defaults(created_by_id: try_spree_current_user.try(:id))
+        params.permit(:created_by_id, :user_id, :store_id, :channel)
+          .with_defaults(created_by_id: try_spree_current_user.try(:id))
       end
 
       # Used for extensions which need to provide their own custom event links on the order details view.

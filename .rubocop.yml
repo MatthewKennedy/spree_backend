@@ -4,7 +4,6 @@ inherit_mode:
 
 require:
   - rubocop-performance
-  - rubocop-rspec
   - standard
 
 inherit_gem:
@@ -12,5 +11,4 @@ inherit_gem:
 
 inherit_from:
   - .rubocop/rails.yml
-  - .rubocop/rspec.yml
   - .rubocop/custom.yml
