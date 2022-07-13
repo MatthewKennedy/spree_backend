@@ -62,3 +62,10 @@
 .bg-onboarding {
   background: var(--bs-info);
 }
+
+
+
+.card-body > .card {
+  border-style: dashed;
+  border-width: 2px;
+}

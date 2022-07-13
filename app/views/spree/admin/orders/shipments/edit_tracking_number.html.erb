@@ -1,0 +1,20 @@
+<% frame_id = dom_id(@shipment) %>
+
+<%= turbo_frame_tag frame_id do %>
+  <%= form_with model: @shipment, url: spree.admin_shipment_path(@shipment.id), method: :patch, data: { turbo_frame: frame_id } do |f| %>
+    <div class="row">
+      <div class="col">
+        <%= f.field_container :tracking do %>
+          <%= f.text_field :tracking, class: "form-control", placeholder: I18n.t('spree.admin.order.tracking_number') %>
+        <% end %>
+      </div>
+      <div class="col-auto">
+        <%= f.button :submit, class: "btn btn-success" do %>
+          <%= svg_icon name: "check-lg.svg", width: '16', height: '16' %>
+        <% end %>
+
+        <%= link_to_with_icon 'x-lg.svg', I18n.t('spree.cancel'), spree.edit_admin_order_url(@shipment.order), class: 'btn btn-light' , title: I18n.t('spree.cancel'), no_text: true, data: { turbo_frame: frame_id } %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

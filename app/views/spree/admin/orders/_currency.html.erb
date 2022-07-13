@@ -12,19 +12,16 @@
     </div>
   </div>
   <div class="card-body">
+
+      <% currency_label_text = @order.item_count > 0 ? I18n.t('spree.admin.order.the_order_currency_is_locked_once_items_are_added') : Spree.t(:currency) %>
+
     <%= form_for @order, url: spree.admin_order_path(@order), method: :patch, data: { turbo_frame: dom_id(@order), controller: "form-validation" } do |f| %>
       <div class="form-group form-floating mb-0">
         <%= f.select :currency, supported_currency_options, { include_blank: false }, class: 'form-select', disabled: @order.item_count > 0,
                                                             placeholder: I18n.t('spree.admin.order.set_order_currency'),
                                                             data: { action: 'change->form-validation#validate' } %>
 
-        <%= f.label :currency, Spree.t(:currency), class: 'form-label' %>
-
-        <% if @order.item_count > 0 %>
-          <small class="form-text text-muted">
-            <%= I18n.t('spree.admin.order.the_order_currency_is_locked_once_items_are_added') %>
-          </small>
-        <% end %>
+        <%= f.label :currency, currency_label_text, class: 'form-label' %>
       </div>
 
       <%= f.submit I18n.t('spree.admin.order.set_order_currency'), class: 'btn btn-secondary', data: { form_validation_target: "submitBtn" } %>

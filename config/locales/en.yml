@@ -149,6 +149,9 @@ en:
         add_new_taxon: Add a new Taxon
         no_taxons: '<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons.'
       order:
+        tracking_number: Tracking Number
+        add_tracking_number: Add Tracking Number
+        set_order_currency: Set Order Currency
         email_copy_of_invoice_to_customer: Send Invoice
         resend_shipping_confirmation_email: Resend Shipping Confirmation Email
         instructions:

@@ -3,6 +3,20 @@ module Spree
     class ShipmentsController < ResourceController
       SHIPMENT_STATES = %w[ready ship cancel resume pend]
 
+      def edit_tracking_number
+        render 'spree/admin/orders/shipments/edit_tracking_number'
+      end
+
+      def update
+        result = update_service.call(shipment: @shipment, shipment_attributes: permitted_resource_params)
+
+        if result.success?
+          redirect_back fallback_location: location_after_save
+        else
+          flash[:error] = result.error.to_s
+        end
+      end
+
       def add_item
         result = add_item_service.call(
           shipment: @shipment,
