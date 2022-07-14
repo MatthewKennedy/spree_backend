@@ -4,10 +4,10 @@ inherit_mode:
 
 require:
   - rubocop-performance
-  - standard
+#   - standard
 
-inherit_gem:
-  standard: config/base.yml
+# inherit_gem:
+#   standard: config/base.yml
 
 inherit_from:
   - .rubocop/rails.yml

@@ -66,11 +66,7 @@ module Spree
       end
 
       def fire
-        # standard:disable Style/AndOr
-        # standard:disable Lint/AssignmentInCondition
         return unless event = params[:e] and @payment.payment_source
-        # standard:enable Style/AndOr
-        # standard:enable Lint/AssignmentInCondition
 
         # Because we have a transition method also called void, we do this to avoid conflicts.
         event = "void_transaction" if event == "void"

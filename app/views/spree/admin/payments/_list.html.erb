@@ -33,7 +33,6 @@
                   <%= link_to_with_icon(action + '.svg', Spree.t(action), fire_admin_order_payment_path(@order, payment, e: action), no_text: true,
                                                                                                                                      class: 'btn btn-light btn-sm',
                                                                                                                                      data: { turbo_method: :put,
-                                                                                                                                             action: action,
                                                                                                                                              turbo_confirm: Spree.t('are_you_sure'),
                                                                                                                                              turbo_frame: '_top' } ) if can?(action.to_sym, payment) %>
                 <% end %>

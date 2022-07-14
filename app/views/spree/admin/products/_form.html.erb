@@ -1,138 +1,98 @@
 <div data-hook="admin_product_form_fields">
   <div class="row">
-
     <div class="col-12 col-md-8" data-hook="admin_product_form_left">
-      <div data-hook="admin_product_form_name">
-        <%= f.field_container :name do %>
-          <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
-          <%= f.text_field :name, class: 'form-control title' %>
-          <%= f.error_message_on :name %>
-        <% end %>
-      </div>
+      <%= f.field_container :name, data: { hook: "admin_product_form_name" }, class: ['form-floating'] do %>
+        <%= f.text_field :name, class: 'form-control title', placeholder: raw(Spree.t(:name) + required_span_tag) %>
+        <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
+      <% end %>
 
-      <div data-hook="admin_product_form_slug">
-        <%= f.field_container :slug do %>
-          <%= f.label :slug, raw(Spree.t(:slug) + required_span_tag) %>
-          <%= f.text_field :slug, class: 'form-control title' %>
-          <%= f.error_message_on :slug %>
-        <% end %>
-      </div>
+      <%= f.field_container :slug, data: { hook: "admin_product_form_slug" }, class: ['form-floating'] do %>
+        <%= f.text_field :slug, class: 'form-control title', placeholder: raw(Spree.t(:slug) + required_span_tag) %>
+        <%= f.label :slug, raw(Spree.t(:slug) + required_span_tag) %>
+      <% end %>
 
-      <div data-hook="admin_product_form_description">
-        <%= f.field_container :description do %>
-          <%= f.label :description, Spree.t(:description) %>
-          <%= f.text_area :description, {
-            rows: "#{unless @product.has_variants? then '29' else '30' end}",
-            data: {
-              controller: "#{'rte' if product_wysiwyg_editor_enabled?}"
-            },
-            class: "form-control" } %>
-          <%= f.error_message_on :description %>
-        <% end %>
-      </div>
+      <%= f.field_container :description, data: { hook: "admin_product_form_description" } do %>
+        <%= f.label :description, Spree.t(:description) %>
+        <%= f.text_area :description, { rows: "#{unless @product.has_variants? then '29' else '30' end}",
+                                        class: "form-control",
+                                        data: { controller: "#{'rte' if product_wysiwyg_editor_enabled?}" }
+                                      } %>
+      <% end %>
     </div>
 
     <div class="col-12 col-md-4" data-hook="admin_product_form_right">
-      <div data-hook="new_product_status">
-        <%= f.field_container :status do %>
-          <%= f.label :status, Spree.t(:status) %>
-          <% options = ['draft', 'active', 'archived'] %>
-          <% options.delete('active') if cannot? :activate, @product %>
-          <% select_html = { data: {
-                              controller: 'ts--select'
-                             }
-                           } %>
-          <%= f.select :status, options.each_slice(1), { include_blank: false, selected: @product.status }, select_html %>
-          <%= f.error_message_on :status %>
-        <% end %>
-      </div>
+      <%= f.field_container :status, data: { hook: "new_product_status" }, class: ['form-floating'] do %>
+        <% options = ['draft', 'active', 'archived'] %>
+        <% options.delete('active') if cannot? :activate, @product %>
+        <% select_html = { class: 'form-select', data: { controller: 'ts--select' } } %>
+
+        <%= f.select :status, options.each_slice(1), { include_blank: false, selected: @product.status }, select_html %>
+        <%= f.label :status, Spree.t(:status) %>
+      <% end %>
 
       <% if can?(:activate, @product) %>
-        <div data-hook="admin_product_form_make_active_at" data-product-edit-target="makeActiveAt">
-          <%= f.field_container :make_active_at do %>
-            <%= f.label :make_active_at, Spree.t(:make_active_at) %>
-            <%= f.error_message_on :make_active_at %>
 
-            <%= render partial: 'spree/admin/shared/date_picker', locals: { f: f,
-                                                                            field: :make_active_at,
-                                                                            value: datepicker_field_value(@product.make_active_at) } %>
-          <% end %>
-        </div>
+        <%= f.field_container :make_active_at, data: { hook: "admin_product_form_make_active_at" } do %>
+          <%= f.label :make_active_at, Spree.t(:make_active_at) %>
+          <%= render partial: 'spree/admin/shared/date_picker', locals: { f: f, field: :make_active_at, value: datepicker_field_value(@product.make_active_at) } %>
+        <% end %>
+
       <% else %>
-        <div data-hook="admin_product_form_make_active_at">
-          <%= f.field_container :make_active_at do %>
-            <%= f.label :make_active_at, Spree.t(:make_active_at) %>
-            <%= f.text_field :make_active_at, value: datepicker_field_value(@product.make_active_at), class: 'form-control', disabled: true %>
-            <%= f.error_message_on :make_active_at %>
-          <% end %>
-        </div>
+
+        <%= f.field_container :make_active_at, data: { hook: "admin_product_form_make_active_at" } do %>
+          <%= f.label :make_active_at, Spree.t(:make_active_at) %>
+          <%= f.text_field :make_active_at, value: datepicker_field_value(@product.make_active_at), class: 'form-control', disabled: true %>
+        <% end %>
+
       <% end %>
 
       <hr>
 
       <% if @product.active? %>
-        <div data-hook="admin_product_form_available_on" data-product-edit-target="availableOn">
-          <%= f.field_container :available_on do %>
-            <%= f.label :available_on, Spree.t(:available_on) %>
-            <%= f.error_message_on :available_on %>
+        <%= f.field_container :available_on, data: { hook: "admin_product_form_available_on" } do %>
+          <%= f.label :available_on, Spree.t(:available_on) %>
+          <%= render partial: 'spree/admin/shared/date_picker_from', locals: { f: f,
+                                                                               from_field: :available_on,
+                                                                               to_field: :discontinue_on,
+                                                                               value: datepicker_field_value(@product.available_on),
+                                                                               data_max_date: @product.discontinue_on,
+                                                                               placeholder: Spree.t(:available_on) } %>
+        <% end %>
 
-            <%= render partial: 'spree/admin/shared/date_picker_from', locals: { f: f,
-                                                                                 from_field: :available_on,
-                                                                                 to_field: :discontinue_on,
-                                                                                 value: datepicker_field_value(@product.available_on),
-                                                                                 data_max_date: @product.discontinue_on,
-                                                                                 placeholder: Spree.t(:available_on) } %>
-          <% end %>
-        </div>
-
-
-        <div data-hook="admin_product_form_discontinue_on" data-product-edit-target="discontinueOn">
-          <%= f.field_container :discontinue_on do %>
-            <%= f.label :discontinue_on, Spree.t(:discontinue_on) %>
-            <%= f.error_message_on :discontinue_on %>
-
-            <%= render partial: 'spree/admin/shared/date_picker_to',  locals: { f: f,
-                                                                                to_field: :discontinue_on,
-                                                                                from_field: :available_on,
-                                                                                value: datepicker_field_value(@product.discontinue_on),
-                                                                                data_min_date: @product.available_on,
-                                                                                placeholder: Spree.t(:discontinue_on) } %>
-          <% end %>
-        </div>
+        <%= f.field_container :discontinue_on, data: { hook: "admin_product_form_discontinue_on" } do %>
+          <%= f.label :discontinue_on, Spree.t(:discontinue_on) %>
+          <%= render partial: 'spree/admin/shared/date_picker_to',  locals: { f: f,
+                                                                              to_field: :discontinue_on,
+                                                                              from_field: :available_on,
+                                                                              value: datepicker_field_value(@product.discontinue_on),
+                                                                              data_min_date: @product.available_on,
+                                                                              placeholder: Spree.t(:discontinue_on) } %>
+        <% end %>
         <hr>
       <% end %>
 
-      <div data-hook="admin_product_form_cost_price" class="alpha two columns">
-        <%= f.field_container :cost_price do %>
-          <%= f.label :cost_price, Spree.t(:cost_price) %>
-          <%= f.text_field :cost_price, value: number_to_currency(@product.cost_price, unit: ''), class: 'form-control' %>
-          <%= f.error_message_on :cost_price %>
-        <% end %>
-      </div>
-      <div data-hook="admin_product_form_cost_currency" class="omega two columns">
-        <%= f.field_container :cost_currency do %>
-          <%= f.label :cost_currency, Spree.t(:cost_currency) %>
-          <%= f.select :cost_currency, currency_options(@product.cost_currency), {}, { data: {controller: 'ts--select'} } %>
-          <%= f.error_message_on :cost_currency %>
-        <% end %>
-      </div>
+      <%= f.field_container :cost_currency, data: { hook: "admin_product_form_cost_currency" } do %>
+        <%= f.label :cost_currency, Spree.t(:cost_currency) %>
+        <%= f.select :cost_currency, currency_options(@product.cost_currency), {}, { data: {controller: 'ts--select'} } %>
+      <% end %>
 
-    <hr>
+      <%= f.field_container :cost_price, data: { hook: "admin_product_form_cost_price" } do %>
+        <%= f.label :cost_price, Spree.t(:cost_price) %>
+        <%= f.text_field :cost_price, value: number_to_currency(@product.cost_price, unit: ''), class: 'form-control' %>
+      <% end %>
 
-      <div data-hook="admin_product_form_promotionable">
-        <%= f.field_container :promotionable, class: ['form-check'] do %>
-          <%= f.check_box :promotionable, class: 'form-check-input' %>
-          <%= f.label :promotionable, Spree.t(:promotionable), class: 'form-check-label' %>
-          <%= f.error_message_on :promotionable %>
-        <% end %>
-      </div>
+      <hr>
 
-      <div data-hook="admin_product_form_sku">
-        <%= f.field_container :master_sku do %>
-          <%= f.label :master_sku, Spree.t(:master_sku) %>
-          <%= f.text_field :sku, size: 16, class: 'form-control' %>
-        <% end %>
-      </div>
+      <%= f.field_container :promotionable, class: ['form-check'], data: { hook: "admin_product_form_promotionable" } do %>
+        <%= f.check_box :promotionable, class: 'form-check-input' %>
+        <%= f.label :promotionable, Spree.t(:promotionable), class: 'form-check-label' %>
+      <% end %>
+
+      <%= f.field_container :master_sku, data: { hook: "admin_product_form_sku" }  do %>
+        <%= f.label :master_sku, Spree.t(:master_sku) %>
+        <%= f.text_field :sku, size: 16, class: 'form-control' %>
+      <% end %>
+
 
       <% if @product.has_variants? %>
         <div data-hook="admin_product_form_multiple_variants" class="card bg-light mb-3">
@@ -158,140 +118,113 @@
         </div>
       <% else %>
         <div id="shipping_specs" class="row">
-          <div class="col-12 col-md-6">
-            <div id="shipping_specs_weight_field" data-hook="admin_product_form_weight" class="form-group">
-              <%= f.label :weight, Spree.t(:weight) %>
-              <%= f.text_field :weight, value: number_with_precision(@product.weight, precision: 2), size: 4, class: 'form-control' %>
-            </div>
-          </div>
+          <%= f.field_container :weight, data: { hook: "admin_product_form_weight" }, class: ['col-12', 'col-md-6'] do %>
+            <%= f.label :weight, Spree.t(:weight) %>
+            <%= f.text_field :weight, value: number_with_precision(@product.weight, precision: 2), size: 4, class: 'form-control' %>
+          <% end %>
 
-          <div class="col-12 col-md-6">
-            <div id="shipping_specs_height_field" data-hook="admin_product_form_height" class="form-group">
-              <%= f.label :height, Spree.t(:height) %>
-              <%= f.text_field :height, value: number_with_precision(@product.height, precision: 2), size: 4, class: 'form-control' %>
-            </div>
-          </div>
+          <%= f.field_container :height, data: { hook: "admin_product_form_height" }, class: ['col-12', 'col-md-6'] do %>
+            <%= f.label :height, Spree.t(:height) %>
+            <%= f.text_field :height, value: number_with_precision(@product.height, precision: 2), size: 4, class: 'form-control' %>
+          <% end %>
 
-          <div class="col-12 col-md-6">
-            <div id="shipping_specs_width_field" data-hook="admin_product_form_width" class="form-group">
-              <%= f.label :width, Spree.t(:width) %>
-              <%= f.text_field :width, value: number_with_precision(@product.width, precision: 2), size: 4, class: 'form-control' %>
-            </div>
-          </div>
+          <%= f.field_container :width, data: { hook: "admin_product_form_width" }, class: ['col-12', 'col-md-6'] do %>
+            <%= f.label :width, Spree.t(:width) %>
+            <%= f.text_field :width, value: number_with_precision(@product.width, precision: 2), size: 4, class: 'form-control' %>
+          <% end %>
 
-          <div class="col-12 col-md-6">
-            <div id="shipping_specs_depth_field" data-hook="admin_product_form_depth" class="form-group">
-              <%= f.label :depth, Spree.t(:depth) %>
-              <%= f.text_field :depth, value: number_with_precision(@product.depth, precision: 2), size: 4, class: 'form-control' %>
-            </div>
-          </div>
+          <%= f.field_container :depth, data: { hook: "admin_product_form_depth" }, class: ['col-12', 'col-md-6'] do %>
+            <%= f.label :depth, Spree.t(:depth) %>
+            <%= f.text_field :depth, value: number_with_precision(@product.depth, precision: 2), size: 4, class: 'form-control' %>
+          <% end %>
         </div>
       <% end %>
 
-      <div data-hook="admin_product_form_shipping_categories">
-        <%= f.field_container :shipping_category do %>
-          <%= f.label :shipping_category_id, Spree.t(:shipping_category) %>
-          <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {}, { data: {controller: 'ts--select'} }) %>
-          <%= f.error_message_on :shipping_category %>
-        <% end %>
-      </div>
-
-      <div data-hook="admin_product_form_tax_category">
-        <%= f.field_container :tax_category do %>
-          <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-          <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { data: {controller: 'ts--select'} }) %>
-          <%= f.error_message_on :tax_category %>
-        <% end %>
-      </div>
-    </div>
-
-  </div>
-
-  <div data-hook="admin_product_form_taxons">
-    <%= f.field_container :taxons do %>
-      <%= f.label :taxon_ids, Spree.t(:taxons) %>
-
-      <% if can? :modify, Spree::Classification %>
-        <%= f.select :taxon_ids, options_from_collection_for_select(@product.taxons, :id, :pretty_name, @product.taxon_ids),
-                                  { include_hidden: true },
-                                    multiple: true,
-                                    data: { controller: 'ts--search',
-                                            ts__search_uri_value: '/api/v2/platform/taxons',
-                                            ts__search_val_value: 'id',
-                                            ts__search_txt_value: 'pretty_name',
-                                            ts__search_fields_value: ['pretty_name'],
-                                            ts__search_ransack_value: ['pretty_name_i_cont']
-                                           } %>
-
-      <% elsif @product.taxons.any? %>
-        <ul class="text_list">
-          <% @product.taxons.each do |taxon| %>
-            <li><%= taxon.name %></li>
-          <% end %>
-        </ul>
-      <% else %>
-        <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :taxons) %></div>
+      <%= f.field_container :shipping_category, data: { hook: "admin_product_form_shipping_categories" } do %>
+        <%= f.label :shipping_category_id, Spree.t(:shipping_category) %>
+        <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {}, { data: {controller: 'ts--select'} }) %>
       <% end %>
-    <% end %>
+
+      <%= f.field_container :tax_category, data: { hook: "admin_product_form_tax_category" } do %>
+        <%= f.label :tax_category_id, Spree.t(:tax_category) %>
+        <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { data: {controller: 'ts--select'} }) %>
+      <% end %>
+    </div>
   </div>
 
-  <div data-hook="admin_product_form_option_types">
-    <%= f.field_container :option_types do %>
-      <%= f.label :option_type_ids, Spree.t(:option_types) %>
+  <%= f.field_container :taxons, data: { hook: "admin_product_form_taxons" } do %>
+    <%= f.label :taxon_ids, Spree.t(:taxons) %>
 
-      <% if can? :modify, Spree::ProductOptionType %>
-      <%= f.select :option_type_ids, options_from_collection_for_select(@product.option_types, :id, :name, @product.option_type_ids),
+    <% if can? :modify, Spree::Classification %>
+      <%= f.select :taxon_ids, options_from_collection_for_select(@product.taxons, :id, :pretty_name, @product.taxon_ids),
                                 { include_hidden: true },
                                   multiple: true,
                                   data: { controller: 'ts--search',
-                                          ts__search_uri_value: '/api/v2/platform/option_types'
+                                          ts__search_uri_value: '/api/v2/platform/taxons',
+                                          ts__search_val_value: 'id',
+                                          ts__search_txt_value: 'pretty_name',
+                                          ts__search_fields_value: ['pretty_name'],
+                                          ts__search_ransack_value: ['pretty_name_i_cont']
                                          } %>
 
-      <% elsif @product.option_types.any? %>
-        <ul class="text_list">
-          <% @product.option_types.each do |type| %>
-            <li><%= type.presentation %> (<%= type.name %>)</li>
-          <% end %>
-        </ul>
-      <% else %>
-        <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :option_types) %></div>
-      <% end %>
-
+    <% elsif @product.taxons.any? %>
+      <ul class="text_list">
+        <% @product.taxons.each do |taxon| %>
+          <li><%= taxon.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="alert alert-info">
+        <%= Spree.t(:no_resource_found, resource: :taxons) %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
+
+  <%= f.field_container :option_types, data: { hook: "admin_product_form_option_types" } do %>
+    <%= f.label :option_type_ids, Spree.t(:option_types) %>
+
+    <% if can? :modify, Spree::ProductOptionType %>
+    <%= f.select :option_type_ids, options_from_collection_for_select(@product.option_types, :id, :name, @product.option_type_ids),
+                              { include_hidden: true },
+                                multiple: true,
+                                data: { controller: 'ts--search',
+                                        ts__search_uri_value: '/api/v2/platform/option_types'
+                                       } %>
+
+    <% elsif @product.option_types.any? %>
+      <ul class="text_list">
+        <% @product.option_types.each do |type| %>
+          <li><%= type.presentation %> (<%= type.name %>)</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="alert alert-info"><%= Spree.t(:no_resource_found, resource: :option_types) %></div>
+    <% end %>
+  <% end %>
 
   <% if @stores.count > 1 %>
-    <div data-hook="admin_product_form_stores">
-      <%= f.field_container :stores do %>
-        <%= f.label :product_stores, Spree.t(:stores) %>
-        <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: {controller: 'ts--select'} }) %>
-      <% end %>
-    </div>
+    <%= f.field_container :stores, data: { hook: "admin_product_form_stores" } do %>
+      <%= f.label :product_stores, Spree.t(:stores) %>
+      <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: {controller: 'ts--select'} }) %>
+    <% end %>
   <% end %>
 
   <div data-hook="admin_product_form_meta">
-    <div data-hook="admin_product_form_meta_title">
-      <%= f.field_container :meta_title do %>
-        <%= f.label :meta_title, Spree.t(:meta_title) %>
-        <%= f.text_field :meta_title, class: 'form-control' %>
-      <% end %>
-    </div>
+    <%= f.field_container :meta_title, data: { hook: "admin_product_form_meta_title" }  do %>
+      <%= f.label :meta_title, Spree.t(:meta_title) %>
+      <%= f.text_field :meta_title, class: 'form-control' %>
+    <% end %>
 
-    <div data-hook="admin_product_form_meta_keywords">
-      <%= f.field_container :meta_keywords do %>
-        <%= f.label :meta_keywords, Spree.t(:meta_keywords) %>
-        <%= f.text_field :meta_keywords, class: 'form-control' %>
-      <% end %>
-    </div>
+    <%= f.field_container :meta_keywords, data: { hook: "admin_product_form_meta_keywords" } do %>
+      <%= f.label :meta_keywords, Spree.t(:meta_keywords) %>
+      <%= f.text_field :meta_keywords, class: 'form-control' %>
+    <% end %>
 
-    <div data-hook="admin_product_form_meta_description">
-      <%= f.field_container :meta_description do %>
-        <%= f.label :meta_description, Spree.t(:meta_description) %>
-        <%= f.text_area :meta_description, class: 'form-control' %>
-      <% end %>
-    </div>
+    <%= f.field_container :meta_description, data: { hook: "admin_product_form_meta_description" } do %>
+      <%= f.label :meta_description, Spree.t(:meta_description) %>
+      <%= f.text_area :meta_description, class: 'form-control' %>
+    <% end %>
 
     <div data-hook="admin_product_form_additional_fields"></div>
-
   </div>
 </div>

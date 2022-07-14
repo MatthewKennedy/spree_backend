@@ -1,5 +1,4 @@
 require_relative "configuration"
-require_relative "dependencies"
 
 module Spree
   module Backend
@@ -8,7 +7,6 @@ module Spree
 
       initializer "spree.backend.environment", before: :load_config_initializers do |_app|
         Spree::Backend::Config = Spree::Backend::Configuration.new
-        Spree::Backend::Dependencies = Spree::Backend::DashDependencies.new
       end
 
       # filter sensitive information during logging

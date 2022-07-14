@@ -4,7 +4,7 @@ module Spree
       SHIPMENT_STATES = %w[ready ship cancel resume pend]
 
       def edit_tracking_number
-        render 'spree/admin/orders/shipments/edit_tracking_number'
+        render "spree/admin/orders/shipments/edit_tracking_number"
       end
 
       def update
@@ -88,23 +88,23 @@ module Spree
       end
 
       def create_service
-        Spree::Backend::Dependencies.platform_shipment_create_service.constantize
+        Spree::Dependencies.shipment_create_service.constantize
       end
 
       def update_service
-        Spree::Backend::Dependencies.platform_shipment_update_service.constantize
+        Spree::Dependencies.shipment_update_service.constantize
       end
 
       def change_state_service
-        Spree::Backend::Dependencies.platform_shipment_change_state_service.constantize
+        Spree::Dependencies.shipment_change_state_service.constantize
       end
 
       def add_item_service
-        Spree::Backend::Dependencies.platform_shipment_add_item_service.constantize
+        Spree::Dependencies.shipment_add_item_service.constantize
       end
 
       def remove_item_service
-        Spree::Backend::Dependencies.platform_shipment_remove_item_service.constantize
+        Spree::Dependencies.shipment_remove_item_service.constantize
       end
     end
   end

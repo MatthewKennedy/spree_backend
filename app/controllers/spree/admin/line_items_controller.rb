@@ -60,19 +60,19 @@ module Spree
       end
 
       def add_item_service
-        Spree::Backend::Dependencies.platform_line_item_add_item_service.constantize
+        Spree::Dependencies.line_item_add_item_service.constantize
       end
 
       def create_service
-        Spree::Backend::Dependencies.platform_line_item_create_service.constantize
+        Spree::Dependencies.line_item_create_service.constantize
       end
 
       def update_service
-        Spree::Backend::Dependencies.platform_line_item_update_service.constantize
+        Spree::Dependencies.line_item_update_service.constantize
       end
 
       def destroy_service
-        Spree::Backend::Dependencies.platform_line_item_destroy_service.constantize
+        Spree::Dependencies.line_item_destroy_service.constantize
       end
 
       def permitted_resource_params

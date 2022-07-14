@@ -48,8 +48,7 @@ group :test, :development do
   gem "pry-byebug"
   gem "puma"
   gem "redis"
-  gem "rubocop", require: false
-  gem 'standard', '~> 1.12', '>= 1.12.1'
+  gem "rubocop"
   gem "webdrivers", "~> 4.1"
 end
 

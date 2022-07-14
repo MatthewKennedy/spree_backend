@@ -34,9 +34,6 @@ Bundler/InsecureProtocolSource:
 Bundler/OrderedGems:
   Enabled: false
 
-Gemspec/DateAssignment:
-  Enabled: true
-
 Gemspec/DependencyVersion:
   Enabled: false
 
@@ -1081,9 +1078,6 @@ Security/YAMLLoad:
 Security/IoMethods:
   Enabled: false
   Safe: false
-
-Standard/BlockSingleLineBraces:
-  Enabled: true
 
 Style/AccessModifierDeclarations:
   Enabled: false
