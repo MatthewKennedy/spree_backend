@@ -1,6 +1,9 @@
 .card {
   margin-bottom: 1rem !important;
+  border: none !important;
+  box-shadow: 0 0 0.3125rem #1718180d,0 0.0625rem 0.125rem #00000026;
 }
+
 .card-title {
   margin-bottom: 0 ;
 }
@@ -8,4 +11,8 @@
 .card-header {
   background-color: white ;
   border-bottom: none;
+}
+
+main {
+  background: rgb(249, 249, 249);
 }

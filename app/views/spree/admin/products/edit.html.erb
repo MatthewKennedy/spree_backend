@@ -4,7 +4,11 @@
 
 <%= render partial: 'spree/admin/shared/product_tabs', locals: {current: :details} %>
 
-<%= form_with model: [:admin, @product], method: :patch do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
-  <%= render partial: 'spree/admin/shared/edit_resource_links' %>
-<% end %>
+<div data-hook="admin_product_form_fields">
+  <%= form_with model: [:admin, @product], method: :patch do |f| %>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  <% end %>
+</div>
+
+
