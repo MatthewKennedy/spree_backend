@@ -14,6 +14,10 @@ module Spree
       update.after :update_status
       helper_method :clone_object_url
 
+      def update_availability
+        @object.update(status: permitted_resource_params[:status])
+      end
+
       def show
         session[:return_to] ||= request.referer
         redirect_to action: :edit

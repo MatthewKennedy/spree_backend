@@ -109,6 +109,7 @@ Spree::Core::Engine.add_routes do
         end
       end
       member do
+        post :update_availability
         post :clone
         get :stock
       end

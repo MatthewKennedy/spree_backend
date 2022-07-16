@@ -9,9 +9,32 @@ module Spree
 
       def flash_alert(flash)
         if flash.present?
-          type = flash.first[0]
+          style = case flash.first[0]
+          when "success"
+            "text-bg-success"
+          when "error"
+            "text-bg-warning"
+          else
+            "text-bg-dark"
+          end
+
           message = flash.first[1]
-          render partial: 'spree/admin/shared/toast', locals: { kind: type, message: message }
+          render "spree/admin/shared/toast", message: message, style: style
+        end
+      end
+
+      def stream_flash_alert(message: "No message set", kind: "notice")
+        style = case kind
+        when "success"
+          "text-bg-success"
+        when "error"
+          "text-bg-warning"
+        else
+          "text-bg-dark"
+        end
+
+        turbo_stream.append "FlashAlertsContainer" do
+          render "spree/admin/shared/toast", message: message, style: style
         end
       end
 

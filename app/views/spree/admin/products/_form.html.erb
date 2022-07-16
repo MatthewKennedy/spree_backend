@@ -54,65 +54,32 @@
     <div class="col-12 col-md-4" data-hook="admin_product_form_right">
 
       <div class="card">
-        <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.status') %></h5>
+        <div class="card-header d-flex">
+          <div class="flex-fill">
+            <h5 class="card-title"><%= Spree.t('admin.status') %></h5>
+          </div>
+          <div>
+            <h5 class="card-title">
+              <span class="badge bg-success" id="productStatus"><%= @product.status.capitalize %></span>
+            </h5>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" data-controller="form-validation">
           <%= f.field_container :status, data: { hook: "new_product_status" }, class: ['form-floating'] do %>
-            <% options = ['draft', 'active', 'archived'] %>
-            <% options.delete('active') if cannot? :activate, @product %>
-            <% select_html = { class: 'form-select', data: { controller: 'ts--select' } } %>
+            <% options = [ ['Draft', 'draft' ], ['Active', 'active' ], ['Archived', 'archived' ] ] %>
 
-            <%= f.select :status, options.each_slice(1), { include_blank: false, selected: @product.status }, select_html %>
+            <% options.delete('active') if cannot? :activate, @product %>
+            <% select_html = { class: 'form-select', data: { controller: 'ts--select', action: 'change->form-validation#validate' } } %>
+
+            <%= f.select :status, options, { include_blank: false, selected: @product.status }, select_html %>
             <%= f.label :status, Spree.t(:status) %>
           <% end %>
 
-          <% if @product.draft? %>
-            <% if can?(:activate, @product) %>
-              <%= f.field_container :make_active_at, data: { hook: "admin_product_form_make_active_at" } do %>
-                <%= f.label :make_active_at, Spree.t(:make_active_at) %>
-                <%= render partial: 'spree/admin/shared/date_picker', locals: { f: f, field: :make_active_at, value: datepicker_field_value(@product.make_active_at) } %>
-              <% end %>
-            <% else %>
-              <%= f.field_container :make_active_at, data: { hook: "admin_product_form_make_active_at" } do %>
-                <%= f.label :make_active_at, Spree.t(:make_active_at) %>
-                <%= f.text_field :make_active_at, value: datepicker_field_value(@product.make_active_at), class: 'form-control', disabled: true %>
-              <% end %>
-            <% end %>
-          <% end %>
+          <%= submit_tag "Update", formaction: spree.update_availability_admin_product_path(@product), formmethod: "post", data: { form_validation_target: "submitBtn", turbo_frame: dom_id(@product, 'status') } %>
 
-          <% if @product.active? %>
-            <hr>
-            <%= f.field_container :available_on, data: { hook: "admin_product_form_available_on" } do %>
-              <%= f.label :available_on, Spree.t(:available_on) %>
-              <%= render partial: 'spree/admin/shared/date_picker_from', locals: { f: f,
-                                                                                   from_field: :available_on,
-                                                                                   to_field: :discontinue_on,
-                                                                                   value: datepicker_field_value(@product.available_on),
-                                                                                   data_max_date: @product.discontinue_on,
-                                                                                   placeholder: Spree.t(:available_on) } %>
-            <% end %>
-
-            <%= f.field_container :discontinue_on, data: { hook: "admin_product_form_discontinue_on" } do %>
-              <%= f.label :discontinue_on, Spree.t(:discontinue_on) %>
-              <%= render partial: 'spree/admin/shared/date_picker_to',  locals: { f: f,
-                                                                                  to_field: :discontinue_on,
-                                                                                  from_field: :available_on,
-                                                                                  value: datepicker_field_value(@product.discontinue_on),
-                                                                                  data_min_date: @product.available_on,
-                                                                                  placeholder: Spree.t(:discontinue_on) } %>
-            <% end %>
-          <% end %>
-
-
-
-          <% unless @product.archived? %>
-            <hr>
-            <%= f.field_container :promotionable, class: ['form-check'], data: { hook: "admin_product_form_promotionable" } do %>
-              <%= f.check_box :promotionable, class: 'form-check-input' %>
-              <%= f.label :promotionable, Spree.t(:promotionable), class: 'form-check-label' %>
-            <% end %>
-          <% end %>
+          <div id="productStatusOptions">
+            <%= render partial: 'status' %>
+          </div>
         </div>
       </div>
 
@@ -275,8 +242,6 @@
 
     </div>
   </div>
-
-
 
   <% if @stores.count > 1 %>
     <%= f.field_container :stores, data: { hook: "admin_product_form_stores" } do %>

@@ -61,14 +61,6 @@ module Spree
         Spree.t(event_sym, resource: resource_desc)
       end
 
-      def stream_flash_message_for(message:, kind: 'success')
-        respond_to do |format|
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.append('FlashAlertsContainer', partial: 'spree/admin/shared/toast', locals: { message: message, kind: kind })
-          end
-        end
-      end
-
       def render_js_for_destroy
         render partial: "/spree/admin/shared/destroy"
       end

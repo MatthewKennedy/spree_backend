@@ -1,6 +1,7 @@
-<% date_time ||= false  %>
-<% value ||= nil  %>
+<% date_time ||= false %>
+<% value ||= nil %>
 <% placeholder ||= Spree.t(:select_a_date) %>
+<% f ||= nil %>
 
 <div class="input-group" data-controller="datepicker"
                          data-wrap="true"
@@ -8,15 +9,29 @@
                            data-enable-time="true"
                          <% end %>>
   <% if date_time %>
-    <%= f.datetime_field field.to_sym, class: 'js-filterable',
-                                       placeholder: placeholder,
-                                       value: value,
-                                       data: { input:'' } %>
+    <% if f %>
+      <%= f.datetime_field field.to_sym, class: 'js-filterable',
+                                         placeholder: placeholder,
+                                         value: value,
+                                         data: { input:'' } %>
+    <% else %>
+      <%= datetime_field_tag field.to_s, class: 'js-filterable',
+                                         placeholder: placeholder,
+                                         value: value,
+                                         data: { input:'' } %>
+    <% end %>
   <% else %>
-    <%= f.text_field field.to_sym, class: "js-filterable",
-                                   placeholder: placeholder,
-                                   value: value,
-                                   data: { input:'' } %>
+    <% if f %>
+      <%= f.text_field field.to_sym, class: "js-filterable",
+                                     placeholder: placeholder,
+                                     value: value,
+                                     data: { input:'' } %>
+    <% else %>
+      <%= text_field_tag field.to_s, value, class: "js-filterable",
+                                            autocomplete: false,
+                                            placeholder: placeholder,
+                                            data: { input:'' } %>
+    <% end %>
   <% end %>
 
   <%= render partial: 'spree/admin/shared/cal_close' %>
