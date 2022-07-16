@@ -14,10 +14,6 @@ module Spree
       update.after :update_status
       helper_method :clone_object_url
 
-      def update_availability
-        @object.update(status: permitted_resource_params[:status])
-      end
-
       def show
         session[:return_to] ||= request.referer
         redirect_to action: :edit
@@ -101,6 +97,48 @@ module Spree
         end
       end
 
+      def update_availability
+        if @object.update(status: permitted_resource_params[:status])
+          respond_to do |format|
+            format.turbo_stream
+            format.html {
+              flash[:success] = raw(I18n.t("spree.admin.product.messages.product_status_updated_to", name: @product.name, state: @product.status.capitalize))
+              redirect_to location_after_save
+            }
+          end
+        else
+          flash[:error] = I18n.t("spree.admin.product.errors.status_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+        end
+      end
+
+      def update_cost_currency
+        if @object.update(cost_currency: permitted_resource_params[:cost_currency])
+          respond_to do |format|
+            format.turbo_stream
+            format.html {
+              flash[:success] = I18n.t("spree.admin.product.messages.product_cost_currency_updated_successfully")
+              redirect_to location_after_save
+            }
+          end
+        else
+          flash[:error] = I18n.t("spree.admin.product.errors.cost_currency_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+        end
+      end
+
+      def update_promotionable
+        if @object.update(promotionable: permitted_resource_params[:promotionable])
+          respond_to do |format|
+            format.turbo_stream
+            format.html {
+              flash[:success] = I18n.t("spree.admin.product.messages.product_updated")
+              redirect_to location_after_save
+            }
+          end
+        else
+          flash[:error] = I18n.t("spree.admin.product.errors.promotionable_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+        end
+      end
+
       protected
 
       def find_resource
@@ -111,7 +149,7 @@ module Spree
         if params[:product][:product_properties_attributes].present?
           spree.admin_product_product_properties_path(@product)
         else
-          spree.edit_admin_product_url(@product)
+          spree.edit_admin_product_path(@product)
         end
       end
 

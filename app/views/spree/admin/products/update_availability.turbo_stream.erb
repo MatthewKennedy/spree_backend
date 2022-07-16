@@ -6,4 +6,4 @@
   <%= render partial: 'status' %>
 <% end %>
 
-<%= stream_flash_alert(message: "Product updated to: #{ @product.status.capitalize } status.") %>
+<%= stream_flash_alert(message: raw(I18n.t("spree.admin.product.messages.product_status_updated_to", name: @product.name, state: @product.status.capitalize ))) %>

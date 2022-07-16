@@ -6,12 +6,11 @@
 
 <div class="card">
   <div class="card-body">
-    <%= form_for [:admin, @product], html: { multipart: true } do |f| %>
+    <%= form_with model: [:admin, @product], method: :post do |f| %>
       <fieldset data-hook="new_product">
-        <%= f.field_container :name do %>
+        <%= f.field_container :name, data: { hook: "admin_product_form_name" }, class: ['form-floating'] do %>
+          <%= f.text_field :name, class: 'form-control title', placeholder: raw(Spree.t(:name) + required_span_tag), required: true %>
           <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
-          <%= f.text_field :name, class: 'form-control title', required: :required %>
-          <%= f.error_message_on :name %>
         <% end %>
 
         <div data-hook="new_product_attrs" class="row">
@@ -65,25 +64,3 @@
     <% end %>
   </div>
 </div>
-
-<script type="text/javascript">
-//<![CDATA[
-  (function($){
-    var base_url = "<%= spree.admin_prototypes_url %>";
-    var prototype_select = $('#product_prototype_id');
-    prototype_select.change(function() {
-      var id = prototype_select.val();
-      if (id.length) {
-        var url = new Uri(base_url);
-        url.setPath(url.path() + '/' + id);
-        $('#product-from-prototype').load(url.toString());
-      } else {
-        $('#product-from-prototype').empty();
-      }
-    })
-    if (prototype_select.html() == "") {
-      prototype_select.change();
-    }
-  })(jQuery);
-//]]>
-</script>

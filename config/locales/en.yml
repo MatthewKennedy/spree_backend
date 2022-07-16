@@ -338,6 +338,16 @@ en:
         back_end: Admin Panel
       shipment: Shipments
       product:
+        errors:
+          status_could_not_be_updated: "Status could not be updated. Reason: %{error}"
+          cost_currency_could_not_be_updated: "Cost currency could not be updated. Reason: %{error}"
+          promotionable_could_not_be_updated: "Promotionable could not be updated. Reason: %{error}"
+        messages:
+          product_status_updated_to: "Product: <strong>%{name}</strong> has been updated to: <strong>%{state}</strong>"
+          product_updated: Product Updated
+          product_is_promotable: "Product: <strong>%{name}</strong> will be shown in promotions"
+          product_is_not_promotable: "Product: <strong>%{name}</strong> will not be shown in promotions"
+          product_cost_currency_updated_successfully: Product cost currency updated successfully
         all: All
         active: Active
         archived: Archived

@@ -7,12 +7,12 @@
         </div>
         <div class="card-body">
           <%= f.field_container :name, data: { hook: "admin_product_form_name" }, class: ['form-floating'] do %>
-            <%= f.text_field :name, class: 'form-control title', placeholder: raw(Spree.t(:name) + required_span_tag) %>
+            <%= f.text_field :name, class: 'form-control title', placeholder: raw(Spree.t(:name) + required_span_tag), required: true %>
             <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
           <% end %>
 
           <%= f.field_container :slug, data: { hook: "admin_product_form_slug" }, class: ['form-floating'] do %>
-            <%= f.text_field :slug, class: 'form-control title', placeholder: raw(Spree.t(:slug) + required_span_tag) %>
+            <%= f.text_field :slug, class: 'form-control title', placeholder: raw(Spree.t(:slug) + required_span_tag), required: true %>
             <%= f.label :slug, raw(Spree.t(:slug) + required_span_tag) %>
           <% end %>
 
@@ -64,8 +64,8 @@
             </h5>
           </div>
         </div>
-        <div class="card-body" data-controller="form-validation">
-          <%= f.field_container :status, data: { hook: "new_product_status" }, class: ['form-floating'] do %>
+        <div class="card-body">
+          <%= f.field_container :status, data: { hook: "new_product_status", controller: "form-validation" }, class: ['form-floating'] do %>
             <% options = [ ['Draft', 'draft' ], ['Active', 'active' ], ['Archived', 'archived' ] ] %>
 
             <% options.delete('active') if cannot? :activate, @product %>
@@ -73,9 +73,8 @@
 
             <%= f.select :status, options, { include_blank: false, selected: @product.status }, select_html %>
             <%= f.label :status, Spree.t(:status) %>
+            <%= submit_tag "Update Product Status", formaction: spree.update_availability_admin_product_path(@product), formmethod: "post", data: { form_validation_target: "submitBtn" } %>
           <% end %>
-
-          <%= submit_tag "Update", formaction: spree.update_availability_admin_product_path(@product), formmethod: "post", data: { form_validation_target: "submitBtn", turbo_frame: dom_id(@product, 'status') } %>
 
           <div id="productStatusOptions">
             <%= render partial: 'status' %>
@@ -88,14 +87,25 @@
           <h5 class="card-title"><%= Spree.t('admin.cost') %></h5>
         </div>
         <div class="card-body">
-          <%= f.field_container :cost_currency, data: { hook: "admin_product_form_cost_currency" } do %>
-            <%= f.label :cost_currency, Spree.t(:cost_currency) %>
-            <%= f.select :cost_currency, currency_options(@product.cost_currency), {}, { data: {controller: 'ts--select'} } %>
-          <% end %>
+          <div data-controller="form-validation">
+            <%= f.field_container :cost_currency, class: ['form-floating'], data: { hook: "admin_product_form_cost_currency" } do %>
+              <%= f.select :cost_currency, currency_options(@product.cost_currency), {}, { class: 'form-select', data: { controller: 'ts--select', action: 'change->form-validation#validate' } } %>
+              <%= f.label :cost_currency, Spree.t(:cost_currency) %>
+            <% end %>
 
-          <%= f.field_container :cost_price, data: { hook: "admin_product_form_cost_price" } do %>
-            <%= f.label :cost_price, Spree.t(:cost_price) %>
-            <%= f.text_field :cost_price, value: number_to_currency(@product.cost_price, unit: ''), class: 'form-control' %>
+            <%= submit_tag "Update Product Status", formaction: spree.update_cost_currency_admin_product_path(@product), formmethod: "post", data: { form_validation_target: "submitBtn" } %>
+          </div>
+          <%= f.field_container :cost_price, class: ['mb-0'], data: { hook: "admin_product_form_cost_price" } do %>
+
+            <div class="input-group">
+              <span id="costPriceCurrencySymbol" class="input-group-text"><%= currency_symbol(@product.cost_currency) %></span>
+              <%= f.text_field :cost_price, value: number_to_currency(@product.cost_price, unit: ''), class: 'form-control', data: { controller: 'input-formatting',
+                                                                                                                                     input_formatting_options_value: { numeral: true,
+                                                                                                                                                                       numeralThousandsGroupStyle: 'thousand'
+                                                                                                                                                                     }
+                                                                                                                                    } %>
+              <span id="costPriceCurrencyIso" class="input-group-text"><%= @product.cost_currency %></span>
+            </div>
           <% end %>
         </div>
       </div>
@@ -246,12 +256,10 @@
   <% if @stores.count > 1 %>
     <%= f.field_container :stores, data: { hook: "admin_product_form_stores" } do %>
       <%= f.label :product_stores, Spree.t(:stores) %>
-      <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: {controller: 'ts--select'} }) %>
+      <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: { controller: 'ts--select' } }) %>
     <% end %>
   <% end %>
 
-  <div data-hook="admin_product_form_meta">
-
-  </div>
+  <div data-hook="admin_product_form_meta"></div>
   <div data-hook="admin_product_form_additional_fields"></div>
 </div>
