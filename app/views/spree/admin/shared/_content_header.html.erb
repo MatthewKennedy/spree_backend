@@ -9,22 +9,12 @@
           </h4>
         <% end %>
 
-        <% if content_for?(:page_actions) %>
-          <div class="page-actions ps-0 pe-0 d-none d-lg-flex col-auto" data-hook="toolbar">
+        <!-- We are keeping the empty <div> tags in DOM for turbo stream target -->
+        <div id="pageActions" class="page-actions ps-0 pe-0 d-none d-lg-flex col-auto" data-hook="toolbar">
+          <% if content_for?(:page_actions) %>
             <%= yield :page_actions %>
-          </div>
-
-          <div class="d-flex d-lg-none justify-content-end m-0 p-0">
-            <button type="button"
-                    id="contextual-menu-toggle"
-                    class="btn btn-secondary">
-                    <span class="d-none d-sm-inline">
-                      <%= Spree.t('more') %>
-                    </span>
-                    <%= svg_icon name: "chevron-down.svg", width: '16', height: '16' %>
-            </button>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
 
       <% if content_for?(:page_tabs) %>

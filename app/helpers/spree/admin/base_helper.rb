@@ -258,7 +258,13 @@ module Spree
         button_link_to(
           Spree.t("admin.utilities.preview", name: resource_name),
           spree_storefront_resource_url(resource),
-          class: "btn-secondary", icon: "eye.svg", id: "adminPreview#{resource_name}", target: :blank, data: {turbo: false}
+          class: "btn-secondary animate__animated animate__faster",
+          icon: "eye.svg",
+          id: "adminPreview#{resource_name}",
+          target: :blank,
+          data: {turbo: false,
+                 stream_enter_class: "animate__fadeIn",
+                 stream_exit_class: "animate__fadeOut"}
         )
       end
 
