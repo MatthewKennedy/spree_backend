@@ -1,58 +1,9 @@
 <%= render 'spree/admin/shared/product_tabs', current: :properties %>
-<%= render 'spree/admin/shared/error_messages', target: @product %>
 
 <% content_for :page_actions do %>
   <%= external_page_preview_link(@product) %>
-
-  <span class="js-new-ptype-link">
-    <%= button_link_to Spree.t(:select_from_prototype),
-      available_admin_prototypes_url,
-      { icon: 'list.svg', remote: true, 'data-update' => 'prototypes', class: 'btn-secondary' } %>
-  </span>
-
-  <%= button_link_to(
-    Spree.t(:add_product_properties),
-    "javascript:;",
-    { icon: 'plus-square.svg', :'data-target' => "tbody#sortVert", class: 'btn-success  spree_add_fields' }) %>
-<% end if can? :create, Spree::ProductProperty %>
-
-<%= form_for @product, url: spree.admin_product_url(@product), method: :put do |f| %>
-  <fieldset>
-    <div id="prototypes" data-hook></div>
-    <div class="table-responsive border rounded mb-3 bg-white">
-      <table id="product_properties" class="table sortable" data-hook data-sortable-link="<%= update_positions_admin_product_product_properties_url %>">
-        <thead class="text-muted">
-          <tr data-hook="product_properties_header">
-            <th></th>
-            <th><%= Spree.t(:property) %></th>
-            <th><%= Spree.t(:value) %></th>
-            <th class="text-center"><%= Spree.t(:show_property) %></th>
-            <th class="actions"></th>
-          </tr>
-        </thead>
-        <tbody id="sortVert">
-          <%= f.fields_for :product_properties do |pp_form| %>
-            <%= render 'product_property_fields', f: pp_form %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <%= render('spree/admin/shared/edit_resource_links') if can? :update, Spree::ProductProperty %>
-    <%= hidden_field_tag 'clear_product_properties', 'true' %>
-  </fieldset>
 <% end %>
 
-<script>
-  var properties = <%= raw(@properties.to_json) %>;
-  $('#product_properties').on('keydown', 'input.autocomplete', function() {
-    already_auto_completed = $(this).is('ac_input');
-    if (!already_auto_completed) {
-      $(this).autocomplete({source: properties});
-      $(this).focus();
-    }
-  });
-</script>
-
-<style>
-  div.ui-helper-hidden-accessible {display:none;}
-</style>
+<div id="productProperiesMainForm">
+  <%= render 'spree/admin/product_properties/form' %>
+</div>

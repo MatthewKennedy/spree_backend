@@ -1,0 +1,48 @@
+
+<% if @product.properties.any? %>
+  <%= form_for @product, url: spree.admin_product_url(@product), method: :put do |f| %>
+    <div class="card">
+      <div class="card-header d-flex">
+        <div class="flex-fill">
+          <h5 class="card-title"><%= I18n.t('spree.admin.product.properties') %></h5>
+        </div>
+        <div>
+          <% if can? :create, Spree::ProductProperty %>
+            <%= button_link_to Spree.t(:select_from_prototype), spree.available_admin_prototypes_url, { icon: 'list.svg', class: 'btn-secondary btn-sm' } %>
+            <%= link_to Spree.t(:add_new_property), spree.new_admin_product_product_property_path(@product), class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table id="product_properties" class="table">
+          <thead class="text-muted">
+            <tr data-hook="product_properties_header">
+              <th></th>
+              <th><%= Spree.t(:name) %></th>
+              <th><%= Spree.t(:value) %></th>
+              <th class="text-center"><%= Spree.t(:show) %></th>
+              <th class="actions"></th>
+            </tr>
+          </thead>
+          <tbody data-controller="sortable"
+                 data-sortable-handle-value=".handle"
+                 data-sortable-resource-name-value="product_property">
+            <%= f.fields_for :product_properties do |pp_form| %>
+              <%= render 'product_property_fields', f: pp_form if pp_form.object.persisted? %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= render('spree/admin/shared/edit_resource_links') if can? :update, Spree::ProductProperty %>
+  <% end %>
+<% else %>
+  <% if can? :create, Spree::ProductProperty %>
+    <div class="alert alert-info text-center" role="alert">
+      <p><%= I18n.t('spree.admin.product.add_first_property') %></p>
+      <%= link_to I18n.t('spree.admin.product.add_new_properties_from_prototype'), spree.available_admin_prototypes_path, class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+      <%= link_to I18n.t('spree.admin.product.add_a_new_property'), spree.new_admin_product_product_property_path(@product), class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+    </div>
+  <% end %>
+<% end %>

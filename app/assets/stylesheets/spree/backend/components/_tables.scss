@@ -13,10 +13,6 @@ table.table {
     }
   }
 
-  td.move-handle {
-    width: 45px;
-  }
-
   thead {
     th {
       text-transform: uppercase;
@@ -32,6 +28,7 @@ table.table {
   tbody {
     tr {
       td {
+        border-color: var(--bs-border-color);
         vertical-align: middle;
         .filterable {
           margin-left: 0.2em;

@@ -65,20 +65,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     end
   end
 
-  def update_positions
-    base_scope = model_class.try(:for_store, current_store) || model_class
-
-    ApplicationRecord.transaction do
-      params[:positions].each do |id, index|
-        base_scope.find(id).set_list_position(index)
-      end
-    end
-
-    respond_to do |format|
-      format.js { head :ok }
-    end
-  end
-
   def destroy
     invoke_callbacks(:destroy, :before)
     if @object.destroy
@@ -90,6 +76,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     end
 
     respond_with(@object) do |format|
+      format.turbo_stream
       format.html { redirect_to location_after_destroy }
       format.js { render_js_for_destroy }
     end

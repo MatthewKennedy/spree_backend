@@ -98,11 +98,7 @@ Spree::Core::Engine.add_routes do
 
     # Products
     resources :products do
-      resources :product_properties do
-        collection do
-          post :update_positions
-        end
-      end
+      resources :product_properties
       resources :images do
         collection do
           post :update_positions

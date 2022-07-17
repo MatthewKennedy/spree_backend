@@ -2,6 +2,8 @@
 
 import { Application } from '@hotwired/stimulus'
 
+import Sortable from 'stimulus-sortable'
+
 // Stimulus - Spree Controllers
 import SortableTreeController from './sortable_tree_controller'
 import ClipboardController from './clipboard_controller'
@@ -29,6 +31,7 @@ import variantSearchController from './ts/templates/variant_controller'
 // Stimulus - Setup
 window.Stimulus = Application.start()
 
+Stimulus.register('sortable', Sortable)
 Stimulus.register('sortable-tree', SortableTreeController)
 Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('datepicker', DatePickerController)

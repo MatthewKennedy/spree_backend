@@ -1,7 +1,7 @@
 aside#main-sidebar {
   overflow-y: auto;
   border-right: 1px solid var(--bs-gray-200);
-  background: var(--bs-body-bg);
+  background: white !important;
   top: 0;
 
   #navHeader {
@@ -40,7 +40,6 @@ a.sidebar-submenu-item {
 }
 
 ul.active-option {
-  background-color: var(--bs-gray-100);
   border-radius: var(--bs-border-radius);
   .drop-menu-indicator {
     transform: rotate(90deg);
@@ -82,7 +81,7 @@ ul.nav-sidebar {
 #contextualSideMenu {
   max-height: 85vh;
   overflow-x: auto;
-  background-color: var(--bs-body-bg);
+  background-color: white;
   position: fixed;
   left: 0;
   top: -100%;

@@ -164,6 +164,7 @@ module Spree
         name = options[:name] || Spree.t(:delete)
         options[:class] = "btn btn-danger btn-sm delete-resource"
         options[:data] = {confirm: Spree.t(:are_you_sure), action: "remove"}
+
         link_to_with_icon "delete.svg", name, url, options
       end
 
