@@ -57,12 +57,12 @@
               </td>
               <td>
                 <span class="badge rounded-pill bg-<%= order.considered_risky ? 'considered_risky' : 'considered_safe' %>">
-                  <%= order.considered_risky ? I18n.t("spree.risky") : I18n.t("spree.safe") %>
+                  <%= order.considered_risky ? I18n.t("spree.admin.risky") : I18n.t("spree.admin.safe") %>
                 </span>
               </td>
               <td class="no-wrap">
                 <% if order.payment_state %>
-                  <%= link_to I18n.t("spree.payment_states.#{order.payment_state}"),
+                  <%= link_to I18n.t("spree.admin.payment_states.#{order.payment_state}"),
                     admin_order_payments_path(order),
                     class: "badge rounded-pill bg-#{order.payment_state}" %>
 
@@ -76,7 +76,7 @@
               <% if Spree::Order.checkout_step_names.include?(:delivery) %>
                 <td class="no-wrap">
                   <% if order.shipment_state %>
-                    <span class="badge rounded-pill bg-<%= order.shipment_state %>"><%= I18n.t("spree.shipment_states.#{order.shipment_state}") %></span>
+                    <span class="badge rounded-pill bg-<%= order.shipment_state %>"><%= I18n.t("spree.admin.shipment_states.#{order.shipment_state}") %></span>
                     <span class="filterable js-add-filter" data-ransack-field="q_shipment_state_eq" data-ransack-value="<%= order.shipment_state %>">
                       <%= svg_icon name: "filter.svg", width: '14', height: '14' %>
                     </span>

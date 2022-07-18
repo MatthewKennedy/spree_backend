@@ -75,7 +75,7 @@ module Spree
 
           redirect_back fallback_location: spree.edit_admin_order_url(@order)
         elsif @order.line_items.empty?
-          @order.errors.add(:line_items, I18n.t("spree.errors.messages.blank"))
+          @order.errors.add(:line_items, I18n.t("spree.admin.errors.messages.blank"))
         end
       end
 

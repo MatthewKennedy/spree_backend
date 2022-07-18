@@ -10,3 +10,14 @@ search:
   paths:
     - 'app'
     - 'lib'
+
+## Do not consider these keys missing:
+ignore_missing:
+  - 'activerecord*'
+  - 'aria*'
+  - 'date*'
+  - 'number*'
+  - 'views*'
+
+ignore_unused:
+  - 'spree.admin.webhooks_subscribers*'

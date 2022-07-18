@@ -27,7 +27,7 @@
                 params.merge({q: {status_eq: :archived}}).permit!,
                 class: "nav-link #{'active' if params[:q][:status_eq] == 'archived'}" %>
   </li>
-<% end  %>
+<% end %>
 
 <% content_for :table_filter do %>
   <%= render partial: 'filters' %>
@@ -61,7 +61,7 @@
             </td>
             <td>
               <%= link_to product.name, edit_admin_product_path(product) %>
-              <br />
+              <br>
               <small><%= product.sku rescue '' %></small>
             </td>
             <% if defined?(Spree::Vendor) && can?(:manage, Spree::Vendor) %>

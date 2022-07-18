@@ -51,7 +51,7 @@
             <% unless %w[new create].include? controller.action_name %>
               <div class="col-12 mt-3">
                 <div id="updatePageType" data-page-type="<%= @cms_page.type %>" class="alert alert-info d-none">
-                  <% button_type = I18n.t('spree.update') %>
+                  <% button_type = I18n.t('spree.admin.update') %>
                   <%= raw I18n.t('spree.admin.cms.click_button_to_change_page_type', button_type: button_type) %>
                 </div>
               </div>
@@ -75,7 +75,7 @@
 
               <%= f.field_container :slug, class: ['col-12 col-md-4'] do %>
                 <div id="noHomePage">
-                  <%= f.label :slug, I18n.t('spree.slug') %>
+                  <%= f.label :slug, I18n.t('spree.admin.slug') %>
                   <%= f.text_field :slug, class: 'form-control', disabled: @cms_page.homepage? %>
                   <%= f.error_message_on :slug %>
                 </div>

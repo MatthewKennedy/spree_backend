@@ -18,7 +18,7 @@
         <%= I18n.t('spree.admin.store_form.currencies_help') %>
       </small>
     <% end %>
-    <hr />
+    <hr>
     <%= f.field_container :checkout_zone_id do %>
       <%= f.label :checkout_zone_id, Spree.t(:shipping_zone) %>
       <%= f.select :checkout_zone_id, options_for_select(@zones), { include_blank: Spree.t(:no_limits_zone) }, { data: {controller: 'ts--select'} } %>
@@ -28,14 +28,14 @@
       <%= f.error_message_on :checkout_zone_id %>
     <% end %>
     <%= f.field_container :default_country_id do %>
-      <%= f.label :default_country_id, I18n.t('spree.i18n.default_country') %>
+      <%= f.label :default_country_id, I18n.t('spree.admin.default_country') %>
       <%= f.select :default_country_id, options_for_select(@countries, @store.default_country_id), {}, { data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :default_country_id %>
       <small class="form-text text-muted">
         <%= I18n.t('spree.admin.store_form.default_country_help') %>
       </small>
     <% end %>
-    <hr />
+    <hr>
     <%= f.field_container :default_locale do %>
       <%= f.label :default_locale %>
       <%= f.select :default_locale, options_from_collection_for_select(all_locales_options, :last, :first, @store.default_locale || I18n.locale), {}, { data: {controller: 'ts--select'} } %>

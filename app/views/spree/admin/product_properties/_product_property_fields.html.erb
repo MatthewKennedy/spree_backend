@@ -29,7 +29,7 @@
   <td class="actions">
     <span class="d-flex justify-content-end">
       <% if can?(:destroy, f.object) %>
-        <%= link_to_with_icon 'delete.svg', I18n.t('spree.delete'), spree.admin_product_product_property_path(@product, f.object), class: 'delete-line-item btn btn-danger btn-sm', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } , title: I18n.t('spree.delete'), no_text: true %>
+        <%= link_to_with_icon 'delete.svg', I18n.t('spree.admin.delete'), spree.admin_product_product_property_path(@product, f.object), class: 'delete-line-item btn btn-danger btn-sm', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } , title: I18n.t('spree.admin.delete'), no_text: true %>
       <% else %>
       <span class="btn btn-danger btn-sm icon-link disabled" style="opacity:0.2;">
         <%= svg_icon name: "delete.svg", width: '18', height: '18' %>

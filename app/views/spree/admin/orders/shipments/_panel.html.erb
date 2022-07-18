@@ -6,7 +6,7 @@
     <div>
       <h5 class="card-title">
         <% if @order.shipment_state %>
-          <span class="badge bg-<%= @order.shipment_state %>"><%= I18n.t("spree.shipment_states.#{@order.shipment_state}") %></span>
+          <span class="badge bg-<%= @order.shipment_state %>"><%= I18n.t("spree.admin.shipment_states.#{@order.shipment_state}") %></span>
         <% end %>
       </h5>
     </div>
@@ -44,7 +44,7 @@
 
             <% if shipment.manifest.empty? and can?(:update, shipment) %>
               <div>
-                <%= link_to_with_icon 'x-lg.svg', I18n.t('spree.admin.order.delete_shipment'), spree.admin_shipment_path(shipment.id), class: 'btn btn-light btn-sm', data: { turbo_method: :delete, turbo_confirm: I18n.t('spree.are_you_sure') } , title: I18n.t('spree.admin.order.delete_shipment'), no_text: true %>
+                <%= link_to_with_icon 'x-lg.svg', I18n.t('spree.admin.order.delete_shipment'), spree.admin_shipment_path(shipment.id), class: 'btn btn-light btn-sm', data: { turbo_method: :delete, turbo_confirm: I18n.t('spree.admin.are_you_sure') } , title: I18n.t('spree.admin.order.delete_shipment'), no_text: true %>
               </div>
             <% end %>
 
@@ -60,7 +60,7 @@
               <%= form_with model: shipment, url: spree.add_item_admin_shipment_path(shipment.id), method: :patch, class: 'input-group' do |f| %>
                   <div class="form-group form-floating col-2">
                     <%= f.number_field :quantity, class: 'form-control rounded-start rounded-0',
-                                                  placeholder: I18n.t('spree.quantity'),
+                                                  placeholder: I18n.t('spree.admin.quantity'),
                                                   required: true,
                                                   data: { controller: 'input-formatting',
                                                           input_formatting_options_value: { numericOnly: true,
@@ -126,7 +126,7 @@
                       <% end %>
                     </div>
                     <div class="col-auto">
-                      <%= link_to_with_icon 'pen.svg', I18n.t('spree.edit'), spree.edit_tracking_number_admin_shipment_path(shipment.id), class: 'btn btn-light' , title: I18n.t('spree.edit'), no_text: true %>
+                      <%= link_to_with_icon 'pen.svg', I18n.t('spree.admin.edit'), spree.edit_tracking_number_admin_shipment_path(shipment.id), class: 'btn btn-light' , title: I18n.t('spree.admin.edit'), no_text: true %>
                     </div>
                   </div>
                 <% else %>

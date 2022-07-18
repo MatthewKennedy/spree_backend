@@ -1,12 +1,22 @@
 ---
 en:
+  "!": "!"
   spree:
     admin:
+      actions:
+        cancel: Cancel
+        continue: Continue
+        create: Create
+        save: Save
+        update: Update
       active: Active
       address:
         emirate: Emirate
         post_code: Post Code
         state_territory: State / Territory
+        street: Street
+      amount: Amount
+      are_you_sure: Are you sure
       cancel: Cancel
       cms:
         add_new_page: Add New Page
@@ -18,7 +28,6 @@ en:
         button_text: Button Text
         click_button_to_change_page_type: Click the <b>%{button_type}</b> button to load the options for this page type.
         click_create_to_load_new_link: Click the <b>Create</b> button below to save your new page section, and load the section settings.
-        click_here: click here
         click_update_to_load_new_link: Click the <b>Update</b> button below to load the new section settings.
         content: Content
         draft_mode: Draft Mode
@@ -38,18 +47,13 @@ en:
           layout_style: Layout Style
           square_image: Please use an image with an aspect ratio of 18:13 (1080px x 780px).
           tall_image: Please use an image with an aspect ratio of 27:40 (1080px x 1600px).
-        info_featured_article_body: "<p>The Feature Article section allows you to add rich text to your page with a set title subtitle and linking button.</p> <p>This section can be set to use full screen or container and also use gutters.</p>"
-        info_hero_image_body: "<p>The Hero Image section adds a large image with a button and tagline text to your page.</p> <p>The button can link to a Product, Taxon or Page. This section can be set to fit within the central container or to the edges of the screen.</p> <p><b>Tip:</b> Use a hero image with no button text or title, and then set the <b>Fit:</b> to <b>Container</b> and <b>Gutters</b> to <b>Use Gutters</b> this creates an image section that looks great above a Side-by-Side Images section, or an Image Gallery section.</p> <p>Experiment with the settings, and don't be afraid to use more than one Hero Image section per page.</p>"
-        info_image_gallery_body: "<p>The Image Gallery section can be configured in several ways. For example, each image can link to a product or taxon. If you do not provide a link, you can display three images. Additionally, you can also use labels to add text to your images.</p> <p>There are two layout configurations for the Image Gallery section, with the taller image used on the left or the right. You can also set this section to fit the edges of the screen or the central container to match your website's style.</p>"
-        info_product_carousel_body: "<p>Product Carousel is a simple section to use. Search for the taxon you wish to display, save the changes, and the products in your chosen taxon will be displayed on your page.</p>"
-        info_rich_text_content_body: "<p>The Rich Text Content section is simply a section that offers nothing more than an area of rich text editor content to be displayed on your page.</p>"
-        info_side_by_side_images_body: "<p>The Side-by-Side Images section can be configured in several ways, you have the option of using them as plane images, images with text, and either of those options can be clickable links if a link is set.</p> <p><b>Tip:</b> You can blow these images out to the edge of the screen and remove the gutters to create a completely different look.</p>"
         link_to_product: Link to Product
         link_to_taxon: Link to Taxon
         meta_description: Meta Description
         meta_title: Meta Title
         more_page_settings: <span class="more">More</span><span class="less">Less</span> Page Settings
         new_page: New Page
+        new_section: New section
         no_sections_found_please_add_one: Add your first section to this page by clicking the <b>+ Add New Section</b> button above.
         page: Page
         page_sections: "%{page_name} Sections"
@@ -70,8 +74,18 @@ en:
         visible: Visible
         you_have_no_pages: You have no Pages, click the <b>+ Add New Page</b> button to get started.
       copy_to_clipboard: Copy to clipboard
+      cost: Cost
+      count_on_hand: Count on hand
+      country_rule:
+        label: Label
       created_at: Created At
+      customer_details_updated: Customer details updated
       dashboard: Dashboard
+      date: Date
+      default: Default
+      default_country: Default country
+      delete: Delete
+      details: Details
       digitals:
         add_new_file: Add a new digital asset.
         delete_file_confirmation: 'Are you sure you want to delete: %{filename}'
@@ -85,14 +99,29 @@ en:
         back_end: Admin Panel
         both: All
         front_end: Storefront
+      edit: Edit
+      ends_at: Ends at
+      errors:
+        messages:
+          blank: Blank
+          cannot_remove_icon: Cannot remove icon
       execution_time: Execution Time
+      existing_shipments: Existing shipments
       filters: Filters
       home: Home
       kind: Kind
+      language: Language
+      limit_usage_to: Limit usage to
       linkable:
         search_for_a_page: Search for a page
         search_for_a_product: Search for a Product
         search_for_a_taxon: Search for a Taxon
+      location: Location
+      make_sure_the_above_reimbursement_amount_is_correct: Make sure the above reimbursement amount is correct
+      match_choices:
+        all: All
+        none: None
+      move_variant_to: Move {{variant.name}} to
       name: Name
       navigation:
         add_new_item: Add New Item
@@ -136,11 +165,24 @@ en:
         url_info: The URL field can link to an external website using <b>https://example.com</b>, link to an otherwise unreachable internal path using <b>/policies/privacy</b>, launch an email client using <b>mailto:sales@example.com</b> or used to create a clickable phone number with <b>tel:123456789</b>
         used_in: Used In
         you_have_no_menus: You have no Menus, click the Add New Menu button to create your first Menu.
+      new_shipment_at_location: New shipment at location
+      no_payment_provider_settings_message: No payment provider settings message
+      note: Note
+      notice_messages:
+        icon_removed: Icon removed
+        prices_saved: Prices saved
+        product_cloned: Product cloned
+        product_deleted: Product deleted
+        product_not_cloned: Product not cloned
+        product_not_deleted: Product not deleted
+        variant_deleted: Variant deleted
+        variant_not_deleted: Variant not deleted
       oauth_applications:
         list: oAuth applications
         new: New oAuth application
         scopes: Scopes
         uid: UID
+      option_type_filterable_info: Option type filterable info
       order:
         add: Add
         add_a_shipment_to_this_order_to_begin_adding_items: Add a new shipping location to this order, and then add products to the shipment. Ideally, choose the location nearest the delivery address for faster and cheaper delivery.
@@ -184,6 +226,8 @@ en:
         unfulfilled: Unfulfilled
         unpaid: Unpaid
         your_order_has_no_shipments: Your order has no shipments, create a new shipment then add products to the shipment to generate shipping rates.
+      organization: Organization
+      page: Page
       payments:
         gateway:
           card_code: Card Varification Code
@@ -214,15 +258,38 @@ en:
       product_kinds:
         digital: Digital
         physical: Physical
+      product_rule:
+        choose_products: Choose products
+        label: Label
+      promotion_cloned: Promotion cloned
+      promotion_not_cloned: Promotion not cloned
+      quantity: Quantity
+      receive_stock: Receive stock
       reports:
         for: For %{store_name}
       request_errors: Request Errors
       response_code: Response Code
       return_authorization:
         product: Product
+      risk: Risk
+      risky: Risky
+      safe: Safe
       save: Save
+      search: Search
+      select_from_prototype: Select from prototype
+      seo: Seo
       settings: Settings
       shipment: Shipments
+      shipments: Shipments
+      sku: Sku
+      slug: Slug
+      specifications: Specifications
+      starting_from: Starting from
+      status: Status
+      stock_transfer:
+        errors:
+          must_have_variant: Must have variant
+          variants_unavailable: Variants unavailable
       store:
         digital_settings:
           digital_asset_authorized_clicks:
@@ -237,6 +304,16 @@ en:
           digital_asset_settings: Digital Asset Settings
           limit_digital_download_count: Limit Download Count
           limit_digital_download_days: Limit Download Days
+      store_credit:
+        errors:
+          cannot_change_used_store_credit: Cannot change used store credit
+          unable_to_create: Unable to create
+          unable_to_delete: Unable to delete
+          unable_to_update: Unable to update
+      store_errors:
+        unable_to_create: Unable to create
+        unable_to_delete: Unable to delete
+        unable_to_update: Unable to update
       store_form:
         checkout_zone_help: Selecting zone will limit to which Countries or States products are shipped. For more information <a href='https://guides.spreecommerce.org/user/configuration/configuring_geography.html#zones' target='_blank' class='alert-link'>please see documentation</a>
         code_help: Store unique identifier, which is an abbreviated version of the store’s name (used as the layout directory name, and also helpful for separating templates by store)
@@ -246,6 +323,7 @@ en:
         footer_help: This content is visible in the footer section of your Store
         locales_help: Install <a href='https://github.com/spree-contrib/spree_i18n' target='_blank' class='alert-link'>Spree I18n extension</a> to add more locales
         look_and_feel: Look and feel
+        'look_and_feel ': 'Look and feel '
         mail_from_address_help: This is the email which will be the sender of all your Store emails (Order Confirmation, Shipment notification etc)
         new_order_notifications_email_help: If you want to receive an email notification every time someone places an Order please provide an email address for that notification to be sent to
         seo_robots: Please check <a href='https://developers.google.com/search/reference/robots_meta_tag' target='_blank'>this page for more help</a>
@@ -273,8 +351,12 @@ en:
         taxonomies: Taxonomies
         taxons: Taxons
         users: Users
+      tax_and_shipping: Tax and shipping
       taxon:
         nested_under_info: Nest this Taxon within the Taxonomy tree.
+      taxon_rule:
+        choose_taxons: Choose taxons
+        label: Label
       taxonomies:
         add_new_taxon: Add a new Taxon
         edit_root_taxonomy: Edit %{name} Taxonomy
@@ -282,6 +364,9 @@ en:
         submenu: Submenu
         taxonomies: Taxonomies
         taxons_belonging_to: Taxons Belonging To %{taxonomy_name}
+      this_order_has_already_received_a_refund: This order has already received a refund
+      time: Time
+      update: Update
       url: URL
       user:
         account: Account
@@ -296,8 +381,12 @@ en:
         store_credits: Store Credits
         stores: Stores
         user_information: User Information
+      user_rule:
+        choose_users: Choose users
       utilities:
         preview: Preview %{name}
+      variant: Variant
+      variant_prices_search_placeholder: Variant prices search placeholder
       webhooks_subscribers:
         addresses: Addresses
         all_events: All Events
@@ -351,3 +440,4 @@ en:
         wished_items: Wished Items
         wishlists: Wishlists
         zones: Zones
+    administration: Administration

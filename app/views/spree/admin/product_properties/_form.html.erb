@@ -7,7 +7,7 @@
         </div>
         <div>
           <% if can? :create, Spree::ProductProperty %>
-            <%= button_link_to I18n.t('spree.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
+            <%= button_link_to I18n.t('spree.admin.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
             <%= button_link_to I18n.t('spree.admin.product.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
           <% end %>
         </div>
@@ -42,7 +42,7 @@
       <p>
         <%= I18n.t('spree.admin.product.add_first_property') %>
       </p>
-        <%= button_link_to I18n.t('spree.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
+        <%= button_link_to I18n.t('spree.admin.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
         <%= button_link_to I18n.t('spree.admin.product.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
     </div>
   <% end %>
