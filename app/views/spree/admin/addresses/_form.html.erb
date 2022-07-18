@@ -70,9 +70,9 @@
                                           data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
           <% end %>
 
-          <% if f.object.country.states.present?  %>
+          <% if f.object.country.states.present? %>
             <%= f.collection_select :state_id, f.object.country.states.sort, :id, :name, { include_blank: true }, {class: 'form-select', required: f.object.country.states_required?, data: { controller: f.object.country.states.empty? ? '' : 'ts--select',
-                                                                                                                                                                                              form_validation_target: "disableOnSubmit removeRequiredOnSubmit" }}  %>
+                                                                                                                                                                                              form_validation_target: "disableOnSubmit removeRequiredOnSubmit" }} %>
           <% end %>
 
           <% if f.object.country.states_required? || f.object.country.states.present? %>

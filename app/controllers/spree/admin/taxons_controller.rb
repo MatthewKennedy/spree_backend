@@ -48,10 +48,10 @@ module Spree
 
       def remove_icon
         if @taxon.icon.destroy
-          flash[:success] = Spree.t("notice_messages.icon_removed")
+          flash[:success] = I18n.t("spree.notice_messages.icon_removed")
           redirect_to spree.edit_admin_taxonomy_taxon_url(@taxonomy.id, @taxon.id)
         else
-          flash[:error] = Spree.t("errors.messages.cannot_remove_icon")
+          flash[:error] = I18n.t("spree.errors.messages.cannot_remove_icon")
           render :edit, status: :unprocessable_entity
         end
       end

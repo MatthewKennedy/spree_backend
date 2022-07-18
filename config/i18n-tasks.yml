@@ -8,5 +8,5 @@ data:
 # Find translate calls
 search:
   paths:
-    - '../app'
-    - '../lib'
+    - 'app'
+    - 'lib'

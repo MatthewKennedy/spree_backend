@@ -6,7 +6,7 @@
 <% end %>
 
 <form>
-  <input class="form-control" placeholder="<%= Spree.t('variant_prices_search_placeholder') %>" type="text" id="variant-price-search">
+  <input class="form-control" placeholder="<%= I18n.t('spree.variant_prices_search_placeholder') %>" type="text" id="variant-price-search">
 </form>
 
 <%= form_tag nil, { class: 'form-horizontal' } do %>
@@ -14,8 +14,8 @@
     <%= render 'variant_prices', variant: @product.master %>
   </div>
   <div class="form-actions" data-hook="buttons">
-    <%= button Spree.t('actions.update'), 'save.svg' %>
+    <%= button I18n.t('spree.actions.update'), 'save.svg' %>
     <span class="or"><%= Spree.t(:or) %></span>
-    <%= button_link_to Spree.t('actions.cancel'), admin_product_path(@product), icon: 'delete.svg' %>
+    <%= button_link_to I18n.t('spree.actions.cancel'), admin_product_path(@product), icon: 'delete.svg' %>
   </div>
 <% end %>

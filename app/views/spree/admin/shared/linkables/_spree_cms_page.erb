@@ -5,7 +5,7 @@
    <% active_id_holder = resource.linked_resource.id %>
  <% end %>
  <%= f.field_container :linked_resource_id do %>
-    <%= f.label :linked_resource_id, Spree.t('page') %>
+    <%= f.label :linked_resource_id, I18n.t('spree.page') %>
     <%= f.select :linked_resource_id,
          options_from_collection_for_select(resorce_holder || [],
                                             id_holder, name_holder, active_id_holder || nil),

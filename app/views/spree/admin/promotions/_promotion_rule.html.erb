@@ -2,7 +2,7 @@
   <% type_name = promotion_rule.class.name.demodulize.underscore %>
   <div class="card-header d-flex justify-content-between align-items-center">
     <h6 class='card-title mb-0'>
-      <%= Spree.t("promotion_rule_types.#{type_name}.description") %>
+      <%= I18n.t("spree.promotion_rule_types.#{type_name}.description") %>
     </h6>
 
     <%= link_to_with_icon 'delete.svg', '',

@@ -122,7 +122,7 @@
 
           <%= f.field_container :tax_category, data: { hook: "admin_product_form_tax_category" } do %>
             <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-            <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { data: {controller: 'ts--select'} }) %>
+            <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: I18n.t('spree.match_choices.none') }, { data: {controller: 'ts--select'} }) %>
           <% end %>
         </div>
       </div>

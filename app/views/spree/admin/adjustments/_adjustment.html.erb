@@ -1,6 +1,6 @@
 <%
-  @edit_url = edit_admin_order_adjustment_path(@order, adjustment)
-  @delete_url = admin_order_adjustment_path(@order, adjustment)
+  @edit_url = spree.edit_admin_order_adjustment_path(@order, adjustment)
+  @delete_url = spree.admin_order_adjustment_path(@order, adjustment)
 %>
 
 <tr id="<%= spree_dom_id(adjustment) %>" class="<%= adjustment.eligible? ? 'eligible' : 'ineligible' %>" data-hook="adjustment_row">
@@ -15,7 +15,7 @@
   </td>
   <td class="text-center">
     <span class="text-lowercase badge rounded-pill bg-<%= adjustment.state %>">
-      <%= Spree.t("state_machine_states.#{adjustment.state}") %>
+      <%= I18n.t("spree.state_machine_states.#{adjustment.state}") %>
     </span>
   </td>
   <td class="actions">

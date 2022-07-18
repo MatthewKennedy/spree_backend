@@ -13,9 +13,9 @@ module Spree
       def destroy
         @variant = parent.variants.find(params[:id])
         if @variant.destroy
-          flash[:success] = Spree.t("notice_messages.variant_deleted")
+          flash[:success] = I18n.t("spree.notice_messages.variant_deleted")
         else
-          flash[:error] = Spree.t("notice_messages.variant_not_deleted", error: @variant.errors.full_messages.to_sentence)
+          flash[:error] = I18n.t("spree.notice_messages.variant_not_deleted", error: @variant.errors.full_messages.to_sentence)
         end
 
         respond_with(@variant) do |format|

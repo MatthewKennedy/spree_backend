@@ -57,12 +57,12 @@ module Spree
         begin
           # TODO: why is @product.destroy raising ActiveRecord::RecordNotDestroyed instead of failing with false result
           if @product.destroy
-            flash[:success] = Spree.t("notice_messages.product_deleted")
+            flash[:success] = I18n.t("spree.notice_messages.product_deleted")
           else
-            flash[:error] = Spree.t("notice_messages.product_not_deleted", error: @product.errors.full_messages.to_sentence)
+            flash[:error] = I18n.t("spree.notice_messages.product_not_deleted", error: @product.errors.full_messages.to_sentence)
           end
         rescue ActiveRecord::RecordNotDestroyed => e
-          flash[:error] = Spree.t("notice_messages.product_not_deleted", error: e.message)
+          flash[:error] = I18n.t("spree.notice_messages.product_not_deleted", error: e.message)
         end
 
         respond_with(@product) do |format|
@@ -75,15 +75,15 @@ module Spree
         @new = @product.duplicate
 
         if @new.persisted?
-          flash[:success] = Spree.t("notice_messages.product_cloned")
+          flash[:success] = I18n.t("spree.notice_messages.product_cloned")
           redirect_to spree.edit_admin_product_url(@new)
         else
-          flash[:error] = Spree.t("notice_messages.product_not_cloned", error: @new.errors.full_messages.to_sentence)
+          flash[:error] = I18n.t("spree.notice_messages.product_not_cloned", error: @new.errors.full_messages.to_sentence)
           redirect_to spree.admin_products_url
         end
       rescue ActiveRecord::RecordInvalid => e
         # Handle error on uniqueness validation on product fields
-        flash[:error] = Spree.t("notice_messages.product_not_cloned", error: e.message)
+        flash[:error] = I18n.t("spree.notice_messages.product_not_cloned", error: e.message)
         redirect_to spree.admin_products_url
       end
 

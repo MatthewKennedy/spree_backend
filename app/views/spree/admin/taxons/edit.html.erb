@@ -19,8 +19,8 @@
   <%= render 'form', f: f %>
 
   <div class="form-actions" data-hook="buttons">
-    <%= button Spree.t('actions.update'), 'save.svg' %>
+    <%= button I18n.t('spree.actions.update'), 'save.svg' %>
     <span class="or"><%= Spree.t(:or) %></span>
-    <%= button_link_to Spree.t('actions.cancel'), edit_admin_taxonomy_url(@taxonomy), icon: "x-lg.svg" %>
+    <%= button_link_to I18n.t('spree.actions.cancel'), edit_admin_taxonomy_url(@taxonomy), icon: "x-lg.svg" %>
   </div>
 <% end %>

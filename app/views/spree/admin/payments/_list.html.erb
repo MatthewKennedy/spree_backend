@@ -3,7 +3,7 @@
     <thead class="text-muted">
       <tr data-hook="payments_header">
         <th><%= Spree::Payment.human_attribute_name(:number) %></th>
-        <th><%= "#{Spree.t('date')}/#{Spree.t('time')}" %></th>
+        <th><%= "#{I18n.t('spree.date')}/#{I18n.t('spree.time')}" %></th>
         <th class="text-center"><%= Spree.t(:amount) %></th>
         <th class="text-center"><%= Spree.t(:via) %></th>
         <th class="text-center"><%= Spree.t(:id) %></th>
@@ -33,7 +33,7 @@
                   <%= link_to_with_icon(action + '.svg', Spree.t(action), fire_admin_order_payment_path(@order, payment, e: action), no_text: true,
                                                                                                                                      class: 'btn btn-light btn-sm',
                                                                                                                                      data: { turbo_method: :put,
-                                                                                                                                             turbo_confirm: Spree.t('are_you_sure'),
+                                                                                                                                             turbo_confirm: I18n.t('spree.are_you_sure'),
                                                                                                                                              turbo_frame: '_top' } ) if can?(action.to_sym, payment) %>
                 <% end %>
               <% end %>

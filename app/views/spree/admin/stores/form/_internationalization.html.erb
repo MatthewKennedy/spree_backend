@@ -28,7 +28,7 @@
       <%= f.error_message_on :checkout_zone_id %>
     <% end %>
     <%= f.field_container :default_country_id do %>
-      <%= f.label :default_country_id, Spree.t('i18n.default_country') %>
+      <%= f.label :default_country_id, I18n.t('spree.i18n.default_country') %>
       <%= f.select :default_country_id, options_for_select(@countries, @store.default_country_id), {}, { data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :default_country_id %>
       <small class="form-text text-muted">
