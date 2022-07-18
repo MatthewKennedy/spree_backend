@@ -21,5 +21,5 @@ ignore_missing:
 
 ignore_unused:
   - 'spree.admin.webhooks_subscribers*'
-  # - 'spree.admin.product*'
+  - 'spree.admin.product*'
   - 'spree.admin.tab*'
