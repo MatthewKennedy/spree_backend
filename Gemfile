@@ -45,6 +45,7 @@ group :test, :development do
   gem "awesome_print"
   gem "ffaker"
   gem "gem-release"
+  gem "i18n-tasks"
   gem "pry-byebug"
   gem "puma"
   gem "redis"

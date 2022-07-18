@@ -77,6 +77,10 @@ module Spree
         @stores = stores_scope.order(default: :desc)
       end
 
+      def menu_panel
+        @menu_panel = "main"
+      end
+
       def can_not_transition_without_customer_info
         unless @order.billing_address.present?
           flash[:notice] = Spree.t(:fill_in_customer_info)
