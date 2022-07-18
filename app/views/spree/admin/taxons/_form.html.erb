@@ -39,11 +39,11 @@
         <% disabled = @taxon.root? %>
       <% end %>
       <%= f.field_container :parent_id do %>
-        <%= f.label :parent_id, Spree.t('admin.navigation.nested_under') %>
+        <%= f.label :parent_id, I18n.t('spree.admin.navigation.nested_under') %>
         <%= f.select :parent_id, nested_set_options(@taxonomy.taxons, @taxon) {|i| "#{'-' * i.level} #{i.name}" }, { include_blank: false }, { data: {controller: 'ts--select'}, disabled: disabled  } %>
         <%= f.error_message_on :parent_id %>
         <small class="form-text text-muted">
-          <%= Spree.t('admin.taxon.nested_under_info') %>
+          <%= I18n.t('spree.admin.taxon.nested_under_info') %>
         </small>
       <% end %>
     </div>

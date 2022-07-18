@@ -15,7 +15,7 @@
         </h6>
       -->
       <small class="form-text text-muted mt-0 mb-1">
-        <%= Spree.t('admin.taxonomies.submenu') %>: <%= active_badge(!taxon.hide_from_nav) %>
+        <%= I18n.t('spree.admin.taxonomies.submenu') %>: <%= active_badge(!taxon.hide_from_nav) %>
       </small>
     </div>
     <% if taxon.icon.present? %>

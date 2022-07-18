@@ -3,13 +3,13 @@ module Spree
     module ProductsHelper
       # will return a human readable string
       def available_status(product)
-        return Spree.t("admin.product.archived") if product.status == "archived"
-        return Spree.t("admin.product.deleted") if product.deleted?
+        return I18n.t("spree.admin.product.archived") if product.status == "archived"
+        return I18n.t("spree.admin.product.deleted") if product.deleted?
 
         if product.available?
-          Spree.t("admin.product.active")
+          I18n.t("spree.admin.product.active")
         else
-          Spree.t("admin.product.draft")
+          I18n.t("spree.admin.product.draft")
         end
       end
     end

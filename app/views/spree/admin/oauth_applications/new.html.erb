@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
-  <%= link_to Spree.t('admin.oauth_applications.list'), spree.admin_oauth_applications_url %> /
-  <%= Spree.t('admin.oauth_applications.new') %>
+  <%= link_to I18n.t('spree.admin.oauth_applications.list'), spree.admin_oauth_applications_url %> /
+  <%= I18n.t('spree.admin.oauth_applications.new') %>
 <% end %>
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @oauth_application } %>

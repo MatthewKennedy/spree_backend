@@ -15,7 +15,7 @@
       <%= f.select :supported_currencies, currency_options(@store.supported_currencies&.split(',')), { prompt: false }, { multiple: true, data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :supported_currencies %>
       <small class="form-text text-muted">
-        <%= Spree.t('admin.store_form.currencies_help') %>
+        <%= I18n.t('spree.admin.store_form.currencies_help') %>
       </small>
     <% end %>
     <hr />
@@ -23,7 +23,7 @@
       <%= f.label :checkout_zone_id, Spree.t(:shipping_zone) %>
       <%= f.select :checkout_zone_id, options_for_select(@zones), { include_blank: Spree.t(:no_limits_zone) }, { data: {controller: 'ts--select'} } %>
       <small class="form-text text-muted">
-        <%= raw(Spree.t('admin.store_form.checkout_zone_help')) %>
+        <%= raw(I18n.t('spree.admin.store_form.checkout_zone_help')) %>
       </small>
       <%= f.error_message_on :checkout_zone_id %>
     <% end %>
@@ -32,7 +32,7 @@
       <%= f.select :default_country_id, options_for_select(@countries, @store.default_country_id), {}, { data: {controller: 'ts--select'} } %>
       <%= f.error_message_on :default_country_id %>
       <small class="form-text text-muted">
-        <%= Spree.t('admin.store_form.default_country_help') %>
+        <%= I18n.t('spree.admin.store_form.default_country_help') %>
       </small>
     <% end %>
     <hr />
@@ -42,7 +42,7 @@
       <%= f.error_message_on :default_locale %>
       <% unless defined?(SpreeI18n) %>
         <small class="form-text text-muted">
-          <%= raw(Spree.t('admin.store_form.locales_help')) %>
+          <%= raw(I18n.t('spree.admin.store_form.locales_help')) %>
         </small>
       <% end %>
     <% end %>

@@ -3,7 +3,7 @@
     <div class="col-12 col-md-8" data-hook="admin_product_form_left">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.details') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.admin.details') %></h5>
         </div>
         <div class="card-body">
           <%= f.field_container :name, data: { hook: "admin_product_form_name" }, class: ['form-floating'] do %>
@@ -28,7 +28,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.seo') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.admin.seo') %></h5>
         </div>
 
         <div class="card-body">
@@ -56,7 +56,7 @@
       <div class="card">
         <div class="card-header d-flex">
           <div class="flex-fill">
-            <h5 class="card-title"><%= Spree.t('admin.status') %></h5>
+            <h5 class="card-title"><%= I18n.t('spree.admin.status') %></h5>
           </div>
           <div>
             <h5 class="card-title">
@@ -84,7 +84,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.cost') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.admin.cost') %></h5>
         </div>
         <div class="card-body">
           <div data-controller="form-validation">
@@ -112,7 +112,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.tax_and_shipping') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.admin.tax_and_shipping') %></h5>
         </div>
         <div class="card-body">
           <%= f.field_container :shipping_category, data: { hook: "admin_product_form_shipping_categories" } do %>
@@ -129,7 +129,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.specifications') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.admin.specifications') %></h5>
         </div>
         <div class="card-body">
           <% if @product.has_variants? %>
@@ -195,7 +195,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title"><%= Spree.t('admin.organization') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.admin.organization') %></h5>
         </div>
         <div class="card-body">
           <%= f.field_container :taxons, data: { hook: "admin_product_form_taxons" } do %>

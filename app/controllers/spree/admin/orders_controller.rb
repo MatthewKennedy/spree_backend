@@ -106,7 +106,7 @@ module Spree
 
       def reset_digitals
         @order.digital_links.each(&:reset!)
-        flash[:notice] = Spree.t("admin.digitals.downloads_reset")
+        flash[:notice] = I18n.t("spree.admin.digitals.downloads_reset")
 
         redirect_back fallback_location: spree.edit_admin_order_url(@order)
       end

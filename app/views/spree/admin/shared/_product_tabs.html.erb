@@ -54,7 +54,7 @@
 
   <%= content_tag :li, class: 'nav-item' do %>
     <%= link_to_with_icon 'download.svg',
-      Spree.t('admin.digitals.digital_assets'),
+      I18n.t('spree.admin.digitals.digital_assets'),
       admin_product_digitals_path(@product),
       class: "nav-link #{'active' if current == :digitals} #{current}" %>
 

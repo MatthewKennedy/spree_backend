@@ -1,6 +1,6 @@
 <% if spree.respond_to? :root_path %>
   <ul class="nav nav-sidebar" id="sidebarDashboard">
-    <%= tab Spree.t('admin.home'), url: spree.root_path, match_path: nil, icon: 'shop.svg' %>
+    <%= tab I18n.t('spree.admin.home'), url: spree.root_path, match_path: nil, icon: 'shop.svg' %>
   </ul>
 <% end %>
 
