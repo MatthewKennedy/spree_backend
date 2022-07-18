@@ -37,7 +37,7 @@ module Spree
         titleized_label = if options[:do_not_titleize] == true
           options[:label]
         else
-          Spree.t(options[:label], default: options[:label], scope: [:admin, :tab]).titleize
+          I18n.t(options[:label], default: options[:label], scope: [:spree, :admin, :tab]).titleize
         end
 
         css_classes = ["sidebar-menu-item d-block w-100 position-relative"]

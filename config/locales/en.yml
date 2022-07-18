@@ -22,9 +22,6 @@ en:
         add_new_page: Add New Page
         add_new_section: Add New Section
         all_pages: All Pages
-        brand_bar:
-          uses_menu: This section uses your Spree Menu named <b>%{menu}</b> to manage the images and links,
-          vist_menu_to_edit: to edit this menu.
         button_text: Button Text
         click_button_to_change_page_type: Click the <b>%{button_type}</b> button to load the options for this page type.
         click_create_to_load_new_link: Click the <b>Create</b> button below to save your new page section, and load the section settings.
@@ -33,8 +30,6 @@ en:
         draft_mode: Draft Mode
         fit: Fit To
         full_screen_mode: <span class="exit">Exit </span>Full Screen Mode
-        full_width: Full width
-        full_width_on_small: Full width on small devices
         go_to_fullscreen_section_manager: Go To Fullscreen Section Manager
         gutters: Gutters
         hero:
@@ -56,12 +51,8 @@ en:
         new_section: New section
         no_sections_found_please_add_one: Add your first section to this page by clicking the <b>+ Add New Section</b> button above.
         page: Page
-        page_sections: "%{page_name} Sections"
-        page_sections_info: The area below represents your %{page_type} displayed in %{store}, add sections and drag them into position
         page_type: Page Type
         section_type: Section Type
-        select_page_type: Select a page type
-        seo_settings: SEO Settings
         set_gutters: Set Gutters
         settings_for: 'Options For: <b>%{section}</b>'
         side_by_side:
@@ -70,7 +61,6 @@ en:
           right_image: Right Image
         subtitle: Subtitle
         title: Title
-        toggle_page_visibility: Toggle page visibility
         visible: Visible
         you_have_no_pages: You have no Pages, click the <b>+ Add New Page</b> button to get started.
       copy_to_clipboard: Copy to clipboard
@@ -89,7 +79,6 @@ en:
       digitals:
         add_new_file: Add a new digital asset.
         delete_file_confirmation: 'Are you sure you want to delete: %{filename}'
-        digital: Digital
         digital_assets: Digital Assets
         downloads_reset: Digital Download Links Reset
         no_digital_assets_added: No digital assets.
@@ -106,7 +95,6 @@ en:
           blank: Blank
           cannot_remove_icon: Cannot remove icon
       execution_time: Execution Time
-      existing_shipments: Existing shipments
       filters: Filters
       home: Home
       kind: Kind
@@ -114,36 +102,27 @@ en:
       limit_usage_to: Limit usage to
       linkable:
         search_for_a_page: Search for a page
-        search_for_a_product: Search for a Product
-        search_for_a_taxon: Search for a Taxon
       location: Location
       make_sure_the_above_reimbursement_amount_is_correct: Make sure the above reimbursement amount is correct
       match_choices:
         all: All
         none: None
-      move_variant_to: Move {{variant.name}} to
       name: Name
       navigation:
         add_new_item: Add New Item
         add_new_menu: Add New Menu
         all_menus: All Menus
-        back_to_all_menus: Back To All Menus
         click_create_to_load_new_link: Click the <b>Create</b> button below to change the link field.
         click_update_to_load_new_link: Click the <b>Update</b> button below to change the link field.
         code: Code
         default_menus_info:
-          allow_this_menu_item_to_contain_nested_menu_items: Allow this Menu Item to contain nested items
           body: Default menus are menus whose language matches the associated store's default language.<br><br> <h5>Example</h5>If you have a store that uses Spanish as the default language but also offers the options of German and French; your default header menu for this store would be set to use <b>Español (es)</b> for the language and <b>Header</b> as the location.<br><br> <h5>Why Are Default Menus Important?</h5> Default menus are displayed to your visitor if no menu is available in the current language they are browsing. It is recommended that you create a default menu for each menu location within each store.<br><br> <h5>More Information</h5>To learn more about menus, view the official Spree user documentation by <a href='https://guides.spreecommerce.org/user/navigation/building_the_main_menu.html' target='_blank' class='alert-link'>clicking here</a>.
           title: Default Menus
-        give_your_menu_a_unique_name: 'Use the unique code to identify your menu: spree-eu-main'
         image_alt_text: Add alt text to your image
-        image_asset: Add a Promotion image or Link icon.
         image_info: "<b>NOTE:</b> You can attach an image to any menu item, but your image will only be displayed in the main menu when nested inside a container with the code <b>promo</b>.<br><br> For best results use images with a width of 540px and height of 350px."
         item_type: Item Type
         link_settings: Link Settings
         link_to: Link To
-        managing_by_store: "<p>You are managing the menus for <b>%{store}</b>. To manage menus for other stores, change the global store using the drop-down in the main navbar found at the top of the screen.</p>"
-        managing_by_store_title: Managing Menus By Store
         menu_item_type_container_message: 'Containers are menu items that do not link to a destination. If you are building the Spree Main Menu create containers with the code: <b>category</b> or <b>promo</b>, and then nest your links inside these containers build out your menu. <br><br> For an indepth guide to building the main menu see the documenttation page <a href=''https://guides.spreecommerce.org/user/navigation/building_the_main_menu.html'' target=''_blank'' class=''alert-link''>Building The Main Menu</a>'
         menu_items: "%{menu_name} Items"
         menus: Menus
@@ -163,9 +142,7 @@ en:
         this_link_takes_you_to_your_stores_home_page: This link takes you to your stores home page.
         type: Type
         url_info: The URL field can link to an external website using <b>https://example.com</b>, link to an otherwise unreachable internal path using <b>/policies/privacy</b>, launch an email client using <b>mailto:sales@example.com</b> or used to create a clickable phone number with <b>tel:123456789</b>
-        used_in: Used In
         you_have_no_menus: You have no Menus, click the Add New Menu button to create your first Menu.
-      new_shipment_at_location: New shipment at location
       no_payment_provider_settings_message: No payment provider settings message
       note: Note
       notice_messages:
@@ -186,51 +163,34 @@ en:
       order:
         add: Add
         add_a_shipment_to_this_order_to_begin_adding_items: Add a new shipping location to this order, and then add products to the shipment. Ideally, choose the location nearest the delivery address for faster and cheaper delivery.
-        add_new_shipping_location: Add New Shipping Location
-        add_tracking_number: Add Tracking Number
         add_user_to_order: Add this User to the Order
-        changing_store_warning: If you change the store this order belongs to, the order will be reset.
         currency: Currency
         customer: Customer
         delete_shipment: Delete Shipment
         email_copy_of_invoice_to_customer: Send Invoice
-        events:
-          approve: approve
-          cancel: cancel
-          resend: Resend
-          resume: resume
         from: from
         instructions:
           cart: Add a customer or products to the order via the Shipment section.
         mark_as_shipped: Mark as Shipped
-        new_account: New Account
-        once_an_order_is_complete_you_can_not_change_store: Sorry, once an order is complete, you can no longer change the store that the order belongs to.
         order: order
-        package: 'Package:'
         products: Products
         resend_shipping_confirmation_email: Resend Shipping Confirmation Email
         search_for_a_product_or_variant: Search for products by name or SKU.
         search_users_by_name_or_email: Search users by name or email.
         set_order_currency: Set Order Currency
-        shipping_from: 'Shipping from:'
         the_order_currency_is_locked_once_items_are_added: The currency of this order is locked.
-        this_shipment_has_no_items: This shipment has no items.
         tracking_number: Tracking Number
-        your_order_has_no_shipments: Your order has no shipments.
       orders:
         abandoned_checkouts: Abandoned Checkouts
         all: All
         all_orders: All Orders
-        cart: Cart
         draft_orders: Draft Orders
         unfulfilled: Unfulfilled
         unpaid: Unpaid
-        your_order_has_no_shipments: Your order has no shipments, create a new shipment then add products to the shipment to generate shipping rates.
       organization: Organization
       page: Page
       payments:
         gateway:
-          card_code: Card Varification Code
           cvc: CVC
       product:
         active: Active
@@ -269,8 +229,6 @@ en:
         for: For %{store_name}
       request_errors: Request Errors
       response_code: Response Code
-      return_authorization:
-        product: Product
       risk: Risk
       risky: Risky
       safe: Safe
@@ -279,7 +237,6 @@ en:
       select_from_prototype: Select from prototype
       seo: Seo
       settings: Settings
-      shipment: Shipments
       shipments: Shipments
       sku: Sku
       slug: Slug
@@ -322,7 +279,6 @@ en:
         default_country_help: This is the Country that will be pre-selected on the Checkout Address form
         footer_help: This content is visible in the footer section of your Store
         locales_help: Install <a href='https://github.com/spree-contrib/spree_i18n' target='_blank' class='alert-link'>Spree I18n extension</a> to add more locales
-        look_and_feel: Look and feel
         'look_and_feel ': 'Look and feel '
         mail_from_address_help: This is the email which will be the sender of all your Store emails (Order Confirmation, Shipment notification etc)
         new_order_notifications_email_help: If you want to receive an email notification every time someone places an Order please provide an email address for that notification to be sent to
@@ -363,24 +319,14 @@ en:
         no_taxons: "<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons."
         submenu: Submenu
         taxonomies: Taxonomies
-        taxons_belonging_to: Taxons Belonging To %{taxonomy_name}
       this_order_has_already_received_a_refund: This order has already received a refund
       time: Time
       update: Update
       url: URL
       user:
-        account: Account
-        addresses: Addresses
         available_store_credit: User has %{amount} in Store Credit available.
-        items: Items
-        items_purchased: Items Purchased
         no_store_credit: User has no Store Credit available.
-        order_history: Order History
-        order_num: 'Order #'
-        orders: Orders
         store_credits: Store Credits
-        stores: Stores
-        user_information: User Information
       user_rule:
         choose_users: Choose users
       utilities:
