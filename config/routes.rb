@@ -98,12 +98,6 @@ Spree::Core::Engine.add_routes do
 
     # Products
     resources :products do
-      resources :product_properties
-      resources :images do
-        collection do
-          post :update_positions
-        end
-      end
       member do
         post :update_availability
         post :update_cost_currency
@@ -111,11 +105,14 @@ Spree::Core::Engine.add_routes do
         post :clone
         get :stock
       end
-      resources :variants do
+      resources :product_properties do
         collection do
-          post :update_positions
+          get :prototypes
+          post :prototype_properties
         end
       end
+      resources :images
+      resources :variants
       resources :variants_including_master, only: [:update]
       resources :prices, only: [:index, :create]
       resources :digitals, only: [:index, :create, :destroy]
@@ -128,13 +125,10 @@ Spree::Core::Engine.add_routes do
       end
     end
 
-    # Product Properties
-    delete "/product_properties/:id", to: "product_properties#destroy", as: :product_property
-
     # Prototypes
     resources :prototypes do
       member do
-        get :select
+        post :select
       end
 
       collection do

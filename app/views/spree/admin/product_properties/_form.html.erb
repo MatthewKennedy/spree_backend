@@ -1,4 +1,3 @@
-
 <% if @product.properties.any? %>
   <%= form_for @product, url: spree.admin_product_url(@product), method: :put do |f| %>
     <div class="card">
@@ -8,8 +7,8 @@
         </div>
         <div>
           <% if can? :create, Spree::ProductProperty %>
-            <%= button_link_to Spree.t(:select_from_prototype), spree.available_admin_prototypes_url, { icon: 'list.svg', class: 'btn-secondary btn-sm' } %>
-            <%= link_to Spree.t(:add_new_property), spree.new_admin_product_product_property_path(@product), class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+            <%= button_link_to I18n.t('spree.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
+            <%= button_link_to I18n.t('spree.admin.product.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
           <% end %>
         </div>
       </div>
@@ -40,9 +39,11 @@
 <% else %>
   <% if can? :create, Spree::ProductProperty %>
     <div class="alert alert-info text-center" role="alert">
-      <p><%= I18n.t('spree.admin.product.add_first_property') %></p>
-      <%= link_to I18n.t('spree.admin.product.add_new_properties_from_prototype'), spree.available_admin_prototypes_path, class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
-      <%= link_to I18n.t('spree.admin.product.add_a_new_property'), spree.new_admin_product_product_property_path(@product), class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+      <p>
+        <%= I18n.t('spree.admin.product.add_first_property') %>
+      </p>
+        <%= button_link_to I18n.t('spree.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
+        <%= button_link_to I18n.t('spree.admin.product.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
     </div>
   <% end %>
 <% end %>
