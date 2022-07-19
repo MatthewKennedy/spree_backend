@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  <%= I18n.t('spree.admin.navigation.menus') %>
+  <%= I18n.t('spree.dash.navigation.menus') %>
 <% end %>
 
 <% content_for :page_actions do %>
-  <%= button_link_to I18n.t('spree.admin.navigation.add_new_menu'), new_object_url, { class: "btn-success ", icon: 'plus-square.svg', id: 'new_menu' } %>
+  <%= button_link_to I18n.t('spree.dash.navigation.add_new_menu'), new_object_url, { class: "btn-success ", icon: 'plus-square.svg', id: 'new_menu' } %>
 <% end if can?(:create, Spree::Menu) %>
 
 <% content_for :table_filter do %>
@@ -14,7 +14,7 @@
 
         <div class="col-12 col-lg-4">
           <div class="form-group">
-            <%= f.label :name_cont, I18n.t('spree.admin.name') %>
+            <%= f.label :name_cont, I18n.t('spree.dash.name') %>
             <%= f.text_field :name_cont, size: 15, class: "form-control js-quick-search-target js-filterable" %>
           </div>
         </div>
@@ -44,13 +44,13 @@
   <table class="table" id="menusTable">
     <thead class="text-muted">
       <th scope="col"><%= Spree.t(:name) %></th>
-      <th scope="col"><%= I18n.t('spree.admin.location') %></th>
-      <th scope="col"><%= I18n.t('spree.admin.language') %></th>
-      <th class="text-center" scope="col" class="text-center"><%= I18n.t('spree.admin.default') %>
+      <th scope="col"><%= I18n.t('spree.dash.location') %></th>
+      <th scope="col"><%= I18n.t('spree.dash.language') %></th>
+      <th class="text-center" scope="col" class="text-center"><%= I18n.t('spree.dash.default') %>
         <span data-show-info
               data-alert-kind="info"
-              data-alert-title="<%= I18n.t('spree.admin.navigation.default_menus_info.title') %>"
-              data-alert-html="<%= I18n.t('spree.admin.navigation.default_menus_info.body') %>">
+              data-alert-title="<%= I18n.t('spree.dash.navigation.default_menus_info.title') %>"
+              data-alert-html="<%= I18n.t('spree.dash.navigation.default_menus_info.body') %>">
           <%= svg_icon name: "info.svg", width: '15', height: '15' %>
         </span>
       </th>
@@ -85,6 +85,6 @@
 <%= render 'spree/admin/shared/index_table_options', collection: @menus, simple: true %>
 <% else %>
   <div class="text-center no-objects-found m-5">
-    <%= I18n.t('spree.admin.navigation.you_have_no_menus') %>
+    <%= I18n.t('spree.dash.navigation.you_have_no_menus') %>
   </div>
 <% end %>

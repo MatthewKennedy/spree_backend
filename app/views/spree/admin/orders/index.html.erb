@@ -8,17 +8,17 @@
 
 <% content_for :page_tabs do %>
   <li class="nav-item">
-    <%= link_to I18n.t('spree.admin.orders.all'),
+    <%= link_to I18n.t('spree.dash.orders.all'),
       spree.admin_orders_path(q: { completed_at_not_null: 1 }),
       class: "nav-link #{'active' if params[:q][:payment_state_not_eq].blank? && params[:q][:shipment_state_not_eq].blank?}" %>
   </li>
   <li class="nav-item">
-    <%= link_to I18n.t('spree.admin.orders.unpaid'),
+    <%= link_to I18n.t('spree.dash.orders.unpaid'),
       params.merge({q: {payment_state_not_eq: :paid, completed_at_not_null: 1}}).permit!,
       class: "nav-link #{'active' if params[:q][:payment_state_not_eq] == 'paid'}" %>
   </li>
   <li class="nav-item">
-    <%= link_to I18n.t('spree.admin.orders.unfulfilled'),
+    <%= link_to I18n.t('spree.dash.orders.unfulfilled'),
       params.merge({q: {shipment_state_not_eq: :shipped, completed_at_not_null: 1}}).permit!,
       class: "nav-link #{'active' if params[:q][:shipment_state_not_eq] == 'shipped'}" %>
   </li>
@@ -57,12 +57,12 @@
               </td>
               <td>
                 <span class="badge rounded-pill bg-<%= order.considered_risky ? 'considered_risky' : 'considered_safe' %>">
-                  <%= order.considered_risky ? I18n.t("spree.admin.risky") : I18n.t("spree.admin.safe") %>
+                  <%= order.considered_risky ? I18n.t("spree.dash.risky") : I18n.t("spree.dash.safe") %>
                 </span>
               </td>
               <td class="no-wrap">
                 <% if order.payment_state %>
-                  <%= link_to I18n.t("spree.admin.payment_states.#{order.payment_state}"),
+                  <%= link_to I18n.t("spree.dash.payment_states.#{order.payment_state}"),
                     admin_order_payments_path(order),
                     class: "badge rounded-pill bg-#{order.payment_state}" %>
 
@@ -76,7 +76,7 @@
               <% if Spree::Order.checkout_step_names.include?(:delivery) %>
                 <td class="no-wrap">
                   <% if order.shipment_state %>
-                    <span class="badge rounded-pill bg-<%= order.shipment_state %>"><%= I18n.t("spree.admin.shipment_states.#{order.shipment_state}") %></span>
+                    <span class="badge rounded-pill bg-<%= order.shipment_state %>"><%= I18n.t("spree.dash.shipment_states.#{order.shipment_state}") %></span>
                     <span class="filterable js-add-filter" data-ransack-field="q_shipment_state_eq" data-ransack-value="<%= order.shipment_state %>">
                       <%= svg_icon name: "filter.svg", width: '14', height: '14' %>
                     </span>

@@ -1,6 +1,6 @@
 <div data-hook="admin_webhooks_subscriber_form_fields">
   <%= f.field_container :url, class: ['form-group'] do %>
-    <%= f.label :url, raw(I18n.t('spree.admin.url') + required_span_tag) %>
+    <%= f.label :url, raw(I18n.t('spree.dash.url') + required_span_tag) %>
     <%= f.text_field :url, class: 'form-control', placeholder: 'https://example.com/endpoint' %>
     <%= f.error_message_on :url %>
   <% end %>
@@ -23,14 +23,14 @@
                                  'data-action' => 'webhooks_subscriber_events#hideCheckboxes',
                                  'data-webhooks_subscriber_events-target' => 'subscribeToAll',
                                   class: 'events' } %>
-          <%= label_tag :subscribe_to_all_events_true, I18n.t('spree.admin.webhooks_subscribers.subscribe_to_all_events') %>
+          <%= label_tag :subscribe_to_all_events_true, I18n.t('spree.dash.webhooks_subscribers.subscribe_to_all_events') %>
         </div>
         <div class="radio my-2">
           <%= radio_button_tag :subscribe_to_all_events, false,
                                !subscribe_to_all_events?,
                                { 'data-action' => 'webhooks_subscriber_events#showCheckboxes',
                                  class: 'events' } %>
-          <%= label_tag :subscribe_to_all_events_false, I18n.t('spree.admin.webhooks_subscribers.select_events') %>
+          <%= label_tag :subscribe_to_all_events_false, I18n.t('spree.dash.webhooks_subscribers.select_events') %>
         </div>
       </div>
       <br>

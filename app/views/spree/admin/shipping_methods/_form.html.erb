@@ -11,7 +11,7 @@
     <div data-hook="admin_shipping_method_form_display_field" class="col-12 col-lg-6">
       <%= f.field_container :display_on do %>
         <%= f.label :display_on, Spree.t(:display) %>
-        <%= select(:shipping_method, :display_on, Spree::ShippingMethod::DISPLAY.collect { |display| [I18n.t("spree.admin.display_on.#{display}"), display.to_s] }, { selected: :both, include_blank: true }, { data: { controller: 'ts--select' } }) %>
+        <%= select(:shipping_method, :display_on, Spree::ShippingMethod::DISPLAY.collect { |display| [I18n.t("spree.dash.display_on.#{display}"), display.to_s] }, { selected: :both, include_blank: true }, { data: { controller: 'ts--select' } }) %>
         <%= f.error_message_on :display_on %>
       <% end %>
     </div>

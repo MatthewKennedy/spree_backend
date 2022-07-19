@@ -57,12 +57,12 @@ module Spree
         begin
           # TODO: why is @product.destroy raising ActiveRecord::RecordNotDestroyed instead of failing with false result
           if @product.destroy
-            flash[:success] = I18n.t("spree.admin.notice_messages.product_deleted")
+            flash[:success] = I18n.t("spree.dash.notice_messages.product_deleted")
           else
-            flash[:error] = I18n.t("spree.admin.notice_messages.product_not_deleted", error: @product.errors.full_messages.to_sentence)
+            flash[:error] = I18n.t("spree.dash.notice_messages.product_not_deleted", error: @product.errors.full_messages.to_sentence)
           end
         rescue ActiveRecord::RecordNotDestroyed => e
-          flash[:error] = I18n.t("spree.admin.notice_messages.product_not_deleted", error: e.message)
+          flash[:error] = I18n.t("spree.dash.notice_messages.product_not_deleted", error: e.message)
         end
 
         respond_with(@product) do |format|
@@ -75,15 +75,15 @@ module Spree
         @new = @product.duplicate
 
         if @new.persisted?
-          flash[:success] = I18n.t("spree.admin.notice_messages.product_cloned")
+          flash[:success] = I18n.t("spree.dash.notice_messages.product_cloned")
           redirect_to spree.edit_admin_product_url(@new)
         else
-          flash[:error] = I18n.t("spree.admin.notice_messages.product_not_cloned", error: @new.errors.full_messages.to_sentence)
+          flash[:error] = I18n.t("spree.dash.notice_messages.product_not_cloned", error: @new.errors.full_messages.to_sentence)
           redirect_to spree.admin_products_url
         end
       rescue ActiveRecord::RecordInvalid => e
         # Handle error on uniqueness validation on product fields
-        flash[:error] = I18n.t("spree.admin.notice_messages.product_not_cloned", error: e.message)
+        flash[:error] = I18n.t("spree.dash.notice_messages.product_not_cloned", error: e.message)
         redirect_to spree.admin_products_url
       end
 
@@ -102,12 +102,12 @@ module Spree
           respond_to do |format|
             format.turbo_stream
             format.html {
-              flash[:success] = raw(I18n.t("spree.admin.product.messages.product_status_updated_to", name: @product.name, state: @product.status.capitalize))
+              flash[:success] = raw(I18n.t("spree.dash.products.messages.product_status_updated_to", name: @product.name, state: @product.status.capitalize))
               redirect_to location_after_save
             }
           end
         else
-          flash[:error] = I18n.t("spree.admin.product.errors.status_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+          flash[:error] = I18n.t("spree.dash.products.errors.status_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
         end
       end
 
@@ -116,12 +116,12 @@ module Spree
           respond_to do |format|
             format.turbo_stream
             format.html {
-              flash[:success] = I18n.t("spree.admin.product.messages.product_cost_currency_updated_successfully")
+              flash[:success] = I18n.t("spree.dash.products.messages.product_cost_currency_updated_successfully")
               redirect_to location_after_save
             }
           end
         else
-          flash[:error] = I18n.t("spree.admin.product.errors.cost_currency_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+          flash[:error] = I18n.t("spree.dash.products.errors.cost_currency_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
         end
       end
 
@@ -130,12 +130,12 @@ module Spree
           respond_to do |format|
             format.turbo_stream
             format.html {
-              flash[:success] = I18n.t("spree.admin.product.messages.product_updated")
+              flash[:success] = I18n.t("spree.dash.products.messages.product_updated")
               redirect_to location_after_save
             }
           end
         else
-          flash[:error] = I18n.t("spree.admin.product.errors.promotionable_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+          flash[:error] = I18n.t("spree.dash.products.errors.promotionable_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
         end
       end
 

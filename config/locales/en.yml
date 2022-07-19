@@ -1,7 +1,8 @@
 ---
 en:
   spree:
-    admin:
+    administration: Administration
+    dash:
       actions:
         cancel: Cancel
         continue: Continue
@@ -191,11 +192,18 @@ en:
       payments:
         gateway:
           cvc: CVC
-      product:
+      product: Product
+      product_kinds:
+        digital: Digital
+        physical: Physical
+      product_rule:
+        choose_products: Choose products
+        label: Label
+      products:
         active: Active
-        add_a_new_property: Add A New Property
+        add_a_new_property: Add a new property
         add_first_property: This product has no properties added, click the buttons below to begin adding new properies.
-        add_new_properties_from_prototype: Add New Properties From a Prototype
+        add_new_properties_from_prototype: Add new properties from prototype
         all: All
         archived: Archived
         deleted: Deleted
@@ -206,20 +214,14 @@ en:
           status_could_not_be_updated: 'Status could not be updated. Reason: %{error}'
         messages:
           product_cost_currency_updated_successfully: Product cost currency updated successfully
-          product_is_not_promotable: 'Product: <strong>%{name}</strong> will not be shown in promotions'
-          product_is_promotable: 'Product: <strong>%{name}</strong> will be shown in promotions'
-          product_status_updated_to: 'Product: <strong>%{name}</strong> has been updated to: <strong>%{state}</strong>'
-          product_updated: Product Updated
-        new_product_details: New Product Details
+          product_is_not_promotable: Product is not promotable
+          product_is_promotable: Product is promotable
+          product_status_updated_to: Product status updated to
+          product_updated: Product updated
+        new_product_details: New product details
         new_product_master_price: 'Price: %{currency_iso} - (%{currency_symbol})'
-        pre_order: Pre-order
         properties: Properties
-      product_kinds:
-        digital: Digital
-        physical: Physical
-      product_rule:
-        choose_products: Choose products
-        label: Label
+        select_from_prototype: Select from prototype
       promotion_cloned: Promotion cloned
       promotion_not_cloned: Promotion not cloned
       quantity: Quantity
@@ -233,7 +235,6 @@ en:
       safe: Safe
       save: Save
       search: Search
-      select_from_prototype: Select from prototype
       seo: Seo
       settings: Settings
       shipments: Shipments
@@ -385,4 +386,3 @@ en:
         wished_items: Wished Items
         wishlists: Wishlists
         zones: Zones
-    administration: Administration

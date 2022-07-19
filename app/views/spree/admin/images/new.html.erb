@@ -11,9 +11,9 @@
     <%= render partial: 'form', locals: { f: f } %>
 
     <div class="form-actions" data-hook="buttons">
-      <%= button I18n.t('spree.admin.actions.create'), 'save.svg' %>
+      <%= button I18n.t('spree.dash.actions.create'), 'save.svg' %>
       <span class="or"><%= Spree.t(:or) %></span>
-      <%= button_link_to I18n.t('spree.admin.actions.cancel'), spree.admin_product_images_url(@product), icon: 'delete.svg', id: 'cancel_link' %>
+      <%= button_link_to I18n.t('spree.dash.actions.cancel'), spree.admin_product_images_url(@product), icon: 'delete.svg', id: 'cancel_link' %>
     </div>
   </fieldset>
 <% end %>

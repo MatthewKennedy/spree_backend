@@ -1,5 +1,5 @@
 <% content_for :modal_header do %>
-  <h5 class="modal-title"><%= I18n.t('spree.admin.product.add_a_new_property') %></h5>
+  <h5 class="modal-title"><%= I18n.t('spree.dash.products.add_a_new_property') %></h5>
   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 <% end %>
 
@@ -29,8 +29,8 @@
 <% end %>
 
 <% content_for :modal_footer do %>
-  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('spree.admin.cancel') %></button>
-  <%= button_tag(I18n.t('spree.admin.save'), class: "btn btn-primary", form: "newProductProperty") %>
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('spree.dash.cancel') %></button>
+  <%= button_tag(I18n.t('spree.dash.save'), class: "btn btn-primary", form: "newProductProperty") %>
 <% end %>
 
 <%= render partial: 'spree/admin/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable' } %>

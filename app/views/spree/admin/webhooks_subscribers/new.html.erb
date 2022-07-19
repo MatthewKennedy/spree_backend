@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
-  <%= link_to I18n.t('spree.admin.webhooks_subscribers.webhooks_subscribers'), spree.admin_webhooks_subscribers_path %> /
-  <%= I18n.t('spree.admin.webhooks_subscribers.new_webhooks_subscriber') %>
+  <%= link_to I18n.t('spree.dash.webhooks_subscribers.webhooks_subscribers'), spree.admin_webhooks_subscribers_path %> /
+  <%= I18n.t('spree.dash.webhooks_subscribers.new_webhooks_subscriber') %>
 <% end %>
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @webhooks_subscriber } %>

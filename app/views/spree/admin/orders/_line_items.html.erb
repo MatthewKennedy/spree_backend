@@ -35,7 +35,7 @@
             <td>
               <span class="d-flex justify-content-center">
                 <% if can? :update, item %>
-                  <%= link_to_with_icon 'delete.svg', I18n.t('spree.admin.delete'), spree.admin_order_line_item_path(@order, item), class: 'delete-line-item btn btn-danger btn-sm', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } , title: I18n.t('spree.admin.delete'), no_text: true %>
+                  <%= link_to_with_icon 'delete.svg', I18n.t('spree.dash.delete'), spree.admin_order_line_item_path(@order, item), class: 'delete-line-item btn btn-danger btn-sm', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } , title: I18n.t('spree.dash.delete'), no_text: true %>
                 <% end %>
               </span>
             </td>

@@ -9,7 +9,7 @@
     </div>
     <div class="col-12 col-md-6">
       <%= f.field_container :type do %>
-        <%= f.label :type, I18n.t('spree.admin.cms.section_type') %>
+        <%= f.label :type, I18n.t('spree.dash.cms.section_type') %>
         <%= f.select(:type, spree_humanize_dropdown_values('Spree::CmsSection', {const: 'TYPES'}), {include_blank: false}) %>
         <%= f.error_message_on :type %>
       <% end %>
@@ -21,9 +21,9 @@
       <div class="col-12">
         <div class="alert alert-warning mt-3">
           <% if %w[new create].include? controller.action_name %>
-            <%= raw I18n.t('spree.admin.cms.click_create_to_load_new_link') %>
+            <%= raw I18n.t('spree.dash.cms.click_create_to_load_new_link') %>
           <% else %>
-            <%= raw I18n.t('spree.admin.cms.click_update_to_load_new_link') %>
+            <%= raw I18n.t('spree.dash.cms.click_update_to_load_new_link') %>
           <% end %>
         </div>
       </div>
@@ -40,14 +40,14 @@
             <div class="card-header d-flex">
               <div class="d-flex flex-grow-1">
                 <h5 class="mb-0">
-                  <%= raw I18n.t('spree.admin.cms.settings_for', section: spree_humanize_type(@cms_section.type)) %>
+                  <%= raw I18n.t('spree.dash.cms.settings_for', section: spree_humanize_type(@cms_section.type)) %>
                 </h5>
               </div>
               <div class="d-flex">
                 <span data-show-info
                           data-alert-kind="info"
                           data-alert-title="<%= spree_humanize_type(@cms_section.type) %>"
-                          data-alert-html="<%= raw I18n.t("spree.admin.cms.info_#{spree_resource_path(@cms_section)}_body") %>">
+                          data-alert-html="<%= raw I18n.t("spree.dash.cms.info_#{spree_resource_path(@cms_section)}_body") %>">
                           <%= svg_icon name: "info.svg", width: '25', height: '25' %>
                 </span>
               </div>
