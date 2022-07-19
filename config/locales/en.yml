@@ -1,6 +1,5 @@
 ---
 en:
-  "!": "!"
   spree:
     admin:
       actions:
@@ -202,8 +201,8 @@ en:
         deleted: Deleted
         draft: Draft
         errors:
-          cost_currency_could_not_be_updated: 'Cost currency could not be updated. Reason: %{error}'
-          promotionable_could_not_be_updated: 'Promotionable could not be updated. Reason: %{error}'
+          cost_currency_could_not_be_updated: Cost currency could not be updated. %{error}
+          promotionable_could_not_be_updated: Promotionable could not be updated. %{error}
           status_could_not_be_updated: 'Status could not be updated. Reason: %{error}'
         messages:
           product_cost_currency_updated_successfully: Product cost currency updated successfully

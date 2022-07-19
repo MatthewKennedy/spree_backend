@@ -2,16 +2,17 @@ base_locale: en
 data:
   yaml:
     write:
-      # do not wrap lines at 80 characters
       line_width: -1
 
-# Find translate calls
 search:
   paths:
     - 'app'
     - 'lib'
 
-## Do not consider these keys missing:
+  exclude:
+    - 'app/assets/*'
+    - 'app/javascript/*'
+
 ignore_missing:
   - 'activerecord*'
   - 'aria*'
@@ -20,6 +21,5 @@ ignore_missing:
   - 'views*'
 
 ignore_unused:
-  - 'spree.admin.webhooks_subscribers*'
-  - 'spree.admin.product*'
   - 'spree.admin.tab*'
+  - 'spree.admin.product*'
