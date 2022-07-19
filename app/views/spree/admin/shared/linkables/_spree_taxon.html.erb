@@ -6,7 +6,7 @@
  <% end %>
 
  <%= f.field_container :linked_resource_field do %>
-   <%= f.label :linked_resource_id, I18n.t('spree.dash.taxon') %>
+   <%= f.label :linked_resource_id, I18n.t('spree.dash.navigation.taxon') %>
    <%= f.select :linked_resource_id,
         options_from_collection_for_select(resource_holder || [],
                                            id_holder, name_holder, active_id_holder || nil),

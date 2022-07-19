@@ -5,13 +5,13 @@
    <% active_id_holder = resource.linked_resource.id %>
  <% end %>
  <%= f.field_container :linked_resource_id do %>
-    <%= f.label :linked_resource_id, I18n.t('spree.dash.page') %>
+    <%= f.label :linked_resource_id, I18n.t('spree.dash.navigation.page') %>
     <%= f.select :linked_resource_id,
          options_from_collection_for_select(resorce_holder || [],
                                             id_holder, name_holder, active_id_holder || nil),
          { include_blank: true },
          class: 'select2autocomplete',
-         data: { autocomplete_placeholder_value: I18n.t('spree.dash.linkable.search_for_a_page'),
+         data: { autocomplete_placeholder_value: I18n.t('spree.dash.navigation.search_for_a_page'),
                  autocomplete_clear_value: true,
                  autocomplete_url_value: 'pages_api_v2',
                  autocomplete_return_attr_value: 'title',

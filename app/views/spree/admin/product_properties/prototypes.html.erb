@@ -49,8 +49,8 @@
 <% end %>
 
 <% content_for :modal_footer do %>
-  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('spree.dash.cancel') %></button>
-  <%= button_tag(I18n.t('spree.dash.save'), class: "btn btn-primary", form: "newProductProperty") %>
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('spree.dash.actions.cancel') %></button>
+  <%= button_tag(I18n.t('spree.dash.actions.save'), class: "btn btn-primary", form: "newProductProperty") %>
 <% end %>
 
 <%= render partial: 'spree/admin/shared/modal' %>

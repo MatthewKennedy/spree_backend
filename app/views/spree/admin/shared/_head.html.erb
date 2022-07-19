@@ -8,7 +8,7 @@
   <% if content_for? :title %>
     <%= yield :title %>
   <% else %>
-    <%= "Spree #{I18n.t('spree.administration')}: " %>
+    <%= "#{I18n.t('spree.dash.spree_administration')}: " %>
     <%= Spree.t(controller.controller_name, default: controller.controller_name.titleize) %>
   <% end %>
 </title>

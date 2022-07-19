@@ -51,7 +51,7 @@
             <% unless %w[new create].include? controller.action_name %>
               <div class="col-12 mt-3">
                 <div id="updatePageType" data-page-type="<%= @cms_page.type %>" class="alert alert-info d-none">
-                  <% button_type = I18n.t('spree.dash.update') %>
+                  <% button_type = I18n.t('spree.dash.actions.update') %>
                   <%= raw I18n.t('spree.dash.cms.click_button_to_change_page_type', button_type: button_type) %>
                 </div>
               </div>

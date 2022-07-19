@@ -1,7 +1,6 @@
 ---
 en:
   spree:
-    administration: Administration
     dash:
       actions:
         cancel: Cancel
@@ -17,7 +16,6 @@ en:
         street: Street
       amount: Amount
       are_you_sure: Are you sure
-      cancel: Cancel
       cms:
         add_new_page: Add New Page
         add_new_section: Add New Section
@@ -100,8 +98,6 @@ en:
       kind: Kind
       language: Language
       limit_usage_to: Limit usage to
-      linkable:
-        search_for_a_page: Search for a page
       location: Location
       make_sure_the_above_reimbursement_amount_is_correct: Make sure the above reimbursement amount is correct
       match_choices:
@@ -133,12 +129,16 @@ en:
         new_menu_item: New Menu Item
         no_menu_items: "<b>%{menu}</b> has no items. Click the <b>Add New Item</b> button to begin adding links to this menu."
         open_link_in_new_window: Open this link in a new window
+        page: Page
+        product: Product
         public_details: Public Details
+        search_for_a_page: Search for a page
         search_for_a_product: Search for a Product
         search_for_a_taxon: Search for a Taxon
         set_a_code: Adding a code is optional but can be useful if you need to identify this menu item. When building the Spree main menu use the code <b>category</b> or <b>promo</b> to create the containers that organize links and promotions appropriately. To learn more view the documentation by <a href='https://guides.spreecommerce.org/user/navigation/add_menu_items.html' target='_blank' class='alert-link'>clicking here</a>.
         settings: Settings
         subtitle: Subtitle
+        taxon: Taxon
         this_link_takes_you_to_your_stores_home_page: This link takes you to your stores home page.
         type: Type
         url_info: The URL field can link to an external website using <b>https://example.com</b>, link to an otherwise unreachable internal path using <b>/policies/privacy</b>, launch an email client using <b>mailto:sales@example.com</b> or used to create a clickable phone number with <b>tel:123456789</b>
@@ -188,11 +188,9 @@ en:
         unfulfilled: Unfulfilled
         unpaid: Unpaid
       organization: Organization
-      page: Page
       payments:
         gateway:
           cvc: CVC
-      product: Product
       product_kinds:
         digital: Digital
         physical: Physical
@@ -233,7 +231,6 @@ en:
       risk: Risk
       risky: Risky
       safe: Safe
-      save: Save
       search: Search
       seo: Seo
       settings: Settings
@@ -241,6 +238,7 @@ en:
       sku: Sku
       slug: Slug
       specifications: Specifications
+      spree_administration: Spree administration
       starting_from: Starting from
       status: Status
       stock_transfer:
@@ -321,7 +319,6 @@ en:
         taxonomies: Taxonomies
       this_order_has_already_received_a_refund: This order has already received a refund
       time: Time
-      update: Update
       url: URL
       user:
         available_store_credit: User has %{amount} in Store Credit available.
