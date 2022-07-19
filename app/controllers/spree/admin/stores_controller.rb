@@ -53,6 +53,10 @@ module Spree
 
       private
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def load_store
         @store = stores_scope.find_by(id: params[:id]) || stores_scope.new
       end

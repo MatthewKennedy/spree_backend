@@ -45,7 +45,15 @@
                               # Substitute - for _ converting zh-tw to zh_tw
                               # Flatpickr not making things easy here.
     flatpickr_locale:         "#{flatpickr_local_fallback.sub("-", "_")}"
-
-  }.to_json
-%>
+  }.to_json %>
 </script>
+
+<%
+  # Add dynamic translations used for I18n tasks
+  #
+  # i18n-tasks-use I18n.t('spree.dash.payment_states.paid')
+  # i18n-tasks-use I18n.t('spree.dash.payment_states.balance_due')
+  # i18n-tasks-use I18n.t('spree.dash.shipment_states.shipped')
+  # i18n-tasks-use I18n.t('spree.dash.shipment_states.pending')
+  # i18n-tasks-use I18n.t('spree.dash.shipment_states.ready')
+%>

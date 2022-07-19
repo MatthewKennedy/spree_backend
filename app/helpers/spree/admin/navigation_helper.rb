@@ -19,8 +19,20 @@ module Spree
       ICON_SIZE = 16
       MENU_ICON_SIZE = 18
 
-      def active_panel?(controller_names)
-        controller_names.include?(controller.controller_name.to_sym)
+      def accounts_menu_active?
+        @menu_panel_kind == 'account'
+      end
+
+      def main_menu_active?
+        @menu_panel_kind == 'main'
+      end
+
+      def settings_menu_active?
+        @menu_panel_kind == 'settings'
+      end
+
+      def store_switcher_menu_active?
+        @menu_panel_kind == 'store_switcher'
       end
 
       def tab(*args)
@@ -37,7 +49,8 @@ module Spree
         titleized_label = if options[:do_not_titleize] == true
           options[:label]
         else
-          I18n.t(options[:label], default: options[:label], scope: [:spree, :admin, :tab]).titleize
+          # i18n-tasks-use I18n.t('spree.dash.tab.applications')
+          I18n.t(options[:label], default: options[:label], scope: [:spree, :dash, :tab]).titleize
         end
 
         css_classes = ["sidebar-menu-item d-block w-100 position-relative"]
@@ -71,9 +84,10 @@ module Spree
         end
 
         css_classes << "selected" if selected
+        controller_name = "menu" if selected
 
         css_classes << options[:css_class] if options[:css_class]
-        content_tag("li", link, class: css_classes.join(" "))
+        content_tag("li", link, class: css_classes.join(" "), data: { controller: controller_name } )
       end
 
       # Single main menu item
@@ -236,18 +250,6 @@ module Spree
           end
 
           link_to(text.html_safe, url, html_options.except(:icon))
-        end
-      end
-
-      def configurations_sidebar_menu_item(link_text, url, options = {})
-        options[:is_selected] ||= url.ends_with?(controller.controller_name) ||
-          url.ends_with?("#{controller.controller_name}/edit") ||
-          url.ends_with?("#{controller.controller_name.singularize}/edit")
-
-        options[:class] = "sidebar-menu-item d-block w-100"
-        options[:class] << " selected font-weight-bold" if options[:is_selected]
-        content_tag(:li, options) do
-          link_to(link_text, url, class: "#{"text-muted" unless options[:is_selected]} sidebar-submenu-item w-100 py-2 py-md-1 ps-5 d-block")
         end
       end
 

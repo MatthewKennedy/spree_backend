@@ -51,6 +51,10 @@ module Spree
 
       private
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def scope
         current_store.payment_methods.accessible_by(current_ability, :index)
       end

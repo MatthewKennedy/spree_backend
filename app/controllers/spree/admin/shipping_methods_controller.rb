@@ -18,6 +18,10 @@ module Spree
 
       private
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def set_shipping_category
         return true if params["shipping_method"][:shipping_categories].blank?
 

@@ -22,6 +22,10 @@ module Spree
 
       private
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def resource
         @resource ||= Spree::Admin::Resource.new "spree/admin/webhooks/subscribers", "subscribers", nil
       end

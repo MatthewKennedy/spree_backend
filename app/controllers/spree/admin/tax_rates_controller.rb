@@ -5,6 +5,10 @@ module Spree
 
       private
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def load_data
         @available_zones = Zone.order(:name)
         @available_categories = TaxCategory.order(:name)

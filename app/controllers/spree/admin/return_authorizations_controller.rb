@@ -15,6 +15,10 @@ module Spree
 
       private
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def load_form_data
         load_return_items
         load_reimbursement_types

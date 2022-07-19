@@ -15,6 +15,7 @@ en:
         state_territory: State / Territory
         street: Street
       amount: Amount
+      apis: API's
       are_you_sure: Are you sure
       cms:
         add_new_page: Add New Page
@@ -66,6 +67,8 @@ en:
       count_on_hand: Count on hand
       country_rule:
         label: Label
+      create_platform_application: Create platform application
+      create_webhook_subscriber: Create webhook subscriber
       created_at: Created At
       customer_details_updated: Customer details updated
       dashboard: Dashboard
@@ -86,6 +89,7 @@ en:
         back_end: Admin Panel
         both: All
         front_end: Storefront
+      download_sdk: Download SDK
       edit: Edit
       ends_at: Ends at
       errors:
@@ -94,9 +98,9 @@ en:
           cannot_remove_icon: Cannot remove icon
       execution_time: Execution Time
       filters: Filters
-      home: Home
       kind: Kind
       language: Language
+      learn_more: Learn more
       limit_usage_to: Limit usage to
       location: Location
       make_sure_the_above_reimbursement_amount_is_correct: Make sure the above reimbursement amount is correct
@@ -159,7 +163,7 @@ en:
         new: New oAuth application
         scopes: Scopes
         uid: UID
-      option_type_filterable_info: Option type filterable info
+      option_type_filterable_info: When an option type is filterable, your storefront visitors are presented with the option to filter a collection of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront taxons that contain products with this option type set.
       order:
         add: Add
         add_a_shipment_to_this_order_to_begin_adding_items: Add a new shipping location to this order, and then add products to the shipment. Ideally, choose the location nearest the delivery address for faster and cheaper delivery.
@@ -188,9 +192,13 @@ en:
         unfulfilled: Unfulfilled
         unpaid: Unpaid
       organization: Organization
+      payment_states:
+        balance_due: Balance due
+        paid: Paid
       payments:
         gateway:
           cvc: CVC
+      platform_api: Platform API
       product_kinds:
         digital: Digital
         physical: Physical
@@ -222,6 +230,9 @@ en:
         select_from_prototype: Select from prototype
       promotion_cloned: Promotion cloned
       promotion_not_cloned: Promotion not cloned
+      promotions:
+        organizations: Organizations
+        promotions: Promotions
       quantity: Quantity
       receive_stock: Receive stock
       reports:
@@ -234,6 +245,24 @@ en:
       search: Search
       seo: Seo
       settings: Settings
+      settings_menu:
+        countries: Countries
+        refund_reasons: Refund reasons
+        reimbursement_types: Reimbursement types
+        return_reasons: Return reasons
+        roles: Roles
+        shipping_categories: Shipping categories
+        shipping_methods: Shipping methods
+        states: States
+        store_credit_categories: Store credit categories
+        stores: Stores
+        tax_categories: Tax categories
+        tax_rates: Tax rates
+        zones: Zones
+      shipment_states:
+        pending: Pending
+        ready: Ready
+        shipped: Shipped
       shipments: Shipments
       sku: Sku
       slug: Slug
@@ -282,29 +311,23 @@ en:
         new_order_notifications_email_help: If you want to receive an email notification every time someone places an Order please provide an email address for that notification to be sent to
         seo_robots: Please check <a href='https://developers.google.com/search/reference/robots_meta_tag' target='_blank'>this page for more help</a>
         social_help: If you want to link to your social accounts in the footer part of your website please fill below fields
+      storefront_api: Storefront API
       successful: Successful
       tab:
         applications: Applications
         apps: Apps
-        configuration: Configuration
         content: Content
         customer_returns: Customer Returns
+        dashboard: Dashboard
+        home: Home
         integrations: Integrations
+        logout: Logout
         navigation: Navigation
-        option_types: Option Types
         orders: Orders
-        overview: Overview
         pages: Pages
         products: Products
-        promotion_categories: Promotion Categories
-        promotions: Promotions
-        properties: Properties
-        prototypes: Prototypes
-        reports: Reports
-        return_authorizations: Return Authorizations
-        taxonomies: Taxonomies
-        taxons: Taxons
-        users: Users
+        returns: Returns
+        stock: Stock
       tax_and_shipping: Tax and shipping
       taxon:
         nested_under_info: Nest this Taxon within the Taxonomy tree.
@@ -330,6 +353,7 @@ en:
         preview: Preview %{name}
       variant: Variant
       variant_prices_search_placeholder: Variant prices search placeholder
+      webhooks: Webhooks
       webhooks_subscribers:
         addresses: Addresses
         all_events: All Events
@@ -372,6 +396,7 @@ en:
         store_credits: Store Credits
         stores: Stores
         subscribe_to_all_events: Subscribe to all events
+        subscribers: Webhooks Subscribers
         subscriptions: Subscriptions
         tax_rates: Tax Rates
         taxonomies: Taxonomies
@@ -379,7 +404,6 @@ en:
         time_of_last_event: Time of Last Event
         variants: Variants
         webhooks_events: Webhooks Events
-        webhooks_subscribers: Webhooks Subscribers
         wished_items: Wished Items
         wishlists: Wishlists
         zones: Zones

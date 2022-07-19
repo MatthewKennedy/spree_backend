@@ -16,8 +16,7 @@ module Spree
       helper "spree/currency"
       layout "spree/layouts/admin"
 
-      before_action :authorize_admin
-      before_action :load_stores
+      before_action :authorize_admin, :load_stores, :load_main_menu_panel
 
       helper_method :admin_oauth_token
 
@@ -77,8 +76,8 @@ module Spree
         @stores = stores_scope.order(default: :desc)
       end
 
-      def menu_panel
-        @menu_panel = "main"
+      def load_main_menu_panel
+        @menu_panel_kind = "main"
       end
 
       def can_not_transition_without_customer_info

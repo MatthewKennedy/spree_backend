@@ -26,7 +26,10 @@ module Spree
 
       def set_viewable
         @image.viewable_type = "Spree::Variant"
-        @image.viewable_id = params[:image][:viewable_id]
+
+        if params[:image][:viewable_id].present?
+          @image.viewable_id = params[:image][:viewable_id]
+        end
       end
 
       def load_product

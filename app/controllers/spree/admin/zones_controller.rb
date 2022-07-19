@@ -21,6 +21,12 @@ module Spree
         @states = State.order(:name)
         @zones = Zone.order(:name)
       end
+
+      private
+
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
     end
   end
 end

@@ -19,6 +19,3 @@ ignore_missing:
   - 'date*'
   - 'number*'
   - 'views*'
-
-ignore_unused:
-  - 'spree.dash.tab*'

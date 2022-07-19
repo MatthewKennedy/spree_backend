@@ -20,7 +20,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
   def edit
     respond_with(@object) do |format|
-      format.turbo_stream
       format.html { render layout: !request.xhr? }
       format.js { render layout: false } if request.xhr?
     end
@@ -32,7 +31,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
       set_current_store
       invoke_callbacks(:update, :after)
       respond_with(@object) do |format|
-        format.turbo_stream
         format.html do
           flash[:success] = flash_message_for(@object, :successfully_updated)
           redirect_to location_after_save unless request.xhr?
@@ -55,7 +53,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
       invoke_callbacks(:create, :after)
       flash[:success] = flash_message_for(@object, :successfully_created)
       respond_with(@object) do |format|
-        format.turbo_stream
         format.html { redirect_to location_after_save }
         format.js { render layout: false }
       end

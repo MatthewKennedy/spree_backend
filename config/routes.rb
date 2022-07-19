@@ -39,12 +39,8 @@ Spree::Core::Engine.add_routes do
 
     # Options
     resources :option_types do
-      collection do
-        post :update_positions
-        post :update_values_positions
-      end
+      resources :option_values, except: :index
     end
-    delete "/option_values/:id", to: "option_values#destroy", as: :option_value
 
     # Orders
     resources :orders, except: [:show] do
@@ -90,11 +86,7 @@ Spree::Core::Engine.add_routes do
     end
 
     # Payment Methods
-    resources :payment_methods do
-      collection do
-        post :update_positions
-      end
-    end
+    resources :payment_methods
 
     # Products
     resources :products do
@@ -212,9 +204,6 @@ Spree::Core::Engine.add_routes do
 
     # Taxonomies / Taxons
     resources :taxonomies do
-      collection do
-        post :update_positions
-      end
       resources :taxons do
         member do
           delete :remove_icon

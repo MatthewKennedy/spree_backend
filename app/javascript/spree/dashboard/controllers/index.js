@@ -8,6 +8,7 @@ import Sortable from 'stimulus-sortable'
 import SortableTreeController from './sortable_tree_controller'
 import ClipboardController from './clipboard_controller'
 import DatePickerController from './datepicker_controller'
+import MenuController from './menu_controller'
 import NumberIncrementController from './number_increment_controller'
 import FormValidationController from './form_validation_controller'
 
@@ -33,6 +34,7 @@ window.Stimulus = Application.start()
 
 Stimulus.register('sortable', Sortable)
 Stimulus.register('sortable-tree', SortableTreeController)
+Stimulus.register('menu', MenuController)
 Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('datepicker', DatePickerController)
 Stimulus.register('number-increment', NumberIncrementController)

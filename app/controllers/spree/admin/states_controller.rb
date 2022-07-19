@@ -13,6 +13,10 @@ module Spree
 
       protected
 
+      def load_main_menu_panel
+        @menu_panel_kind = "settings"
+      end
+
       def location_after_save
         admin_country_states_url(@country)
       end
