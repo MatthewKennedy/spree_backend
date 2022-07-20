@@ -79,3 +79,12 @@ input::-webkit-contacts-auto-fill-button {
   }
 }
 
+.form-select .ts-control {
+  padding-top: 25px !important;
+}
+
+
+
+.ts-wrapper.form-select.disabled .ts-control {
+  background: #e9ecef !important;
+}

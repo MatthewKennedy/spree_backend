@@ -78,6 +78,7 @@ en:
       default: Default
       default_country: Default country
       delete: Delete
+      description: Description
       details: Details
       digitals:
         add_new_file: Add a new digital asset.
@@ -110,6 +111,9 @@ en:
       match_choices:
         all: All
         none: None
+      meta_description: Meta description
+      meta_keywords: Meta keywords
+      meta_title: Meta title
       name: Name
       navigation:
         add_new_item: Add New Item
@@ -167,6 +171,7 @@ en:
         scopes: Scopes
         uid: UID
       option_type_filterable_info: When an option type is filterable, your storefront visitors are presented with the option to filter a collection of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront taxons that contain products with this option type set.
+      option_types: Option types
       options:
         add_option_value: Add option value
         values:
@@ -242,6 +247,7 @@ en:
       promotions:
         organizations: Organizations
         promotions: Promotions
+      properties: Properties
       quantity: Quantity
       receive_stock: Receive stock
       reports:
@@ -252,7 +258,7 @@ en:
       risky: Risky
       safe: Safe
       search: Search
-      seo: Seo
+      seo: SEO
       settings: Settings
       settings_menu:
         countries: Countries
@@ -338,8 +344,6 @@ en:
         returns: Returns
         stock: Stock
       tax_and_shipping: Tax and shipping
-      taxon:
-        nested_under_info: Nest this Taxon within the Taxonomy tree.
       taxon_rule:
         choose_taxons: Choose taxons
         label: Label
@@ -350,9 +354,13 @@ en:
         submenu: Submenu
         taxonomies: Taxonomies
       taxons:
+        hide_from_sub_navigation: Hide from sub navigation
         messages:
           product_removed: Product removed
-        use_the_search_box_above_to_search_for_taxons: Use the search box above to search for taxons
+        nested_under_info: Nest this Taxon within the Taxonomy tree.
+        permalink: Permalink
+        taxons: Taxons
+        use_the_search_box_above_to_search_for_taxons: Use the search box above to search for a Taxon.
       this_order_has_already_received_a_refund: This order has already received a refund
       time: Time
       url: URL

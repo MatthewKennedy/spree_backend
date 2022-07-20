@@ -82,9 +82,9 @@ module Spree
       end
 
       def remove_from_taxon
-        taxon = Taxon.find(params[:product][:taxon_id])
+        @taxon = Taxon.find(params[:product][:taxon_id])
 
-        if @object.taxons.delete(taxon)
+        if @object.taxons.delete(@taxon)
           respond_to do |format|
             format.turbo_stream { render "spree/admin/taxons/remove_from_taxon" }
           end

@@ -10,7 +10,11 @@ module Spree
       end
 
       def products_panel
-        @taxon = Taxon.find(params[:taxon_id])
+        if params[:taxon_id].blank?
+          head :no_content
+        else
+          @taxon = Taxon.find(params[:taxon_id])
+        end
       end
 
       def update

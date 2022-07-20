@@ -4,29 +4,28 @@
 
 <div class="taxon-products-view card">
     <div class="card-body">
-      <div id="taxonSearch" class="form-group mb-0">
-        <%= form_with url: spree.products_panel_admin_taxons_path, method: :post, data: { controller: "form-validation", turbo_frame: :taxons } do |f| %>
+      <%= form_with url: spree.products_panel_admin_taxons_path, method: :post, data: { controller: "form-validation", turbo_frame: :taxons } do |f| %>
+        <%= field_container :taxon_ids, nil, class: ['form-floating', 'mb-0'] do %>
           <%= f.select :taxon_id, [], { include_hidden: false },
                                         multiple: false,
+                                        class:'form-select',
                                         data: { action: 'change->form-validation#validate',
                                                 controller: 'ts--search',
                                                 ts__search_uri_value: '/api/v2/platform/taxons',
                                                 ts__search_val_value: 'id',
+                                                ts__search_plugins_value: ['clear_button'],
                                                 ts__search_txt_value: 'pretty_name',
                                                 ts__search_fields_value: ['pretty_name'],
                                                 ts__search_ransack_value: ['pretty_name_i_cont']
                                                } %>
 
           <%= f.submit I18n.t('spree.dash.order.products'), class: 'btn btn-secondary', data: { form_validation_target: "submitBtn" } %>
+          <%= f.label :taxon_ids, I18n.t('spree.dash.taxons.taxons') %>
         <% end %>
-    </div>
-  </div>
+      <% end %>
 
-  <div class="card-body">
-    <%= turbo_frame_tag :taxons do %>
-      <div class="alert alert-info text-center" role="alert">
-        <span><%= I18n.t('spree.dash.taxons.use_the_search_box_above_to_search_for_taxons') %></span>
-      </div>
-    <% end %>
+      <%= turbo_frame_tag :taxons do %>
+        <%= render 'instructions' %>
+      <% end %>
   </div>
 </div>

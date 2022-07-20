@@ -1,96 +1,88 @@
 <div data-hook="admin_inside_taxon_form">
   <div class="row">
     <div class="col-12 col-md-8">
-      <%= f.field_container :name do %>
-        <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
-        <%= text_field :taxon, :name, class: 'form-control', required: true %>
-        <%= f.error_message_on :name, class: 'error-message' %>
-      <% end %>
+      <div class="card">
+        <div class="card-header">
+           <h5 class="card-title"><%= I18n.t('spree.dash.details') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.field_container :name, class: ['form-floating'] do %>
+            <%= text_field :taxon, :name, class: 'form-control', required: true, placeholder: raw(I18n.t('spree.dash.name') + required_span_tag) %>
+            <%= f.label :name, raw(I18n.t('spree.dash.name') + required_span_tag) %>
+          <% end %>
+
+          <% unless @taxon.new_record? %>
+            <%= f.field_container :permalink, class: ['form-floating'] do %>
+              <%= text_field_tag :permalink_part, @permalink_part, class: 'form-control', placeholder: raw(I18n.t('spree.dash.taxons.permalink') + required_span_tag), required: true, autocomplete: false %>
+              <%= f.label :permalink, raw(I18n.t('spree.dash.taxons.permalink') + required_span_tag) %>
+              <small class="form-text text-muted">
+                <%= [Spree::Config[:storefront_taxons_path] , @parent_permalink].join('/') + @permalink_part %>
+              </small>
+            <% end %>
+          <% end %>
+
+          <%= f.field_container :description, class: ['form-floating'] do %>
+            <%= f.text_area :description, class: "form-control", data: { controller: "#{'rte' if product_wysiwyg_editor_enabled?}" }, rows: 14, placeholder: I18n.t('spree.dash.description') %>
+            <%= f.label :description, I18n.t('spree.dash.description') %>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <div class="col-12 col-md-4">
-      <%= f.field_container :hide_from_nav, class: ['custom-control', 'custom-checkbox', 'my-4'] do %>
-        <%= f.check_box :hide_from_nav, class: 'custom-control-input' %>
-        <%= f.label :hide_from_nav, Spree.t(:hide_from_subcategories_nav), class: 'custom-control-label' %>
-        <%= f.error_message_on :hide_from_nav %>
-      <% end %>
-    </div>
+      <div class="card">
+        <div class="card-header">
+           <h5 class="card-title"><%= I18n.t('spree.dash.settings') %></h5>
+        </div>
+        <div class="card-body">
+          <%= f.field_container :hide_from_nav, class: ['form-check'] do %>
+            <%= f.check_box :hide_from_nav, class: 'form-check-input' %>
+            <%= f.label :hide_from_nav, I18n.t('spree.dash.taxons.hide_from_sub_navigation'), class: 'form-check-label' %>
+          <% end %>
 
-    <div class="col-12 col-md-8">
-      <% unless @taxon.new_record? %>
-        <%= f.field_container :permalink do %>
-          <%= label_tag :permalink_part, raw(Spree.t(:permalink) + required_span_tag) %>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <%= [Spree::Config[:storefront_taxons_path] , @parent_permalink].join('/') %>
-              </span>
+          <% if @taxon.new_record? %>
+            <% disabled = false %>
+          <% else %>
+            <% disabled = @taxon.root? %>
+          <% end %>
+
+          <%= f.field_container :parent_id do %>
+            <div class="form-floating">
+              <%= f.select :parent_id, nested_set_options(@taxonomy.taxons, @taxon) {|i| "#{'-' * i.level} #{i.name}" }, { include_blank: false }, { class: 'form-select', data: {controller: 'ts--select'}, disabled: disabled  } %>
+              <%= f.label :parent_id, I18n.t('spree.dash.navigation.nested_under') %>
             </div>
-            <%= text_field_tag :permalink_part, @permalink_part, class: 'form-control', required: true %>
+            <small class="form-text text-muted">
+              <%= I18n.t('spree.dash.taxons.nested_under_info') %>
+            </small>
+          <% end %>
+
+          <%= render 'assets_form', f: f %>
+        </div>
+      </div>
+
+      <% unless @taxon.new_record? %>
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title"><%= I18n.t('spree.dash.seo') %></h5>
           </div>
-        <% end %>
-      <% end %>
-    </div>
+          <div class="card-body">
+            <%= f.field_container :meta_title, class: ['form-floating'] do %>
+              <%= f.text_field :meta_title, class: 'form-control', placeholder: I18n.t('spree.dash.meta_title') %>
+              <%= f.label :meta_title, I18n.t('spree.dash.meta_title') %>
+            <% end %>
 
-    <div class="col-12 col-md-4">
-      <% if @taxon.new_record? %>
-        <% disabled = false %>
-      <% else %>
-        <% disabled = @taxon.root? %>
-      <% end %>
-      <%= f.field_container :parent_id do %>
-        <%= f.label :parent_id, I18n.t('spree.dash.navigation.nested_under') %>
-        <%= f.select :parent_id, nested_set_options(@taxonomy.taxons, @taxon) {|i| "#{'-' * i.level} #{i.name}" }, { include_blank: false }, { data: {controller: 'ts--select'}, disabled: disabled  } %>
-        <%= f.error_message_on :parent_id %>
-        <small class="form-text text-muted">
-          <%= I18n.t('spree.dash.taxon.nested_under_info') %>
-        </small>
-      <% end %>
-    </div>
-  </div>
-<% unless @taxon.new_record? %>
-  <div class="row">
-    <div class="col-12">
-      <hr>
-    </div>
-  </div>
+            <%= f.field_container :meta_description, class: ['form-floating'] do %>
+              <%= f.text_area :meta_description, class: 'form-control', style: 'height: 150px', placeholder: I18n.t('spree.dash.meta_description') %>
+              <%= f.label :meta_description, I18n.t('spree.dash.meta_description') %>
+            <% end %>
 
-  <div class="row">
-    <div class="col-12 col-md-8">
-      <%= f.field_container :description do %>
-        <%= f.label :description, Spree.t(:description) %>
-        <%= f.text_area :description, class: "form-control #{'spree-rte' if taxon_wysiwyg_editor_enabled? }", rows: 14 %>
-      <% end %>
-    </div>
-
-    <div class="col-12 col-md-4">
-      <%= render 'assets_form', f: f %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <hr>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <%= f.field_container :meta_title do %>
-        <%= f.label :meta_title, Spree.t(:meta_title) %>
-        <%= f.text_field :meta_title, class: 'form-control', rows: 6 %>
-      <% end %>
-
-      <%= f.field_container :meta_description do %>
-        <%= f.label :meta_description, Spree.t(:meta_description) %>
-        <%= f.text_area :meta_description, class: 'form-control', rows: 6 %>
-      <% end %>
-
-      <%= f.field_container :meta_keywords do %>
-        <%= f.label :meta_keywords, Spree.t(:meta_keywords) %>
-        <%= f.text_field :meta_keywords, class: 'form-control', rows: 6 %>
+            <%= f.field_container :meta_keywords, class: ['form-floating'] do %>
+              <%= f.text_field :meta_keywords, class: 'form-control', placeholder: I18n.t('spree.dash.meta_keywords') %>
+              <%= f.label :meta_keywords, I18n.t('spree.dash.meta_keywords') %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
-<% end %>
 </div>
