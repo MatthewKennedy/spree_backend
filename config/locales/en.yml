@@ -347,6 +347,8 @@ en:
         no_taxons: "<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons."
         submenu: Submenu
         taxonomies: Taxonomies
+      taxons:
+        use_the_search_box_above_to_search_for_taxons: Use the search box above to search for taxons
       this_order_has_already_received_a_refund: This order has already received a refund
       time: Time
       url: URL

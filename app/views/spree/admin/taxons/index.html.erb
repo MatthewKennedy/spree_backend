@@ -2,12 +2,31 @@
   <%= Spree.t(:taxons) %>
 <% end %>
 
-<div class="taxon-products-view">
-  <div id="taxonSearch" class="form-group">
-    <%= select_tag :taxon_id, nil, class: 'd-block w-100' %>
+<div class="taxon-products-view card">
+    <div class="card-body">
+      <div id="taxonSearch" class="form-group mb-0">
+        <%= form_with url: spree.admin_taxon_modal_path, method: :post, data: { controller: "form-validation", turbo_frame: :taxons } do |f| %>
+          <%= f.select :taxon_id, [], { include_hidden: true },
+                                        multiple: false,
+                                        data: { action: 'change->form-validation#validate',
+                                                controller: 'ts--search',
+                                                ts__search_uri_value: '/api/v2/platform/taxons',
+                                                ts__search_val_value: 'id',
+                                                ts__search_txt_value: 'pretty_name',
+                                                ts__search_fields_value: ['pretty_name'],
+                                                ts__search_ransack_value: ['pretty_name_i_cont']
+                                               } %>
+
+          <%= f.submit I18n.t('spree.dash.order.products'), class: 'btn btn-secondary', data: { form_validation_target: "submitBtn" } %>
+        <% end %>
+    </div>
   </div>
 
-  <ul id="taxon_products" class="taxon row"></ul>
-
-  <%= render partial: "spree/admin/products/autocomplete", formats: :js %>
+  <div class="card-body">
+    <%= turbo_frame_tag :taxons do %>
+      <div class="alert alert-info text-center" role="alert">
+        <span><%= I18n.t('spree.dash.taxons.use_the_search_box_above_to_search_for_taxons') %></span>
+      </div>
+    <% end %>
+  </div>
 </div>

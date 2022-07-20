@@ -161,7 +161,6 @@
       <%= button_link_to I18n.t('spree.dash.order.resend_shipping_confirmation_email'), resend_admin_order_url(@order), method: :post, icon: 'envelope.svg', class: 'btn-secondary' %>
     <% end %>
 
-
     <% if @order.special_instructions.present? %>
       <div class='special_instructions'>
         <strong><%= Spree.t(:special_instructions) %>:&nbsp;</strong><%= @order.special_instructions %>

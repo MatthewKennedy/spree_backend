@@ -211,6 +211,7 @@ Spree::Core::Engine.add_routes do
       end
     end
     resources :taxons, only: [:index, :show]
+    post "/taxon_modal", to: "taxons#modal", as: :taxon_modal
 
     # Users
     resources :users do

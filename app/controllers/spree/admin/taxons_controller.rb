@@ -9,6 +9,10 @@ module Spree
       def index
       end
 
+      def modal
+        @taxon = Taxon.find(params[:taxon_id])
+      end
+
       def update
         successful = @taxon.transaction do
           parent_id = params[:taxon][:parent_id]

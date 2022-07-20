@@ -19,7 +19,7 @@
                                                       ts__search_variant_include_value: 'images,stock_items.stock_location' } %>
 
             <%= label_tag :variant_id, I18n.t('spree.dash.order.products'), class: 'form-label' %>
-            <%= hidden_field nil, 'line_item[quantity]', value: "1"  %>
+            <%= hidden_field nil, 'line_item[quantity]', value: "1" %>
           </div>
           <%= f.submit I18n.t('spree.dash.order.products'), class: 'btn btn-secondary', data: { form_validation_target: "submitBtn" } %>
         <% end %>
