@@ -16,11 +16,16 @@
   <div class="col-12 col-md-6">
     <%= f.field_container :filterable, class: ['form-switch', 'mb-0'] do %>
       <%= f.check_box :filterable, class: 'form-check-input' %>
-      <%= f.label :filterable, Spree.t(:filterable) %> <span>I</span>
+      <%= f.label :filterable, Spree.t(:filterable), class: 'form-check-label' %>
+      <a data-bs-toggle="collapse" href="#optionTypeFilterInformation" role="button" aria-expanded="false" aria-controls="collapseExample" class="align-self-center">
+        <%= svg_icon name: "info-circle.svg", width: '14', height: '14', classes: 'ms-1 shim-bottom' %>
+      </a>
     <% end %>
 
-    <small class="form-text text-muted">
-      <%= raw I18n.t('spree.dash.option_type_filterable_info') %>
-    </small>
+    <div class="collapse" id="optionTypeFilterInformation">
+      <small class="form-text text-muted">
+        <%= raw I18n.t('spree.dash.option_type_filterable_info') %>
+      </small>
+    </div>
   </div>
 </div>

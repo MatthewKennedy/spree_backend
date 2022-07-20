@@ -3,31 +3,30 @@
   <%= @option_type.name %>
 <% end %>
 
-<% content_for :page_actions do %>
-  <span id="new_add_option_value" data-hook>
-    <%= button_link_to Spree.t(:add_option_value), "javascript:;", { icon: 'plus-square.svg', :'data-target' => "tbody#sortVert", class: 'btn-success  spree_add_fields' } %>
-  </span>
-<% end %>
-
 <%= form_for [:admin, @option_type] do |f| %>
   <div class="card mb-3">
     <div class="card-body">
       <%= render 'form', f: f %>
     </div>
-    <div class="card-body">
+
+    <div class="card-header text-end">
+      <span id="new_add_option_value" data-hook>
+        <%= button_link_to I18n.t('spree.dash.options.add_option_value'), spree.new_admin_option_type_option_value_path(@option_type), { icon: 'plus-square.svg', class: 'btn-sm btn-secondary', data: { turbo_frame: :modal } } %>
+      </span>
+    </div>
+    <div class="card-body pt-0">
       <% if @option_type.option_values.any? %>
         <div class="table-responsive border rounded bg-white">
-          <table class="table table-condensed sortable">
+          <table class="table">
             <thead data-hook="option_header">
               <tr>
-                <th colspan="2"><%= raw(Spree.t(:name) + required_span_tag) %></th>
-                <th><%= raw(Spree.t(:display) + required_span_tag) %></th>
+                <th></th>
+                <th><%= raw(I18n.t('spree.dash.name') + required_span_tag) %></th>
+                <th><%= raw(I18n.t('spree.dash.display') + required_span_tag) %></th>
                 <th class="actions"></th>
               </tr>
             </thead>
-            <tbody data-controller="sortable"
-                   data-sortable-handle-value=".handle"
-                   data-sortable-resource-name-value="option_value">
+            <tbody data-controller="sortable" data-sortable-resource-name-value="option_value">
               <%= f.fields_for :option_values do |option_value_form| %>
                 <%= render partial: 'option_value_fields', locals: { f: option_value_form } %>
               <% end %>
@@ -36,7 +35,7 @@
         </div>
       <% else %>
         <div class="alert alert-info text-center" role="alert">
-          <span>No values, click add option value to add.</span>
+          <span><%= I18n.t('spree.dash.options.values.this_option_type_has_no_values_click_the_add_option_value_button_to_create_a_new_value') %></span>
         </div>
       <% end %>
     </div>

@@ -24,9 +24,7 @@
               <th class="actions"></th>
             </tr>
           </thead>
-          <tbody data-controller="sortable"
-                 data-sortable-handle-value=".handle"
-                 data-sortable-resource-name-value="product_property">
+          <tbody data-controller="sortable" data-sortable-resource-name-value="product_property">
             <%= f.fields_for :product_properties do |pp_form| %>
               <%= render 'product_property_fields', f: pp_form if pp_form.object.persisted? %>
             <% end %>

@@ -15,10 +15,7 @@
         <th class="actions"></th>
       </tr>
     </thead>
-    <tbody data-controller="sortable"
-           data-sortable-handle-value=".handle"
-           data-sortable-resource-name-value="variant">
-
+    <tbody data-controller="sortable" data-sortable-resource-name-value="variant">
     <% @variants.each do |variant| %>
       <tr id="<%= spree_dom_id variant %>" <%= 'style="color:red;"' if variant.deleted? %> data-hook="variants_row" data-sortable-update-url="<%= spree.admin_product_variant_path(@product, variant) %>">
         <td class="move-handle">

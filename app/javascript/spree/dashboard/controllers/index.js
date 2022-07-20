@@ -2,9 +2,8 @@
 
 import { Application } from '@hotwired/stimulus'
 
-import Sortable from 'stimulus-sortable'
-
 // Stimulus - Spree Controllers
+import Sortable from './sortable_controller'
 import SortableTreeController from './sortable_tree_controller'
 import ClipboardController from './clipboard_controller'
 import DatePickerController from './datepicker_controller'

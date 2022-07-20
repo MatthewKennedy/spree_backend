@@ -85,6 +85,7 @@ en:
         no_digital_assets_added: No digital assets.
         reset_download_links: Reset Digital Download Links
         upload: Upload
+      display: Display
       display_on:
         back_end: Admin Panel
         both: All
@@ -164,6 +165,10 @@ en:
         scopes: Scopes
         uid: UID
       option_type_filterable_info: When an option type is filterable, your storefront visitors are presented with the option to filter a collection of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront taxons that contain products with this option type set.
+      options:
+        add_option_value: Add option value
+        values:
+          this_option_type_has_no_values_click_the_add_option_value_button_to_create_a_new_value: This Option Type has no values, click the Add Option Value button to create a new value.
       order:
         add: Add
         add_a_shipment_to_this_order_to_begin_adding_items: Add a new shipping location to this order, and then add products to the shipment. Ideally, choose the location nearest the delivery address for faster and cheaper delivery.
@@ -199,6 +204,7 @@ en:
         gateway:
           cvc: CVC
       platform_api: Platform API
+      presentation: Presentation
       product_kinds:
         digital: Digital
         physical: Physical
@@ -207,6 +213,7 @@ en:
         label: Label
       products:
         active: Active
+        add_a_new_option_value: Add a new option value
         add_a_new_property: Add a new property
         add_first_property: This product has no properties added, click the buttons below to begin adding new properies.
         add_new_properties_from_prototype: Add new properties from prototype

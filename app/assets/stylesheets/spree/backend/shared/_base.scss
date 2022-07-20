@@ -102,3 +102,12 @@ div.admin-product-image-container {
 #contentHeaderRow {
   min-height: 51px;
 }
+
+[data-sortable-update-url] {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}

@@ -33,10 +33,7 @@
         </tr>
       </thead>
 
-      <tbody data-controller="sortable"
-             data-sortable-handle-value=".handle"
-             data-sortable-resource-name-value="image">
-
+      <tbody data-controller="sortable" data-sortable-resource-name-value="image">
         <% (@product.variant_images).each do |image| %>
           <tr id="<%= spree_dom_id image %>" data-hook="images_row" data-sortable-update-url="<%= spree.admin_product_image_path(@product, image) %>">
             <td class="move-handle">

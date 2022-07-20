@@ -32,7 +32,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
       invoke_callbacks(:update, :after)
       respond_with(@object) do |format|
         format.html do
-          flash[:success] = flash_message_for(@object, :successfully_updated)
+          flash[:success] = flash_message_for(@object, :successfully_updated) unless request.xhr?
           redirect_to location_after_save unless request.xhr?
         end
         format.js { render layout: false }
@@ -69,16 +69,17 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     invoke_callbacks(:destroy, :before)
     if @object.destroy
       invoke_callbacks(:destroy, :after)
-      flash[:success] = flash_message_for(@object, :successfully_removed)
+      respond_with(@object) do |format|
+        format.turbo_stream
+        format.html do
+          flash[:success] = flash_message_for(@object, :successfully_removed)
+          redirect_to location_after_destroy
+        end
+        format.js { render_js_for_destroy }
+      end
     else
       invoke_callbacks(:destroy, :fails)
       flash[:error] = @object.errors.full_messages.join(", ")
-    end
-
-    respond_with(@object) do |format|
-      format.turbo_stream
-      format.html { redirect_to location_after_destroy }
-      format.js { render_js_for_destroy }
     end
   end
 
