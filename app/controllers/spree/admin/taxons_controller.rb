@@ -9,7 +9,7 @@ module Spree
       def index
       end
 
-      def modal
+      def products_panel
         @taxon = Taxon.find(params[:taxon_id])
       end
 

@@ -17,6 +17,9 @@ Spree::Core::Engine.add_routes do
       resources :states
     end
 
+    # Classifications
+    patch :classification, path: "classification/taxon/:taxon_id/product/:product_id", to: "classifications#update"
+
     # CMS Pages
     resources :cms_pages do
       resources :cms_sections, except: :index
@@ -94,6 +97,7 @@ Spree::Core::Engine.add_routes do
         post :update_availability
         post :update_cost_currency
         post :update_promotionable
+        patch :remove_from_taxon
         post :clone
         get :stock
       end
@@ -210,8 +214,11 @@ Spree::Core::Engine.add_routes do
         end
       end
     end
-    resources :taxons, only: [:index, :show]
-    post "/taxon_modal", to: "taxons#modal", as: :taxon_modal
+    resources :taxons, only: [:index, :show] do
+      collection do
+        post :products_panel
+      end
+    end
 
     # Users
     resources :users do

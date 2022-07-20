@@ -6,6 +6,8 @@ en:
         cancel: Cancel
         continue: Continue
         create: Create
+        edit: Edit
+        remove: Remove
         save: Save
         update: Update
       active: Active
@@ -223,6 +225,7 @@ en:
         draft: Draft
         errors:
           cost_currency_could_not_be_updated: Cost currency could not be updated. %{error}
+          could_not_remove_from_taxon: Could not remove from taxon
           promotionable_could_not_be_updated: Promotionable could not be updated. %{error}
           status_could_not_be_updated: 'Status could not be updated. Reason: %{error}'
         messages:
@@ -230,7 +233,6 @@ en:
           product_is_not_promotable: Product is not promotable
           product_is_promotable: Product is promotable
           product_status_updated_to: Product status updated to
-          product_updated: Product updated
         new_product_details: New product details
         new_product_master_price: 'Price: %{currency_iso} - (%{currency_symbol})'
         properties: Properties
@@ -348,6 +350,8 @@ en:
         submenu: Submenu
         taxonomies: Taxonomies
       taxons:
+        messages:
+          product_removed: Product removed
         use_the_search_box_above_to_search_for_taxons: Use the search box above to search for taxons
       this_order_has_already_received_a_refund: This order has already received a refund
       time: Time

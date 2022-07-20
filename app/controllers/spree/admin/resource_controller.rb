@@ -27,8 +27,11 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
   def update
     invoke_callbacks(:update, :before)
-    if @object.update(permitted_resource_params)
-      set_current_store
+
+    @object.assign_attributes(permitted_resource_params)
+    set_current_store
+
+    if @object.save
       invoke_callbacks(:update, :after)
       respond_with(@object) do |format|
         format.html do

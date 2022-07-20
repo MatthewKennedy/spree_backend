@@ -59,6 +59,12 @@ div.admin-product-image-container {
     height: 50px;
   }
 
+  &.medium-img {
+    border-radius: var(--bs-border-radius);
+    width: 75px;
+    height: 75px;
+  }
+
   &.product-img {
     border-width: 2px;
     border-radius: calc(var(--bs-border-radius) * 2);

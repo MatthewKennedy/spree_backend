@@ -31,24 +31,8 @@ module Spree
         if params[:product][:option_type_ids].present?
           params[:product][:option_type_ids] = params[:product][:option_type_ids].reject(&:empty?)
         end
-        invoke_callbacks(:update, :before)
-        if @object.update(permitted_resource_params)
-          set_current_store
-          invoke_callbacks(:update, :after)
-          flash[:success] = flash_message_for(@object, :successfully_updated)
-          respond_with(@object) do |format|
-            format.html { redirect_to location_after_save }
-            format.js { render layout: false }
-          end
-        else
-          # Stops people submitting blank slugs, causing errors when they try to
-          # update the product again
-          @product.slug = @product.slug_was if @product.slug.blank?
-          invoke_callbacks(:update, :fails)
-          respond_with(@object) do |format|
-            format.html { render :edit, status: :unprocessable_entity }
-          end
-        end
+
+        super
       end
 
       def destroy
@@ -97,14 +81,27 @@ module Spree
         end
       end
 
+      def remove_from_taxon
+        taxon = Taxon.find(params[:product][:taxon_id])
+
+        if @object.taxons.delete(taxon)
+          respond_to do |format|
+            format.turbo_stream { render "spree/admin/taxons/remove_from_taxon" }
+          end
+        else
+          respond_to do |format|
+            format.turbo_stream do
+              render turbo_stream: turbo_stream.append("FlashAlertsContainer", partial: "spree/admin/shared/toast",
+                locals: {message: I18n.t("spree.dash.products.errors.could_not_remove_from_taxon"), style: "text-bg-warning"})
+            end
+          end
+        end
+      end
+
       def update_availability
         if @object.update(status: permitted_resource_params[:status])
           respond_to do |format|
             format.turbo_stream
-            format.html {
-              flash[:success] = raw(I18n.t("spree.dash.products.messages.product_status_updated_to", name: @product.name, state: @product.status.capitalize))
-              redirect_to location_after_save
-            }
           end
         else
           flash[:error] = I18n.t("spree.dash.products.errors.status_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
@@ -115,10 +112,6 @@ module Spree
         if @object.update(cost_currency: permitted_resource_params[:cost_currency])
           respond_to do |format|
             format.turbo_stream
-            format.html {
-              flash[:success] = I18n.t("spree.dash.products.messages.product_cost_currency_updated_successfully")
-              redirect_to location_after_save
-            }
           end
         else
           flash[:error] = I18n.t("spree.dash.products.errors.cost_currency_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
@@ -129,10 +122,6 @@ module Spree
         if @object.update(promotionable: permitted_resource_params[:promotionable])
           respond_to do |format|
             format.turbo_stream
-            format.html {
-              flash[:success] = I18n.t("spree.dash.products.messages.product_updated")
-              redirect_to location_after_save
-            }
           end
         else
           flash[:error] = I18n.t("spree.dash.products.errors.promotionable_could_not_be_updated", error: @product.errors.full_messages.to_sentence)

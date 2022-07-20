@@ -5,8 +5,8 @@
 <div class="taxon-products-view card">
     <div class="card-body">
       <div id="taxonSearch" class="form-group mb-0">
-        <%= form_with url: spree.admin_taxon_modal_path, method: :post, data: { controller: "form-validation", turbo_frame: :taxons } do |f| %>
-          <%= f.select :taxon_id, [], { include_hidden: true },
+        <%= form_with url: spree.products_panel_admin_taxons_path, method: :post, data: { controller: "form-validation", turbo_frame: :taxons } do |f| %>
+          <%= f.select :taxon_id, [], { include_hidden: false },
                                         multiple: false,
                                         data: { action: 'change->form-validation#validate',
                                                 controller: 'ts--search',
