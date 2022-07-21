@@ -207,6 +207,7 @@ en:
       payment_states:
         balance_due: Balance due
         paid: Paid
+        void: Void
       payments:
         gateway:
           cvc: CVC
@@ -278,6 +279,7 @@ en:
         pending: Pending
         ready: Ready
         shipped: Shipped
+        void: Void
       shipments: Shipments
       sku: Sku
       slug: Slug
@@ -351,7 +353,6 @@ en:
         add_new_taxon: Add a new Taxon
         edit_root_taxonomy: Edit %{name} Taxonomy
         no_taxons: "<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons."
-        submenu: Submenu
         taxonomies: Taxonomies
       taxons:
         hide_from_sub_navigation: Hide from sub navigation

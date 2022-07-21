@@ -17,6 +17,10 @@ export default class extends Controller {
     handle: {
       type: String,
       default: '.handle'
+    },
+    dragClass: {
+      type: String,
+      default: 'item-dragged'
     }
   }
 
@@ -68,7 +72,7 @@ export default class extends Controller {
       handle: this.handleValue,
       swapThreshold: 0.5,
       emptyInsertThreshold: 8,
-      dragClass: 'item-dragged',
+      dragClass: this.dragClassValue,
       draggable: '.draggable',
       animation: 350,
       forceFallback: false,
