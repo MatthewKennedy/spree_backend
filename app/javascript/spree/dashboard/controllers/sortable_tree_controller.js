@@ -3,15 +3,33 @@ import { Sortable } from 'sortablejs'
 import { patch } from '../utilities/request_utility'
 
 export default class extends Controller {
-  static values = { handle: String }
+  static values = {
+    resourceName: String,
+    paramName: {
+      type: String,
+      default: 'position'
+    },
+    responseKind: {
+      type: String,
+      default: 'turbo_stream'
+    },
+    animation: Number,
+    handle: {
+      type: String,
+      default: '.handle'
+    }
+  }
+
+  initialize () {
+    this.end = this.end.bind(this)
+  }
 
   connect () {
     const itemSortable = {
       ...this.options
     }
 
-    let containers = null
-    containers = this.element.querySelectorAll(
+    const containers = this.element.querySelectorAll(
       '[data-sortable-tree-parent-id-value]'
     )
 
@@ -34,13 +52,10 @@ export default class extends Controller {
       }
     }
 
-    const response = await patch(item.dataset.sortableTreeUpdateUrlValue, {
-      body: data
+    await patch(item.dataset.sortableTreeUpdateUrlValue, {
+      body: data,
+      responseKind: this.responseKindValue
     })
-
-    if (!response.ok) {
-      SpreeDash.showFlash('error', 'This move could not be saved.')
-    }
   }
 
   get options () {
@@ -50,7 +65,7 @@ export default class extends Controller {
         pull: true,
         put: true
       },
-      handle: this.handleValue || undefined,
+      handle: this.handleValue,
       swapThreshold: 0.5,
       emptyInsertThreshold: 8,
       dragClass: 'item-dragged',

@@ -7,6 +7,7 @@ module Spree
       end
 
       def build_sortable_tree(parent_resource, child_resource)
+        parent_resource_name = parent_resource.class.name.demodulize.underscore
         child_resource_name = child_resource.class.name.demodulize.underscore
         descendants = []
 
@@ -23,7 +24,7 @@ module Spree
           class: "sortable-tree-item draggable removable-dom-element",
           data: {
             sortable_tree_resource_name_value: child_resource_name.singularize,
-            sortable_tree_update_url_value: "/api/v2/platform/#{child_resource_name.pluralize}/#{child_resource.id}/reposition"
+            sortable_tree_update_url_value: "/admin/#{parent_resource_name.pluralize}/#{parent_resource.id}/#{child_resource_name.pluralize}/#{child_resource.id}/reposition"
           })
       end
     end

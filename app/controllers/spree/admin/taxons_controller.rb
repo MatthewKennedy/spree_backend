@@ -66,6 +66,27 @@ module Spree
 
       private
 
+      def successful_reposition_actions
+        reload_taxon_and_set_new_permalink(@taxon)
+        update_permalinks_on_child_taxons
+
+        respond_to do |format|
+          format.turbo_stream { render "spree/admin/taxonomies/reposition" }
+        end
+      end
+
+      def reload_taxon_and_set_new_permalink(taxon)
+        taxon.reload
+        taxon.set_permalink
+        taxon.save!
+      end
+
+      def update_permalinks_on_child_taxons
+        @taxon.descendants.each do |taxon|
+          reload_taxon_and_set_new_permalink(taxon)
+        end
+      end
+
       def location_after_save
         spree.edit_admin_taxonomy_taxon_path(@taxonomy.id, @taxon.id)
       end
@@ -123,7 +144,7 @@ module Spree
       end
 
       def scope
-        current_store.taxonomies
+        current_store.taxons
       end
     end
   end

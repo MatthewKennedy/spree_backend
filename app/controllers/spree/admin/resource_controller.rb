@@ -86,6 +86,20 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     end
   end
 
+  def reposition
+    new_parent = scope.find(permitted_resource_params[:new_parent_id])
+    new_index = permitted_resource_params[:new_position_idx].to_i
+
+    if @object.move_to_child_with_index(new_parent, new_index)
+      successful_reposition_actions
+    else
+      respond_with(@object) do |format|
+        format.html { render action: :edit, status: :unprocessable_entity }
+        format.js { render layout: false, status: :unprocessable_entity }
+      end
+    end
+  end
+
   protected
 
   class << self
@@ -274,5 +288,16 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
   def turbo_enabled?
     false
+  end
+
+  # Override this method to customize the response from a successful reposition.
+  def successful_reposition_actions
+    respond_with(@object) do |format|
+      format.html do
+        flash[:success] = flash_message_for(@object, :successfully_updated) unless request.xhr?
+        redirect_to location_after_save unless request.xhr?
+      end
+      format.js { render layout: false }
+    end
   end
 end

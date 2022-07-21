@@ -19,21 +19,9 @@
         </div>
 
         <% if @taxonomy.root.present? %>
-          <div class="card-body p-0 bg-light" data-controller="sortable-tree" data-sortable-tree-handle-value=".handle">
-            <div data-sortable-tree-parent-id-value="<%= @taxonomy.root.id %>">
-
-              <% if @taxonomy.root.children.present? %>
-                <% @taxonomy.root.children.each do |root_children| %>
-                  <%= build_sortable_tree(@taxonomy, root_children) %>
-                <% end %>
-              <% else %>
-                <div class="text-center no-objects-found m-5 m-5">
-                  <%= raw I18n.t('spree.dash.taxonomies.no_taxons', taxonomy: @taxonomy.root.name ) %>
-                </div>
-              <% end %>
-
-            </div>
-          </div>
+        <div id="<%= dom_id(@taxonomy) %>_sortable_tree_area">
+          <%= render 'spree/admin/taxonomies/tree' %>
+        </div>
         <% end %>
       </div>
 

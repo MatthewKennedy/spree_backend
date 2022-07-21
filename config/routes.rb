@@ -210,6 +210,7 @@ Spree::Core::Engine.add_routes do
     resources :taxonomies do
       resources :taxons do
         member do
+          patch :reposition
           delete :remove_icon
         end
       end

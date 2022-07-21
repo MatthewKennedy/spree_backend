@@ -9,7 +9,11 @@
       <%= taxon.name %> <br>
 
       <h6 class="form-text text-muted m-0">
-        <span class="badge text-bg-light"><%= svg_icon(name: 'link.svg', width: '16', height: '16') %> <%= taxon.permalink %></span>
+        <%= turbo_frame_tag :path do %>
+          <span class="badge text-bg-light">
+            <%= svg_icon(name: 'link.svg', width: '16', height: '16') %> <span id="<%= dom_id(taxon) %>_permalink"><%= taxon.permalink %></span>
+          </span>
+        <% end %>
       </h6>
     </div>
     <% if taxon.icon.present? %>
