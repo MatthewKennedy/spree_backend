@@ -12,7 +12,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
   def new
     invoke_callbacks(:new_action, :before)
     respond_with(@object) do |format|
-      format.turbo_stream
       format.html { render layout: !request.xhr? }
       format.js { render layout: false } if request.xhr?
     end
@@ -94,8 +93,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
       successful_reposition_actions
     else
       respond_with(@object) do |format|
-        format.html { render action: :edit, status: :unprocessable_entity }
-        format.js { render layout: false, status: :unprocessable_entity }
+        stream_flash_alert(message: I18n.t("spree.dash.errors.error_reposition_failed"), kind: :error)
       end
     end
   end

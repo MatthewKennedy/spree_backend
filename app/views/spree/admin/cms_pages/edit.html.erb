@@ -7,9 +7,8 @@
 <% end %>
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @cms_page } %>
-<%= form_for [:admin, @cms_page], as: :cms_page, url: spree.admin_cms_page_path do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
-<% end %>
+
+<%= render partial: 'form' %>
 
 <% if @cms_page.sections? %>
   <%= render partial: 'live_preview_area' %>

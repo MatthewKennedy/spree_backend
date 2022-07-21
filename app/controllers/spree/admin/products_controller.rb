@@ -89,12 +89,7 @@ module Spree
             format.turbo_stream { render "spree/admin/taxons/remove_from_taxon" }
           end
         else
-          respond_to do |format|
-            format.turbo_stream do
-              render turbo_stream: turbo_stream.append("FlashAlertsContainer", partial: "spree/admin/shared/toast",
-                locals: {message: I18n.t("spree.dash.products.errors.could_not_remove_from_taxon"), style: "text-bg-warning"})
-            end
-          end
+          stream_flash_alert(message: I18n.t("spree.dash.products.errors.could_not_remove_from_taxon"), kind: :error)
         end
       end
 
@@ -104,7 +99,7 @@ module Spree
             format.turbo_stream
           end
         else
-          flash[:error] = I18n.t("spree.dash.products.errors.status_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+          stream_flash_alert(message: I18n.t("spree.dash.products.errors.status_could_not_be_updated"), kind: :error)
         end
       end
 
@@ -114,7 +109,7 @@ module Spree
             format.turbo_stream
           end
         else
-          flash[:error] = I18n.t("spree.dash.products.errors.cost_currency_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+          stream_flash_alert(message: I18n.t("spree.dash.products.errors.cost_currency_could_not_be_updated"), kind: :error)
         end
       end
 
@@ -124,7 +119,7 @@ module Spree
             format.turbo_stream
           end
         else
-          flash[:error] = I18n.t("spree.dash.products.errors.promotionable_could_not_be_updated", error: @product.errors.full_messages.to_sentence)
+          stream_flash_alert(message: I18n.t("spree.dash.products.errors.promotionable_could_not_be_updated"), kind: :error)
         end
       end
 

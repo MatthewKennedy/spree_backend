@@ -64,6 +64,9 @@ en:
         title: Title
         visible: Visible
         you_have_no_pages: You have no Pages, click the <b>+ Add New Page</b> button to get started.
+      cms_pages:
+        errors:
+          could_not_update_page_visibility: Could not update page visibility
       copy_to_clipboard: Copy to clipboard
       cost: Cost
       count_on_hand: Count on hand
@@ -97,6 +100,7 @@ en:
       edit: Edit
       ends_at: Ends at
       errors:
+        error_reposition_failed: Error reposition failed
         messages:
           blank: Blank
           cannot_remove_icon: Cannot remove icon

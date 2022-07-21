@@ -78,6 +78,16 @@ module Spree
         formatted_option_values
       end
 
+      def spree_humanize_cms(cms_array)
+        formatted_option_values = []
+
+        cms_array.each do |section|
+          formatted_option_values << [spree_humanize_type(section.name), section]
+        end
+
+        formatted_option_values
+      end
+
       def spree_humanize_type(obj)
         last_word = obj.split("::", 10).last
 

@@ -22,6 +22,10 @@ Spree::Core::Engine.add_routes do
 
     # CMS Pages
     resources :cms_pages do
+      member do
+        patch :update_visibility
+      end
+
       resources :cms_sections, except: :index
     end
 

@@ -106,7 +106,7 @@ button#cmsSectionEditorFullScreen {
 }
 
 #pageLivePreview {
-  transform-origin: top left;
+  // transform-origin: top left; FIX MK
   background: var(--bs-gray-800);
 }
 

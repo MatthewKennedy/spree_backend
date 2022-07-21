@@ -7,27 +7,29 @@
           <%= button_link_to I18n.t('spree.dash.cms.add_new_section'), spree.new_admin_cms_page_cms_section_path(@cms_page), icon: 'plus-square.svg', class: 'no-wrap btn btn-success  align-self-center' %>
         </div>
         <div class="col d-none d-md-flex justify-content-end">
-          <div id="LiveViewSwitcher" class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-outline-primary active">
-              <input type="radio" name="options" id="mobileLiveView" autocomplete="off"> Mobile
-            </label>
-            <label class="btn btn-outline-primary">
-              <input type="radio" name="options" id="tabletLiveView" autocomplete="off"> Tablet
-            </label>
-            <label class="btn btn-outline-primary">
-              <input type="radio" name="options" id="desktopLiveView" autocomplete="off" checked> Desktop
-            </label>
+          <div id="LiveViewSwitcher" class="btn-group" data-toggle="buttons">
+            <input class="btn-check" type="radio" name="options" id="mobileLiveView" autocomplete="off">
+            <label class="btn btn-outline-secondary">Mobile</label>
+
+            <input class="btn-check" type="radio" name="options" id="tabletLiveView" autocomplete="off">
+            <label class="btn btn-outline-secondary">Tablet</label>
+
+            <input class="btn-check" type="radio" name="options" id="desktopLiveView" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary">Desktop</label>
           </div>
 
           <div class="ms-2">
-              <button id="cmsSectionEditorFullScreen" type="button" class="btn btn-outline-primary no-wrap" data-toggle="button" autocomplete="off"><%= raw I18n.t('spree.dash.cms.full_screen_mode') %></button>
+            <button id="cmsSectionEditorFullScreen" type="button" class="btn btn-outline-primary no-wrap" data-toggle="button" autocomplete="off"><%= raw I18n.t('spree.dash.cms.full_screen_mode') %></button>
           </div>
         </div>
       </div>
       <div class="row g-0">
         <div id="draggableSectionsHolder" class="col-12 col-md-3 bg-light border">
           <% if @cms_page.cms_sections.any? %>
-            <div id="cmsPagesectionsArea" class="card-body row m-0 p-1 g-0">
+            <div id="cmsPagesectionsArea"
+                 class="card-body row m-0 p-1 g-0"
+                 data-controller="sortable"
+                 data-sortable-resource-name-value="cms_section">
               <% @cms_page.cms_sections.each do |section| %>
                 <%= render 'spree/admin/cms_pages/section_template', section: section %>
               <% end %>
@@ -47,11 +49,7 @@
         <div class="d-none d-md-block col bg-secondary border border-start-0">
           <div id="liveViewCont" class="desktopLiveView">
             <div class="embed-responsive embed-responsive-4by3">
-              <iframe class="embed-responsive-item"
-                      id="pageLivePreview"
-                      src="<%= spree_storefront_resource_url(@cms_page, locale: cms_page_locale(@cms_page)) + "?no_cache=#{rand(1...10000)}" %>"
-                      sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-modals">
-              </iframe>
+               <%= render 'iframe_content' %>
             </div>
           </div>
         </div>
