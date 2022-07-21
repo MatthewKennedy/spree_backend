@@ -1,20 +1,16 @@
 <% taxonomy = parent_resource %>
 <% taxon = child_resource %>
 
-<div class="sortable-tree-item-row d-flex flex-nowrap p-1 align-items-center">
+<div id="<%= dom_id(taxon) %>" class="sortable-tree-item-row d-flex flex-nowrap p-1 align-items-center">
   <%= render 'spree/admin/shared/drag_handle' %>
 
   <div class="d-flex align-items-center overflow-hidden w-100">
     <div class="overflow-hidden">
-      <%= taxon.name %>
-      <!-- TODO: Taxon Paths do not update in view, fix with Turbo Frames.
-        <h6 class="form-text text-muted mt-0 mb-1">
-          <span class="badge rounded-pill bg-light bg-light-muted-text"><%#= svg_icon(name: 'link.svg', width: '16', height: '16') %> <%= taxon.permalink %></span>
-        </h6>
-      -->
-      <small class="form-text text-muted mt-0 mb-1">
-        <%= I18n.t('spree.dash.taxonomies.submenu') %>: <%= active_badge(!taxon.hide_from_nav) %>
-      </small>
+      <%= taxon.name %> <br>
+
+      <h6 class="form-text text-muted m-0">
+        <span class="badge text-bg-light"><%= svg_icon(name: 'link.svg', width: '16', height: '16') %> <%= taxon.permalink %></span>
+      </h6>
     </div>
     <% if taxon.icon.present? %>
       <div class="ms-2">
