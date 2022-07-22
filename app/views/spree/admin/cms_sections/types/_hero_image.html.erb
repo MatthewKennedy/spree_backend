@@ -1,29 +1,41 @@
+<div class="collapse" id="cmsSectionInfo">
+  <div class="bs-callout bs-callout-info">
+    <h5 id="conveying-meaning-to-assistive-technologies">
+      <%= spree_humanize_type(@cms_section.type) %>
+    </h5>
+    <p>
+      <%= I18n.t('spree.dash.cms_sections.hero_image.hero_image_info') %>
+    </p>
+  </div>
+</div>
+
 <div class="row pb-0">
   <div class="col-12 col-md-6">
-    <%= f.field_container :title do %>
+    <%= f.field_container :title, class: ["form-floating"] do %>
+      <%= f.text_field :title, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
       <%= f.label :title, I18n.t('spree.dash.cms.title') %>
-      <%= f.text_field :title, class: 'form-control' %>
-      <%= f.error_message_on :title %>
     <% end %>
 
-    <%= f.field_container :button_text do %>
+    <%= f.field_container :button_text, class: ["form-floating"] do %>
+      <%= f.text_field :button_text, class: 'form-control', placeholder: I18n.t('spree.dash.cms.button_text') %>
       <%= f.label :button_text, I18n.t('spree.dash.cms.button_text') %>
-      <%= f.text_field :button_text, class: 'form-control' %>
-      <%= f.error_message_on :button_text %>
     <% end %>
 
     <div class="row">
-      <%= f.field_container :fit, class: ['col-6'] do %>
-        <%= f.label :fit, I18n.t('spree.dash.cms.fit') %>
-        <%= f.select(:fit, @cms_section.boundaries, {include_blank: false}, data: {controller: 'ts--select'}) %>
-        <%= f.error_message_on :fit %>
-      <% end %>
+      <div class="col-6">
+        <%= f.field_container :fit, class: ["form-floating"] do %>
+          <%= f.select(:fit, @cms_section.boundaries, {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
+          <%= f.label :fit, I18n.t('spree.dash.cms.fit') %>
+        <% end %>
+      </div>
 
-      <%= f.field_container :gutters, class: ['col-6'] do %>
-        <%= f.label :gutters, I18n.t('spree.dash.cms.gutters') %>
-        <%= f.select(:gutters, @cms_section.gutters_sizes, {include_blank: false}, data: {controller: 'ts--select'}) %>
-        <%= f.error_message_on :gutters %>
-      <% end %>
+      <div class="col-6">
+        <%= f.field_container :gutters, class: ["form-floating"] do %>
+          <%= f.label :gutters, I18n.t('spree.dash.cms.gutters') %>
+          <%= f.select(:gutters, @cms_section.gutters_sizes, {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
+          <%= f.label :gutters, I18n.t('spree.dash.cms.gutters') %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="col-12 col-md-6 pt-4">
@@ -33,14 +45,14 @@
   </div>
   <div class="col-12"><hr></div>
   <div class="col-12 col-md-6">
-    <%= f.field_container :linked_resource_type do %>
+    <%= f.field_container :linked_resource_type, class: ["form-floating"]  do %>
+      <%= f.select(:linked_resource_type, spree_humanize_dropdown_values('Spree::Cms::Sections::HeroImage',
+                                        { const: 'LINKED_RESOURCE_TYPE' }),
+                                        {include_blank: false},
+                                        class: 'link_switcher form-select',
+                                        data: {controller: 'ts--select'},
+                                        placeholder: I18n.t('spree.dash.navigation.link_to')) %>
       <%= f.label :linked_resource_type, I18n.t('spree.dash.navigation.link_to') %>
-      <%= f.select(:linked_resource_type,
-          spree_humanize_dropdown_values('Spree::Cms::Sections::HeroImage',
-                                          { const: 'LINKED_RESOURCE_TYPE' }),
-                                          { include_blank: false },
-                                          class: 'link_switcher') %>
-      <%= f.error_message_on :linked_resource_type %>
     <% end %>
   </div>
   <div class="col-12 col-md-6">

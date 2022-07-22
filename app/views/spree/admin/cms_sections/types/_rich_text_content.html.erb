@@ -1,4 +1,4 @@
-<%= f.field_container :rte_content, class: ['mb-0'] do %>
-  <%= f.text_area :rte_content, { rows: "20", class: 'form-control spree-rte' } %>
-  <%= f.error_message_on :rte_content %>
+<%= f.field_container :rte_content, class: ['mb-0', 'form-floating'] do %>
+  <%= f.text_area :rte_content, { data: { controller: 'rte'}, style: "height: 283px;", class: 'form-control' } %>
+  <%= f.label :rte_content, I18n.t('spree.dash.cms.content') %>
 <% end %>

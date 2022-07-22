@@ -3,17 +3,33 @@
   <%= link_to @cms_page.title, spree.edit_admin_cms_page_path(@cms_page) %> / <%= @cms_section.name %>
 <% end %>
 
-<% content_for :page_actions do %>
-<%= button_link_to(
-          I18n.t('spree.dash.cms.go_to_fullscreen_section_manager'),
-          spree.edit_admin_cms_page_path(@cms_page) + '?section_editor_full_screen_mode=true',
-          class: 'btn-secondary', icon: 'fullscreen.svg', id: 'admin_preview_product'
-        ) %>
-<% end %>
-
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @cms_section } %>
 
-<%= form_for [:admin, @cms_page, @cms_section], as: :cms_section, url: spree.admin_cms_page_cms_section_path(@cms_page, @cms_section) do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
-  <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title"><%= I18n.t("spree.dash.settings") %></h5>
+  </div>
+  <div class="card-body">
+      <%= form_with scope: :cms_section, url: spree.admin_cms_page_cms_section_path(@cms_page, @cms_section), class: "row", data: {controller: "form-validation", turbo_frame: :cms_section_settings}, method: :patch do |f| %>
+        <div class="col-12 col-md-6">
+          <%= f.field_container :name, class: ["form-floating"] do %>
+            <%= f.text_field :name, class: 'form-control', required: true, autocomplete: false, placeholder: raw(Spree.t(:name) + required_span_tag) %>
+            <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
+          <% end %>
+        </div>
+        <div class="col-12 col-md-6">
+          <%= f.field_container :type, class: ["form-floating"] do %>
+            <%= f.select(:type, spree_humanize_cms(Rails.application.config.spree.cms.sections), {include_blank: false}, class: 'form-select', data: {controller: "ts--select", action: 'change->form-validation#validate' }) %>
+            <%= f.label :type, I18n.t('spree.dash.cms.section_type') %>
+          <% end %>
+        </div>
+        <%= f.submit I18n.t('spree.dash.actions.update'), data: {form_validation_target: "submitBtn"} %>
+      <% end %>
+  </div>
+</div>
+
+<%= turbo_frame_tag :cms_section_settings do %>
+  <%= form_with scope: :cms_section, url: spree.admin_cms_page_cms_section_path(@cms_page, @cms_section), data: {turbo_frame: "_top"}, method: :patch do |f| %>
+    <%= render partial: 'form', locals: { f: f } %>
+  <% end %>
 <% end %>

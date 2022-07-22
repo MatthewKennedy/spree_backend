@@ -24,14 +24,12 @@ en:
         add_new_section: Add New Section
         all_pages: All Pages
         button_text: Button Text
-        click_button_to_change_page_type: Click the <b>%{button_type}</b> button to load the options for this page type.
         click_create_to_load_new_link: Click the <b>Create</b> button below to save your new page section, and load the section settings.
         click_update_to_load_new_link: Click the <b>Update</b> button below to load the new section settings.
         content: Content
         draft_mode: Draft Mode
         fit: Fit To
         full_screen_mode: <span class="exit">Exit </span>Full Screen Mode
-        go_to_fullscreen_section_manager: Go To Fullscreen Section Manager
         gutters: Gutters
         hero:
           aspect_ratio: Please use an image with the aspect ratio of 12:5 (2400px x 1000px)
@@ -55,7 +53,6 @@ en:
         page_type: Page Type
         section_type: Section Type
         set_gutters: Set Gutters
-        settings_for: 'Options For: <b>%{section}</b>'
         side_by_side:
           image_info: Please use an image with an aspect ratio of 54:35 (1468px x 952px).
           left_image: Left Image
@@ -65,8 +62,16 @@ en:
         visible: Visible
         you_have_no_pages: You have no Pages, click the <b>+ Add New Page</b> button to get started.
       cms_pages:
+        basic_deatils: Basic Deatils
         errors:
           could_not_update_page_visibility: Could not update page visibility
+        new_page_details: New Page Details
+        when_creating_a_new_page_first_give_the_page_a_title_and_select_the_page_type_you_will_then_be_offered_more_options: When creating a new page first give the page a Title, then select the page type, once created you will then be offered more options.
+      cms_sections:
+        errors:
+          position_could_not_be_updated: Position could not be updated
+        hero_image:
+          hero_image_info: Hero image info
       copy_to_clipboard: Copy to clipboard
       cost: Cost
       count_on_hand: Count on hand
@@ -144,21 +149,20 @@ en:
         new_menu_item: New Menu Item
         no_menu_items: "<b>%{menu}</b> has no items. Click the <b>Add New Item</b> button to begin adding links to this menu."
         open_link_in_new_window: Open this link in a new window
-        page: Page
-        product: Product
         public_details: Public Details
         search_for_a_page: Search for a page
         search_for_a_product: Search for a Product
         search_for_a_taxon: Search for a Taxon
+        search_taxons: Search taxons
         set_a_code: Adding a code is optional but can be useful if you need to identify this menu item. When building the Spree main menu use the code <b>category</b> or <b>promo</b> to create the containers that organize links and promotions appropriately. To learn more view the documentation by <a href='https://guides.spreecommerce.org/user/navigation/add_menu_items.html' target='_blank' class='alert-link'>clicking here</a>.
         settings: Settings
         subtitle: Subtitle
-        taxon: Taxon
         this_link_takes_you_to_your_stores_home_page: This link takes you to your stores home page.
         type: Type
         url_info: The URL field can link to an external website using <b>https://example.com</b>, link to an otherwise unreachable internal path using <b>/policies/privacy</b>, launch an email client using <b>mailto:sales@example.com</b> or used to create a clickable phone number with <b>tel:123456789</b>
         you_have_no_menus: You have no Menus, click the Add New Menu button to create your first Menu.
       no_payment_provider_settings_message: No payment provider settings message
+      not_applicable: Not applicable
       note: Note
       notice_messages:
         icon_removed: Icon removed

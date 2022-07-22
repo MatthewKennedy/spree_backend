@@ -26,7 +26,11 @@ Spree::Core::Engine.add_routes do
         patch :update_visibility
       end
 
-      resources :cms_sections, except: :index
+      resources :cms_sections, except: [:index] do
+        member do
+          patch :update_position
+        end
+      end
     end
 
     # Dashboard

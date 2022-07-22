@@ -1,35 +1,14 @@
  <div class="row">
     <div id="pageSectionsArea" class="col-12">
-
-      <hr class="mt-4 hide-on-full-screen-mode">
-      <div class="row">
-        <div class="col d-flex justify-content-start">
-          <%= button_link_to I18n.t('spree.dash.cms.add_new_section'), spree.new_admin_cms_page_cms_section_path(@cms_page), icon: 'plus-square.svg', class: 'no-wrap btn btn-success  align-self-center' %>
-        </div>
-        <div class="col d-none d-md-flex justify-content-end">
-          <div id="LiveViewSwitcher" class="btn-group" data-toggle="buttons">
-            <input class="btn-check" type="radio" name="options" id="mobileLiveView" autocomplete="off">
-            <label class="btn btn-outline-secondary">Mobile</label>
-
-            <input class="btn-check" type="radio" name="options" id="tabletLiveView" autocomplete="off">
-            <label class="btn btn-outline-secondary">Tablet</label>
-
-            <input class="btn-check" type="radio" name="options" id="desktopLiveView" autocomplete="off" checked>
-            <label class="btn btn-outline-secondary">Desktop</label>
-          </div>
-
-          <div class="ms-2">
-            <button id="cmsSectionEditorFullScreen" type="button" class="btn btn-outline-primary no-wrap" data-toggle="button" autocomplete="off"><%= raw I18n.t('spree.dash.cms.full_screen_mode') %></button>
-          </div>
-        </div>
-      </div>
       <div class="row g-0">
-        <div id="draggableSectionsHolder" class="col-12 col-md-3 bg-light border">
+        <div id="draggableSectionsHolder" class="col-12 col-md-3 bg-light">
+
           <% if @cms_page.cms_sections.any? %>
             <div id="cmsPagesectionsArea"
                  class="card-body row m-0 p-1 g-0"
                  data-controller="sortable"
-                 data-sortable-resource-name-value="cms_section">
+                 data-sortable-resource-name-value="cms_section"
+                 data-sortable-response-kind-value="turbo-stream">
               <% @cms_page.cms_sections.each do |section| %>
                 <%= render 'spree/admin/cms_pages/section_template', section: section %>
               <% end %>
@@ -46,7 +25,7 @@
           <% end %>
         </div>
 
-        <div class="d-none d-md-block col bg-secondary border border-start-0">
+        <div class="d-none d-md-block col bg-secondary overflow-hidden">
           <div id="liveViewCont" class="desktopLiveView">
             <div class="embed-responsive embed-responsive-4by3">
                <%= render 'iframe_content' %>

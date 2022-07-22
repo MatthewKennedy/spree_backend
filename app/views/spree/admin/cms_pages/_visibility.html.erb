@@ -1,11 +1,11 @@
 <%= form_with scope: :cms_page, url: spree.update_visibility_admin_cms_page_path(@cms_page), data: {controller: "form-validation", turbo_frame: :viability_toggle}, method: :patch do |f| %>
   <%= f.check_box :visible, class: 'btn-check', data: {action: 'change->form-validation#validate'} %>
   <% if @cms_page.visible? %>
-    <%= f.label :visible, class: 'btn btn-sm btn-secondary' do %>
+    <%= f.label :visible, class: 'rounded-pill badge text-bg-primary' do %>
       <%= svg_icon name: "eye.svg", width: '18', height: '18', classes: 'mb-0' %> <%= I18n.t('spree.dash.cms.visible') %>
     <% end %>
   <% else %>
-    <%= f.label :visible, class: 'btn btn-sm btn-outline-secondary' do %>
+    <%= f.label :visible, class: 'rounded-pill badge text-bg-secondary' do %>
       <%= svg_icon name: "eye-slash-fill.svg", width: '18', height: '18', classes: 'mb-0' %> <%= I18n.t('spree.dash.cms.draft_mode') %>
     <% end %>
   <% end %>

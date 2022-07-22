@@ -1,21 +1,4 @@
 <div data-hook="admin_cms_section_form_fields">
-  <div class="row">
-    <div class="col-12 col-md-6">
-      <%= f.field_container :name do %>
-        <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
-        <%= f.text_field :name, class: 'form-control', required: true, autocomplete: false %>
-        <%= f.error_message_on :name %>
-      <% end %>
-    </div>
-    <div class="col-12 col-md-6">
-      <%= f.field_container :type do %>
-        <%= f.label :type, I18n.t('spree.dash.cms.section_type') %>
-        <%= f.select(:type, spree_humanize_cms(Rails.application.config.spree.cms.sections)) %>
-        <%= f.error_message_on :type %>
-      <% end %>
-    </div>
-  </div>
-
   <div id="alertToClickUpdate" class="d-none">
     <div class="row">
       <div class="col-12">
@@ -38,18 +21,15 @@
         <div class="col-12">
           <div class="card mb-3">
             <div class="card-header d-flex">
-              <div class="d-flex flex-grow-1">
-                <h5 class="mb-0">
-                  <%= raw I18n.t('spree.dash.cms.settings_for', section: spree_humanize_type(@cms_section.type)) %>
+              <div class="flex-fill">
+                <h5 class="card-title">
+                  <%= spree_humanize_type(@cms_section.type) %>
                 </h5>
               </div>
-              <div class="d-flex">
-                <span data-show-info
-                          data-alert-kind="info"
-                          data-alert-title="<%= spree_humanize_type(@cms_section.type) %>"
-                          data-alert-html="<%= raw I18n.t("spree.dash.cms.info_#{spree_resource_path(@cms_section)}_body") %>">
-                          <%= svg_icon name: "info.svg", width: '25', height: '25' %>
-                </span>
+              <div>
+                <a data-bs-toggle="collapse" href="#cmsSectionInfo" role="button" aria-expanded="false" aria-controls="cmsSectionInfo" class="align-self-center">
+                  <%= svg_icon name: "info-circle.svg", width: '20', height: '20', classes: 'ms-1 shim-bottom' %>
+                </a>
               </div>
             </div>
             <div class="card-body">
@@ -60,6 +40,9 @@
                 </div>
               </div>
               <% end %>
+            </div>
+            <div class="card-footer text-center">
+              <%= render partial: 'spree/admin/shared/edit_resource_links' %>
             </div>
           </div>
         </div>
