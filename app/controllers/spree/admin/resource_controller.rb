@@ -7,8 +7,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
   rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
 
-  respond_to :html
-
   def new
     invoke_callbacks(:new_action, :before)
     respond_with(@object) do |format|
@@ -33,6 +31,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     if @object.save
       invoke_callbacks(:update, :after)
       respond_with(@object) do |format|
+        format.turbo_stream if update_turbo_stream_enabled?
         format.html do
           flash[:success] = flash_message_for(@object, :successfully_updated) unless request.xhr?
           redirect_to location_after_save unless request.xhr?
@@ -55,6 +54,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
       invoke_callbacks(:create, :after)
       flash[:success] = flash_message_for(@object, :successfully_created)
       respond_with(@object) do |format|
+        format.turbo_stream if create_turbo_stream_enabled?
         format.html { redirect_to location_after_save }
         format.js { render layout: false }
       end
@@ -72,7 +72,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     if @object.destroy
       invoke_callbacks(:destroy, :after)
       respond_with(@object) do |format|
-        format.turbo_stream
+        format.turbo_stream if destroy_turbo_stream_enabled?
         format.html do
           flash[:success] = flash_message_for(@object, :successfully_removed)
           redirect_to location_after_destroy
@@ -286,6 +286,18 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
   def turbo_enabled?
     false
+  end
+
+  def create_turbo_stream_enabled?
+    false
+  end
+
+  def update_turbo_stream_enabled?
+    false
+  end
+
+  def destroy_turbo_stream_enabled?
+    true
   end
 
   # Override this method to customize the response from a successful reposition.

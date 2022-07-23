@@ -83,8 +83,12 @@ input::-webkit-contacts-auto-fill-button {
   padding-top: 22px !important;
 }
 
-
-
 .ts-wrapper.form-select.disabled .ts-control {
   background: #e9ecef !important;
+}
+
+.ts-dropdown.single.plugin-dropdown_input {
+  .dropdown-input-wrap {
+    display: none;
+  }
 }

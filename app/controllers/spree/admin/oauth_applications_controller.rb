@@ -9,7 +9,7 @@ module Spree
         @menu_panel_kind = "settings"
       end
 
-      def turbo_enabled?
+      def create_turbo_stream_enabled?
         true
       end
 

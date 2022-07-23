@@ -95,9 +95,6 @@ module Spree
 
       def update_availability
         if @object.update(status: permitted_resource_params[:status])
-          respond_to do |format|
-            format.turbo_stream
-          end
         else
           stream_flash_alert(message: I18n.t("spree.dash.products.errors.status_could_not_be_updated"), kind: :error)
         end
@@ -105,9 +102,6 @@ module Spree
 
       def update_cost_currency
         if @object.update(cost_currency: permitted_resource_params[:cost_currency])
-          respond_to do |format|
-            format.turbo_stream
-          end
         else
           stream_flash_alert(message: I18n.t("spree.dash.products.errors.cost_currency_could_not_be_updated"), kind: :error)
         end
@@ -115,9 +109,6 @@ module Spree
 
       def update_promotionable
         if @object.update(promotionable: permitted_resource_params[:promotionable])
-          respond_to do |format|
-            format.turbo_stream
-          end
         else
           stream_flash_alert(message: I18n.t("spree.dash.products.errors.promotionable_could_not_be_updated"), kind: :error)
         end

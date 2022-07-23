@@ -123,6 +123,7 @@ en:
       meta_description: Meta description
       meta_keywords: Meta keywords
       meta_title: Meta title
+      more_information: More information
       name: Name
       navigation:
         add_new_item: Add New Item
@@ -136,14 +137,17 @@ en:
           title: Default Menus
         image_alt_text: Add alt text to your image
         image_info: "<b>NOTE:</b> You can attach an image to any menu item, but your image will only be displayed in the main menu when nested inside a container with the code <b>promo</b>.<br><br> For best results use images with a width of 540px and height of 350px."
+        information:
+          item_type: 'Menu items with the Type: ''Link'' are used for linking to web pages. Menu items set to Type: ''Container'' are used to group links, giving structure to your menu.'
         item_type: Item Type
         link_settings: Link Settings
         link_to: Link To
+        link_to_info: Link to Pages, Products, Taxons or external URL's.
         menu_item_type_container_message: 'Containers are menu items that do not link to a destination. If you are building the Spree Main Menu create containers with the code: <b>category</b> or <b>promo</b>, and then nest your links inside these containers build out your menu. <br><br> For an indepth guide to building the main menu see the documenttation page <a href=''https://guides.spreecommerce.org/user/navigation/building_the_main_menu.html'' target=''_blank'' class=''alert-link''>Building The Main Menu</a>'
         menu_items: "%{menu_name} Items"
         menus: Menus
         move_could_not_be_saved: 'ERROR: This move could not be saved.'
-        nested_under: Nested under
+        nested_under: Nested Under
         nested_under_info: Quickly nest your Menu Item if you already know where it needs to be.
         new_menu: New Menu
         new_menu_item: New Menu Item
@@ -159,6 +163,7 @@ en:
         subtitle: Subtitle
         this_link_takes_you_to_your_stores_home_page: This link takes you to your stores home page.
         type: Type
+        url: URL
         url_info: The URL field can link to an external website using <b>https://example.com</b>, link to an otherwise unreachable internal path using <b>/policies/privacy</b>, launch an email client using <b>mailto:sales@example.com</b> or used to create a clickable phone number with <b>tel:123456789</b>
         you_have_no_menus: You have no Menus, click the Add New Menu button to create your first Menu.
       no_payment_provider_settings_message: No payment provider settings message

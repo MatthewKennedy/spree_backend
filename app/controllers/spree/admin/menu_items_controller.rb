@@ -28,6 +28,10 @@ module Spree
       def load_data
         @menu_item_types = Spree::MenuItem::ITEM_TYPE
       end
+
+      def scope
+        current_store.menu_items
+      end
     end
   end
 end
