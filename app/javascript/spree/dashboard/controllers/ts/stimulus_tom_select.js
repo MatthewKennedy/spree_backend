@@ -14,7 +14,6 @@ class StimulusTomSelect extends Controller {
 
   connect () {
     this.element.setAttribute('autocomplete', 'random')
-
     // eslint-disable-next-line eqeqeq
     if (this.element.options.length && this.element.options[0].value == '') {
       if (!this.config.plugins.includes('clear_button')) this.config.plugins.push('clear_button')

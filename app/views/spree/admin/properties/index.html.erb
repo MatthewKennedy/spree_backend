@@ -9,7 +9,6 @@
 <% content_for :table_filter do %>
   <div data-hook="admin_property_sidebar">
     <%= search_form_for [:admin, @search] do |f| %>
-
       <%- locals = {f: f} %>
 
       <div class="row">
@@ -36,46 +35,44 @@
           </div>
         </div>
       </div>
-    </div>
 
       <div class="form-actions" data-hook="admin_pproperties_index_search_buttons">
         <%= button Spree.t(:search), 'search.svg' %>
       </div>
-
     <% end %>
   </div>
 <% end %>
 
 <% if @properties.any? %>
-<div class="table-responsive border rounded bg-white">
-  <table class="table" id='listing_properties' data-hook>
-    <thead class="text-muted">
-      <tr data-hook="listing_properties_header">
-        <th><%= Spree.t(:name) %></th>
-        <th><%= Spree.t(:presentation) %></th>
-        <th><%= Spree.t(:filterable) %></th>
-        <th><%= Spree.t(:filter_param) %></th>
-        <th class="actions"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @properties.each do |property| %>
-        <tr id="<%= spree_dom_id property %>" data-hook="listing_properties_row">
-          <td><%= property.name %></td>
-          <td><%= property.presentation %></td>
-          <td><%= active_badge(property.filterable) %></td>
-          <td><%= property.filter_param %></td>
-          <td class="actions">
-            <span class="d-flex justify-content-end">
-              <%= link_to_edit(property, no_text: true) if can?(:edit, property) %>
-              <%= link_to_delete(property, no_text: true) if can?(:delete, property) %>
-            </span>
-          </td>
+  <div class="table-responsive border rounded bg-white">
+    <table class="table" id='listing_properties' data-hook>
+      <thead class="text-muted">
+        <tr data-hook="listing_properties_header">
+          <th><%= Spree.t(:name) %></th>
+          <th><%= Spree.t(:presentation) %></th>
+          <th><%= Spree.t(:filterable) %></th>
+          <th><%= Spree.t(:filter_param) %></th>
+          <th class="actions"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% @properties.each do |property| %>
+          <tr id="<%= spree_dom_id property %>" data-hook="listing_properties_row">
+            <td><%= property.name %></td>
+            <td><%= property.presentation %></td>
+            <td><%= active_badge(property.filterable) %></td>
+            <td><%= property.filter_param %></td>
+            <td class="actions">
+              <span class="d-flex justify-content-end">
+                <%= link_to_edit(property, no_text: true) if can?(:edit, property) %>
+                <%= link_to_delete(property, no_text: true) if can?(:delete, property) %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% else %>
   <div class="text-center w-100 no-objects-found m-5">
     <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Property)) %>,

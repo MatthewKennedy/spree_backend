@@ -50,8 +50,8 @@ div.admin-product-image-container {
 
   &.mini-img {
     border-radius: calc(var(--bs-border-radius) / 2);
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
 
   &.small-img {
@@ -110,7 +110,7 @@ div.admin-product-image-container {
   min-height: 51px;
 }
 
-[data-sortable-update-url] {
+[data-stream-exit-class] {
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
   -webkit-animation-duration: .5s;

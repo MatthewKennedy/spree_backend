@@ -1,11 +1,5 @@
 // Green
-.bg-completed,
-.bg-complete,
-.bg-resumed,
-.bg-considered_safe,
-.bg-paid,
-.bg-shipped,
-.bg-ready,
+
 .bg-active,
 .bg-success,
 .bg-sold,
@@ -13,8 +7,10 @@
 .bg-authorized,
 .bg-published,
 .bg-live,
-.bg-approved {
-  background: var(--bs-success);
+.bg-approved,
+.text-bg-success {
+  color: #202223 !important;
+  background: #aee9d1 !important;
 }
 
 // Red
@@ -28,6 +24,7 @@
 }
 
 // Orange
+.bg-ready,
 .bg-processing,
 .bg-pending,
 .bg-awaiting_return,
@@ -47,23 +44,28 @@
 .bg-notice,
 .bg-suspended,
 .bg-partial {
-  background: var(--bs-warning);
+  color: #202223;
+  background: #ffd79d;
 }
 
 // light
+.bg-completed,
+.bg-complete,
+.bg-resumed,
+.bg-considered_safe,
+.bg-paid,
+.bg-shipped,
 .badge.bg-disabled,
 .badge.bg-invited
 .bg-light {
-  color: red;
-  background: var(--bs-light);
+  color: #202223;
+  background: var(--bs-body-bg);
 }
 
 // Info
 .bg-onboarding {
   background: var(--bs-info);
 }
-
-
 
 .card-body > .card {
   border-style: dashed;

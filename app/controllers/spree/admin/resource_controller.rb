@@ -1,7 +1,7 @@
 class Spree::Admin::ResourceController < Spree::Admin::BaseController
   include Spree::Backend::Callbacks
 
-  helper_method :new_object_url, :edit_object_url, :object_url, :collection_url
+  helper_method :new_object_url, :edit_object_url, :clone_object_url, :object_url, :collection_url
   before_action :load_resource, except: :update_positions
   before_action :set_currency, :set_current_store, only: [:new, :create]
 
@@ -72,12 +72,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     if @object.destroy
       invoke_callbacks(:destroy, :after)
       respond_with(@object) do |format|
-        format.turbo_stream if destroy_turbo_stream_enabled?
-        format.html do
-          flash[:success] = flash_message_for(@object, :successfully_removed)
-          redirect_to location_after_destroy
-        end
-        format.js { render_js_for_destroy }
+        format.turbo_stream { render "spree/admin/shared/stream_templates/destroy" }
       end
     else
       invoke_callbacks(:destroy, :fails)
@@ -241,6 +236,15 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
         parent, object, options
     else
       spree.send "edit_admin_#{resource.object_name}_url", object, options
+    end
+  end
+
+  def clone_object_url(object, options = {})
+    if parent_data.present?
+      spree.send "clone_admin_#{resource.model_name}_#{resource.object_name}_url",
+        parent, object, options
+    else
+      spree.send "clone_admin_#{resource.object_name}_url", object, options
     end
   end
 

@@ -1,25 +1,23 @@
 <% if content_for?(:table_filter) %>
-  <div class="filter-wrap mb-4">
-    <div class="col-12 px-0">
-      <div class="index-filter-button d-flex">
-        <%= form_tag request.fullpath, id: "quick-search", class: 'flex-grow-1 me-3' do %>
-          <%= text_field_tag :quick_search, nil, class: "form-control js-quick-search", placeholder: Spree.t(:search_by) %>
-        <% end %>
+  <div class="filter-wrap mb-3">
+    <div class="index-filter-button d-flex">
+      <%= form_tag request.fullpath, id: "quick-search", class: 'flex-grow-1 me-3' do %>
+        <%= text_field_tag :quick_search, nil, class: "form-control js-quick-search", placeholder: Spree.t(:search_by), autocomplete: false %>
+      <% end %>
 
-        <button class="btn btn-secondary js-show-index-filters m-0 rounded-sm" type="button">
-          <%= svg_icon name: "filter.svg", width: '16', height: '16' %>
-          <span class="d-none d-sm-inline"><%= I18n.t('spree.dash.filters') %></span>
-        </button>
-      </div>
-      <% unless defined?(simple) %>
-        <div id="table-filter" data-hook class="card filter-well mt-4">
+      <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#tableFilter" aria-expanded="false" aria-controls="tableFilter">
+        <%= svg_icon name: "filter.svg", width: '16', height: '16' %>
+        <span class="d-none d-sm-inline"><%= I18n.t('spree.dash.filters') %></span>
+      </button>
+    </div>
+    <% unless defined?(simple) %>
+      <div id="tableFilter" class="collapse pt-3">
+        <div class="card">
           <div class="card-body">
             <%= yield :table_filter %>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class="table-active-filters js-filters"></div>
 <% end %>

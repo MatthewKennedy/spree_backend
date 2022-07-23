@@ -1,5 +1,9 @@
 ---
 en:
+  admin:
+    dash:
+      actions:
+        delete: Delete
   spree:
     dash:
       actions:
@@ -80,6 +84,7 @@ en:
       create_platform_application: Create platform application
       create_webhook_subscriber: Create webhook subscriber
       created_at: Created At
+      customer: Customer
       customer_details_updated: Customer details updated
       dashboard: Dashboard
       date: Date
@@ -103,6 +108,7 @@ en:
         front_end: Storefront
       download_sdk: Download SDK
       edit: Edit
+      email: Email
       ends_at: Ends at
       errors:
         error_reposition_failed: Error reposition failed
@@ -110,6 +116,7 @@ en:
           blank: Blank
           cannot_remove_icon: Cannot remove icon
       execution_time: Execution Time
+      filter: Filter
       filters: Filters
       kind: Kind
       language: Language
@@ -123,7 +130,6 @@ en:
       meta_description: Meta description
       meta_keywords: Meta keywords
       meta_title: Meta title
-      more_information: More information
       name: Name
       navigation:
         add_new_item: Add New Item
@@ -136,14 +142,12 @@ en:
           body: Default menus are menus whose language matches the associated store's default language.<br><br> <h5>Example</h5>If you have a store that uses Spanish as the default language but also offers the options of German and French; your default header menu for this store would be set to use <b>Español (es)</b> for the language and <b>Header</b> as the location.<br><br> <h5>Why Are Default Menus Important?</h5> Default menus are displayed to your visitor if no menu is available in the current language they are browsing. It is recommended that you create a default menu for each menu location within each store.<br><br> <h5>More Information</h5>To learn more about menus, view the official Spree user documentation by <a href='https://guides.spreecommerce.org/user/navigation/building_the_main_menu.html' target='_blank' class='alert-link'>clicking here</a>.
           title: Default Menus
         image_alt_text: Add alt text to your image
-        image_info: "<b>NOTE:</b> You can attach an image to any menu item, but your image will only be displayed in the main menu when nested inside a container with the code <b>promo</b>.<br><br> For best results use images with a width of 540px and height of 350px."
         information:
           item_type: 'Menu items with the Type: ''Link'' are used for linking to web pages. Menu items set to Type: ''Container'' are used to group links, giving structure to your menu.'
         item_type: Item Type
         link_settings: Link Settings
         link_to: Link To
         link_to_info: Link to Pages, Products, Taxons or external URL's.
-        menu_item_type_container_message: 'Containers are menu items that do not link to a destination. If you are building the Spree Main Menu create containers with the code: <b>category</b> or <b>promo</b>, and then nest your links inside these containers build out your menu. <br><br> For an indepth guide to building the main menu see the documenttation page <a href=''https://guides.spreecommerce.org/user/navigation/building_the_main_menu.html'' target=''_blank'' class=''alert-link''>Building The Main Menu</a>'
         menu_items: "%{menu_name} Items"
         menus: Menus
         move_could_not_be_saved: 'ERROR: This move could not be saved.'
@@ -209,16 +213,27 @@ en:
         set_order_currency: Set Order Currency
         the_order_currency_is_locked_once_items_are_added: The currency of this order is locked.
         tracking_number: Tracking Number
+      order_state:
+        address: Address
+        awaiting_return: Awaiting return
+        canceled: Cancelled
+        cart: Cart
+        complete: Complete
+        confirm: Confirm
+        delivery: Delivery
+        payment: Payment
+        resumed: Resumed
+        returned: Returned
       orders:
         abandoned_checkouts: Abandoned Checkouts
-        all: All
         all_orders: All Orders
         draft_orders: Draft Orders
-        unfulfilled: Unfulfilled
-        unpaid: Unpaid
       organization: Organization
+      payment: Payment
       payment_states:
         balance_due: Balance due
+        credit_owed: Credit owed
+        failed: Failed
         paid: Paid
         void: Void
       payments:
@@ -288,7 +303,11 @@ en:
         tax_categories: Tax categories
         tax_rates: Tax rates
         zones: Zones
+      shipment: Shipment
       shipment_states:
+        backorder: Backorder
+        canceled: Cancelled
+        partial: Partial
         pending: Pending
         ready: Ready
         shipped: Shipped
@@ -377,6 +396,7 @@ en:
         use_the_search_box_above_to_search_for_taxons: Use the search box above to search for a Taxon.
       this_order_has_already_received_a_refund: This order has already received a refund
       time: Time
+      total: Total
       url: URL
       user:
         available_store_credit: User has %{amount} in Store Credit available.

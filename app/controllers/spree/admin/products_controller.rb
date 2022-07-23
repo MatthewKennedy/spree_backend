@@ -12,7 +12,6 @@ module Spree
       update.before :update_before
       update.before :skip_updating_status
       update.after :update_status
-      helper_method :clone_object_url
 
       def show
         session[:return_to] ||= request.referer
@@ -199,10 +198,6 @@ module Spree
           master: [],
           variants: [:prices]
         }
-      end
-
-      def clone_object_url(resource)
-        clone_admin_product_url resource
       end
 
       def permitted_resource_params

@@ -20,19 +20,19 @@ module Spree
       MENU_ICON_SIZE = 18
 
       def accounts_menu_active?
-        @menu_panel_kind == 'account'
+        @menu_panel_kind == "account"
       end
 
       def main_menu_active?
-        @menu_panel_kind == 'main'
+        @menu_panel_kind == "main"
       end
 
       def settings_menu_active?
-        @menu_panel_kind == 'settings'
+        @menu_panel_kind == "settings"
       end
 
       def store_switcher_menu_active?
-        @menu_panel_kind == 'store_switcher'
+        @menu_panel_kind == "store_switcher"
       end
 
       def tab(*args)
@@ -87,7 +87,7 @@ module Spree
         controller_name = "menu" if selected
 
         css_classes << options[:css_class] if options[:css_class]
-        content_tag("li", link, class: css_classes.join(" "), data: { controller: controller_name } )
+        content_tag("li", link, class: css_classes.join(" "), data: {controller: controller_name})
       end
 
       # Single main menu item
@@ -144,49 +144,51 @@ module Spree
         ["Spree::#{model_name.classify}", model_name.classify, model_name.tr("_", "/").classify].find(&:safe_constantize).try(:safe_constantize)
       end
 
-      def link_to_clone(resource, options = {})
-        options[:data] = {action: "clone", "original-title": Spree.t(:clone)}
-        options[:class] = "btn btn-secondary btn-sm with-tip icon-link"
-        options[:method] = :post
-        options[:icon] = "clone.svg"
-        button_link_to "", clone_object_url(resource), options
+      def link_to_edit_url(url, options = {})
+        options[:data] = {action: "edit"}
+        options[:no_text] = true
+        options[:class] = "btn btn-secondary btn-sm"
+
+        link_to_with_icon("edit.svg", I18n.t('spree.dash.actions.edit'), url, options)
       end
 
-      def link_to_clone_promotion(promotion, options = {})
-        options[:data] = {action: "clone", "original-title": Spree.t(:clone)}
-        options[:class] = "btn btn-secondary btn-sm with-tip"
-        options[:method] = :post
-        options[:icon] = "clone.svg"
-        button_link_to "", clone_admin_promotion_path(promotion), options
+      def link_to_clone(resource, options = {})
+        url = options[:url] || clone_object_url(resource)
+        name = options[:name] || I18n.t("admin.dash.actions.clone")
+
+        options[:no_text] ||= true
+        options[:class] ||= "btn btn-light btn-sm"
+        options[:data] ||= {turbo_method: :post, turbo_confirm: I18n.t("spree.dash.are_you_sure")}
+
+        link_to_with_icon("clone.svg", name, url, options)
       end
 
       def link_to_edit(resource, options = {})
         url = options[:url] || edit_object_url(resource)
-        options[:data] = {action: "edit"}
-        options[:class] = "btn btn-secondary btn-sm"
-        link_to_with_icon("edit.svg", Spree.t(:edit), url, options)
-      end
+        name = options[:name] || I18n.t("admin.dash.actions.edit")
 
-      def link_to_edit_url(url, options = {})
-        options[:data] = {action: "edit"}
-        options[:class] = "btn btn-secondary btn-sm"
-        link_to_with_icon("edit.svg", Spree.t(:edit), url, options)
+        options[:no_text] ||= true
+        options[:class] ||= "btn btn-light btn-sm"
+
+        link_to_with_icon("edit.svg", name, url, options)
       end
 
       def link_to_delete(resource, options = {})
         url = options[:url] || object_url(resource)
-        name = options[:name] || Spree.t(:delete)
-        options[:class] = "btn btn-danger btn-sm delete-resource"
-        options[:data] = {confirm: Spree.t(:are_you_sure), action: "remove"}
+        name = options[:name] || I18n.t("admin.dash.actions.delete")
 
-        link_to_with_icon "delete.svg", name, url, options
+        options[:no_text] ||= true
+        options[:class] ||= "btn btn-outline-danger btn-sm"
+        options[:data] ||= {turbo_method: :delete, turbo_confirm: I18n.t("spree.dash.are_you_sure")}
+
+        link_to_with_icon("delete.svg", name, url, options)
       end
 
       def link_to_with_icon(icon_name, text, url, options = {})
         options[:class] = (options[:class].to_s + " icon-link with-tip action-#{icon_name}").strip
         options[:title] = text if options[:no_text]
         text = options[:no_text] ? "" : content_tag(:span, text)
-        options.delete(:no_text)
+
         options[:width] ||= ICON_SIZE
         options[:height] ||= ICON_SIZE
         options[:icon_classes] ||= ""
@@ -264,7 +266,7 @@ module Spree
       end
 
       def page_header_back_button(url)
-        link_to url, class: "btn btn-outline-info me-3" do
+        link_to url, class: "btn btn-outline-secondary me-3" do
           svg_icon name: "chevron-left.svg", width: 15, height: 15
         end
       end

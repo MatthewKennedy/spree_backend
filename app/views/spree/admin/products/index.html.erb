@@ -35,17 +35,19 @@
 
 <% if @collection.any? %>
 <div class="table-responsive border rounded bg-white">
-  <table class="table" id="listing_products">
+  <table class="table table-hover rounded" id="listing_products">
     <thead class="text-muted">
       <tr data-hook="admin_products_index_headers">
-        <th scope="col" class="ps-5" colspan="2"><%= sort_link @search,:name, Spree.t(:name), { default_order: "desc" }, {title: 'admin_products_listing_name_title'} %></th>
+        <th scope="col" class="" colspan="2">
+          <%= Spree.t(:name) %>
+        </th>
         <% if defined?(Spree::Vendor) && can?(:manage, Spree::Vendor) %>
           <th scope="col" class="text-center"><%= Spree.t(:vendor) %></th>
         <% end %>
         <th scope="col" class="text-center"><%= I18n.t('spree.dash.kind') %></th>
         <th scope="col" class="text-center"><%= Spree.t(:status) %></th>
         <th scope="col" class="text-center" class="text-center">
-          <%= sort_link @search, :master_default_price_amount, Spree.t(:price), {}, {title: 'admin_products_listing_price_title'} %>
+          <%= Spree.t(:price) %>
         </th>
         <th scope="col" class="text-center" data-hook="admin_products_index_header_actions" class="actions"></th>
       </tr>
@@ -53,23 +55,25 @@
     <tbody>
       <% @collection.each do |product| %>
         <% available_status = available_status(product) %>
-          <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
-            <td scope="row" class="image">
+          <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows">
+            <td style="width:50px;" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="mini-img">
               <%= link_to edit_admin_product_path(product) do %>
                 <%= small_image product %>
               <% end %>
             </td>
-            <td>
-              <%= link_to product.name, edit_admin_product_path(product) %>
+
+            <td data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+              <%= link_to product.name, edit_admin_product_path(product), class: 'text-reset text-decoration-none' %>
               <br>
-              <small><%= product.sku rescue '' %></small>
+              <small>SKU: <span class="text-secondary"><%= product.sku rescue '' %></span></small>
             </td>
+
             <% if defined?(Spree::Vendor) && can?(:manage, Spree::Vendor) %>
-              <td class="text-center">
+              <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
                 <%= link_to product.vendor.name, spree.admin_vendor_path(product.vendor_id) if product.vendor.present? %>
               </td>
             <% end %>
-            <td class="text-center">
+            <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
               <span class="badge rounded-pill text-bg-light">
                 <% if product.digital? %>
                   <%= I18n.t('spree.dash.product_kinds.digital') %>
@@ -78,14 +82,19 @@
                 <% end %>
               </span>
             </td>
-            <td class="status text-center"><%= active_badge(available_status == I18n.t('spree.dash.products.active'), label: available_status) %></td>
-            <td class="text-center"><%= display_price(product) %></td>
+
+            <td class="status text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+              <%= active_badge(available_status == I18n.t('spree.dash.products.active'), label: available_status) %>
+            </td>
+
+            <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+              <%= display_price(product) %>
+            </td>
 
             <td class="actions " data-hook="admin_products_index_row_actions">
               <span class="d-flex justify-content-end">
-                <%= link_to_edit product, no_text: true, class: 'edit' if can?(:edit, product) && !product.deleted? %>
-                <%= link_to_clone product, no_text: true, class: 'clone' if can?(:clone, product) %>
-                <%= link_to_delete product, no_text: true if can?(:delete, product) && !product.deleted? %>
+                <%= link_to_clone(product) if can?(:clone, product) %>
+                <%= link_to_delete(product) if can?(:delete, product) && !product.deleted? %>
               </span>
             </td>
           </tr>

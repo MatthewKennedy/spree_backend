@@ -58,17 +58,18 @@
           <div class="card-body">
             <% unless shipment.ready? || shipment.shipped? and can?(:update, shipment) %>
               <%= form_with model: shipment, url: spree.add_item_admin_shipment_path(shipment.id), method: :patch, class: 'input-group' do |f| %>
-                  <div class="form-group form-floating col-2">
+                  <div class="form-group form-floating">
                     <%= f.number_field :quantity, class: 'form-control rounded-start rounded-0',
                                                   placeholder: I18n.t('spree.dash.quantity'),
                                                   required: true,
+
                                                   data: { controller: 'input-formatting',
                                                           input_formatting_options_value: { numericOnly: true,
                                                                                             blocks: [4] } } %>
                     <%= f.label :quantity %>
                   </div>
 
-                  <div class="form-group form-floating col">
+                  <div class="form-group form-floating" style="width: 60%">
                     <%= f.select :variant_id, [], {}, class: 'form-select rounded-0', required: true,
                                                       placeholder: I18n.t('spree.dash.order.search_for_a_product_or_variant'),
                                                       data: { action: 'change->form-validation#validate',
@@ -83,7 +84,7 @@
                     <%= label_tag :variant_id, I18n.t('spree.dash.order.products'), class: 'form-label' %>
                   </div>
 
-                  <div class="form-group form-floating col-auto">
+                  <div class="form-group">
                     <%= f.submit I18n.t('spree.dash.order.add'), class: 'btn btn-outline-secondary rounded-0 rounded-end w-100 h-100', data: { form_validation_target: "submitBtn" } %>
                   </div>
               <% end %>
