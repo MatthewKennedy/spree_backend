@@ -118,3 +118,9 @@ div.admin-product-image-container {
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+
+dialog#customTurboConfirm {
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}

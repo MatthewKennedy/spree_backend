@@ -55,7 +55,6 @@ test_app
 vendor/bundle
 */vendor/bundle
 .ignore
-TODO
 
 node_modules
 app/assets/javascripts/spree_dash.js
