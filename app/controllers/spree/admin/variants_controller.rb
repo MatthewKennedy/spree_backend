@@ -8,20 +8,9 @@ module Spree
       before_action :redirect_on_empty_option_values, only: [:new]
       before_action :load_data, only: [:new, :create, :edit, :update]
 
-      # override the destroy method to set deleted_at value
-      # instead of actually deleting the product.
       def destroy
-        @variant = parent.variants.find(params[:id])
-        if @variant.destroy
-          flash[:success] = I18n.t("spree.dash.notice_messages.variant_deleted")
-        else
-          flash[:error] = I18n.t("spree.dash.notice_messages.variant_not_deleted", error: @variant.errors.full_messages.to_sentence)
-        end
-
-        respond_with(@variant) do |format|
-          format.html { redirect_to spree.admin_product_variants_url(params[:product_id]) }
-          format.js { render_js_for_destroy }
-        end
+        @object = parent.variants.find(params[:id])
+        super
       end
 
       protected

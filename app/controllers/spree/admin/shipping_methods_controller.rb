@@ -5,17 +5,6 @@ module Spree
       before_action :set_shipping_category, only: [:create, :update]
       before_action :set_zones, only: [:create, :update]
 
-      def destroy
-        @object.destroy
-
-        flash[:success] = flash_message_for(@object, :successfully_removed)
-
-        respond_with(@object) do |format|
-          format.html { redirect_to collection_url }
-          format.js { render_js_for_destroy }
-        end
-      end
-
       private
 
       def load_main_menu_panel

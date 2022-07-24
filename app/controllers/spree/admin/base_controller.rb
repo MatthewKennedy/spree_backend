@@ -60,7 +60,7 @@ module Spree
         Spree.t(event_sym, resource: resource_desc)
       end
 
-      def stream_flash_alert(kind:, message: "No message set")
+      def stream_flash_alert(kind:, message: I18n.t("spree.dash.no_message_set"))
         style = case kind
         when :success
           "text-bg-success"
@@ -76,10 +76,6 @@ module Spree
               locals: {message: message, style: style})
           end
         end
-      end
-
-      def render_js_for_destroy
-        render partial: "/spree/admin/shared/destroy"
       end
 
       def config_locale

@@ -53,7 +53,6 @@ module Spree
           flash[:success] = flash_message_for(@store_credit, :successfully_removed)
           respond_with(@store_credit) do |format|
             format.html { redirect_to spree.admin_user_store_credits_path(@user) }
-            format.js { render_js_for_destroy }
           end
         else
           render plain: I18n.t("spree.dash.store_credit.errors.unable_to_delete"), status: :unprocessable_entity
