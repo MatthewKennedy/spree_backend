@@ -85,15 +85,6 @@ module Spree
         end
       end
 
-      def svg_icon(name:, width:, height:, classes: "")
-        if name.ends_with?(".svg")
-          icon_name = File.basename(name, File.extname(name))
-          inline_svg_tag "#{icon_name}.svg", class: "icon-#{icon_name} #{classes}", size: "#{width}px*#{height}px"
-        else
-          inline_svg_tag "#{name}.svg", class: "icon-#{name} #{classes}", size: "#{width}px*#{height}px"
-        end
-      end
-
       def datepicker_field_value(date)
         unless date.blank?
           l(date, format: "%Y/%m/%d")

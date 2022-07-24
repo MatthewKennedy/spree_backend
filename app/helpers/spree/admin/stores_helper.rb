@@ -16,10 +16,10 @@ module Spree
       def store_switcher_link(store)
         if current_store.id == store.id
           classes = "disabled bg-light"
-          icon = svg_icon name: "circle-fill.svg", width: "18", height: "18"
+          icon = inline_svg_tag "circle-fill.svg", size: "18px * 18px"
         else
           classes = nil
-          icon = svg_icon name: "circle.svg", width: "18", height: "18"
+          icon = inline_svg_tag "circle.svg", size: "18px * 18px"
         end
 
         link_to icon + store.unique_name, spree.admin_url(host: store.formatted_url),

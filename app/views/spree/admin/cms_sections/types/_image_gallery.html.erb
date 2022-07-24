@@ -2,10 +2,10 @@
   <div id="ImageGalleryLayout" class="col-12 col-md-6 m-auto">
     <div id="LayoutType">
       <div id="Default" class="<% unless @cms_section.layout_style == 'Default' %>d-none<% end %>">
-        <%= svg_icon name: "default-layout.svg", width: '150', height: '150' %>
+        <%= inline_svg_tag "default-layout.svg", size: '150px * 150px' %>
       </div>
       <div id="Reversed" class="<% unless @cms_section.layout_style == 'Reversed' %>d-none<% end %>">
-        <%= svg_icon name: "reversed-layout.svg", width: '150', height: '150' %>
+        <%= inline_svg_tag "reversed-layout.svg", size: '150px * 150px' %>
       </div>
     </div>
 

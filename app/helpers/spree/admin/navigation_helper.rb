@@ -73,7 +73,7 @@ module Spree
             class: "w-100 px-3 py-2 d-flex align-items-center text-muted",
             width: MENU_ICON_SIZE,
             height: MENU_ICON_SIZE,
-            icon_classes: "me-2"
+            icon_class: "me-2"
           )
         else
           link_to(
@@ -93,10 +93,9 @@ module Spree
       # Single main menu item
       def main_menu_item(text, url: nil, icon: nil)
         link_to url, data: {bs_toggle: "collapse"}, class: "d-flex w-100 px-3 py-2 position-relative align-items-center" do
-          svg_icon(name: icon, classes: "me-2 text-muted", width: MENU_ICON_SIZE, height: MENU_ICON_SIZE) +
+          inline_svg_tag(icon, class: "me-2 text-muted", size: "#{MENU_ICON_SIZE}px * #{MENU_ICON_SIZE}px") +
             content_tag(:span, raw(" #{text}"), class: "text-muted") +
-            svg_icon(name: "chevron-right.svg", classes: "drop-menu-indicator text-muted position-absolute", width: (MENU_ICON_SIZE - 8),
-              height: (MENU_ICON_SIZE - 8))
+            inline_svg_tag("chevron-right.svg", class: "drop-menu-indicator text-muted position-absolute", size: "#{MENU_ICON_SIZE - 8}px * #{MENU_ICON_SIZE - 8}")
         end
       end
 
@@ -181,13 +180,11 @@ module Spree
         options[:title] = text if options[:no_text]
         text = options[:no_text] ? "" : content_tag(:span, text)
 
-        options[:width] ||= ICON_SIZE
-        options[:height] ||= ICON_SIZE
-        options[:icon_classes] ||= ""
+        options[:size] ||= "#{ICON_SIZE}px * #{ICON_SIZE}px"
+        options[:icon_class] ||= ""
 
         if icon_name
-          icon = svg_icon(name: icon_name, classes: "icon icon-#{icon_name} #{options[:icon_classes]}", width: options[:width],
-            height: options[:height])
+          icon = inline_svg_tag(icon_name, class: "svg-icon icon-#{icon_name} #{options[:icon_class]}", size: options[:size])
           text = "#{icon} #{text}"
         end
 
@@ -197,7 +194,7 @@ module Spree
       # Override: Add disable_with option to prevent multiple request on consecutive clicks
       def button(text, icon_name = nil, button_type = "submit", options = {})
         if icon_name
-          icon = svg_icon(name: icon_name, classes: "icon icon-#{icon_name}", width: ICON_SIZE, height: ICON_SIZE)
+          icon = inline_svg_tag(icon_name, class: "svg-icon icon-#{icon_name}", size: "#{ICON_SIZE}px * #{ICON_SIZE}xp")
           text = "#{icon} #{text}"
         end
 
@@ -235,7 +232,7 @@ module Spree
           html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : "btn btn-secondary"
 
           if html_options[:icon]
-            icon = svg_icon(name: html_options[:icon], classes: "icon icon-#{html_options[:icon]}", width: ICON_SIZE, height: ICON_SIZE)
+            icon = inline_svg_tag(html_options[:icon], class: "svg-icon icon-#{html_options[:icon]}", size: "#{ICON_SIZE}px * #{ICON_SIZE}px")
             text = "#{icon} #{text}"
           end
 
@@ -255,7 +252,7 @@ module Spree
 
       def page_header_back_button(url)
         link_to url, class: "btn btn-outline-secondary me-3" do
-          svg_icon name: "chevron-left.svg", width: 15, height: 15
+          inline_svg_tag "chevron-left.svg", size: "15px * 15px"
         end
       end
     end

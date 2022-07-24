@@ -48,7 +48,7 @@
             <%= f.hidden_field :variant_id, value: item.line_item.variant_id %>
 
             <%= f.button :submit, class: "btn btn-danger btn-sm" do %>
-              <%= svg_icon name: "x-lg.svg", width: '16', height: '16' %>
+              <%= inline_svg_tag "x-lg.svg", size: '16px * 16px' %>
             <% end %>
           <% end %>
         <% end %>
