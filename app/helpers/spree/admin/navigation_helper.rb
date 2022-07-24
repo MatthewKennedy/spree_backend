@@ -194,19 +194,13 @@ module Spree
       # Override: Add disable_with option to prevent multiple request on consecutive clicks
       def button(text, icon_name = nil, button_type = "submit", options = {})
         if icon_name
-          icon = inline_svg_tag(icon_name, class: "svg-icon icon-#{icon_name}", size: "#{ICON_SIZE}px * #{ICON_SIZE}xp")
+          icon = inline_svg_tag(icon_name, class: "svg-icon icon-#{icon_name}", size: "#{ICON_SIZE}px * #{ICON_SIZE}px")
           text = "#{icon} #{text}"
         end
 
         css_classes = options[:class] || "btn-success "
-        button_tag(
-          text.html_safe,
-          options.merge(
-            :type => button_type,
-            :class => "btn #{css_classes}",
-            "data-disable-with" => "#{Spree.t(:saving)}..."
-          )
-        )
+
+        button_tag(text.html_safe, options.merge(type: button_type, class: "btn #{css_classes}"))
       end
 
       def button_link_to(text, url, html_options = {})
