@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <% reimbursements.each do |reimbursement| %>
-        <tr id="<%= spree_dom_id(reimbursement) %>" data-hook="reimbursement_row">
+        <tr id="<%= dom_id(reimbursement) %>" data-hook="reimbursement_row">
           <td>
             <% if reimbursement.reimbursed? %>
               <%= link_to reimbursement.number, url_for([:admin, @order, reimbursement]) %>

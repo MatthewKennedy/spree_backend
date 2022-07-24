@@ -8,12 +8,12 @@
       </tr>
     </thead>
     <tbody>
-      <% taxons.each do |taxonp| %>
-        <tr id="<%= spree_dom_id(taxon) %>" data-hook="taxons_row">
+      <% taxons.each do |taxon| %>
+        <tr id="<%= dom_id(taxon) %>" data-hook="taxons_row" data-stream-exit-class="animate__fadeOut">
           <td><%= taxon.name %></td>
           <td><%= taxon_path taxon %></td>
           <td class="actions">
-            <%= link_to_delete taxon, url: remove_admin_product_taxon_url(@product, taxon), name: icon('delete.svg') + ' ' + Spree.t(:remove) %>
+            <%= link_to_delete(taxon, url: remove_admin_product_taxon_url(@product, taxon)) %>
           </td>
         </tr>
       <% end %>

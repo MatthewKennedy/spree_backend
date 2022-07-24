@@ -55,7 +55,7 @@
     <tbody>
       <% @collection.each do |product| %>
         <% available_status = available_status(product) %>
-          <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows">
+          <tr <%== "style='color: red;'" if product.deleted? %> id="<%= dom_id(product) %>" data-hook="admin_products_index_rows" data-stream-exit-class="animate__fadeOut">
             <td style="width:50px;" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="mini-img">
               <%= link_to edit_admin_product_path(product) do %>
                 <%= small_image product %>

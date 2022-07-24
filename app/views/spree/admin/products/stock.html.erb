@@ -18,7 +18,7 @@
       <tbody>
         <% @variants.each do |variant| %>
           <% if variant.stock_items.present? %>
-            <tr id="<%= spree_dom_id variant %>" data-hook="admin_product_stock_management_index_rows">
+            <tr id="<%= dom_id(variant) %>" data-hook="admin_product_stock_management_index_rows">
               <td class="image text-center">
                 <%= small_image(variant) %>
               </td>

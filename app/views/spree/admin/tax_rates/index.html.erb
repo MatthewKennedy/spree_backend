@@ -23,7 +23,7 @@
     </thead>
     <tbody>
       <% @tax_rates.each do |tax_rate| %>
-      <tr id="<%= spree_dom_id tax_rate %>" data-hook="rate_row">
+      <tr id="<%= dom_id(tax_rate) %>" data-hook="rate_row" data-stream-exit-class="animate__fadeOut">
         <td><%= tax_rate.zone.try(:name) || Spree.t(:not_available) %></td>
         <td><%= tax_rate.name %></td>
         <td><%= tax_rate.tax_category.try(:name) || Spree.t(:not_available) %></td>
@@ -33,8 +33,8 @@
         <td><%= tax_rate.calculator.to_s %></td>
         <td class="actions">
           <span class="d-flex justify-content-end">
-            <%= link_to_edit(tax_rate, no_text: true) if can? :edit, tax_rate %>
-            <%= link_to_delete(tax_rate, no_text: true) if can? :delete, tax_rate %>
+            <%= link_to_edit(tax_rate) if can? :edit, tax_rate %>
+            <%= link_to_delete(tax_rate) if can? :delete, tax_rate %>
           </span>
         </td>
       </tr>

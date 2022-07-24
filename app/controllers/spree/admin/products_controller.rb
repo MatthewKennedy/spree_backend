@@ -34,26 +34,6 @@ module Spree
         super
       end
 
-      def destroy
-        @product = product_scope.friendly.find(params[:id])
-
-        begin
-          # TODO: why is @product.destroy raising ActiveRecord::RecordNotDestroyed instead of failing with false result
-          if @product.destroy
-            flash[:success] = I18n.t("spree.dash.notice_messages.product_deleted")
-          else
-            flash[:error] = I18n.t("spree.dash.notice_messages.product_not_deleted", error: @product.errors.full_messages.to_sentence)
-          end
-        rescue ActiveRecord::RecordNotDestroyed => e
-          flash[:error] = I18n.t("spree.dash.notice_messages.product_not_deleted", error: e.message)
-        end
-
-        respond_with(@product) do |format|
-          format.html { redirect_to collection_url }
-          format.js { render_js_for_destroy }
-        end
-      end
-
       def clone
         @new = @product.duplicate
 

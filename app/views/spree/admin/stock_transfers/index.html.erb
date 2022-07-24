@@ -58,7 +58,7 @@
     </thead>
     <tbody>
       <% @stock_transfers.each do |stock_transfer| %>
-        <tr id="<%= spree_dom_id stock_transfer %>" data-hook="stock_transfer_row">
+        <tr id="<%= dom_id(stock_transfer) %>" data-hook="stock_transfer_row">
           <td><%= link_to stock_transfer.number, admin_stock_transfer_path(stock_transfer) %></td>
           <td><%= stock_transfer.reference %></td>
           <td>

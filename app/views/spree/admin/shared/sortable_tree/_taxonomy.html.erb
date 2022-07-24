@@ -1,7 +1,7 @@
 <% taxonomy = parent_resource %>
 <% taxon = child_resource %>
 
-<div id="<%= dom_id(taxon) %>" class="sortable-tree-item-row d-flex flex-nowrap p-1 align-items-center">
+<div id="<%= dom_id(taxon) %>" class="sortable-tree-item-row d-flex flex-nowrap p-1 align-items-center" data-stream-exit-class="animate__fadeOut">
   <%= render 'spree/admin/shared/drag_handle' %>
 
   <div class="d-flex align-items-center overflow-hidden w-100">
@@ -26,7 +26,7 @@
   </div>
 
   <div class="d-flex align-items-center space-buttons px-2">
-    <%= link_to_edit(taxon, no_text: true, url: spree.edit_admin_taxonomy_taxon_path(taxonomy, taxon.id)) %>
-    <%= link_to_delete(taxon, no_text: true, url: spree.admin_taxonomy_taxon_path(taxonomy, taxon.id)) if can?(:destroy, taxon) %>
+    <%= link_to_edit(taxon, url: spree.edit_admin_taxonomy_taxon_path(taxonomy, taxon.id)) %>
+    <%= link_to_delete(taxon, url: spree.admin_taxonomy_taxon_path(taxonomy, taxon.id)) if can?(:destroy, taxon) %>
   </div>
 </div>

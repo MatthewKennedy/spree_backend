@@ -19,7 +19,7 @@
     <thead class="text-muted">
     <tbody>
       <% @stores.each do |store| %>
-        <tr>
+        <tr id="<%= dom_id(store) %>" data-stream-exit-class="animate__fadeOut">
           <td><%= store.unique_name %></td>
           <td><%= link_to store.url, store.formatted_url, target: :blank %></td>
           <td><%= store.supported_currencies_list.map(&:iso_code).join(', ') %></td>
@@ -36,7 +36,7 @@
                 <%= link_to_with_icon('save.svg', btn_label, btn_url, no_text: true, method: (store.default? ? nil : :put), class: "btn btn-#{btn_class} btn-sm with-tip", aria: {disabled: store.default?}) %>
               <% end %>
 
-              <%= link_to_delete store, no_text: true, url: spree.admin_store_path(store) if can?(:destroy, store) %>
+              <%= link_to_delete(store) if can?(:destroy, store) %>
             </span>
           </td>
         </tr>

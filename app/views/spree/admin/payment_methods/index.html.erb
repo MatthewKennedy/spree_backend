@@ -38,7 +38,7 @@
     </thead>
     <tbody data-controller="sortable" data-sortable-resource-name-value="payment_method">
       <% @payment_methods.each do |method| %>
-        <tr id="<%= spree_dom_id method %>" data-hook="admin_payment_methods_index_rows" data-sortable-update-url="<%= spree.admin_payment_method_path(method) %>">
+        <tr id="<%= dom_id(method) %>" data-hook="admin_payment_methods_index_rows" data-sortable-update-url="<%= spree.admin_payment_method_path(method) %>" data-stream-exit-class="animate__fadeOut">
           <td class="move-handle">
             <% if can?(:edit, method) %>
               <%= render 'spree/admin/shared/drag_handle' %>
@@ -50,8 +50,8 @@
           <td class="text-center"><%= active_badge(method.active) %></td>
           <td data-hook="admin_payment_methods_index_row_actions" class="actions">
             <span class="d-flex justify-content-end">
-              <%= link_to_edit(method, no_text: true) if can? :edit, method %>
-              <%= link_to_delete(method, no_text: true) if can? :delete, method %>
+              <%= link_to_edit(method) if can? :edit, method %>
+              <%= link_to_delete(method) if can? :delete, method %>
             </span>
           </td>
         </tr>

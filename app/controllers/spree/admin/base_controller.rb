@@ -18,7 +18,7 @@ module Spree
 
       before_action :authorize_admin, :load_stores, :load_main_menu_panel
 
-      helper_method :admin_oauth_token
+      helper_method :admin_oauth_token, :stream_flash_alert
 
       protected
 

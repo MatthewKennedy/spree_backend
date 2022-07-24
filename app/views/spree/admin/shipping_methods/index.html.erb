@@ -23,7 +23,7 @@
     </thead>
     <tbody>
       <% @shipping_methods.includes(:zones, :calculator).each do |shipping_method| %>
-        <tr id="<%= spree_dom_id shipping_method %>" data-hook="admin_shipping_methods_index_rows">
+        <tr id="<%= dom_id(shipping_method) %>" data-hook="admin_shipping_methods_index_rows" data-stream-exit-class="animate__fadeOut">
           <td>
             <%= shipping_method.name %>
             <% if shipping_method.admin_name.present? %>
@@ -57,8 +57,8 @@
             <% end %>
           <td class="actions" data-hook="admin_shipping_methods_index_row_actions">
             <span class="d-flex justify-content-end">
-              <%= link_to_edit(shipping_method, no_text: true) if can? :edit, shipping_method %>
-              <%= link_to_delete(shipping_method, no_text: true) if can? :delete, shipping_method %>
+              <%= link_to_edit(shipping_method) if can? :edit, shipping_method %>
+              <%= link_to_delete(shipping_method) if can? :delete, shipping_method %>
             </span>
           </td>
         </tr>

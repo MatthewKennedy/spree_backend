@@ -23,21 +23,6 @@ module Spree
         end
       end
 
-      def stream_flash_alert(message: "No message set", kind: "notice")
-        style = case kind
-        when "success"
-          "text-bg-success"
-        when "error"
-          "text-bg-warning"
-        else
-          "text-bg-dark"
-        end
-
-        turbo_stream.append "FlashAlertsContainer" do
-          render "spree/admin/shared/toast", message: message, style: style
-        end
-      end
-
       def field_container(model, method, options = {}, &block)
         css_classes = options[:class].to_a
         css_classes << "form-group"
@@ -241,10 +226,6 @@ module Spree
           },
           title: Spree.t(:remove),
           no_text: true) + form.hidden_field(:_destroy)
-      end
-
-      def spree_dom_id(record)
-        dom_id(record, "spree")
       end
 
       I18N_PLURAL_MANY_COUNT = 2.1
