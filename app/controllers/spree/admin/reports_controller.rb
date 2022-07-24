@@ -1,8 +1,6 @@
 module Spree
   module Admin
     class ReportsController < Spree::Admin::BaseController
-      respond_to :html
-
       class << self
         def available_reports
           @@available_reports

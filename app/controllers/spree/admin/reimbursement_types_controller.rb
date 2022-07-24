@@ -10,13 +10,11 @@ module Spree
               flash[:success] = flash_message_for(@object, :successfully_updated)
               redirect_to location_after_save
             end
-            format.js { render layout: false }
           end
         else
           invoke_callbacks(:update, :fails)
           respond_with(@object) do |format|
             format.html { render action: :edit }
-            format.js { render layout: false }
           end
         end
       end

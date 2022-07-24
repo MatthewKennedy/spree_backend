@@ -36,7 +36,7 @@
             </div>
 
             <div>
-              <%= link_to I18n.t('spree.dash.actions.edit'), edit_admin_product_path(product), class: 'btn', data: {turbo_frame: '_top'} %>
+              <%= link_to I18n.t('spree.dash.actions.edit'), spree.edit_admin_product_path(product), class: 'btn', data: {turbo_frame: '_top'} %>
               <%= form_with scope: :product, url: spree.remove_from_taxon_admin_product_path(product), class: 'd-inline', method: :patch, data: {turbo: true} do |f| %>
                 <%= f.hidden_field :taxon_id, value: @taxon.id %>
                 <%= f.submit I18n.t('spree.dash.actions.remove'), class: 'btn' %>

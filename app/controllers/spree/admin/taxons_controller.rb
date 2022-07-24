@@ -4,7 +4,6 @@ module Spree
       belongs_to "spree/taxonomy"
 
       before_action :set_permalink_part, only: [:edit]
-      respond_to :html, :js
 
       def index
       end
@@ -44,12 +43,10 @@ module Spree
 
           respond_with(@taxon) do |format|
             format.html { redirect_to spree.edit_admin_taxonomy_taxon_path(@taxonomy.id, @taxon.id) }
-            format.json { render json: @taxon.to_json }
           end
         else
           respond_with(@taxon) do |format|
             format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @taxon.errors.full_messages.to_sentence, status: :unprocessable_entity }
           end
         end
       end

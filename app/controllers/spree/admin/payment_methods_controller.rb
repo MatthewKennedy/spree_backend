@@ -5,8 +5,6 @@ module Spree
       before_action :load_data
       before_action :validate_payment_method_provider, only: :create
 
-      respond_to :html
-
       def create
         @payment_method = params[:payment_method].delete(:type).constantize.new(payment_method_params)
         @object = @payment_method

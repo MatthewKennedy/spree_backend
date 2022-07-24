@@ -56,24 +56,24 @@
       <% @collection.each do |product| %>
         <% available_status = available_status(product) %>
           <tr <%== "style='color: red;'" if product.deleted? %> id="<%= dom_id(product) %>" data-hook="admin_products_index_rows" data-stream-exit-class="animate__fadeOut">
-            <td style="width:50px;" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="mini-img">
-              <%= link_to edit_admin_product_path(product) do %>
+            <td style="width:50px;" data-controller="linkable-td" data-linkable-td-uri-value="<%= spree.edit_admin_product_path(product) %>" class="mini-img">
+              <%= link_to spree.edit_admin_product_path(product) do %>
                 <%= small_image product %>
               <% end %>
             </td>
 
-            <td data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
-              <%= link_to product.name, edit_admin_product_path(product), class: 'text-reset text-decoration-none' %>
+            <td data-controller="linkable-td" data-linkable-td-uri-value="<%= spree.edit_admin_product_path(product) %>" class="no-wrap">
+              <%= link_to product.name, spree.edit_admin_product_path(product), class: 'text-reset text-decoration-none' %>
               <br>
               <small>SKU: <span class="text-secondary"><%= product.sku rescue '' %></span></small>
             </td>
 
             <% if defined?(Spree::Vendor) && can?(:manage, Spree::Vendor) %>
-              <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+              <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= spree.edit_admin_product_path(product) %>" class="no-wrap">
                 <%= link_to product.vendor.name, spree.admin_vendor_path(product.vendor_id) if product.vendor.present? %>
               </td>
             <% end %>
-            <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+            <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= spree.edit_admin_product_path(product) %>" class="no-wrap">
               <span class="badge rounded-pill text-bg-light">
                 <% if product.digital? %>
                   <%= I18n.t('spree.dash.product_kinds.digital') %>
@@ -83,11 +83,11 @@
               </span>
             </td>
 
-            <td class="status text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+            <td class="status text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= spree.edit_admin_product_path(product) %>" class="no-wrap">
               <%= active_badge(available_status == I18n.t('spree.dash.products.active'), label: available_status) %>
             </td>
 
-            <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= edit_admin_product_path(product) %>" class="no-wrap">
+            <td class="text-center" data-controller="linkable-td" data-linkable-td-uri-value="<%= spree.edit_admin_product_path(product) %>" class="no-wrap">
               <%= display_price(product) %>
             </td>
 

@@ -1,7 +1,6 @@
 module Spree
   module Admin
     class StockMovementsController < Spree::Admin::BaseController
-      respond_to :html
       helper_method :stock_location
 
       def index

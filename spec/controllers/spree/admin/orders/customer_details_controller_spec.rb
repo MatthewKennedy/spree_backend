@@ -42,7 +42,7 @@ describe Spree::Admin::Orders::CustomerDetailsController, type: :controller do
         let(:guest_checkout) { "true" }
 
         context "valid parameters" do
-          it { expect(response).to redirect_to(edit_admin_order_url(order)) }
+          it { expect(response).to redirect_to(spree.edit_admin_order_url(order)) }
           it { expect(order.reload.bill_address.firstname).to eq("Jane") }
           it { expect(order.reload.user).to be_nil }
         end
@@ -60,7 +60,7 @@ describe Spree::Admin::Orders::CustomerDetailsController, type: :controller do
         let(:guest_checkout) { "false" }
 
         context "valid parameters" do
-          it { expect(response).to redirect_to(edit_admin_order_url(order)) }
+          it { expect(response).to redirect_to(spree.edit_admin_order_url(order)) }
           it { expect(order.reload.bill_address.firstname).to eq("Jane") }
           it { expect(order.reload.user).to eq(user) }
         end

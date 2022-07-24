@@ -5,9 +5,9 @@ module Spree
 
       def location_after_save
         if @taxonomy.previously_new_record?
-          edit_admin_taxonomy_url(@taxonomy)
+          spree.edit_admin_taxonomy_url(@taxonomy)
         else
-          admin_taxonomies_url
+          spree.admin_taxonomies_url
         end
       end
     end

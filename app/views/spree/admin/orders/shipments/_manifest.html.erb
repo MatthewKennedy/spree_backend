@@ -1,11 +1,11 @@
 <% shipment.manifest.each do |item| %>
   <tr class="stock-item" data-item-quantity="<%= item.quantity %>">
     <td style="width:50px" data-hook="item-image">
-      <%= link_to small_image(item.variant), edit_admin_product_path(item.variant.product) %>
+      <%= link_to small_image(item.variant), spree.edit_admin_product_path(item.variant.product) %>
     </td>
 
     <td>
-      <small><%= link_to item.variant.product.name, edit_admin_product_path(item.variant.product) %>
+      <small><%= link_to item.variant.product.name, spree.edit_admin_product_path(item.variant.product) %>
         <br>
         <%= "(#{item.variant.options_text})" if item.variant.options_text.present? %>
         <% if item.variant.sku.present? %>

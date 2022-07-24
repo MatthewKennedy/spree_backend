@@ -9,8 +9,6 @@ module Spree
       before_action :load_data
       before_action :can_not_transition_without_customer_info, except: [:show, :index]
 
-      respond_to :html
-
       def index
         @payments = @order.payments.includes(refunds: :reason)
         @refunds = @payments.flat_map(&:refunds)

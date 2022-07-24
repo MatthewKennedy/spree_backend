@@ -20,8 +20,8 @@
     </thead>
     <tbody>
       <% @tax_categories.each do |tax_category|
-           @edit_url = edit_admin_tax_category_path(tax_category)
-           @delete_url = admin_tax_category_path(tax_category) %>
+           @edit_url = spree.edit_admin_tax_category_path(tax_category)
+           @delete_url = spree.admin_tax_category_path(tax_category) %>
 
         <tr id="<%= dom_id(tax_category) %>" data-hook="tax_row" data-stream-exit-class="animate__fadeOut">
           <td><%= tax_category.name %></td>

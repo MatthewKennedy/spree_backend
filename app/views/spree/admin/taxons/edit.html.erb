@@ -11,7 +11,7 @@
 <% end %>
 
 <%# Because otherwise the form would attempt to use to_param of @taxon %>
-<% form_url = admin_taxonomy_taxon_path(@taxonomy.id, @taxon.id) %>
+<% form_url = spree.admin_taxonomy_taxon_path(@taxonomy.id, @taxon.id) %>
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @taxon } %>
 
@@ -21,6 +21,6 @@
   <div class="form-actions" data-hook="buttons">
     <%= button I18n.t('spree.dash.actions.update'), 'save.svg' %>
     <span class="or"><%= Spree.t(:or) %></span>
-    <%= button_link_to I18n.t('spree.dash.actions.cancel'), edit_admin_taxonomy_url(@taxonomy), icon: "x-lg.svg" %>
+    <%= button_link_to I18n.t('spree.dash.actions.cancel'), spree.edit_admin_taxonomy_url(@taxonomy), icon: "x-lg.svg" %>
   </div>
 <% end %>

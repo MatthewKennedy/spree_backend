@@ -5,9 +5,6 @@ module Spree
 
       def update
         stock_item.save
-        respond_to do |format|
-          format.js { head :ok }
-        end
       end
 
       def create
@@ -30,7 +27,6 @@ module Spree
 
         respond_with(@stock_item) do |format|
           format.html { redirect_back fallback_location: spree.stock_admin_product_url(stock_item.product) }
-          format.js
         end
       end
 

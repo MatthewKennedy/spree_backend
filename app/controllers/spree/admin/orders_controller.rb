@@ -7,8 +7,6 @@ module Spree
       before_action :load_order, only: %i[reset_digitals edit update cancel resume approve resend open_adjustments close_adjustments]
       before_action :load_user, only: %i[update]
 
-      respond_to :html
-
       def index
         params[:q] ||= {}
         params[:q][:completed_at_not_null] ||= "1" if Spree::Backend::Config[:show_only_complete_orders_by_default]

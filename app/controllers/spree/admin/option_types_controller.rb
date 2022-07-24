@@ -4,7 +4,7 @@ module Spree
       protected
 
       def location_after_save
-        edit_admin_option_type_url(@option_type)
+        spree.edit_admin_option_type_url(@option_type)
       end
     end
   end
