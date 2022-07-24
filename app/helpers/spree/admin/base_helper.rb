@@ -197,18 +197,6 @@ module Spree
         safe_join(fields)
       end
 
-      # renders hidden field and link to remove record using nested_attributes
-      def link_to_icon_remove_fields(form)
-        url = form.object.persisted? ? [:admin, form.object] : "#"
-        link_to_with_icon("delete.svg", "", url,
-          class: "spree_remove_fields btn btn-sm btn-danger",
-          data: {
-            action: "remove"
-          },
-          title: Spree.t(:remove),
-          no_text: true) + form.hidden_field(:_destroy)
-      end
-
       I18N_PLURAL_MANY_COUNT = 2.1
       def plural_resource_name(resource_class)
         resource_class.model_name.human(count: I18N_PLURAL_MANY_COUNT)
@@ -227,7 +215,7 @@ module Spree
       def external_page_preview_link(resource, options = {})
         resource_name = options[:name] || resource.class.name.demodulize
 
-        button_link_to(
+        link_to_with_icon(
           I18n.t("spree.dash.utilities.preview", name: resource_name),
           spree_storefront_resource_url(resource),
           class: "btn-secondary animate__animated animate__faster",

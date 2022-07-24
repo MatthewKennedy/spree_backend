@@ -44,7 +44,7 @@
 
             <% if shipment.manifest.empty? and can?(:update, shipment) %>
               <div>
-                <%= link_to_with_icon 'x-lg.svg', I18n.t('spree.dash.order.delete_shipment'), spree.admin_shipment_path(shipment.id), class: 'btn btn-light btn-sm', data: { turbo_method: :delete, turbo_confirm: I18n.t('spree.dash.are_you_sure') } , title: I18n.t('spree.dash.order.delete_shipment'), no_text: true %>
+                <%= link_to_delete(shipment, { url: spree.admin_shipment_path(shipment.id) }) %>
               </div>
             <% end %>
 
@@ -123,11 +123,11 @@
                   <div class="row">
                     <div class="col">
                       <%= field_container :tracking, nil do %>
-                        <%= text_field_tag :tracking, shipment.tracking, class: "form-control", placeholder: I18n.t('spree.dash.order.tracking_number'), readonly: true %>
+                        <%= text_field_tag :tracking, shipment.tracking, class: "form-control", placeholder: I18n.t('spree.dash.order.tracking_number'), readonly: true, autocomplete: false %>
                       <% end %>
                     </div>
                     <div class="col-auto">
-                      <%= link_to_with_icon 'pen.svg', I18n.t('spree.dash.edit'), spree.edit_tracking_number_admin_shipment_path(shipment.id), class: 'btn btn-light' , title: I18n.t('spree.dash.edit'), no_text: true %>
+                      <%= link_to_edit(shipment, { url: spree.edit_tracking_number_admin_shipment_path(shipment.id) }) %>
                     </div>
                   </div>
                 <% else %>
@@ -159,7 +159,7 @@
     <% end %>
 
     <% if @order.shipped? and can?(:resend, @order) %>
-      <%= button_link_to I18n.t('spree.dash.order.resend_shipping_confirmation_email'), resend_admin_order_url(@order), method: :post, icon: 'envelope.svg', class: 'btn-secondary' %>
+      <%= link_to_with_icon I18n.t('spree.dash.order.resend_shipping_confirmation_email'), resend_admin_order_url(@order), method: :post, icon: 'envelope.svg', class: 'btn-secondary' %>
     <% end %>
 
     <% if @order.special_instructions.present? %>

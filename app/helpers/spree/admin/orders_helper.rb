@@ -8,7 +8,7 @@ module Spree
           next unless order.send("can_#{event}?")
 
           label = Spree.t(event, scope: "admin.order.events", default: Spree.t(event))
-          links << button_link_to(
+          links << link_to_with_icon(
             label.capitalize,
             [event.to_sym, :admin, order],
             method: :put,

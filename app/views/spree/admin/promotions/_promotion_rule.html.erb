@@ -5,11 +5,8 @@
       <%= I18n.t("spree.dash.promotion_rule_types.#{type_name}.description") %>
     </h6>
 
-    <%= link_to_with_icon 'delete.svg', '',
-      spree.admin_promotion_promotion_rule_path(@promotion, promotion_rule),
-      remote: true,
-      method: :delete,
-      class: 'delete btn btn-danger btn-sm' %>
+    <%= link_to_with_icon 'FIXME',
+      spree.admin_promotion_promotion_rule_path(@promotion, promotion_rule), class: 'delete btn btn-danger btn-sm', icon: 'delete.svg' %>
   </div>
   <% param_prefix = "promotion[promotion_rules_attributes][#{promotion_rule.id}]" %>
   <%= hidden_field_tag "#{param_prefix}[id]", promotion_rule.id %>

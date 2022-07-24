@@ -12,11 +12,12 @@
           <td><%= prototype.name %></td>
           <td class="actions">
             <span class="d-flex justify-content-end">
-              <%= link_to_with_icon 'save.svg',
+              <%= link_to_with_icon
                 Spree.t(:select),
                 select_admin_prototype_url(prototype),
                 class: 'btn btn-success  btn-sm ajax select_properties_from_prototype',
-                no_text: true %>
+                no_text: true,
+                icon: 'save.svg' %>
             </span>
           </td>
         </tr>

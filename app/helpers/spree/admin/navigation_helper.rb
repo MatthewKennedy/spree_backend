@@ -66,21 +66,9 @@ module Spree
         end
 
         link = if options[:icon]
-          link_to_with_icon(
-            options[:icon],
-            titleized_label,
-            destination_url,
-            class: "w-100 px-3 py-2 d-flex align-items-center text-muted",
-            width: MENU_ICON_SIZE,
-            height: MENU_ICON_SIZE,
-            icon_class: "me-2"
-          )
+          link_to_with_icon(titleized_label, destination_url, {class: "w-100 px-3 py-2 d-flex align-items-center text-muted", icon: options[:icon], icon_class: "me-2"})
         else
-          link_to(
-            titleized_label,
-            destination_url,
-            class: "sidebar-submenu-item w-100 py-2 py-md-1 ps-5 d-block #{selected ? "font-weight-bold" : "text-muted"}"
-          )
+          link_to(titleized_label, destination_url, {class: "sidebar-submenu-item w-100 py-2 py-md-1 ps-5 d-block #{selected ? "font-weight-bold" : "text-muted"}"})
         end
 
         css_classes << "selected" if selected
@@ -149,9 +137,10 @@ module Spree
 
         options[:no_text] ||= true
         options[:class] ||= "btn btn-light btn-sm"
-        options[:data] ||= {turbo_method: :post, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
+        options[:icon] = "clone.svg"
+        options[:data] = {turbo_method: :post, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
 
-        link_to_with_icon("clone.svg", name, url, options)
+        link_to_with_icon(name, url, options)
       end
 
       def link_to_edit(resource, options = {})
@@ -159,9 +148,10 @@ module Spree
         name = options[:name] || I18n.t("admin.dash.actions.edit")
 
         options[:no_text] ||= true
+        options[:icon] = "pen.svg"
         options[:class] ||= "btn btn-light btn-sm"
 
-        link_to_with_icon("pen.svg", name, url, options)
+        link_to_with_icon(name, url, options)
       end
 
       def link_to_delete(resource, options = {})
@@ -169,26 +159,25 @@ module Spree
         name = options[:name] || I18n.t("admin.dash.actions.delete")
 
         options[:no_text] ||= true
-        options[:class] ||= "btn btn-outline-danger btn-sm"
-        options[:data] ||= {turbo_method: :delete, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
+        options[:class] ||= "btn btn-sm btn-outline-danger"
+        options[:icon] = "delete.svg"
+        options[:data] = {turbo_method: :delete, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
 
-        link_to_with_icon("delete.svg", name, url, options)
+        link_to_with_icon(name, url, options)
       end
 
-      def link_to_with_icon(icon_name, text, url, options = {})
-        options[:class] = (options[:class].to_s + " icon-link with-tip action-#{icon_name}").strip
-        options[:title] = text if options[:no_text]
+      def link_to_with_icon(text, url, options = {})
+        options[:class] ||= ""
         text = options[:no_text] ? "" : content_tag(:span, text)
 
-        options[:size] ||= "#{ICON_SIZE}px * #{ICON_SIZE}px"
-        options[:icon_class] ||= ""
-
-        if icon_name
-          icon = inline_svg_tag(icon_name, class: "svg-icon icon-#{icon_name} #{options[:icon_class]}", size: options[:size])
+        if options[:icon]
+          icon_class = options[:no_text] ? "" : "me-1"
+          options[:icon_size] ||= "#{ICON_SIZE}px * #{ICON_SIZE}px"
+          icon = inline_svg_tag(options[:icon], class: "#{icon_class} #{options[:icon_class]}", size: options[:icon_size])
           text = "#{icon} #{text}"
         end
 
-        link_to(text.html_safe, url, options)
+        link_to text.html_safe, url, options.except(:icon, :icon_class, :icon_size, :no_text)
       end
 
       # Override: Add disable_with option to prevent multiple request on consecutive clicks
@@ -201,37 +190,6 @@ module Spree
         css_classes = options[:class] || "btn-success "
 
         button_tag(text.html_safe, options.merge(type: button_type, class: "btn #{css_classes}"))
-      end
-
-      def button_link_to(text, url, html_options = {})
-        if html_options[:method] &&
-            !html_options[:method].to_s.casecmp("get").zero? &&
-            !html_options[:remote]
-
-          html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : "btn btn-success "
-
-          form_tag(url, method: html_options.delete(:method)) do
-            button(text, html_options.delete(:icon), nil, html_options)
-          end
-        else
-          if html_options["data-update"].nil? && html_options[:remote]
-            # standard:disable Style/SlicingWithRange
-            object_name, action = url.split("/")[-2..-1]
-            # standard:enable Style/SlicingWithRange
-            html_options["data-update"] = [action, object_name.singularize].join("_")
-          end
-
-          html_options.delete("data-update") unless html_options["data-update"]
-
-          html_options[:class] = html_options[:class] ? "btn #{html_options[:class]}" : "btn btn-secondary"
-
-          if html_options[:icon]
-            icon = inline_svg_tag(html_options[:icon], class: "svg-icon icon-#{html_options[:icon]}", size: "#{ICON_SIZE}px * #{ICON_SIZE}px")
-            text = "#{icon} #{text}"
-          end
-
-          link_to(text.html_safe, url, html_options.except(:icon))
-        end
       end
 
       def active_badge(condition, options = {})

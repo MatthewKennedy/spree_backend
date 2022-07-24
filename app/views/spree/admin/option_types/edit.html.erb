@@ -15,7 +15,7 @@
 
     <div class="card-header text-end">
       <span id="new_add_option_value" data-hook>
-        <%= button_link_to I18n.t('spree.dash.options.add_option_value'), spree.new_admin_option_type_option_value_path(@option_type), { icon: 'plus-square.svg', class: 'btn-sm btn-secondary', data: { turbo_frame: :modal } } %>
+        <%= link_to_with_icon I18n.t('spree.dash.options.add_option_value'), spree.new_admin_option_type_option_value_path(@option_type), { icon: 'plus-square.svg', class: 'btn-sm btn-secondary', data: { turbo_frame: :modal } } %>
       </span>
     </div>
     <div class="card-body pt-0">
