@@ -9,17 +9,7 @@ module Spree
 
       def flash_alert(flash)
         if flash.present?
-          style = case flash.first[0]
-          when "success"
-            "text-bg-success"
-          when "error"
-            "text-bg-warning"
-          else
-            "text-bg-dark"
-          end
-
-          message = flash.first[1]
-          render "spree/admin/shared/toast", message: message, kind: style
+          render "spree/admin/shared/toast", message: flash.first[1]
         end
       end
 

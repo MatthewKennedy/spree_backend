@@ -9,16 +9,15 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
   def new
     invoke_callbacks(:new_action, :before)
+
     respond_with(@object) do |format|
       format.html { render layout: !request.xhr? }
-      format.js { render layout: false } if request.xhr?
     end
   end
 
   def edit
     respond_with(@object) do |format|
       format.html { render layout: !request.xhr? }
-      format.js { render layout: false } if request.xhr?
     end
   end
 
@@ -30,52 +29,57 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
 
     if @object.save
       invoke_callbacks(:update, :after)
+
       respond_with(@object) do |format|
         format.turbo_stream if update_turbo_stream_enabled?
         format.html do
           flash[:success] = flash_message_for(@object, :successfully_updated) unless request.xhr?
           redirect_to location_after_save unless request.xhr?
         end
-        format.js { render layout: false }
       end
     else
       invoke_callbacks(:update, :fails)
+
       respond_with(@object) do |format|
         format.html { render action: :edit, status: :unprocessable_entity }
-        format.js { render layout: false, status: :unprocessable_entity }
       end
     end
   end
 
   def create
     invoke_callbacks(:create, :before)
+
     @object.attributes = permitted_resource_params
     if @object.save
       invoke_callbacks(:create, :after)
+
       flash[:success] = flash_message_for(@object, :successfully_created)
+
       respond_with(@object) do |format|
         format.turbo_stream if create_turbo_stream_enabled?
         format.html { redirect_to location_after_save }
-        format.js { render layout: false }
       end
     else
       invoke_callbacks(:create, :fails)
+
       respond_with(@object) do |format|
         format.html { render action: :new, status: :unprocessable_entity }
-        format.js { render layout: false, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
     invoke_callbacks(:destroy, :before)
+
     if @object.destroy
       invoke_callbacks(:destroy, :after)
+
       respond_with(@object) do |format|
         format.turbo_stream { render "spree/admin/shared/stream_templates/destroy" }
       end
     else
       invoke_callbacks(:destroy, :fails)
+
       flash[:error] = @object.errors.full_messages.join(", ")
     end
   end
@@ -88,7 +92,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
       successful_reposition_actions
     else
       respond_with(@object) do |format|
-        stream_flash_alert(message: I18n.t("spree.dash.errors.error_reposition_failed"), kind: :error)
+        stream_flash_alert(message: I18n.t("spree.dash.errors.error_reposition_failed"))
       end
     end
   end
@@ -288,10 +292,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     [:new, :create]
   end
 
-  def turbo_enabled?
-    false
-  end
-
   def create_turbo_stream_enabled?
     false
   end
@@ -311,7 +311,6 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
         flash[:success] = flash_message_for(@object, :successfully_updated) unless request.xhr?
         redirect_to location_after_save unless request.xhr?
       end
-      format.js { render layout: false }
     end
   end
 end

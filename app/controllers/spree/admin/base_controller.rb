@@ -60,20 +60,10 @@ module Spree
         Spree.t(event_sym, resource: resource_desc)
       end
 
-      def stream_flash_alert(kind:, message: I18n.t("spree.dash.no_message_set"))
-        style = case kind
-        when :success
-          "text-bg-success"
-        when :error
-          "text-bg-warning"
-        else
-          "text-bg-dark"
-        end
-
+      def stream_flash_alert(message: I18n.t("spree.dash.no_message_set"))
         respond_to do |format|
           format.turbo_stream do
-            render turbo_stream: turbo_stream.append("FlashAlertsContainer", partial: "spree/admin/shared/toast",
-              locals: {message: message, style: style})
+            render turbo_stream: turbo_stream.append("FlashAlertsContainer", partial: "spree/admin/shared/toast", locals: {message: message})
           end
         end
       end
