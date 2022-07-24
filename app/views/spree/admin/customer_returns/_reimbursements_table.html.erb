@@ -14,7 +14,7 @@
         <tr id="<%= dom_id(reimbursement) %>" data-hook="reimbursement_row">
           <td>
             <% if reimbursement.reimbursed? %>
-              <%= link_to reimbursement.number, url_for([:admin, @order, reimbursement]) %>
+              <%= link_to reimbursement.number, spree.admin_order_reimbursements_path(@order, reimbursement) %>
             <% else %>
               <%= reimbursement.number %>
             <% end %>
@@ -29,7 +29,7 @@
           <td class="actions">
             <span class="d-flex justify-content-end">
               <% if !reimbursement.reimbursed? %>
-                <%= link_to_edit_url(url_for([:edit, :admin, @order, reimbursement]), title: "admin_edit_#{dom_id(reimbursement)}", no_text: true) if can?(:edit, reimbursement) %>
+                <%= link_to_edit(reimbursement , url: spree.edit_admin_order_reimbursement_path(@order, reimbursement)) if can?(:edit, reimbursement) %>
               <% end %>
             </span>
           </td>

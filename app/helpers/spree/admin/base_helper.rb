@@ -19,7 +19,7 @@ module Spree
           end
 
           message = flash.first[1]
-          render "spree/admin/shared/toast", message: message, style: style
+          render "spree/admin/shared/toast", message: message, kind: style
         end
       end
 

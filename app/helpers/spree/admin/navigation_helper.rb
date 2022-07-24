@@ -144,14 +144,6 @@ module Spree
         ["Spree::#{model_name.classify}", model_name.classify, model_name.tr("_", "/").classify].find(&:safe_constantize).try(:safe_constantize)
       end
 
-      def link_to_edit_url(url, options = {})
-        options[:data] = {action: "edit"}
-        options[:no_text] = true
-        options[:class] = "btn btn-secondary btn-sm"
-
-        link_to_with_icon("edit.svg", I18n.t('spree.dash.actions.edit'), url, options)
-      end
-
       def link_to_clone(resource, options = {})
         url = options[:url] || clone_object_url(resource)
         name = options[:name] || I18n.t("admin.dash.actions.clone")
@@ -200,10 +192,6 @@ module Spree
         end
 
         link_to(text.html_safe, url, options)
-      end
-
-      def spree_icon(icon_name)
-        icon_name ? svg_icon(name: icon_name, classes: icon_name, width: MENU_ICON_SIZE, height: MENU_ICON_SIZE) : ""
       end
 
       # Override: Add disable_with option to prevent multiple request on consecutive clicks
