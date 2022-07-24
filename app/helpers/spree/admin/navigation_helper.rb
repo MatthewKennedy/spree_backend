@@ -150,7 +150,7 @@ module Spree
 
         options[:no_text] ||= true
         options[:class] ||= "btn btn-light btn-sm"
-        options[:data] ||= {turbo_method: :post, turbo_confirm: I18n.t("spree.dash.are_you_sure")}
+        options[:data] ||= {turbo_method: :post, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
 
         link_to_with_icon("clone.svg", name, url, options)
       end
@@ -162,7 +162,7 @@ module Spree
         options[:no_text] ||= true
         options[:class] ||= "btn btn-light btn-sm"
 
-        link_to_with_icon("edit.svg", name, url, options)
+        link_to_with_icon("pen.svg", name, url, options)
       end
 
       def link_to_delete(resource, options = {})
@@ -171,7 +171,7 @@ module Spree
 
         options[:no_text] ||= true
         options[:class] ||= "btn btn-outline-danger btn-sm"
-        options[:data] ||= {turbo_method: :delete, turbo_confirm: I18n.t("spree.dash.are_you_sure")}
+        options[:data] ||= {turbo_method: :delete, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
 
         link_to_with_icon("delete.svg", name, url, options)
       end

@@ -25,6 +25,7 @@ en:
       amount: Amount
       apis: API's
       are_you_sure: Are you sure
+      are_you_sure_you_want_to: Are you sure you want to %{action} this %{resource}
       avs_responses:
         street_address_matches_but_5-digit_and_9_digit_postal_code_do_not_match: Street address matches, but 5-digit and 9-digit postal code do not match.
         street_address_matches_but_postal_code_not_verified: Street address matches, but postal code not verified.

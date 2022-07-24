@@ -64,7 +64,7 @@ module Spree
       end
 
       def spree_humanize_type(obj)
-        last_word = obj.split("::", 10).last
+        last_word = obj.demodulize
 
         if last_word.starts_with?("Cms")
           last_word.slice(3, 100).gsub(/(?<=[a-z])(?=[A-Z])/, " ")
