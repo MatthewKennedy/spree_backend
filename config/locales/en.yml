@@ -3,7 +3,9 @@ en:
   admin:
     dash:
       actions:
+        clone: Clone
         delete: Delete
+        edit: Edit
   spree:
     dash:
       actions:
@@ -23,6 +25,9 @@ en:
       amount: Amount
       apis: API's
       are_you_sure: Are you sure
+      avs_responses:
+        street_address_matches_but_5-digit_and_9_digit_postal_code_do_not_match: Street address matches, but 5-digit and 9-digit postal code do not match.
+        street_address_matches_but_postal_code_not_verified: Street address matches, but postal code not verified.
       cms:
         add_new_page: Add New Page
         add_new_section: Add New Section

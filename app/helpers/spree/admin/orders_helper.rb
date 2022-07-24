@@ -26,16 +26,18 @@ module Spree
 
       def order_state_badge(order_state)
         case order_state
-        when 'complete'
-          'bg-success'
+        when "complete"
+          "bg-success"
         else
-          'bg-secondary'
+          "bg-secondary"
         end
       end
 
       def avs_response_code
         {
-          "A" => "Street address matches, but 5-digit and 9-digit postal code do not match.",
+          "A" => I18n.t("spree.dash.avs_responses.street_address_matches_but_5-digit_and_9_digit_postal_code_do_not_match"),
+          "B" => I18n.t("spree.dash.avs_responses.street_address_matches_but_postal_code_not_verified"),
+          # TODO MSK translate these
           "B" => "Street address matches, but postal code not verified.",
           "C" => "Street address and postal code do not match.",
           "D" => "Street address and postal code match. ",
