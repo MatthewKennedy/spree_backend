@@ -131,6 +131,17 @@ module Spree
         ["Spree::#{model_name.classify}", model_name.classify, model_name.tr("_", "/").classify].find(&:safe_constantize).try(:safe_constantize)
       end
 
+      def link_to_edit(resource, options = {})
+        url = options[:url] || edit_object_url(resource)
+        name = options[:name] || I18n.t("admin.dash.actions.edit")
+
+        options[:no_text] ||= true
+        options[:icon] = "pen.svg"
+        options[:class] ||= "btn btn-light btn-sm"
+
+        link_to_with_icon(name, url, options)
+      end
+
       def link_to_clone(resource, options = {})
         url = options[:url] || clone_object_url(resource)
         name = options[:name] || I18n.t("admin.dash.actions.clone")
@@ -139,17 +150,6 @@ module Spree
         options[:class] ||= "btn btn-light btn-sm"
         options[:icon] = "clone.svg"
         options[:data] = {turbo_method: :post, turbo_confirm: I18n.t("spree.dash.are_you_sure_you_want_to", action: name, resource: spree_humanize_type(resource.class.name))}
-
-        link_to_with_icon(name, url, options)
-      end
-
-      def link_to_edit(resource, options = {})
-        url = options[:url] || edit_object_url(resource)
-        name = options[:name] || I18n.t("admin.dash.actions.edit")
-
-        options[:no_text] ||= true
-        options[:icon] = "pen.svg"
-        options[:class] ||= "btn btn-light btn-sm"
 
         link_to_with_icon(name, url, options)
       end
@@ -166,30 +166,30 @@ module Spree
         link_to_with_icon(name, url, options)
       end
 
-      def link_to_with_icon(text, url, options = {})
-        options[:class] ||= ""
-        text = options[:no_text] ? "" : content_tag(:span, text)
+      def link_to_with_icon(name, url, html_options = {})
+        html_options[:class] ||= ""
+        name = html_options[:no_text] ? "" : content_tag(:span, name)
 
-        if options[:icon]
-          icon_class = options[:no_text] ? "" : "me-1"
-          options[:icon_size] ||= "#{ICON_SIZE}px * #{ICON_SIZE}px"
-          icon = inline_svg_tag(options[:icon], class: "#{icon_class} #{options[:icon_class]}", size: options[:icon_size])
-          text = "#{icon} #{text}"
+        if html_options[:icon]
+          icon_class = html_options[:no_text] ? "" : "me-1"
+          html_options[:icon_size] ||= "#{ICON_SIZE}px * #{ICON_SIZE}px"
+          icon = inline_svg_tag(html_options[:icon], class: "#{icon_class} #{html_options[:icon_class]}", size: html_options[:icon_size])
+          name = "#{icon} #{name}"
         end
 
-        link_to text.html_safe, url, options.except(:icon, :icon_class, :icon_size, :no_text)
+        link_to name.html_safe, url, html_options.except(:icon, :icon_class, :icon_size, :no_text)
       end
 
       # Override: Add disable_with option to prevent multiple request on consecutive clicks
-      def button(text, icon_name = nil, button_type = "submit", options = {})
+      def button(text, icon_name = nil, button_type = "submit", html_options = {})
         if icon_name
           icon = inline_svg_tag(icon_name, class: "svg-icon icon-#{icon_name}", size: "#{ICON_SIZE}px * #{ICON_SIZE}px")
           text = "#{icon} #{text}"
         end
 
-        css_classes = options[:class] || "btn-success "
+        css_classes = html_options[:class] || "btn-success "
 
-        button_tag(text.html_safe, options.merge(type: button_type, class: "btn #{css_classes}"))
+        button_tag(text.html_safe, html_options.merge(type: button_type, class: "btn #{css_classes}"))
       end
 
       def active_badge(condition, options = {})

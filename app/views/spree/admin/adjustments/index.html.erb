@@ -1,7 +1,7 @@
 <%= render partial: 'spree/admin/shared/order_tabs', locals: { current: :adjustments} %>
 
 <% content_for :page_actions do %>
-  <%= link_to_with_icon(Spree.t(:new_adjustment), new_admin_order_adjustment_url(@order), class: "btn-success ", icon: 'plus-square.svg') if can? :create, Spree::Adjustment %>
+  <%= link_to_with_icon(Spree.t(:new_adjustment), new_admin_order_adjustment_url(@order), class: "btn btn-success ", icon: 'plus-square.svg') if can? :create, Spree::Adjustment %>
 <% end %>
 
 <% if @adjustments.present? %>
@@ -18,7 +18,7 @@
   <div class="card bg-light mb-3" data-hook="adjustments_new_coupon_code">
     <div class="card-body">
       <div class="form-group">
-        <%= text_field_tag "coupon_code", "", placeholder: Spree.t(:coupon_code), class: "form-control" %>
+        <%= text_field_tag "coupon_code", "", placeholder: Spree.t(:coupon_code), class: "form-control", autocomplete: false %>
       </div>
       <%= button Spree.t(:add_coupon_code), 'plus-square.svg', 'submit', id: "add_coupon_code" %>
     </div>
