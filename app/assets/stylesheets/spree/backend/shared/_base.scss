@@ -124,3 +124,15 @@ dialog#customTurboConfirm {
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
 }
+
+
+#formActionButtons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+  border-top: 1px solid rgb(235, 235, 235);
+  background: white;
+  width: 100%;
+  text-align: center;
+}

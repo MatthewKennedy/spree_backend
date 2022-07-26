@@ -9,7 +9,7 @@
     <%= label_tag :promotion_rule_type, Spree.t(:add_rule_of_type) %>
     <div class="input-group mb-3">
       <%= select_tag('promotion_rule[type]', options_for_promotion_rule_types(@promotion), data: {controller: 'ts--select'}) %>
-      <%= button Spree.t(:add), 'plus-square.svg', 'submit', class: "btn btn-secondary" %>
+      <%= button Spree.t(:add), 'plus-square.svg', 'submit', class: "btn btn-light" %>
     </div>
   <% end %>
 

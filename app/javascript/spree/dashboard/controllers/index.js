@@ -9,6 +9,7 @@ import ClipboardController from './clipboard_controller'
 import DatePickerController from './datepicker_controller'
 import FormValidationController from './form_validation_controller'
 import InputFormattingController from './input_formatting_controller'
+import InputStateController from './input_state_controller'
 import LinkableTd from './linkable_td_controller'
 import MenuController from './menu_controller'
 import ModalController from './modal_controller'
@@ -31,6 +32,7 @@ Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('datepicker', DatePickerController)
 Stimulus.register('form-validation', FormValidationController)
 Stimulus.register('input-formatting', InputFormattingController)
+Stimulus.register('input-state', InputStateController)
 Stimulus.register('linkable-td', LinkableTd)
 Stimulus.register('menu', MenuController)
 Stimulus.register('modal', ModalController)

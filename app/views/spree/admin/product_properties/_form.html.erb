@@ -7,8 +7,8 @@
         </div>
         <div>
           <% if can? :create, Spree::ProductProperty %>
-            <%= link_to_with_icon I18n.t('spree.dash.products.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
-            <%= link_to_with_icon I18n.t('spree.dash.products.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+            <%= link_to_with_icon I18n.t('spree.dash.products.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal} %>
+            <%= link_to_with_icon I18n.t('spree.dash.products.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal } %>
           <% end %>
         </div>
       </div>
@@ -40,8 +40,8 @@
       <p>
         <%= I18n.t('spree.dash.products.add_first_property') %>
       </p>
-        <%= link_to_with_icon I18n.t('spree.dash.products.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-secondary btn-sm', data: { turbo_frame: :modal} %>
-        <%= link_to_with_icon I18n.t('spree.dash.products.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-secondary btn-sm', data: { turbo_frame: :modal } %>
+        <%= link_to_with_icon I18n.t('spree.dash.products.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-light btn-sm', data: { turbo_frame: :modal} %>
+        <%= link_to_with_icon I18n.t('spree.dash.products.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal } %>
     </div>
   <% end %>
 <% end %>

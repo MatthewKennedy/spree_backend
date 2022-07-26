@@ -127,7 +127,7 @@
                       <% end %>
                     </div>
                     <div class="col-auto">
-                      <%= link_to_edit(shipment, { url: spree.edit_tracking_number_admin_shipment_path(shipment.id) }) %>
+                      <%= link_to_edit(shipment, { url: spree.edit_tracking_number_admin_shipment_path(shipment.id), class: 'btn btn-light' }) %>
                     </div>
                   </div>
                 <% else %>
@@ -159,7 +159,7 @@
     <% end %>
 
     <% if @order.shipped? and can?(:resend, @order) %>
-      <%= link_to_with_icon I18n.t('spree.dash.order.resend_shipping_confirmation_email'), resend_admin_order_url(@order), method: :post, icon: 'envelope.svg', class: 'btn-secondary' %>
+      <%= link_to_with_icon I18n.t('spree.dash.order.resend_shipping_confirmation_email'), resend_admin_order_url(@order), method: :post, icon: 'envelope.svg', class: 'btn btn-light' %>
     <% end %>
 
     <% if @order.special_instructions.present? %>

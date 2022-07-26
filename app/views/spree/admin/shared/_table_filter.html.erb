@@ -5,7 +5,7 @@
         <%= text_field_tag :quick_search, nil, class: "form-control js-quick-search", placeholder: Spree.t(:search_by), autocomplete: false %>
       <% end %>
 
-      <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#tableFilter" aria-expanded="false" aria-controls="tableFilter">
+      <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#tableFilter" aria-expanded="false" aria-controls="tableFilter">
         <%= inline_svg_tag "filter.svg", size: '16px * 16px' %>
         <span class="d-none d-sm-inline"><%= I18n.t('spree.dash.filters') %></span>
       </button>
