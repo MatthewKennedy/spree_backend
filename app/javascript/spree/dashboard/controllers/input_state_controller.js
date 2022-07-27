@@ -4,17 +4,15 @@ export default class extends Controller {
   static targets = ['submitButton', 'watch']
 
   connect () {
-    this.watchTargets.forEach((input) => {
-      input.setAttribute('data-action', 'change->input-state#inputWatcher')
-    })
-
     this.inputWatcher()
   }
 
-  disconnect () {
-    this.watchTargets.forEach((input) => {
-      input.removeAttribute('data-action', 'change->input-state#inputWatcher')
-    })
+  watchTargetConnected (target) {
+    target.setAttribute('data-action', 'change->input-state#inputWatcher')
+  }
+
+  watchTargetDisconnect (target) {
+    target.removeAttribute('data-action', 'change->input-state#inputWatcher')
   }
 
   inputWatcher () {
@@ -22,13 +20,13 @@ export default class extends Controller {
 
     this.watchTargets.forEach((inputEl) => {
       if (inputEl.type === 'checkbox' || inputEl.type === 'radio') {
-        if (inputEl.checked !== inputEl.defaultChecked) {
-          changeCount.push(1)
-        }
+        if (inputEl.checked !== inputEl.defaultChecked) changeCount.push(1)
+      } else if (inputEl.type === 'select-one') {
+        if (this.multiSelect(inputEl) === true) changeCount.push(1)
+      } else if (inputEl.type === 'select-multiple') {
+        if (this.multiSelect(inputEl) === true) changeCount.push(1)
       } else {
-        if (inputEl.value !== inputEl.defaultValue) {
-          changeCount.push(1)
-        }
+        if (inputEl.value !== inputEl.defaultValue) changeCount.push(1)
       }
     })
 
@@ -40,12 +38,30 @@ export default class extends Controller {
   }
 
   performChange () {
-    document.getElementById('formActionButtons').style.display = 'block'
+    document.getElementById('inputStateSubmitButton').style.display = 'inline'
     this.submitButtonTarget.disabled = false
   }
 
   revertChange () {
-    document.getElementById('formActionButtons').style.display = 'none'
+    document.getElementById('inputStateSubmitButton').style.display = 'none'
     this.submitButtonTarget.disabled = true
+  }
+
+  multiSelect (inputEl) {
+    let hasChanged = false
+    let defaultSelected = 0
+    let i
+    let optionsCount
+    let option
+
+    for (i = 0, optionsCount = inputEl.options.length; i < optionsCount; i++) {
+      option = inputEl.options[i]
+
+      hasChanged = hasChanged || (option.selected !== option.defaultSelected)
+      if (option.defaultSelected) defaultSelected = i
+    }
+
+    if (hasChanged && !inputEl.multiple) hasChanged = (defaultSelected !== inputEl.selectedIndex)
+    if (hasChanged) return true
   }
 }

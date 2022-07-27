@@ -16,24 +16,24 @@
       <%= f.datetime_field from_field.to_sym, class: 'js-filterable',
                                               value: value,
                                               placeholder: placeholder,
-                                              data: { input:'' } %>
+                                              data: { input:'', input_state_target: "watch" } %>
     <% else %>
       <%= datetime_field_tag from_field.to_s, class: 'js-filterable',
                                               placeholder: placeholder,
                                               value: value,
-                                              data: { input:'' } %>
+                                              data: { input:'', input_state_target: "watch" } %>
     <% end %>
   <% else %>
     <% if f %>
     <%= f.text_field from_field.to_sym, class: 'js-filterable',
                                         value: value,
                                         placeholder: placeholder,
-                                        data: { input:'' } %>
+                                        data: { input:'', input_state_target: "watch" } %>
     <% else %>
       <%= text_field_tag from_field.to_s, value, class: "js-filterable",
                                                  autocomplete: false,
                                                  placeholder: placeholder,
-                                                 data: { input:'' } %>
+                                                 data: { input:'', input_state_target: "watch" } %>
     <% end %>
   <% end %>
 

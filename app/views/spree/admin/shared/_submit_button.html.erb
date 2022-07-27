@@ -1,0 +1,7 @@
+<%= button_tag( {form: form_id, class: 'btn btn-success btn-sm', data: { input_state_target: "submitButton" }}) do %>
+  <% if kind == :new %>
+    <%= inline_svg_tag('check-lg.svg') %> <%= I18n.t('spree.dash.actions.save') %>
+  <% else %>
+    <%= inline_svg_tag('check-lg.svg') %> <%= I18n.t('spree.dash.actions.update') %>
+  <% end %>
+<% end %>

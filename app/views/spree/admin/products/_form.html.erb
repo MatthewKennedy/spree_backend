@@ -4,6 +4,10 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title"><%= I18n.t('spree.dash.details') %></h5>
+
+          <div id="inputStateSubmitButton">
+            <%= render partial: 'spree/admin/shared/submit_button', locals: { kind: :edit, form_id: "edit_option_type_#{@product.id}" } %>
+          </div>
         </div>
         <div class="card-body">
           <%= f.field_container :name, data: { hook: "admin_product_form_name" }, class: ['form-floating'] do %>
@@ -117,12 +121,12 @@
         <div class="card-body">
           <%= f.field_container :shipping_category, data: { hook: "admin_product_form_shipping_categories" } do %>
             <%= f.label :shipping_category_id, Spree.t(:shipping_category) %>
-            <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {}, { data: {controller: 'ts--select'} }) %>
+            <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {}, { data: {controller: 'ts--select', input_state_target: "watch"} }) %>
           <% end %>
 
           <%= f.field_container :tax_category, data: { hook: "admin_product_form_tax_category" } do %>
             <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-            <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: I18n.t('spree.dash.match_choices.none') }, { data: {controller: 'ts--select'} }) %>
+            <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: I18n.t('spree.dash.match_choices.none') }, { data: {controller: 'ts--select' } }) %>
           <% end %>
         </div>
       </div>
@@ -210,7 +214,8 @@
                                                   ts__search_val_value: 'id',
                                                   ts__search_txt_value: 'pretty_name',
                                                   ts__search_fields_value: ['pretty_name'],
-                                                  ts__search_ransack_value: ['pretty_name_i_cont']
+                                                  ts__search_ransack_value: ['pretty_name_i_cont'],
+                                                  input_state_target: "watch"
                                                  } %>
 
             <% elsif @product.taxons.any? %>

@@ -3,15 +3,23 @@
   <%= @option_type.name %>
 <% end %>
 
+<% content_for :page_actions do %>
+  <%#= render partial: 'spree/admin/shared/submit_button', locals: { kind: :edit, form_id: "edit_option_type_#{@option_type.id}" } %>
+<% end %>
+
 <%= form_for [:admin, @option_type], data: {controller: "input-state"} do |f| %>
   <div class="card mb-3">
+    <div class="card-header d-flex">
+      <div class="flex-fill">
+        <h5 class="card-title">Settings</h5>
+      </div>
+      <div id="inputStateSubmitButton">
+        <%= render partial: 'spree/admin/shared/submit_button', locals: { kind: :edit, form_id: "edit_option_type_#{@option_type.id}" } %>
+      </div>
+    </div>
     <div class="card-body">
       <%= render 'form', f: f %>
     </div>
-    <div id="formActionButtons" class="card-body">
-      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
-    </div>
-
     <div class="card-header text-end">
       <span id="new_add_option_value" data-hook>
         <%= link_to_with_icon I18n.t('spree.dash.options.add_option_value'), spree.new_admin_option_type_option_value_path(@option_type), { icon: 'plus-square.svg', class: 'btn btn-sm btn-light', data: { turbo_frame: :modal } } %>
