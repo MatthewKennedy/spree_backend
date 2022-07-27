@@ -9,10 +9,12 @@ export default class extends Controller {
 
   watchTargetConnected (target) {
     target.setAttribute('data-action', 'change->input-state#inputWatcher')
+    this.inputWatcher()
   }
 
   watchTargetDisconnect (target) {
     target.removeAttribute('data-action', 'change->input-state#inputWatcher')
+    this.inputWatcher()
   }
 
   inputWatcher () {
@@ -21,9 +23,7 @@ export default class extends Controller {
     this.watchTargets.forEach((inputEl) => {
       if (inputEl.type === 'checkbox' || inputEl.type === 'radio') {
         if (inputEl.checked !== inputEl.defaultChecked) changeCount.push(1)
-      } else if (inputEl.type === 'select-one') {
-        if (this.multiSelect(inputEl) === true) changeCount.push(1)
-      } else if (inputEl.type === 'select-multiple') {
+      } else if (inputEl.tagName === 'SELECT') {
         if (this.multiSelect(inputEl) === true) changeCount.push(1)
       } else {
         if (inputEl.value !== inputEl.defaultValue) changeCount.push(1)
