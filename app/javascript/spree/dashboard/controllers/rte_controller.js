@@ -24,11 +24,24 @@ export default class extends Controller {
       plugins: this.pluginsValue,
       menubar: this.menubarValue,
       toolbar: this.toolbarValue
+
     }
   }
 
   connect () {
-    this.rte = tinymce.init({ ...this.config })
+    this.rte = tinymce.init({
+      setup: function (editor) {
+        editor.on('NodeChange', function (e) {
+          // Hack for form-state
+          const event = new Event('change')
+          const editorContent = this.getContent()
+
+          e.target.targetElm.value = editorContent
+          e.target.targetElm.dispatchEvent(event)
+        })
+      },
+      ...this.config
+    })
   }
 
   disconnect () {

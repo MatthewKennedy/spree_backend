@@ -13,7 +13,7 @@ export default class extends Flatpickr {
       altInputClass: 'flatpickr-alt-input form-control rounded-start',
       showMonths: 1,
       onReady: function (dateObj, dateStr, fp) {
-        // Hack for form-state change tracker.
+        // Hack for form-state
         fp.input.type = 'text'
         fp.input.style.display = 'none'
       }
