@@ -7,7 +7,7 @@
   <%#= render partial: 'spree/admin/shared/submit_button', locals: { kind: :edit, form_id: "edit_option_type_#{@option_type.id}" } %>
 <% end %>
 
-<%= form_for [:admin, @option_type], data: {controller: "input-state"} do |f| %>
+<%= form_for [:admin, @option_type], data: {controller: "form-state"} do |f| %>
   <div class="card mb-3">
     <div class="card-header d-flex">
       <div class="flex-fill">

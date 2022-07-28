@@ -13,24 +13,24 @@
       <%= f.datetime_field field.to_sym, class: 'js-filterable',
                                          placeholder: placeholder,
                                          value: value,
-                                         data: { input:'', input_state_target: "watch" } %>
+                                         data: { input:'', form_state_target: "watch" } %>
     <% else %>
       <%= datetime_field_tag field.to_s, class: 'js-filterable',
                                          placeholder: placeholder,
                                          value: value,
-                                         data: { input:'', input_state_target: "watch" } %>
+                                         data: { input:'', form_state_target: "watch" } %>
     <% end %>
   <% else %>
     <% if f %>
       <%= f.text_field field.to_sym, class: "js-filterable",
                                      placeholder: placeholder,
                                      value: value,
-                                     data: { input:'', input_state_target: "watch"} %>
+                                     data: { input:'', form_state_target: "watch"} %>
     <% else %>
       <%= text_field_tag field.to_s, value, class: "js-filterable",
                                             autocomplete: false,
                                             placeholder: placeholder,
-                                            data: { input:'', input_state_target: "watch" } %>
+                                            data: { input:'', form_state_target: "watch" } %>
 
     <% end %>
   <% end %>

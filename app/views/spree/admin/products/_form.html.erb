@@ -24,7 +24,7 @@
             <%= f.label :description, Spree.t(:description) %>
             <%= f.text_area :description, { rows: 15,
                                             class: "form-control",
-                                            data: { controller: "#{'rte' if product_wysiwyg_editor_enabled?}" }
+                                            data: { controller: "#{'rte' if product_wysiwyg_editor_enabled?}", form_state_target: "watch" }
                                           } %>
           <% end %>
         </div>
@@ -121,12 +121,12 @@
         <div class="card-body">
           <%= f.field_container :shipping_category, data: { hook: "admin_product_form_shipping_categories" } do %>
             <%= f.label :shipping_category_id, Spree.t(:shipping_category) %>
-            <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {}, { data: {controller: 'ts--select', input_state_target: "watch"} }) %>
+            <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {}, { data: {controller: 'ts--select', form_state_target: "watch"} }) %>
           <% end %>
 
           <%= f.field_container :tax_category, data: { hook: "admin_product_form_tax_category" } do %>
             <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-            <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: I18n.t('spree.dash.match_choices.none') }, { data: {controller: 'ts--select', input_state_target: "watch" } }) %>
+            <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: I18n.t('spree.dash.match_choices.none') }, { data: {controller: 'ts--select', form_state_target: "watch" } }) %>
           <% end %>
         </div>
       </div>
@@ -215,7 +215,7 @@
                                                   ts__search_txt_value: 'pretty_name',
                                                   ts__search_fields_value: ['pretty_name'],
                                                   ts__search_ransack_value: ['pretty_name_i_cont'],
-                                                  input_state_target: "watch"
+                                                  form_state_target: "watch"
                                                  } %>
 
             <% elsif @product.taxons.any? %>
@@ -240,7 +240,7 @@
                                         multiple: true,
                                         data: { controller: 'ts--search',
                                                 ts__search_uri_value: '/api/v2/platform/option_types',
-                                                input_state_target: "watch"
+                                                form_state_target: "watch"
                                                } %>
 
             <% elsif @product.option_types.any? %>
@@ -262,7 +262,7 @@
   <% if @stores.count > 1 %>
     <%= f.field_container :stores, data: { hook: "admin_product_form_stores" } do %>
       <%= f.label :product_stores, Spree.t(:stores) %>
-      <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: { controller: 'ts--select', input_state_target: "watch" } }) %>
+      <%= collection_select(:product, :store_ids, @stores, :id, :unique_name, {}, { multiple: true, data: { controller: 'ts--select', form_state_target: "watch" } }) %>
     <% end %>
   <% end %>
 
