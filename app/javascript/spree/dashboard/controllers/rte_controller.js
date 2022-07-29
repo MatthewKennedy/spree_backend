@@ -33,7 +33,7 @@ export default class extends Controller {
       setup: function (editor) {
         editor.on('NodeChange', function (e) {
           // Hack for form-state
-          const event = new Event('change')
+          const event = new Event('input')
           const editorContent = this.getContent()
 
           e.target.targetElm.value = editorContent
