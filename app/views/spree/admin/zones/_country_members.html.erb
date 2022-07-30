@@ -1,15 +1,18 @@
 <div id="country_members" data-hook="member">
-  <div class="card mb-3">
-    <div class="card-header">
-      <h5 class="card-title mb-0 h6">
-        <%= Spree.t(:countries) %>
-      </h5>
+  <div class="card">
+    <div class="card-header d-flex">
+      <div class="flex-fill">
+        <h5 class="card-title"><%= Spree.t(:countries) %></h5>
+      </div>
+      <div>
+        <%= render partial: 'spree/admin/shared/submit_button' %>
+      </div>
     </div>
 
     <div class="card-body">
-      <%= zone_form.field_container :country_ids do %>
+      <%= zone_form.field_container :country_ids, class: ['form-floating'] do %>
+        <%= zone_form.collection_select :country_ids, @countries, :id, :name, {}, { class: 'form-select', multiple: true, data: { controller: 'ts--select', form_state_target: "watch" } } %>
         <%= zone_form.label :country_ids, Spree.t(:countries) %>
-        <%= zone_form.collection_select :country_ids, @countries, :id, :name, {}, { multiple: true, data: { controller: 'ts--select' } } %>
       <% end %>
     </div>
   </div>

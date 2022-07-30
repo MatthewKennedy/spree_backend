@@ -1,49 +1,56 @@
 <div class="row">
   <div class="col-12 col-lg-6" data-hook="admin_zone_form_fields">
-    <div class="card mb-3">
-      <div class="card-header">
-        <h5 class="card-title mb-0 h6"><%= Spree.t(:general_settings) %></h5>
-      </div>
+    <%= form_for [:admin, @zone], data: {controller: "form-state"} do |zone_form| %>
+      <div class="card">
+        <div class="card-header d-flex">
+          <div class="flex-fill">
+            <h5 class="card-title"><%= Spree.t(:general_settings) %></h5>
+          </div>
+          <div>
+            <%= render partial: 'spree/admin/shared/submit_button' %>
+          </div>
+        </div>
 
-      <div class="card-body">
-        <%= zone_form.field_container :name do %>
-          <%= zone_form.label :name, Spree.t(:name) %>
-          <%= zone_form.text_field :name, class: 'form-control' %>
-          <%= zone_form.error_message_on :name %>
-        <% end %>
-
-        <%= zone_form.field_container :description do %>
-          <%= zone_form.label :description, Spree.t(:description) %>
-          <%= zone_form.text_field :description, class: 'form-control' %>
-        <% end %>
-
-        <div data-hook="default" class="form-group checkbox">
-          <%= label_tag "zone[#{:default_tax}" do %>
-            <%= zone_form.check_box :default_tax %>
-            <%= Spree.t(:default_tax_zone) %>
+        <div class="card-body">
+          <%= zone_form.field_container :name, class: ['form-floating'] do %>
+            <%= zone_form.text_field :name, class: 'form-control', placeholder: Spree.t(:name), required: true, data: {form_state_target: "watch"} %>
+            <%= zone_form.label :name, Spree.t(:name) %>
           <% end %>
-        </div>
 
-        <div data-hook="type" class="form-group">
-          <strong><%= Spree.t(:type) %></strong>
-          <div class="radio my-2">
-            <%= label_tag :country_based do %>
-              <%= zone_form.radio_button('kind', 'country', { id: 'country_based' }) %>
-              <%= Spree.t(:country_based) %>
+          <%= zone_form.field_container :description, class: ['form-floating'] do %>
+            <%= zone_form.text_field :description, class: 'form-control', placeholder: Spree.t(:description), data: {form_state_target: "watch"} %>
+            <%= zone_form.label :description, Spree.t(:description) %>
+          <% end %>
+
+          <%= zone_form.field_container :default_tax, class: ['form-check'] do %>
+            <%= zone_form.check_box :default_tax, class: 'form-check-input', data: {form_state_target: "watch"} %>
+            <%= zone_form.label :default_tax, Spree.t(:default_tax_zone), class: 'form-check-label' %>
+          <% end %>
+
+          <div data-hook="type" class="form-group">
+            <strong><%= Spree.t(:type) %></strong>
+            <%= zone_form.field_container :country_based, class: ['form-check'] do %>
+              <%= zone_form.radio_button('kind', 'country', { class: 'form-check-input' ,id: 'country_based', data: {form_state_target: "watch"} }) %>
+              <%= zone_form.label :country_based, Spree.t(:country_based), for: 'country_based', class: 'form-check-label' %>
             <% end %>
-          </div>
-          <div class="radio my-2">
-            <%= label_tag :state_based do %>
-              <%= zone_form.radio_button('kind', 'state', { id: 'state_based' }) %>
-              <%= Spree.t(:state_based) %>
+
+            <%= zone_form.field_container :state_based, class: ['form-check'] do %>
+              <%= zone_form.radio_button('kind', 'state', { class: 'form-check-input', id: 'state_based', data: {form_state_target: "watch"} }) %>
+              <%= zone_form.label :state_based, Spree.t(:state_based), for: 'state_based', class: 'form-check-label' %>
             <% end %>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
+
   <div class="col-12 col-lg-6">
-    <%= render partial: 'state_members', locals: { zone_form: zone_form } %>
-    <%= render partial: 'country_members', locals: { zone_form: zone_form } %>
+    <%= form_for [:admin, @zone], data: {controller: "form-state"} do |zone_form| %>
+      <% if @zone.state? %>
+        <%= render partial: 'state_members', locals: { zone_form: zone_form } %>
+      <% elsif @zone.country? %>
+        <%= render partial: 'country_members', locals: { zone_form: zone_form } %>
+      <% end %>
+    <% end %>
   </div>
 </div>

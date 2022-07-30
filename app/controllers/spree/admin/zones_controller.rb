@@ -7,7 +7,7 @@ module Spree
         @zone.zone_members.build
       end
 
-      protected
+      private
 
       def collection
         params[:q] ||= {}
@@ -22,7 +22,9 @@ module Spree
         @zones = Zone.order(:name)
       end
 
-      private
+      def location_after_save
+        spree.edit_admin_zone_path(@zone)
+      end
 
       def load_main_menu_panel
         @menu_panel_kind = "settings"
