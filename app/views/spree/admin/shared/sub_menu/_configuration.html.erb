@@ -4,9 +4,6 @@
   <%= tab :tax_rates, url: spree.admin_tax_rates_path, label: I18n.t('spree.dash.settings_menu.tax_rates') if can? :manage, Spree::TaxRate %>
   <%= tab :zones, url: spree.admin_zones_path, label: I18n.t('spree.dash.settings_menu.zones') if can? :manage, Spree::Zone %>
   <%= tab :countries, url: spree.admin_countries_path, label: I18n.t('spree.dash.settings_menu.countries') if can? :manage, Spree::Country %>
-  <% if country = current_store.default_country %>
-    <%= tab :states, url: spree.admin_country_states_path(country), label: I18n.t('spree.dash.settings_menu.states') if can? :manage, Spree::Country %>
-  <% end %>
   <%= tab :shipping_methods, url: spree.admin_shipping_methods_path, label: I18n.t('spree.dash.settings_menu.shipping_methods') if can? :manage, Spree::ShippingMethod %>
   <%= tab :shipping_categories, url: spree.admin_shipping_categories_path, label: I18n.t('spree.dash.settings_menu.shipping_categories') if can? :manage, Spree::ShippingCategory %>
   <%= tab :store_credit_categories, url: spree.admin_store_credit_categories_path, label: I18n.t('spree.dash.settings_menu.store_credit_categories') if can? :manage, Spree::StoreCreditCategory %>

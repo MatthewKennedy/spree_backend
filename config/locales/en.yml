@@ -85,6 +85,10 @@ en:
       copy_to_clipboard: Copy to clipboard
       cost: Cost
       count_on_hand: Count on hand
+      countries:
+        add_new_state: Add new state
+        edit_state: Edit state
+        states: States
       country_rule:
         label: Label
       create_platform_application: Create platform application

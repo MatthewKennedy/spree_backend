@@ -13,8 +13,8 @@ Spree::Core::Engine.add_routes do
     resources :oauth_applications
 
     # Countries
-    resources :countries do
-      resources :states
+    resources :countries, except: [:show] do
+      resources :states, except: [:index, :show]
     end
 
     # Classifications

@@ -1,13 +1,13 @@
 import StimulusFormState from 'stimulus-form-state'
 
 export default class extends StimulusFormState {
-  performChange () {
-    this.submitButtonTarget.disabled = false
-    this.submitButtonTarget.style.display = 'inline'
+  enableChangeControles () {
+    this.saveButtonTarget.disabled = false
+    this.saveButtonTarget.style.display = 'inline'
   }
 
-  revertChange () {
-    this.submitButtonTarget.disabled = true
-    this.submitButtonTarget.style.display = 'none'
+  disableChangeControles () {
+    this.saveButtonTarget.disabled = true
+    this.saveButtonTarget.style.display = 'none'
   }
 }

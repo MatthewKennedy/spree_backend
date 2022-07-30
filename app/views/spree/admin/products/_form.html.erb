@@ -78,11 +78,10 @@
             <div class="card-header d-flex">
               <div class="flex-fill">
                 <h5 class="card-title"><%= I18n.t('spree.dash.status') %></h5>
+                <span class="badge bg-success animate__animated" id="productStatus" data-stream-enter-class="animate__pulse"><%= @product.status.capitalize %></span>
               </div>
               <div>
-                <h5 class="card-title">
-                  <span class="badge bg-success animate__animated" id="productStatus" data-stream-enter-class="animate__pulse"><%= @product.status.capitalize %></span>
-                </h5>
+                <%= render partial: 'spree/admin/shared/submit_button' %>
               </div>
             </div>
             <div class="card-body">
@@ -97,7 +96,6 @@
                 <%= submit_tag "Update Product Status", formaction: spree.update_availability_admin_product_path(@product), formmethod: "post", data: { form_validation_target: "submitBtn" } %>
               <% end %>
 
-              <%= render partial: 'spree/admin/shared/submit_button' %>
               <div id="productStatusOptions">
                 <%= render partial: 'status' %>
               </div>
