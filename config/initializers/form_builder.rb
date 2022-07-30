@@ -6,6 +6,10 @@ class ActionView::Helpers::FormBuilder
     @template.field_container(@object_name, method, options, &block)
   end
 
+  def checkbox_container(method, options = {}, &block)
+    @template.checkbox_container(@object_name, method, options, &block)
+  end
+
   def error_message_on(method, options = {})
     @template.error_message_on(@object_name, method, objectify_options(options))
   end

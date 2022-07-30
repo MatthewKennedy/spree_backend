@@ -15,7 +15,17 @@ module Spree
 
       def field_container(model, method, options = {}, &block)
         css_classes = options[:class].to_a
-        css_classes << "form-group"
+        css_classes << "form-group form-floating"
+        css_classes << "withError" if error_message_on(model, method).present?
+        content_tag(
+          :div, capture(&block),
+          options.merge(class: css_classes.join(" "), id: "#{model}_#{method}_field")
+        )
+      end
+
+      def checkbox_container(model, method, options = {}, &block)
+        css_classes = options[:class].to_a
+        css_classes << "form-group form-check"
         css_classes << "withError" if error_message_on(model, method).present?
         content_tag(
           :div, capture(&block),
