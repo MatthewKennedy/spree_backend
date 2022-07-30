@@ -10,28 +10,28 @@
     </div>
     <div class="card-body row">
       <div class="col-12">
-        <%= f.field_container :name, data_hook: 'name', class: ['form-floating'] do %>
+        <%= f.field_container :name, data_hook: 'name' do %>
           <%= f.text_field :name, class: 'form-control', placeholder: Spree.t(:name), required: true, data: { form_state_target: "watch" } %>
           <%= f.label :name, Spree.t(:name) %>
         <% end %>
       </div>
 
       <div class="col-12 col-md-4">
-        <%= f.field_container :iso_name, data_hook: 'iso_name', class: ['form-floating'] do %>
+        <%= f.field_container :iso_name, data_hook: 'iso_name' do %>
           <%= f.text_field :iso_name, class: 'form-control', placeholder: Spree.t(:iso_name), required: true, data: { form_state_target: "watch" } %>
           <%= f.label :iso_name, Spree.t(:iso_name) %>
         <% end %>
       </div>
 
       <div class="col-12 col-md-4">
-        <%= f.field_container :iso, data_hook: 'iso', class: ['form-floating'] do %>
+        <%= f.field_container :iso, data_hook: 'iso' do %>
           <%= f.text_field :iso, class: 'form-control', placeholder: Spree.t(:iso), data: { form_state_target: "watch" } %>
           <%= f.label :iso, Spree.t(:iso) %>
         <% end %>
       </div>
 
       <div class="col-12 col-md-4">
-        <%= f.field_container :iso3, data_hook: 'iso3', class: ['form-floating'] do %>
+        <%= f.field_container :iso3, data_hook: 'iso3' do %>
           <%= f.text_field :iso3, class: 'form-control', placeholder: Spree.t(:iso3), required: true, data: { form_state_target: "watch" } %>
           <%= f.label :iso3, Spree.t(:iso3) %>
         <% end %>

@@ -10,7 +10,7 @@
     </div>
 
     <div class="card-body">
-      <%= zone_form.field_container :state_ids, class: ['form-floating'] do %>
+      <%= zone_form.field_container :state_ids do %>
         <%= zone_form.collection_select :state_ids, @states, :id, :name, {}, { class: 'form-select' ,multiple: true, data: { controller: 'ts--select', form_state_target: "watch" } } %>
         <%= zone_form.label :state_ids, Spree.t(:states) %>
       <% end %>

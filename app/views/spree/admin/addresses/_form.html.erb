@@ -5,7 +5,7 @@
 <div data-hook="address_fields">
   <h6 class="text-muted">International Location</h6>
   <!-- COUNTRY -->
-  <%= field_container :country, nil, class: ['form-floating'] do %>
+  <%= field_container :country, nil do %>
     <%= f.collection_select :country_id, all_countries, :id, :name, {  }, { class: 'form-select', data: { controller: 'ts--select', action: 'change->form-validation#validate' } } %>
     <%= f.label :country, raw(Spree.t(:country) + required_span_tag), class: 'form-label' %>
   <% end %>
@@ -17,7 +17,7 @@
   <% Spree::Address::ADDRESS_FIELDS.each do |field| %>
     <% next unless naming_fields.include?(field) %>
 
-    <%= field_container (field), nil, class: ['form-floating'] do %>
+    <%= field_container (field), nil do %>
       <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
       <% if requireds.include?(field) %>
         <%= f.label field, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
@@ -38,7 +38,7 @@
         <% label_name = Spree.t(field) %>
       <% end %>
 
-      <%= field_container (field), nil, class: ['form-floating'] do %>
+      <%= field_container (field), nil do %>
         <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
         <% if requireds.include?(field) %>
           <%= f.label field, raw(label_name + required_span_tag), class: 'form-label' %>
@@ -61,7 +61,7 @@
        end %>
 
       <!-- STATE -->
-      <%= field_container (field), :state, class: ['form-floating'], data: { form_validation_target: "hideOnSubmit" } do %>
+      <%= field_container (field), :state, data: { form_validation_target: "hideOnSubmit" } do %>
         <% if f.object.country.try(:states) %>
           <% if !f.object.country.states.present? && f.object.country.states_required? %>
             <%= f.text_field :state_name, style: "display: #{ f.object.country.states.empty? && f.object.country.states_required? ? 'block' : 'none' };",
@@ -104,7 +104,7 @@
       end %>
 
       <!-- ZIPCODE -->
-      <%= field_container (field), nil, class: ['form-floating'], data: { form_validation_target: "hideOnSubmit" } do %>
+      <%= field_container (field), nil, data: { form_validation_target: "hideOnSubmit" } do %>
         <%= f.text_field field, class: 'form-control', placeholder: Spree.t(field),  data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
 
         <% if f.object.country.zipcode_required? %>
@@ -121,7 +121,7 @@
     <% if field == 'phone' %>
     <hr class="mt-4">
     <h6 class="text-muted">Contact Details</h6>
-      <%= field_container (field), nil, class: ['form-floating'] do %>
+      <%= field_container (field), nil do %>
         <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
         <% if requireds.include?(field) %>
           <%= f.label field, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>

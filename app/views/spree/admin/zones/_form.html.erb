@@ -12,12 +12,12 @@
         </div>
 
         <div class="card-body">
-          <%= zone_form.field_container :name, class: ['form-floating'] do %>
+          <%= zone_form.field_container :name do %>
             <%= zone_form.text_field :name, class: 'form-control', placeholder: Spree.t(:name), required: true, data: {form_state_target: "watch"} %>
             <%= zone_form.label :name, Spree.t(:name) %>
           <% end %>
 
-          <%= zone_form.field_container :description, class: ['form-floating'] do %>
+          <%= zone_form.field_container :description do %>
             <%= zone_form.text_field :description, class: 'form-control', placeholder: Spree.t(:description), data: {form_state_target: "watch"} %>
             <%= zone_form.label :description, Spree.t(:description) %>
           <% end %>

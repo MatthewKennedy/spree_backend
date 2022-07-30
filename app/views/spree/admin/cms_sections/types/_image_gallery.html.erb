@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <%= f.field_container :layout_style, class: ["form-floating"] do %>
+    <%= f.field_container :layout_style do %>
       <%= f.select(:layout_style, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
                                   { const: 'LAYOUT_OPTIONS' }),
                                   { include_blank: false },
@@ -30,13 +30,13 @@
       </div>
       <small class="text-muted mb-4"><%= I18n.t('spree.dash.cms.image_gallery.square_image') %></small>
 
-    <%= f.field_container :title_one, class: ["form-floating"] do %>
+    <%= f.field_container :title_one do %>
       <%= f.text_field :title_one, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
       <%= f.label :title_one, I18n.t('spree.dash.cms.title') %>
     <% end %>
 
       <div class="col-12"><hr></div>
-      <%= f.field_container :link_type_one, class: ["form-floating"] do %>
+      <%= f.field_container :link_type_one do %>
         <%= f.select(:link_type_one,
             spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
                                             { const: 'LINKED_RESOURCE_TYPE' }),
@@ -59,13 +59,13 @@
       </div>
       <small class="text-muted mb-4"><%= I18n.t('spree.dash.cms.image_gallery.tall_image') %></small>
 
-      <%= f.field_container :title_two, class: ["form-floating"] do %>
+      <%= f.field_container :title_two do %>
         <%= f.text_field :title_two, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
         <%= f.label :title_two, I18n.t('spree.dash.cms.title') %>
       <% end %>
 
       <div class="col-12"><hr></div>
-      <%= f.field_container :link_type_two, class: ["form-floating"] do %>
+      <%= f.field_container :link_type_two do %>
         <%= f.select(:link_type_two,
             spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
                                             { const: 'LINKED_RESOURCE_TYPE' }),
@@ -87,13 +87,13 @@
       </div>
       <small class="text-muted mb-4"><%= I18n.t('spree.dash.cms.image_gallery.square_image') %></small>
 
-      <%= f.field_container :title_three, class: ["form-floating"] do %>
+      <%= f.field_container :title_three do %>
         <%= f.text_field :title_three, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
         <%= f.label :title_three, I18n.t('spree.dash.cms.title') %>
       <% end %>
 
       <div class="col-12"><hr></div>
-        <%= f.field_container :link_type_three, class: ["form-floating"] do %>
+        <%= f.field_container :link_type_three do %>
           <%= f.select(:link_type_three,
               spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
                                               { const: 'LINKED_RESOURCE_TYPE' }),
@@ -111,14 +111,14 @@
 <div class="row pb-0">
   <div class="col-12"> <hr></div>
   <div class="col-6">
-    <%= f.field_container :fit, class: ["form-floating"] do %>
+    <%= f.field_container :fit do %>
       <%= f.select(:fit, @cms_section.boundaries, {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
       <%= f.label :fit, I18n.t('spree.dash.cms.fit') %>
     <% end %>
   </div>
 
   <div class="col-6">
-    <%= f.field_container :display_labels, class: ["form-floating"] do %>
+    <%= f.field_container :display_labels do %>
       <%= f.select(:display_labels,
           spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
                                           { const: 'LABEL_OPTIONS' }),

@@ -5,7 +5,7 @@
 <div class="taxon-products-view card">
     <div class="card-body">
       <%= form_with url: spree.products_panel_admin_taxons_path, method: :post, data: { controller: "form-validation", turbo_frame: :taxons } do |f| %>
-        <%= field_container :taxon_ids, nil, class: ['form-floating', 'mb-0'] do %>
+        <%= field_container :taxon_ids, nil, class: ['mb-0'] do %>
           <%= f.select :taxon_id, [], { include_hidden: false },
                                         multiple: false,
                                         class:'form-select',

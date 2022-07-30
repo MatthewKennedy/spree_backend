@@ -11,26 +11,26 @@
 
 <div class="row pb-0">
   <div class="col-12 col-md-6">
-    <%= f.field_container :title, class: ["form-floating"] do %>
+    <%= f.field_container :title do %>
       <%= f.text_field :title, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
       <%= f.label :title, I18n.t('spree.dash.cms.title') %>
     <% end %>
 
-    <%= f.field_container :button_text, class: ["form-floating"] do %>
+    <%= f.field_container :button_text do %>
       <%= f.text_field :button_text, class: 'form-control', placeholder: I18n.t('spree.dash.cms.button_text') %>
       <%= f.label :button_text, I18n.t('spree.dash.cms.button_text') %>
     <% end %>
 
     <div class="row">
       <div class="col-6">
-        <%= f.field_container :fit, class: ["form-floating"] do %>
+        <%= f.field_container :fit do %>
           <%= f.select(:fit, @cms_section.boundaries, {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
           <%= f.label :fit, I18n.t('spree.dash.cms.fit') %>
         <% end %>
       </div>
 
       <div class="col-6">
-        <%= f.field_container :gutters, class: ["form-floating"] do %>
+        <%= f.field_container :gutters do %>
           <%= f.label :gutters, I18n.t('spree.dash.cms.gutters') %>
           <%= f.select(:gutters, @cms_section.gutters_sizes, {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
           <%= f.label :gutters, I18n.t('spree.dash.cms.gutters') %>
@@ -45,7 +45,7 @@
   </div>
   <div class="col-12"><hr></div>
   <div class="col-12 col-md-6">
-    <%= f.field_container :linked_resource_type, class: ["form-floating"]  do %>
+    <%= f.field_container :linked_resource_type  do %>
       <%= f.select(:linked_resource_type, spree_humanize_dropdown_values('Spree::Cms::Sections::HeroImage',
                                         { const: 'LINKED_RESOURCE_TYPE' }),
                                         {include_blank: false},

@@ -8,12 +8,12 @@
     <%= form_with model: [:admin, @product], url: spree.admin_product_url(@product), id: 'newProductProperty', data: { turbo_frame: "_top" }, method: :put do |f| %>
       <%= f.fields_for :product_properties do |pp_form| %>
         <% unless pp_form.object.persisted? %>
-          <%= f.field_container :property_name, class: ['form-floating'] do %>
+          <%= f.field_container :property_name do %>
             <%= pp_form.text_field :property_name, class: 'form-control', required: true, placeholder: raw(Spree.t(:property_name) + required_span_tag) %>
             <%= pp_form.label :property_name, raw(Spree.t(:property_name) + required_span_tag) %>
           <% end %>
 
-          <%= f.field_container :value, class: ['form-floating'] do %>
+          <%= f.field_container :value do %>
             <%= pp_form.text_field :value, class: 'form-control', required: true, placeholder: raw(Spree.t(:value) + required_span_tag) %>
             <%= pp_form.label :value, raw(Spree.t(:value) + required_span_tag) %>
           <% end %>

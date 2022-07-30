@@ -21,14 +21,14 @@
             <div class="row pb-0">
 
               <div class="col-12 col-md-6">
-                <%= f.field_container :title, class: ["form-floating"] do %>
+                <%= f.field_container :title do %>
                   <%= f.text_field :title, class: 'form-control', required: true, placeholder: raw(I18n.t('spree.dash.cms.title') + required_span_tag) %>
                   <%= f.label :title, raw(I18n.t('spree.dash.cms.title') + required_span_tag) %>
                 <% end %>
               </div>
 
               <div class="col-12 col-md-6">
-                <%= f.field_container :type, class: ["form-floating"] do %>
+                <%= f.field_container :type do %>
                   <%= f.select(:type, spree_humanize_dropdown_values('Spree::CmsPage', {const: 'TYPES'}), {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
                   <%= f.label :type, I18n.t('spree.dash.cms.page_type') %>
                 <% end %>
@@ -40,14 +40,14 @@
                 <div class="col-12"><hr></div>
 
                 <div class="col-12 col-md-4">
-                  <%= f.field_container :meta_title, class: ['form-floating'] do %>
+                  <%= f.field_container :meta_title do %>
                     <%= f.text_field :meta_title, class: 'form-control', placeholder: I18n.t('spree.dash.cms.meta_title') %>
                     <%= f.label :meta_title, I18n.t('spree.dash.cms.meta_title') %>
                   <% end %>
                 </div>
 
                 <div class="col-12 col-md-4">
-                  <%= f.field_container :slug, class: ['form-floating'] do %>
+                  <%= f.field_container :slug do %>
                     <%= f.text_field :slug, class: 'form-control', disabled: @cms_page.homepage?, placeholder: I18n.t('spree.dash.slug') %>
                     <% if @cms_page.homepage? %>
                       <%= f.label :slug, I18n.t('spree.dash.not_applicable') %>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="col-12 col-md-4">
-                  <%= f.field_container :locale, class: ['form-floating'] do %>
+                  <%= f.field_container :locale do %>
                     <%= f.select :locale, options_from_collection_for_select(supported_locales_options, :last, :first, @cms_page.locale || I18n.locale), {}, {class: 'form-select', data: {controller: 'ts--select'} } %>
                     <%= f.label :language %>
                   <% end %>
@@ -100,7 +100,7 @@
   <%= form_for [:admin, @cms_page], as: :cms_page, url: spree.admin_cms_page_path do |f| %>
     <div class="card">
       <div class="card-body">
-        <%= f.field_container :content, class: ['form-floating']  do %>
+        <%= f.field_container :content  do %>
           <%= f.text_area :content, { data: { controller: 'rte'}, style: "height: 283px;", class: 'form-control', placeholder: I18n.t('spree.dash.cms.content') } %>
           <%= f.label :content, I18n.t('spree.dash.cms.content') %>
         <% end %>

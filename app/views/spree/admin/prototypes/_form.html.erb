@@ -1,13 +1,13 @@
 <div class="row" data-hook="admin_prototype_form_fields">
   <div class="col-12">
-    <%= f.field_container :name, class: ['form-floating'] do %>
+    <%= f.field_container :name do %>
       <%= f.text_field :name, class: 'form-control', required: true, placeholder: raw(I18n.t('spree.dash.name') + required_span_tag) %>
       <%= f.label :name, raw(I18n.t('spree.dash.name') + required_span_tag) %>
     <% end %>
   </div>
 
   <div class="col-12 col-md-4">
-    <%= f.field_container :property_ids, class: ['form-floating'] do %>
+    <%= f.field_container :property_ids do %>
       <%= f.select :property_ids, Spree::Property.all.map { |p| ["#{p.presentation} (#{p.name})", p.id] }, {}, { class:'form-select', placeholder: I18n.t('spree.dash.properties'), multiple: true, data: { controller: 'ts--select' } } %>
       <%#= f.select :property_ids, options_from_collection_for_select(f.object.properties, :id, :name, f.object.property_ids),
                                 { include_hidden: true },
@@ -25,7 +25,7 @@
   </div>
 
   <div class="col-12 col-md-4">
-    <%= f.field_container :option_type_ids, class: ['form-floating']  do %>
+    <%= f.field_container :option_type_ids  do %>
       <%= f.select :option_type_ids, options_from_collection_for_select(f.object.option_types, :id, :name, f.object.option_type_ids),
                                 { include_hidden: true },
                                   multiple: true,
@@ -42,7 +42,7 @@
   </div>
 
   <div class="col-12 col-md-4">
-    <%= f.field_container :taxon_ids, class: ['form-floating'] do %>
+    <%= f.field_container :taxon_ids do %>
       <%= f.select :taxon_ids, options_from_collection_for_select(f.object.taxons, :id, :pretty_name, f.object.taxon_ids),
                                 { include_hidden: true },
                                   multiple: true,

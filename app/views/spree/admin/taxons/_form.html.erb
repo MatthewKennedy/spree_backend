@@ -6,13 +6,13 @@
            <h5 class="card-title"><%= I18n.t('spree.dash.details') %></h5>
         </div>
         <div class="card-body">
-          <%= f.field_container :name, class: ['form-floating'] do %>
+          <%= f.field_container :name do %>
             <%= text_field :taxon, :name, class: 'form-control', required: true, placeholder: raw(I18n.t('spree.dash.name') + required_span_tag) %>
             <%= f.label :name, raw(I18n.t('spree.dash.name') + required_span_tag) %>
           <% end %>
 
           <% unless @taxon.new_record? %>
-            <%= f.field_container :permalink, class: ['form-floating'] do %>
+            <%= f.field_container :permalink do %>
               <%= text_field_tag :permalink_part, @permalink_part, class: 'form-control', placeholder: raw(I18n.t('spree.dash.taxons.permalink') + required_span_tag), required: true, autocomplete: false %>
               <%= f.label :permalink, raw(I18n.t('spree.dash.taxons.permalink') + required_span_tag) %>
               <small class="form-text text-muted">
@@ -21,7 +21,7 @@
             <% end %>
           <% end %>
 
-          <%= f.field_container :description, class: ['form-floating'] do %>
+          <%= f.field_container :description do %>
             <%= f.text_area :description, class: "form-control", data: { controller: "#{'rte' if product_wysiwyg_editor_enabled?}" }, rows: 14, placeholder: I18n.t('spree.dash.description') %>
             <%= f.label :description, I18n.t('spree.dash.description') %>
           <% end %>
@@ -66,17 +66,17 @@
             <h5 class="card-title"><%= I18n.t('spree.dash.seo') %></h5>
           </div>
           <div class="card-body">
-            <%= f.field_container :meta_title, class: ['form-floating'] do %>
+            <%= f.field_container :meta_title do %>
               <%= f.text_field :meta_title, class: 'form-control', placeholder: I18n.t('spree.dash.meta_title') %>
               <%= f.label :meta_title, I18n.t('spree.dash.meta_title') %>
             <% end %>
 
-            <%= f.field_container :meta_description, class: ['form-floating'] do %>
+            <%= f.field_container :meta_description do %>
               <%= f.text_area :meta_description, class: 'form-control', style: 'height: 150px', placeholder: I18n.t('spree.dash.meta_description') %>
               <%= f.label :meta_description, I18n.t('spree.dash.meta_description') %>
             <% end %>
 
-            <%= f.field_container :meta_keywords, class: ['form-floating'] do %>
+            <%= f.field_container :meta_keywords do %>
               <%= f.text_field :meta_keywords, class: 'form-control', placeholder: I18n.t('spree.dash.meta_keywords') %>
               <%= f.label :meta_keywords, I18n.t('spree.dash.meta_keywords') %>
             <% end %>

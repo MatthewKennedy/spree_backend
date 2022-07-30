@@ -17,21 +17,21 @@
     <div class="card-body pb-2">
       <div class="row pb-0">
         <div class="col-12 col-md-4">
-          <%= f.field_container :title, class: ["form-floating"] do %>
+          <%= f.field_container :title do %>
             <%= f.text_field :title, class: 'form-control', required: true, placeholder: raw(I18n.t('spree.dash.cms.title') + required_span_tag) %>
             <%= f.label :title, raw(I18n.t('spree.dash.cms.title') + required_span_tag) %>
           <% end %>
         </div>
 
         <div class="col-12 col-md-4">
-          <%= f.field_container :type, class: ["form-floating"] do %>
+          <%= f.field_container :type do %>
             <%= f.select(:type, spree_humanize_dropdown_values('Spree::CmsPage', {const: 'TYPES'}), {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
             <%= f.label :type, I18n.t('spree.dash.cms.page_type') %>
           <% end %>
         </div>
 
         <div class="col-12 col-md-4">
-          <%= f.field_container :locale, class: ['form-floating'] do %>
+          <%= f.field_container :locale do %>
             <%= f.select :locale, options_from_collection_for_select(supported_locales_options, :last, :first, @cms_page.locale || I18n.locale), {}, {class: 'form-select', data: {controller: 'ts--select'} } %>
             <%= f.label :language %>
           <% end %>

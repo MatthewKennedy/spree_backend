@@ -1,18 +1,18 @@
 <div data-hook="admin_menu_form_fields" class="row">
   <div class='col-12 col-md-4'>
-    <%= f.field_container :name, class: ['form-floating'] do %>
+    <%= f.field_container :name do %>
       <%= f.text_field :name, class: 'form-control', required: true, placeholder: raw(Spree.t(:name) + required_span_tag) %>
       <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
     <% end %>
   </div>
   <div class='col-12 col-md-4'>
-    <%= f.field_container :location, class: ['form-floating'] do %>
+    <%= f.field_container :location do %>
       <%= f.select(:location, spree_humanize_dropdown_values('Spree::Menu', { const: 'MENU_LOCATIONS', paramterize_values: true }), {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
       <%= f.label :location, I18n.t('spree.dash.location') %>
     <% end %>
   </div>
   <div class='col-12 col-md-4'>
-    <%= f.field_container :locale, class: ['form-floating'] do %>
+    <%= f.field_container :locale do %>
       <%= f.select :locale, options_from_collection_for_select(all_locales_options, :last, :first, @menu.locale || I18n.locale), {}, { class: 'form-select', data: {controller: 'ts--select'} } %>
       <%= f.label :language %>
     <% end %>

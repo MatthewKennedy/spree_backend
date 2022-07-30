@@ -16,7 +16,7 @@
     <% unless @order.shipped? %>
       <%= form_with model: @order.shipments, url: spree.admin_shipments_path, method: :post, class: 'input-group' do |f| %>
         <%= f.hidden_field :order_id, value: @order.id %>
-        <%= f.field_container :stock_location_id, class: ['form-floating col'] do %>
+        <%= f.field_container :stock_location_id, class: ['col'] do %>
           <%= select(:shipment, :stock_location_id, Spree::StockLocation.all.collect {|s| [ s.name, s.id ] }, { include_blank: false }, class: 'form-select rounded-start rounded-0') %>
           <%= f.label :shipping_location %>
         <% end %>
@@ -113,7 +113,7 @@
 
               <hr>
 
-              <%= field_container :selected_shipping_rate_id, nil, class: ['form-floating'] do %>
+              <%= field_container :selected_shipping_rate_id, nil do %>
                 <%= select_tag :selected_shipping_rate_id, options_for_select(shipment.shipping_rates.map {|sr| ["#{sr.name} #{sr.display_price}", sr.id] }, shipment.selected_shipping_rate_id), { disabled: (shipment.shipped? or cannot? :update, shipment), class: 'form-select'} %>
                 <%= label_tag 'selected_shipping_rate_id', Spree.t(:shipping_method) %>
               <% end %>
