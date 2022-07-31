@@ -22,19 +22,19 @@
             <%= zone_form.label :description, Spree.t(:description) %>
           <% end %>
 
-          <%= zone_form.field_container :default_tax, class: ['form-check'] do %>
+          <%= zone_form.checkbox_container :default_tax, class: ['form-check'] do %>
             <%= zone_form.check_box :default_tax, class: 'form-check-input', data: {form_state_target: "watch"} %>
             <%= zone_form.label :default_tax, Spree.t(:default_tax_zone), class: 'form-check-label' %>
           <% end %>
 
           <div data-hook="type" class="form-group">
             <strong><%= Spree.t(:type) %></strong>
-            <%= zone_form.field_container :country_based, class: ['form-check'] do %>
+            <%= zone_form.checkbox_container :country_based, class: ['form-check'] do %>
               <%= zone_form.radio_button('kind', 'country', { class: 'form-check-input' ,id: 'country_based', data: {form_state_target: "watch"} }) %>
               <%= zone_form.label :country_based, Spree.t(:country_based), for: 'country_based', class: 'form-check-label' %>
             <% end %>
 
-            <%= zone_form.field_container :state_based, class: ['form-check'] do %>
+            <%= zone_form.checkbox_container :state_based, class: ['form-check'] do %>
               <%= zone_form.radio_button('kind', 'state', { class: 'form-check-input', id: 'state_based', data: {form_state_target: "watch"} }) %>
               <%= zone_form.label :state_based, Spree.t(:state_based), for: 'state_based', class: 'form-check-label' %>
             <% end %>

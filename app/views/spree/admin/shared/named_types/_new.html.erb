@@ -1,13 +1,19 @@
-<% content_for :page_title do %>
-  <%= link_to collection_url_label, collection_url %> /
-  <%= page_title %>
+<% content_for :modal_header do %>
+  <h5 class="modal-title"><%= page_title %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 <% end %>
 
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @object } %>
-
-<%= form_for [:admin, @object] do |f| %>
-  <fieldset>
-    <%= render partial: 'spree/admin/shared/named_types/form', locals: { f: f } %>
-    <%= render partial: 'spree/admin/shared/new_resource_links' %>
-  </fieldset>
+<% content_for :modal_body do %>
+  <div class="container">
+    <%= form_for [:admin, @object], id: 'univeralModalForm', data: { turbo_frame: '_top', action: "turbo:submit-end->modal#submitEnd" } do |f| %>
+      <%= render partial: 'spree/admin/shared/named_types/form', locals: { f: f } %>
+    <% end %>
+  </div>
 <% end %>
+
+<% content_for :modal_footer do %>
+  <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= I18n.t('spree.dash.actions.cancel') %></button>
+  <%= button_tag(I18n.t('spree.dash.actions.save'), class: "btn btn-success", form: "new_#{@object.class.name.demodulize.underscore}") %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered modal-lg' } %>

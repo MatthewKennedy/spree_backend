@@ -2,10 +2,6 @@
   <%= page_title %>
 <% end %>
 
-<% content_for :page_actions do %>
-  <%= link_to_with_icon new_button_text, new_object_url, { icon: 'plus-square.svg', id: 'admin_new_named_type', class: "btn-success btn" } %>
-<% end if can? :create, resource %>
-
 <% if @collection.any? %>
 <div class="table-responsive border rounded bg-white">
   <table class="table" id='listing_named_types' data-hook>
@@ -13,7 +9,9 @@
       <tr data-hook="named_types_header">
         <th><%= Spree.t(:name) %></th>
         <th><%= Spree.t(:status) %></th>
-        <th></th>
+        <th class="actions text-end">
+          <%= link_to_with_icon(new_button_text, new_object_url, class: "btn-secondary btn btn-sm", icon: 'plus-square.svg', data: {turbo_frame: :modal}) if can? :create, resource %>
+        </th>
       </tr>
     </thead>
     <tbody id="<%= resource_name.to_s.parameterize.underscore %>">
@@ -28,7 +26,7 @@
           <td class="actions">
             <span class="d-flex justify-content-end">
               <% if named_type.mutable? %>
-                <%= link_to_edit(named_type) if can? :edit, named_type %>
+                <%= link_to_edit(named_type, data: { turbo_frame: :modal }) if can? :edit, named_type %>
                 <%= link_to_delete(named_type) if can? :delete, named_type %>
               <% end %>
             </span>

@@ -1,6 +1,6 @@
-<div class="card mb-4">
+<div class="card">
   <div class="card-header">
-    <h5 class="card-title mb-0 h6">
+    <h5 class="card-title">
       <%= Spree.t(:footer) %>
     </h5>
   </div>
@@ -8,21 +8,19 @@
     <div class="alert alert-info">
       <%= I18n.t('spree.dash.store_form.footer_help') %>
     </div>
-
     <%= f.field_container :description do %>
+      <%= f.text_area :description, class: 'form-control', placeholder: Spree.t(:description) %>
       <%= f.label :description, Spree.t(:description) %>
-      <%= f.text_area :description, class: 'form-control' %>
-      <%= f.error_message_on :description %>
     <% end %>
+
     <%= f.field_container :address do %>
+      <%= f.text_area :address, class: 'form-control', placeholder: Spree.t(:address) %>
       <%= f.label :address, Spree.t(:address) %>
-      <%= f.text_area :address, class: 'form-control' %>
-      <%= f.error_message_on :address %>
     <% end %>
+
     <%= f.field_container :contact_phone do %>
+      <%= f.text_field :contact_phone, class: 'form-control', placeholder: Spree.t(:contact_phone) %>
       <%= f.label :contact_phone, Spree.t(:contact_phone) %>
-      <%= f.text_field :contact_phone, class: 'form-control' %>
-      <%= f.error_message_on :contact_phone %>
     <% end %>
   </div>
 </div>

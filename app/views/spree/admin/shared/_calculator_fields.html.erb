@@ -20,7 +20,7 @@
         </div>
         <% if @object.calculator.respond_to?(:preferences) %>
           <span class="calculator-settings-warning info warning">
-            <%#= I18n.t('spree.dash.calculators.if_you_change_the_calculator') %>
+            <%= I18n.t('spree.dash.calculators.if_you_change_the_calculator') %>
           </span>
         <% end %>
       </div>

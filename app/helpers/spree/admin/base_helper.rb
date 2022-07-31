@@ -15,7 +15,10 @@ module Spree
 
       def field_container(model, method, options = {}, &block)
         css_classes = options[:class].to_a
-        css_classes << "form-group form-floating"
+        if css_classes.empty?
+          css_classes << "form-group form-floating"
+        end
+
         css_classes << "withError" if error_message_on(model, method).present?
         content_tag(
           :div, capture(&block),
@@ -25,7 +28,7 @@ module Spree
 
       def checkbox_container(model, method, options = {}, &block)
         css_classes = options[:class].to_a
-        css_classes << "form-group form-check"
+        css_classes << "form-check"
         css_classes << "withError" if error_message_on(model, method).present?
         content_tag(
           :div, capture(&block),
@@ -103,9 +106,7 @@ module Spree
 
       def preference_field_tag(name, value, options)
         if options[:key] == :currency
-          return select_tag(name,
-            options_from_collection_for_select(supported_currencies_for_all_stores, :iso_code, :iso_code, value),
-            class: "select2")
+          return select_tag(name, options_from_collection_for_select(supported_currencies_for_all_stores, :iso_code, :iso_code, value), data: { controller: "ts--search" })
         end
 
         case options[:type]
@@ -147,32 +148,37 @@ module Spree
         when :integer
           {
             size: 10,
-            class: "input_integer form-control"
+            class: "input_integer form-control",
+            placeholder: "-"
           }
         when :boolean
           {
-            class: "form-check-input"
+            class: "form-check"
           }
         when :string
           {
             size: 10,
-            class: "input_string form-control"
+            class: "input_string form-control",
+            placeholder: "-"
           }
         when :password
           {
             size: 10,
-            class: "password_string form-control"
+            class: "password_string form-control",
+            placeholder: "-"
           }
         when :text
           {
             rows: 15,
             cols: 85,
-            class: "form-control"
+            class: "form-control",
+            placeholder: "-"
           }
         else
           {
             size: 10,
-            class: "input_string form-control"
+            class: "input_string form-control",
+            placeholder: "-"
           }
         end
 
@@ -188,18 +194,17 @@ module Spree
           if object.has_preference?(key)
             case key
             when :currency
-              content_tag(:div, form.label("preferred_#{key}", Spree.t(key)) +
-                (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {class: "form-control select2"}),
-                class: "form-group", id: [object.class.to_s.parameterize, "preference", key].join("-"))
+              content_tag(:div, (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {autocomplete: false,class: "form-select", data: { controller: "ts--search" }}) +
+                form.label("preferred_#{key}", Spree.t(key)),
+                class: "form-group form-floating", id: [object.class.to_s.parameterize, "preference", key].join("-"))
             else
               if object.preference_type(key).to_sym == :boolean
                 content_tag(:div, preference_field_for(form, "preferred_#{key}", type: object.preference_type(key)) +
                   form.label("preferred_#{key}", Spree.t(key), class: "form-check-label"),
                   class: "form-group form-check", id: [object.class.to_s.parameterize, "preference", key].join("-"))
               else
-                content_tag(:div, form.label("preferred_#{key}", Spree.t(key)) +
-                  preference_field_for(form, "preferred_#{key}", type: object.preference_type(key)),
-                  class: "form-group", id: [object.class.to_s.parameterize, "preference", key].join("-"))
+                content_tag(:div, preference_field_for(form, "preferred_#{key}", type: object.preference_type(key)) + form.label("preferred_#{key}", Spree.t(key)),
+                  class: "form-group form-floating", id: [object.class.to_s.parameterize, "preference", key].join("-"))
               end
             end
           end
