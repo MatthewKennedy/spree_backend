@@ -150,7 +150,14 @@ module Spree
             size: 10,
             class: "input_integer form-control",
             placeholder: "-",
-            data: {form_state_target: "watch", input_disable_target: "disable"}
+            data: {controller: "input-formatting", form_state_target: "watch", input_disable_target: "disable", input_formatting_options_value: {numeral: true, numeralDecimalScale: 0, numeralThousandsGroupStyle: "none"}}
+          }
+        when :decimal
+          {
+            size: 10,
+            class: "input_decimal form-control",
+            placeholder: "-",
+            data: {controller: "input-formatting", form_state_target: "watch", input_disable_target: "disable", input_formatting_options_value: {numeral: true, numeralThousandsGroupStyle: "none"}}
           }
         when :boolean
           {
@@ -175,7 +182,7 @@ module Spree
           {
             rows: 15,
             cols: 85,
-            class: "form-control",
+            class: "text_string form-control",
             placeholder: "-",
             data: {form_state_target: "watch", input_disable_target: "disable"}
           }
@@ -200,7 +207,7 @@ module Spree
           if object.has_preference?(key)
             case key
             when :currency
-              content_tag(:div, (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {autocomplete: false, class: "form-select", data: {controller: "ts--search", form_state_target: "watch", input_disable_target: "disable"}}) +
+              content_tag(:div, (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {autocomplete: false, class: "form-select", data: {controller: "ts--select", form_state_target: "watch", input_disable_target: "disable"}}) +
                 form.label("preferred_#{key}", Spree.t(key)),
                 class: "form-group form-floating", id: [object.class.to_s.parameterize, "preference", key].join("-"))
             else

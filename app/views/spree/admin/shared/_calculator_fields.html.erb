@@ -17,7 +17,7 @@
         <div class="calculator-settings" data-input-disable-target="container">
           <%= f.fields_for :calculator do |calculator_form| %>
             <%= preference_fields @object.calculator, calculator_form %>
-            <%= calculator_form.hidden_field(:id, value: @object.calculator.id, data: {controller: 'ts--select', form_state_target: "watch", input_disable_target: "disable" } ) %>
+            <%= calculator_form.hidden_field(:id, value: @object.calculator.id, data: {form_state_target: "watch", input_disable_target: "disable" } ) %>
           <% end %>
         </div>
         <% if @object.calculator.respond_to?(:preferences) %>
