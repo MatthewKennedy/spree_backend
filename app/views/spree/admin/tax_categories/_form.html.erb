@@ -4,8 +4,8 @@
   </div>
   <div class="card-body">
     <%= f.field_container :name do %>
-      <%= f.text_field :name, class: 'form-control', placeholder: Spree.t(:name) %>
-      <%= f.label :name, Spree.t(:name) %>
+      <%= f.text_field :name, class: 'form-control', placeholder: raw(I18n.t('spree.dash.name') + required_span_tag), required: true %>
+      <%= f.label :name, raw(I18n.t('spree.dash.name') + required_span_tag) %>
     <% end %>
 
     <%= f.field_container :tax_code do %>

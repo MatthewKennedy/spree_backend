@@ -13,8 +13,8 @@
 
         <div class="card-body">
           <%= zone_form.field_container :name do %>
-            <%= zone_form.text_field :name, class: 'form-control', placeholder: Spree.t(:name), required: true, data: {form_state_target: "watch"} %>
-            <%= zone_form.label :name, Spree.t(:name) %>
+            <%= zone_form.text_field :name, class: 'form-control', placeholder: raw(Spree.t(:name) + required_span_tag), required: true, data: {form_state_target: "watch"} %>
+            <%= zone_form.label :name, raw(Spree.t(:name) + required_span_tag) %>
           <% end %>
 
           <%= zone_form.field_container :description do %>
@@ -27,8 +27,10 @@
             <%= zone_form.label :default_tax, Spree.t(:default_tax_zone), class: 'form-check-label' %>
           <% end %>
 
-          <div data-hook="type" class="form-group">
-            <strong><%= Spree.t(:type) %></strong>
+          <div data-hook="type" class="form-group mt-4">
+            <h6>
+              <%= Spree.t(:type) %>
+            </h6>
             <%= zone_form.checkbox_container :country_based, class: ['form-check'] do %>
               <%= zone_form.radio_button('kind', 'country', { class: 'form-check-input' ,id: 'country_based', data: {form_state_target: "watch"} }) %>
               <%= zone_form.label :country_based, Spree.t(:country_based), for: 'country_based', class: 'form-check-label' %>
@@ -39,6 +41,11 @@
               <%= zone_form.label :state_based, Spree.t(:state_based), for: 'state_based', class: 'form-check-label' %>
             <% end %>
           </div>
+        </div>
+        <div class="card-footer text-end">
+          <a data-bs-toggle="collapse" href="#menuItemSettingsInformation" role="button" aria-expanded="false" aria-controls="menuItemSettingsInformation" class="align-self-center">
+              <%= inline_svg_tag "info-circle.svg", size: '20px*20px', class: "ms-1" %>
+          </a>
         </div>
       </div>
     <% end %>

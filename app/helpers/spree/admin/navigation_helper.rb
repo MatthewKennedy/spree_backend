@@ -180,6 +180,14 @@ module Spree
         link_to name.html_safe, url, html_options.except(:icon, :icon_class, :icon_size, :no_text)
       end
 
+      def remote_form_submit_button(resource)
+        if resource.persisted?
+          button(I18n.t("spree.dash.actions.update"), "check-lg.svg", "submit", {form: "edit_#{@object.class.name.demodulize.underscore}_#{@object.id}", class: "btn btn-success", id: "globalFormSubmitButton"})
+        else
+          button(I18n.t("spree.dash.actions.create"), "check-lg.svg", "submit", {form: "new_#{@object.class.name.demodulize.underscore}", class: "btn btn-success", id: "globalFormSubmitButton"})
+        end
+      end
+
       # Override: Add disable_with option to prevent multiple request on consecutive clicks
       def button(text, icon_name = nil, button_type = "submit", html_options = {})
         if icon_name

@@ -106,7 +106,7 @@ module Spree
 
       def preference_field_tag(name, value, options)
         if options[:key] == :currency
-          return select_tag(name, options_from_collection_for_select(supported_currencies_for_all_stores, :iso_code, :iso_code, value), data: { controller: "ts--search" })
+          return select_tag(name, options_from_collection_for_select(supported_currencies_for_all_stores, :iso_code, :iso_code, value), data: {controller: "ts--search", form_state_target: "watch", input_disable_target: "disable"})
         end
 
         case options[:type]
@@ -149,36 +149,42 @@ module Spree
           {
             size: 10,
             class: "input_integer form-control",
-            placeholder: "-"
+            placeholder: "-",
+            data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         when :boolean
           {
-            class: "form-check"
+            class: "form-check",
+            data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         when :string
           {
             size: 10,
             class: "input_string form-control",
-            placeholder: "-"
+            placeholder: "-",
+            data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         when :password
           {
             size: 10,
             class: "password_string form-control",
-            placeholder: "-"
+            placeholder: "-",
+            data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         when :text
           {
             rows: 15,
             cols: 85,
             class: "form-control",
-            placeholder: "-"
+            placeholder: "-",
+            data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         else
           {
             size: 10,
             class: "input_string form-control",
-            placeholder: "-"
+            placeholder: "-",
+            data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         end
 
@@ -194,7 +200,7 @@ module Spree
           if object.has_preference?(key)
             case key
             when :currency
-              content_tag(:div, (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {autocomplete: false,class: "form-select", data: { controller: "ts--search" }}) +
+              content_tag(:div, (form.select "preferred_#{key}", currency_options(object.preferences[key]), {}, {autocomplete: false, class: "form-select", data: {controller: "ts--search", form_state_target: "watch", input_disable_target: "disable"}}) +
                 form.label("preferred_#{key}", Spree.t(key)),
                 class: "form-group form-floating", id: [object.class.to_s.parameterize, "preference", key].join("-"))
             else

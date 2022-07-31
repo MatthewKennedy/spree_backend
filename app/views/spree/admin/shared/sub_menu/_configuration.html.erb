@@ -1,14 +1,4 @@
 <ul data-hook="admin_configurations_sidebar_menu" class="collapse nav nav-pills nav-stacked" id="sidebar-configuration">
-  <%= tab :countries, url: spree.admin_countries_path, label: I18n.t('spree.dash.settings_menu.countries') if can? :manage, Spree::Country %>
-  <%= tab :refund_reasons, url: spree.admin_refund_reasons_path, label: I18n.t('spree.dash.settings_menu.refund_reasons') if can? :manage, Spree::RefundReason %>
-  <%= tab :reimbursement_types, url: spree.admin_reimbursement_types_path, label: I18n.t('spree.dash.settings_menu.reimbursement_types') if can? :manage, Spree::ReimbursementType %>
-  <%= tab :return_authorization_reasons, url: spree.admin_return_authorization_reasons_path, label: I18n.t('spree.dash.settings_menu.return_reasons') if can? :manage, Spree::ReturnAuthorizationReason %>
+  <%= tab :stores, url: spree.edit_admin_store_path(current_store), label: I18n.t('spree.dash.settings_menu.details') if can? :manage, current_store %>
   <%= tab :roles, url: spree.admin_roles_path, label: I18n.t('spree.dash.settings_menu.roles') if can? :manage, Spree::Role %>
-  <%= tab :shipping_categories, url: spree.admin_shipping_categories_path, label: I18n.t('spree.dash.settings_menu.shipping_categories') if can? :manage, Spree::ShippingCategory %>
-  <%= tab :shipping_methods, url: spree.admin_shipping_methods_path, label: I18n.t('spree.dash.settings_menu.shipping_methods') if can? :manage, Spree::ShippingMethod %>
-  <%= tab :stores, url: spree.edit_admin_store_path(current_store), label: I18n.t('spree.dash.settings_menu.stores') if can? :manage, current_store %>
-  <%= tab :store_credit_categories, url: spree.admin_store_credit_categories_path, label: I18n.t('spree.dash.settings_menu.store_credit_categories') if can? :manage, Spree::StoreCreditCategory %>
-  <%= tab :tax_categories, url: spree.admin_tax_categories_path, label: I18n.t('spree.dash.settings_menu.tax_categories') if can? :manage, Spree::TaxCategory %>
-  <%= tab :tax_rates, url: spree.admin_tax_rates_path, label: I18n.t('spree.dash.settings_menu.tax_rates') if can? :manage, Spree::TaxRate %>
-  <%= tab :zones, url: spree.admin_zones_path, label: I18n.t('spree.dash.settings_menu.zones') if can? :manage, Spree::Zone %>
 </ul>

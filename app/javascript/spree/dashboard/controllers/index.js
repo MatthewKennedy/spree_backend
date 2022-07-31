@@ -5,10 +5,12 @@ import { Application } from '@hotwired/stimulus'
 // Stimulus - Spree Controllers
 import BsInstanceController from './bs_instance_controller'
 import CardFormattingController from './card_formatting_controller'
+import CheckboxValidationController from './checkbox_validation_controller'
 import ClipboardController from './clipboard_controller'
 import DatePickerController from './datepicker_controller'
 import FormStateController from './form_state_controller'
 import FormValidationController from './form_validation_controller'
+import InputDisableController from './input_disable_controller'
 import InputFormattingController from './input_formatting_controller'
 import LinkableTd from './linkable_td_controller'
 import MenuController from './menu_controller'
@@ -28,10 +30,12 @@ window.Stimulus = Application.start()
 
 Stimulus.register('bs-instance', BsInstanceController)
 Stimulus.register('card-formatting', CardFormattingController)
+Stimulus.register('checkbox-validation', CheckboxValidationController)
 Stimulus.register('clipboard', ClipboardController)
 Stimulus.register('datepicker', DatePickerController)
 Stimulus.register('form-state', FormStateController)
 Stimulus.register('form-validation', FormValidationController)
+Stimulus.register('input-disable', InputDisableController)
 Stimulus.register('input-formatting', InputFormattingController)
 Stimulus.register('linkable-td', LinkableTd)
 Stimulus.register('menu', MenuController)

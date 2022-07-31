@@ -30,7 +30,7 @@ en:
         street_address_matches_but_5-digit_and_9_digit_postal_code_do_not_match: Street address matches, but 5-digit and 9-digit postal code do not match.
         street_address_matches_but_postal_code_not_verified: Street address matches, but postal code not verified.
       calculators:
-        if_you_change_the_calculator: If you change the calculator
+        if_you_change_the_calculator: Click update to save the new calculator.
       cms:
         add_new_page: Add New Page
         add_new_section: Add New Section
@@ -304,17 +304,18 @@ en:
       settings: Settings
       settings_menu:
         countries: Countries
-        refund_reasons: Refund reasons
-        reimbursement_types: Reimbursement types
-        return_reasons: Return reasons
+        details: Details
+        refund_reasons: Refund Reasons
+        reimbursement_types: Reimbursement Types
+        return_reasons: Return Reasons
         roles: Roles
-        shipping_categories: Shipping categories
+        shipping_categories: Shipping Categories
         shipping_methods: Shipping methods
         states: States
-        store_credit_categories: Store credit categories
+        store_credit_categories: Store Credit
         stores: Stores
-        tax_categories: Tax categories
-        tax_rates: Tax rates
+        tax_categories: Tax Categories
+        tax_rates: Tax Rates
         zones: Zones
       shipment: Shipment
       shipment_states:
@@ -377,7 +378,11 @@ en:
         seo_robots: Please check <a href='https://developers.google.com/search/reference/robots_meta_tag' target='_blank'>this page for more help</a>
         social_help: If you want to link to your social accounts in the footer part of your website please fill below fields
         supported_languages: Supported languages
+      store_settings: Store
+      store_switch: Store switch
       storefront_api: Storefront API
+      stores:
+        store: Store
       successful: Successful
       tab:
         applications: Applications
@@ -394,7 +399,8 @@ en:
         products: Products
         returns: Returns
         stock: Stock
-      tax_and_shipping: Tax and shipping
+        tax_and_shipping: Tax & Shipping
+      tax_and_shipping: Tax & Shipping
       taxon_rule:
         choose_taxons: Choose taxons
         label: Label
