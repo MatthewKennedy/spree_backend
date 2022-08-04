@@ -25,12 +25,7 @@ module Spree
           params[:user].delete(:password_confirmation)
         end
 
-        if @user.update(user_params)
-          flash[:success] = Spree.t(:account_updated)
-          redirect_to spree.edit_admin_user_path(@user)
-        else
-          render :edit, status: :unprocessable_entity
-        end
+        super
       end
 
       def addresses

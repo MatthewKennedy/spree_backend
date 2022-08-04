@@ -196,6 +196,8 @@ en:
         variant_deleted: Variant deleted
         variant_not_deleted: Variant not deleted
       oauth_applications:
+        client_id: Client ID
+        client_secret: Client secret
         list: oAuth applications
         new: New oAuth application
         scopes: Scopes
@@ -329,6 +331,17 @@ en:
       shipments: Shipments
       shipping_categories:
         new_shipping_category: New shipping category
+      shipping_methods:
+        categories: Setting Categories
+        categories_info: Choose what categories this shipping method is used for.
+        code: Code
+        code_info: Adding a code to your shipping method helps integrations and other APIs identify the shipping method.
+        display: Display
+        display_info: Select where this shipping method is shown, on the storefront, admin or both.
+        internal_name: Internal name
+        internal_name_info: Set an internal name for this shipping method.
+        tracking_url: Tracking url
+        tracking_url_info: Set a tracking URL that will be sent along with the tracking number when a customer receives their shipping confirmation email.
       sku: Sku
       slug: Slug
       specifications: Specifications
@@ -431,12 +444,17 @@ en:
         preview: Preview %{name}
       variant: Variant
       variant_prices_search_placeholder: Variant prices search placeholder
-      webhooks: Webhooks
+      webhooks:
+        subscribers:
+          events: Events
+          subscription_details: Subscription details
+          subscription_settings: Subscription settings
       webhooks_subscribers:
         addresses: Addresses
         all_events: All Events
         assets: Assets
         cms_pages: CMS Pages
+        cms_section_images: CMS Section Images
         credit_cards: Credit Cards
         customer_returns: Customer Returns
         digital_links: Digital Links
@@ -476,7 +494,9 @@ en:
         subscribe_to_all_events: Subscribe to all events
         subscribers: Webhooks Subscribers
         subscriptions: Subscriptions
+        tax_categories: Tax Categories
         tax_rates: Tax Rates
+        taxon_images: Taxon Images
         taxonomies: Taxonomies
         taxons: Taxons
         time_of_last_event: Time of Last Event

@@ -1,6 +1,7 @@
 module Spree
   module Admin
     class WebhooksSubscribersController < ResourceController
+      before_action :load_data
       create.before :process_subscriptions
       update.before :process_subscriptions
 
@@ -26,6 +27,10 @@ module Spree
         @menu_panel_kind = "settings"
       end
 
+      def location_after_save
+        spree.edit_admin_webhooks_subscriber_path(@object)
+      end
+
       def resource
         @resource ||= Spree::Admin::Resource.new "spree/admin/webhooks/subscribers", "subscribers", nil
       end
@@ -37,14 +42,14 @@ module Spree
           selected_events
         end
 
-        params[:webhooks_subscriber] = params[:webhooks_subscriber].except(*supported_events.keys)
+        params[:webhooks_subscriber] = params[:webhooks_subscriber].except(*@supported_events.keys)
       end
 
       def selected_events
-        supported_events.select { |resource, _events| params[:webhooks_subscriber][resource] == "true" }.values.flatten
+        @supported_events.select { |resource, _events| params[:webhooks_subscriber][resource] == "true" }.values.flatten
       end
 
-      def supported_events
+      def load_data
         @supported_events ||= Spree::Webhooks::Subscriber.supported_events
       end
     end

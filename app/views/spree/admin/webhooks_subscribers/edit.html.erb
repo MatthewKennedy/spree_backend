@@ -6,8 +6,6 @@
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @webhooks_subscriber } %>
 
 <%= form_for [:admin, @webhooks_subscriber] do |f| %>
-  <fieldset>
     <%= render partial: 'form', locals: { f: f } %>
     <%= render partial: 'spree/admin/shared/edit_resource_links' %>
-  </fieldset>
 <% end %>

@@ -161,7 +161,7 @@ module Spree
           }
         when :boolean
           {
-            class: "form-check",
+            class: "form-check-input",
             data: {form_state_target: "watch", input_disable_target: "disable"}
           }
         when :string
