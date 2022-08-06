@@ -2,7 +2,7 @@
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @variant } %>
 
-<%= form_for [:admin, @product, @variant] do |f| %>
+<%= form_with model: [:admin, @product, @variant] do |f| %>
   <div class="card mb-3">
     <div class="card-header">
       <h5 class="mb-0"><%= Spree.t(:new_variant) %></h5>

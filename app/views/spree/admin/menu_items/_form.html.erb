@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
           <%= f.field_container :item_type do %>
-            <%= f.select(:item_type, @menu_item_types, {include_blank: false}, data: {controller: 'ts--select'}, class: 'form-select') %>
+            <%= f.select(:item_type, @menu_item_types, {include_blank: false}) %>
             <%= f.label :item_type, I18n.t('spree.dash.navigation.item_type') %>
             <div class="collapse" id="menuItemSettingsInformation">
               <div class="py-3">
@@ -31,7 +31,7 @@
           <% end %>
 
           <%= f.field_container :code do %>
-            <%= f.text_field :code, class: 'form-control', placeholder: I18n.t('spree.dash.navigation.code') %>
+            <%= f.text_field :code %>
             <%= f.label :code, I18n.t('spree.dash.navigation.code') %>
             <div class="collapse" id="menuItemSettingsInformation">
               <div class="py-3">
@@ -48,7 +48,7 @@
           <% end %>
 
           <%= f.field_container :parent_id do %>
-            <%= f.select :parent_id, nested_set_options(@menu.menu_items, @menu_item) {|i| "#{'-' * i.level} #{i.name}" }, {include_blank: false}, {class: 'form-select', data: {controller: 'ts--select'}} %>
+            <%= f.select :parent_id, nested_set_options(@menu.menu_items, @menu_item) {|i| "#{'-' * i.level} #{i.name}" }, {include_blank: false} %>
             <%= f.label :parent_id, I18n.t('spree.dash.navigation.nested_under') %>
             <div class="collapse" id="menuItemSettingsInformation">
               <div class="py-3">
@@ -74,12 +74,12 @@
         </div>
         <div class="card-body">
           <%= f.field_container :name do %>
-            <%= f.text_field :name, class: 'form-control', required: true, placeholder: raw(Spree.t(:name) + required_span_tag) %>
+            <%= f.text_field :name, required: true %>
             <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
           <% end %>
 
           <%= f.field_container :subtitle do %>
-            <%= f.text_field :subtitle, class: 'form-control', placeholder: I18n.t('spree.dash.navigation.subtitle') %>
+            <%= f.text_field :subtitle %>
             <%= f.label :subtitle, I18n.t('spree.dash.navigation.subtitle') %>
           <% end %>
 
@@ -90,7 +90,7 @@
 
             <% unless @menu_item.icon.new_record? %>
               <%= f.field_container :icon_alt do %>
-                <%= ff.text_field :alt, class: 'form-control', placeholder: I18n.t('spree.dash.navigation.image_alt_text') %>
+                <%= ff.text_field :alt %>
                 <%= ff.label :alt, I18n.t('spree.dash.navigation.image_alt_text') %>
               <% end %>
             <% end %>
@@ -120,7 +120,7 @@
               <div class="row">
                 <div class="col-12 col-md-6">
                   <%= f.field_container :linked_resource_type do %>
-                    <%= f.select(:linked_resource_type, spree_humanize_dropdown_values('Spree::MenuItem', {const: 'LINKED_RESOURCE_TYPE'}), {include_blank: false}, class: 'form-select') %>
+                    <%= f.select(:linked_resource_type, spree_humanize_dropdown_values('Spree::MenuItem', {const: 'LINKED_RESOURCE_TYPE'}), {include_blank: false}) %>
                     <%= f.label :linked_resource_type, I18n.t('spree.dash.navigation.link_to') %>
 
                     <div class="collapse" id="menuItemLinkInformation">

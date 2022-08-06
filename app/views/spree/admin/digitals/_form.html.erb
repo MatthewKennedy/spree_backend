@@ -1,35 +1,47 @@
-<%= form_for :digital, url: admin_product_digitals_path(@product) do |f| %>
-  <% if variant.digital? %>
-    <div class="row">
-      <% variant.digitals.each do |digital| %>
-        <div class="col-12 col-md-6 mb-3 removable-dom-element">
-          <div class="d-flex flex-row align-items-center digital-container border rounded">
-            <div class="col p-0 delete-digital-icon-container">
-              <%= asset_icon(digital) %>
+<%= form_with modle: [admin: @product], scope: :digital, url: admin_product_digitals_path(@product), builder: Spree::Dash::BootstrapBuilder do |f| %>
+  <%= hidden_field_tag 'digital[variant_id]', variant.id %>
+  <div class="card">
+    <div class="card-header d-flex">
+      <div class="flex-fill">
+        <h5 class="card-title">Digitals</h5>
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <div class="card-body">
+      <% if variant.digital? %>
+        <div class="row">
+          <% variant.digitals.each do |digital| %>
+            <div class="col-12 col-md-4 mb-3" id="<%= dom_id(digital) %>" data-stream-exit-class="animate__fadeOut">
+              <div class="d-flex flex-row align-items-center digital-container border rounded">
+                <div class="col p-0 delete-digital-icon-container">
+                  <%= asset_icon(digital) %>
+                </div>
+                <div class="col p-2 delete-digital-info-container">
+                  <span><%= I18n.t("spree.dash.name") %>:</span> <span class="text-secondary"><%= digital.attachment.filename %></span><br>
+                  <span><%= I18n.t("spree.dash.size") %>:</span> <span class="text-secondary"><%= number_to_human_size(digital.attachment.byte_size) %></span>
+                </div>
+                <div class="col-auto p-2 text-end">
+                  <%= link_to_delete(digital, url: admin_product_digital_url(@product, digital)) if can? :delete, digital %>
+                </div>
+              </div>
             </div>
-            <div class="col p-2 delete-digital-info-container">
-              <span>Name:</span> <span class="text-secondary"><%= digital.attachment.filename %></span><br>
-              <span>Size:</span> <span class="text-secondary"><%= number_to_human_size(digital.attachment.byte_size) %></span>
-            </div>
-            <div class="col p-2 text-end delete-digital-button-container">
-              <%= link_to (inline_svg_tag "close.svg", size: '20px * 20px'), admin_product_digital_url(@product, digital), data: { confirm: I18n.t('spree.dash.digitals.delete_file_confirmation', filename: digital.attachment.filename) }, method: :delete, class: 'btn delete-resource delete-digital-asset' %>
-            </div>
-          </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center no-objects-found m-5">
+          <%= I18n.t('spree.dash.digitals.no_digital_assets_added') %>
         </div>
       <% end %>
-    </div>
-  <% else %>
-    <div class="text-center no-objects-found m-5">
-      <%= I18n.t('spree.dash.digitals.no_digital_assets_added') %>
-    </div>
-  <% end %>
 
-  <%= f.field_container :attachment, data: {controller: "upload-button"} do %>
-    <%= f.label :file, I18n.t('spree.dash.digitals.add_new_file'), id: "digital_attachment_#{variant.id}" %> <span class="required font-weight-bold text-danger">*</span><br>
-    <%= f.file_field :attachment, id: "digital_attachment_#{variant.id}", required: true, data: { action: "input->upload-button#buttonState" } %>
-    <%= hidden_field_tag 'digital[variant_id]', variant.id %>
-    <%= button I18n.t('spree.dash.digitals.upload'), 'plus-square.svg', 'submit', { data: { upload_button_target: "uploadButton" } } %>
-    <br>
-    <%= f.error_message_on :attachment %>
-  <% end %>
+      <hr>
+
+      <%= f.label :file, I18n.t('spree.dash.digitals.add_new_file'), id: "digital_attachment_#{variant.id}" %> <span class="required font-weight-bold text-danger">*</span><br>
+      <div class="input-group">
+        <%= f.file_field :attachment, id: "digital_attachment_#{variant.id}", required: true %>
+        <%= f.submit class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
 <% end %>

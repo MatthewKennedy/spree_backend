@@ -10,11 +10,7 @@
     </div>
 
     <%= f.field_container :layout_style do %>
-      <%= f.select(:layout_style, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
-                                  { const: 'LAYOUT_OPTIONS' }),
-                                  { include_blank: false },
-                                  class: 'form-select') %>
-
+      <%= f.select(:layout_style, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery', { const: 'LAYOUT_OPTIONS' }), { include_blank: false }) %>
       <%= f.label :layout_style, I18n.t('spree.dash.cms.image_gallery.layout_style') %>
     <% end %>
   </div>
@@ -31,19 +27,14 @@
       <small class="text-muted mb-4"><%= I18n.t('spree.dash.cms.image_gallery.square_image') %></small>
 
     <%= f.field_container :title_one do %>
-      <%= f.text_field :title_one, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
+      <%= f.text_field :title_one %>
       <%= f.label :title_one, I18n.t('spree.dash.cms.title') %>
     <% end %>
 
       <div class="col-12"><hr></div>
       <%= f.field_container :link_type_one do %>
-        <%= f.select(:link_type_one,
-            spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
-                                            { const: 'LINKED_RESOURCE_TYPE' }),
-                                            { include_blank: false },
-                                            class: 'link_switcher form-select',
-                                            data: { controller: 'ts--select', target_field: :link_one}) %>
-         <%= f.label :link_type_one, I18n.t('spree.dash.navigation.link_to') %>
+        <%= f.select(:link_type_one, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery', { const: 'LINKED_RESOURCE_TYPE' }), { include_blank: false }) %>
+        <%= f.label :link_type_one, I18n.t('spree.dash.navigation.link_to') %>
       <% end %>
 
       <%= render "spree/admin/shared/link_fields", resource: @cms_section, linked_type: @cms_section.link_type_one, save_to: :link_one, f: f %>
@@ -60,19 +51,14 @@
       <small class="text-muted mb-4"><%= I18n.t('spree.dash.cms.image_gallery.tall_image') %></small>
 
       <%= f.field_container :title_two do %>
-        <%= f.text_field :title_two, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
+        <%= f.text_field :title_two %>
         <%= f.label :title_two, I18n.t('spree.dash.cms.title') %>
       <% end %>
 
       <div class="col-12"><hr></div>
       <%= f.field_container :link_type_two do %>
-        <%= f.select(:link_type_two,
-            spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
-                                            { const: 'LINKED_RESOURCE_TYPE' }),
-                                            { include_blank: false },
-                                            class: 'link_switcher form-select',
-                                            data: { controller: 'ts--select', target_field: :link_two}) %>
-         <%= f.label :link_type_two, I18n.t('spree.dash.navigation.link_to') %>
+        <%= f.select(:link_type_two, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery', { const: 'LINKED_RESOURCE_TYPE' }), { include_blank: false }) %>
+        <%= f.label :link_type_two, I18n.t('spree.dash.navigation.link_to') %>
       <% end %>
       <%= render "spree/admin/shared/link_fields", resource: @cms_section, linked_type: @cms_section.link_type_two, save_to: :link_two, f: f %>
     </div>
@@ -88,19 +74,14 @@
       <small class="text-muted mb-4"><%= I18n.t('spree.dash.cms.image_gallery.square_image') %></small>
 
       <%= f.field_container :title_three do %>
-        <%= f.text_field :title_three, class: 'form-control', placeholder: I18n.t('spree.dash.cms.title') %>
+        <%= f.text_field :title_three %>
         <%= f.label :title_three, I18n.t('spree.dash.cms.title') %>
       <% end %>
 
       <div class="col-12"><hr></div>
         <%= f.field_container :link_type_three do %>
-          <%= f.select(:link_type_three,
-              spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
-                                              { const: 'LINKED_RESOURCE_TYPE' }),
-                                              { include_blank: false },
-                                              class: 'link_switcher form-select',
-                                              data: { controller: 'ts--select', target_field: :link_three}) %>
-           <%= f.label :link_type_three, I18n.t('spree.dash.navigation.link_to') %>
+          <%= f.select(:link_type_three, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery', { const: 'LINKED_RESOURCE_TYPE' }), { include_blank: false }) %>
+          <%= f.label :link_type_three, I18n.t('spree.dash.navigation.link_to') %>
         <% end %>
 
       <%= render "spree/admin/shared/link_fields", resource: @cms_section, linked_type: @cms_section.link_type_three, save_to: :link_three, f: f %>
@@ -112,19 +93,14 @@
   <div class="col-12"> <hr></div>
   <div class="col-6">
     <%= f.field_container :fit do %>
-      <%= f.select(:fit, @cms_section.boundaries, {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
+      <%= f.select(:fit, @cms_section.boundaries, {include_blank: false}) %>
       <%= f.label :fit, I18n.t('spree.dash.cms.fit') %>
     <% end %>
   </div>
 
   <div class="col-6">
     <%= f.field_container :display_labels do %>
-      <%= f.select(:display_labels,
-          spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery',
-                                          { const: 'LABEL_OPTIONS' }),
-                                          { include_blank: false },
-                                          class: 'form-select',
-                                          data: { controller: 'ts--select' }) %>
+      <%= f.select(:display_labels, spree_humanize_dropdown_values('Spree::Cms::Sections::ImageGallery', { const: 'LABEL_OPTIONS' }), { include_blank: false }) %>
       <%= f.label :display_labels, I18n.t('spree.dash.cms.image_gallery.display_labels') %>
     <% end %>
   </div>

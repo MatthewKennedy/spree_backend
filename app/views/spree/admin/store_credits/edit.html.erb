@@ -1,6 +1,6 @@
 <%= render partial: 'spree/admin/users/tabs', locals: { current: :store_credits } %>
 
-<%= form_for @store_credit, url: spree.admin_user_store_credit_path(@user, @store_credit) do |f| %>
+<%= form_with model: @store_credit, url: spree.admin_user_store_credit_path(@user, @store_credit) do |f| %>
   <div class="card">
     <div class="card-header">
       <%= Spree.t(:editing_resource, resource: Spree::StoreCredit.model_name.human) %>

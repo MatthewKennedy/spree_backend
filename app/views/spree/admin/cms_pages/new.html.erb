@@ -2,7 +2,7 @@
   <%= link_to I18n.t('spree.dash.cms.all_pages'), spree.admin_cms_pages_path %> / <%= I18n.t('spree.dash.cms.new_page') %>
 <% end %>
 
-<%= form_for [:admin, @cms_page] do |f| %>
+<%= form_with model: [:admin, @cms_page], builder: Spree::Dash::BootstrapBuilder do |f| %>
   <div id="<%= dom_id(@cms_page) %>" class="card">
     <div class="card-header d-flex">
       <div class="flex-fill">
@@ -18,21 +18,21 @@
       <div class="row pb-0">
         <div class="col-12 col-md-4">
           <%= f.field_container :title do %>
-            <%= f.text_field :title, class: 'form-control', required: true, placeholder: raw(I18n.t('spree.dash.cms.title') + required_span_tag) %>
+            <%= f.text_field :title, required: true %>
             <%= f.label :title, raw(I18n.t('spree.dash.cms.title') + required_span_tag) %>
           <% end %>
         </div>
 
         <div class="col-12 col-md-4">
           <%= f.field_container :type do %>
-            <%= f.select(:type, spree_humanize_dropdown_values('Spree::CmsPage', {const: 'TYPES'}), {include_blank: false}, class: 'form-select', data: {controller: 'ts--select'}) %>
+            <%= f.select(:type, spree_humanize_dropdown_values('Spree::CmsPage', {const: 'TYPES'}), {include_blank: false}) %>
             <%= f.label :type, I18n.t('spree.dash.cms.page_type') %>
           <% end %>
         </div>
 
         <div class="col-12 col-md-4">
           <%= f.field_container :locale do %>
-            <%= f.select :locale, options_from_collection_for_select(supported_locales_options, :last, :first, @cms_page.locale || I18n.locale), {}, {class: 'form-select', data: {controller: 'ts--select'} } %>
+            <%= f.select :locale, options_from_collection_for_select(supported_locales_options, :last, :first, @cms_page.locale || I18n.locale), {} %>
             <%= f.label :language %>
           <% end %>
         </div>

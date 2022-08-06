@@ -133,7 +133,7 @@ module Spree
 
       def link_to_edit(resource, options = {})
         url = options[:url] || edit_object_url(resource)
-        name = options[:name] || I18n.t("admin.dash.actions.edit")
+        name = options[:name] || I18n.t("spree.dash.actions.edit")
 
         options[:no_text] ||= true
         options[:icon] = "pen.svg"
@@ -144,7 +144,7 @@ module Spree
 
       def link_to_clone(resource, options = {})
         url = options[:url] || clone_object_url(resource)
-        name = options[:name] || I18n.t("admin.dash.actions.clone")
+        name = options[:name] || I18n.t("spree.dash.actions.clone")
 
         options[:no_text] ||= true
         options[:class] ||= "btn btn-light btn-sm"
@@ -156,7 +156,7 @@ module Spree
 
       def link_to_delete(resource, options = {})
         url = options[:url] || object_url(resource)
-        name = options[:name] || I18n.t("admin.dash.actions.delete")
+        name = options[:name] || I18n.t("spree.dash.actions.delete")
 
         options[:no_text] ||= true
         options[:class] ||= "btn btn-sm btn-outline-danger"
@@ -180,12 +180,16 @@ module Spree
         link_to name.html_safe, url, html_options.except(:icon, :icon_class, :icon_size, :no_text)
       end
 
-      def remote_form_submit_button(resource)
-        if resource.persisted?
-          button(I18n.t("spree.dash.actions.update"), "check-lg.svg", "submit", {form: "edit_#{@object.class.name.demodulize.underscore}_#{@object.id}", class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
-        else
-          button(I18n.t("spree.dash.actions.create"), "check-lg.svg", "submit", {form: "new_#{@object.class.name.demodulize.underscore}", class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
+      def remote_form_submit_button(resource, button_text = nil)
+        if button_text.nil?
+          button_text = if resource.persisted?
+            I18n.t("spree.dash.actions.update")
+          else
+            I18n.t("spree.dash.actions.create")
+          end
         end
+
+        button(button_text, "check-lg.svg", "submit", {form: "mainForm", class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
       end
 
       # Override: Add disable_with option to prevent multiple request on consecutive clicks

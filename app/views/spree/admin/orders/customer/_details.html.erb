@@ -12,7 +12,7 @@
 
     <% unless @order.completed? %>
       <div>
-        <%= form_for @order, url: spree.admin_order_path(@order), method: :patch do |f| %>
+        <%= form_with model: @order, url: spree.admin_order_path(@order), method: :patch do |f| %>
           <%= f.hidden_field :user_id, value: nil %>
           <%= f.button (inline_svg_tag "x-lg.svg", size: '16px * 16px'), type: "submit", class: 'btn btn-light btn-sm' %>
         <% end %>

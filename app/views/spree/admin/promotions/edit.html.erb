@@ -3,7 +3,7 @@
   <%= @promotion.name %>
 <% end %>
 
-<%= form_for @promotion, url: object_url, method: :put do |f| %>
+<%= form_with model: @promotion, url: object_url, method: :put do |f| %>
 <div class="card mb-4">
   <div class="card-body">
       <%= render partial: 'form', locals: { f: f } %>

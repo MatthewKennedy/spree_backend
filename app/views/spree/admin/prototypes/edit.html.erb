@@ -4,7 +4,7 @@
 <% end %>
 
 <div class="card">
-  <%= form_for [:admin, @prototype] do |f| %>
+  <%= form_with model: [:admin, @prototype] do |f| %>
     <div class="card-body">
        <%= render partial: 'form', locals: { f: f } %>
     </div>

@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  <%= I18n.t('spree.dash.webhooks_subscribers.subscribers') %>
+  <%= I18n.t('spree.dash.webhooks.subscribers.subscribers') %>
 <% end %>
 
 <% content_for :page_actions do %>
-  <%= link_to_with_icon I18n.t('spree.dash.webhooks_subscribers.new_webhooks_subscriber'), new_object_url, class: "btn-success btn", icon: 'plus-square.svg', id: 'admin_new_webhooks_subscriber_link' %>
+  <%= link_to_with_icon I18n.t('spree.dash.webhooks.subscribers.new_webhooks_subscriber'), new_object_url, class: "btn-success btn", icon: 'plus-square.svg', id: 'admin_new_webhooks_subscriber_link' %>
 <% end if can?(:create, Spree::Webhooks::Subscriber) %>
 
 <% if @webhooks_subscribers.any? %>
@@ -16,9 +16,9 @@
           <th><%= Spree.t(:vendor) %></th>
         <% end %>
         <th><%= I18n.t('spree.dash.active') %></th>
-        <th><%= I18n.t('spree.dash.webhooks_subscribers.subscriptions') %></th>
-        <th><%= I18n.t('spree.dash.webhooks_subscribers.time_of_last_event') %></th>
-        <th><%= I18n.t('spree.dash.webhooks_subscribers.all_events') %></th>
+        <th><%= I18n.t('spree.dash.webhooks.subscribers.subscriptions') %></th>
+        <th><%= I18n.t('spree.dash.webhooks.subscribers.time_of_last_event') %></th>
+        <th><%= I18n.t('spree.dash.webhooks.subscribers.all_events') %></th>
         <th></th>
       </tr>
       </thead>

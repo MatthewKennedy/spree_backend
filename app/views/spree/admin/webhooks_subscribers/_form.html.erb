@@ -32,14 +32,14 @@
                                subscribe_to_all_events?,
                                { class: 'form-check-input',
                                  data: { bs_toggle: "collapse", bs_target: ".allWebhooksPanel.show"} } %>
-          <%= label_tag :subscribe_to_all_events_true, I18n.t('spree.dash.webhooks_subscribers.subscribe_to_all_events'), class: 'form-check-label' %>
+          <%= label_tag :subscribe_to_all_events_true, I18n.t('spree.dash.webhooks.subscribers.subscribe_to_all_events'), class: 'form-check-label' %>
         </div>
         <div class="form-check">
           <%= radio_button_tag :subscribe_to_all_events, false,
                                !subscribe_to_all_events?,
                                { class: 'form-check-input',
                                  data: {bs_toggle: "collapse", bs_target: ".allWebhooksPanel:not(.show)"} } %>
-          <%= label_tag :subscribe_to_all_events_false, I18n.t('spree.dash.webhooks_subscribers.select_events'), class: 'form-check-label' %>
+          <%= label_tag :subscribe_to_all_events_false, I18n.t('spree.dash.webhooks.subscribers.select_events'), class: 'form-check-label' %>
         </div>
 
         <div class="collapse allWebhooksPanel <%= "show" if !subscribe_to_all_events? %>">

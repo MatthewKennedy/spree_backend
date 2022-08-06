@@ -5,7 +5,7 @@
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @tax_rate } %>
 
-<%= form_for [:admin, @tax_rate] do |f| %>
+<%= form_with model: [:admin, @tax_rate] do |f| %>
   <fieldset>
     <%= render partial: 'form', locals: { f: f } %>
 

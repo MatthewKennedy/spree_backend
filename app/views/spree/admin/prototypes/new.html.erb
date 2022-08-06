@@ -5,7 +5,7 @@
   <%= Spree.t(:new_prototype) %>
 <% end %>
 
-<%= form_for [:admin, @prototype] do |f| %>
+<%= form_with model: [:admin, @prototype] do |f| %>
   <fieldset data-hook="new_prototype">
     <%= render partial: 'form', locals: { f: f } %>
     <%= render partial: 'spree/admin/shared/new_resource_links' %>

@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <div data-hook="add_product_name" class="form-group">
-      <%= form_for @order, url: spree.admin_order_line_items_path(@order), method: :post, data: { controller: "form-validation" } do |f| %>
+      <%= form_with model: @order, url: spree.admin_order_line_items_path(@order), method: :post, data: { controller: "form-validation" } do |f| %>
        <%= f.fields_for :line_items_attributes do |li| %>
           <div class="form-group form-floating">
             <%= li.select :variant_id, [], {}, name: 'line_item[variant_id]', class: 'form-select',

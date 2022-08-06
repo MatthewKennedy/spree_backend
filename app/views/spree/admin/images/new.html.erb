@@ -1,19 +1,22 @@
 <%= render partial: 'spree/admin/shared/product_tabs', locals: { current: :images } %>
 
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @object } %>
-
 <% content_for :page_title do %>
   <%= Spree.t(:new_image) %>
 <% end %>
 
-<%= form_for [:admin, @product, @image], html: { multipart: true } do |f| %>
-  <fieldset data-hook="new_image">
-    <%= render partial: 'form', locals: { f: f } %>
+<div class="card">
+  <div class="card-header">
+    <h5><%= I18n.t("spree.dash.images.new_image") %></h5>
+  </div>
+  <div class="card-body">
+    <%= form_with model: [:admin, @product, @image], builder: Spree::Dash::BootstrapBuilder do |f| %>
+      <%= render partial: 'form', locals: { f: f } %>
 
-    <div class="form-actions" data-hook="buttons">
-      <%= button I18n.t('spree.dash.actions.create'), 'save.svg' %>
-      <span class="or"><%= Spree.t(:or) %></span>
-      <%= link_to_with_icon I18n.t('spree.dash.actions.cancel'), spree.admin_product_images_url(@product), icon: 'delete.svg', id: 'cancel_link' %>
-    </div>
-  </fieldset>
-<% end %>
+      <div class="form-actions" data-hook="buttons">
+        <%= button I18n.t('spree.dash.actions.create'), 'save.svg' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= link_to_with_icon I18n.t('spree.dash.actions.cancel'), spree.admin_product_images_url(@product), icon: 'delete.svg', id: 'cancel_link' %>
+      </div>
+    <% end %>
+  </div>
+</div>

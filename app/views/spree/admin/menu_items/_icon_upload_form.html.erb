@@ -8,7 +8,7 @@
 <% end %>
 
 <%= f.field_container :icon_attachment do %>
-  <div id="<% unless @menu_item.icon.new_record? %>MenuItemImageButton<% end %>">
-    <%= ff.file_field :attachment, class: 'form-control' %>
+  <div id="<%= "MenuItemImageButton" unless @menu_item.icon.new_record? %>">
+    <%= ff.file_field :attachment %>
   </div>
 <% end %>

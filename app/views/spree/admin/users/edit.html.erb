@@ -10,7 +10,7 @@
 
   <div class="card-body">
     <div data-hook="admin_user_edit_form">
-      <%= form_for [:admin, @user], as: :user, url: spree.admin_user_url(@user), method: :put do |f| %>
+      <%= form_with model: [:admin, @user], as: :user, url: spree.admin_user_url(@user), method: :put do |f| %>
         <%= render partial: 'form', locals: { f: f } %>
 
         <div data-hook="admin_user_edit_form_button">

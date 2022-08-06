@@ -5,7 +5,7 @@
   <%= Spree.t(:new_property) %>
 <% end %>
 
-<%= form_for [:admin, @property] do |f| %>
+<%= form_with model: [:admin, @property] do |f| %>
   <fieldset data-hook="new_property">
     <%= render partial: 'form', locals: { f: f } %>
     <div class="form-actions">

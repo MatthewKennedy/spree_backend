@@ -1,17 +1,13 @@
 ---
 en:
-  admin:
-    dash:
-      actions:
-        clone: Clone
-        delete: Delete
-        edit: Edit
   spree:
     dash:
       actions:
         cancel: Cancel
+        clone: Clone
         continue: Continue
         create: Create
+        delete: Delete
         edit: Edit
         remove: Remove
         save: Save
@@ -24,7 +20,6 @@ en:
         street: Street
       amount: Amount
       apis: API's
-      are_you_sure: Are you sure
       are_you_sure_you_want_to: Are you sure you want to %{action} this %{resource}
       avs_responses:
         street_address_matches_but_5-digit_and_9_digit_postal_code_do_not_match: Street address matches, but 5-digit and 9-digit postal code do not match.
@@ -90,6 +85,9 @@ en:
       countries:
         add_new_state: Add new state
         edit_state: Edit state
+        iso: ISO
+        iso3: ISO3
+        iso_name: ISO Name
         states: States
       country_rule:
         label: Label
@@ -107,20 +105,16 @@ en:
       details: Details
       digitals:
         add_new_file: Add a new digital asset.
-        delete_file_confirmation: 'Are you sure you want to delete: %{filename}'
         digital_assets: Digital Assets
         downloads_reset: Digital Download Links Reset
         no_digital_assets_added: No digital assets.
         reset_download_links: Reset Digital Download Links
-        upload: Upload
       display: Display
       display_on:
         back_end: Admin Panel
         both: All
         front_end: Storefront
       download_sdk: Download SDK
-      edit: Edit
-      email: Email
       ends_at: Ends at
       errors:
         error_reposition_failed: Error reposition failed
@@ -130,6 +124,8 @@ en:
       execution_time: Execution Time
       filter: Filter
       filters: Filters
+      images:
+        new_image: New image
       kind: Kind
       language: Language
       learn_more: Learn more
@@ -190,32 +186,25 @@ en:
         icon_removed: Icon removed
         prices_saved: Prices saved
         product_cloned: Product cloned
-        product_deleted: Product deleted
         product_not_cloned: Product not cloned
-        product_not_deleted: Product not deleted
-        variant_deleted: Variant deleted
-        variant_not_deleted: Variant not deleted
       oauth_applications:
         client_id: Client ID
         client_secret: Client secret
         list: oAuth applications
         new: New oAuth application
         scope: Scope
-        scopes: Scopes
-        uid: UID
       option_type_filterable_info: When an option type is filterable, your storefront visitors are presented with the option to filter a collection of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront taxons that contain products with this option type set.
       option_types: Option types
       options:
-        add_option_value: Add option value
+        add_option_value: Add Option Value
         values:
-          this_option_type_has_no_values_click_the_add_option_value_button_to_create_a_new_value: This Option Type has no values, click the Add Option Value button to create a new value.
+          this_option_types: This Option Type has no values, click the Add Option Value button to begin adding values.
       order:
         add: Add
         add_a_shipment_to_this_order_to_begin_adding_items: Add a new shipping location to this order, and then add products to the shipment. Ideally, choose the location nearest the delivery address for faster and cheaper delivery.
         add_user_to_order: Add this User to the Order
         currency: Currency
         customer: Customer
-        delete_shipment: Delete Shipment
         email_copy_of_invoice_to_customer: Send Invoice
         from: from
         instructions:
@@ -314,9 +303,7 @@ en:
         roles: Roles
         shipping_categories: Shipping Categories
         shipping_methods: Shipping methods
-        states: States
         store_credit_categories: Store Credit
-        stores: Stores
         tax_categories: Tax Categories
         tax_rates: Tax Rates
         zones: Zones
@@ -343,6 +330,7 @@ en:
         internal_name_info: Set an internal name for this shipping method.
         tracking_url: Tracking url
         tracking_url_info: Set a tracking URL that will be sent along with the tracking number when a customer receives their shipping confirmation email.
+      size: Size
       sku: Sku
       slug: Slug
       specifications: Specifications
@@ -392,8 +380,6 @@ en:
         seo_robots: Please check <a href='https://developers.google.com/search/reference/robots_meta_tag' target='_blank'>this page for more help</a>
         social_help: If you want to link to your social accounts in the footer part of your website please fill below fields
         supported_languages: Supported languages
-      store_settings: Store
-      store_switch: Store switch
       storefront_api: Storefront API
       stores:
         store: Store
@@ -423,7 +409,6 @@ en:
         categories: Categories
         edit_root_taxonomy: Edit %{name}
         no_taxons: "<b>%{taxonomy}</b> has no Sub Categories. Click the <b>Add a new Category</b> button, to begin."
-        taxonomies: Categories
       taxons:
         hide_from_sub_navigation: Hide from sub navigation
         messages:
@@ -448,62 +433,61 @@ en:
       variant_prices_search_placeholder: Variant prices search placeholder
       webhooks:
         subscribers:
+          addresses: Addresses
+          all_events: All Events
+          assets: Assets
+          cms_pages: CMS Pages
+          cms_section_images: CMS Section Images
+          credit_cards: Credit Cards
+          customer_returns: Customer Returns
+          digital_links: Digital Links
+          digitals: Digitals
           events: Events
+          inventory_units: Inventory Units
+          line_items: Line Items
+          menu_items: Menu Items
+          menus: Menus
+          new_webhooks_subscriber: New Webhooks Subscriber
+          no_events: No Events
+          option_types: Option Types
+          option_values: Option Values
+          orders: Orders
+          payment_capture_events: Payment Capture Events
+          payments: Payments
+          prices: Prices
+          products: Products
+          promotions: Promotions
+          properties: Properties
+          prototypes: Prototypes
+          refunds: Refunds
+          reimbursements: Reimbursements
+          return_authorizations: Return Authorizations
+          return_items: Return Items
+          roles: Roles
+          select_events: Select events
+          shipments: Shipments
+          shipping_categories: Shipping Categories
+          shipping_methods: Shipping Methods
+          shipping_rates: Shipping Rates
+          stock_items: Stock Items
+          stock_locations: Stock Locations
+          stock_movements: Stock Movements
+          stock_transfers: Stock Transfers
+          store_credits: Store Credits
+          stores: Stores
+          subscribe_to_all_events: Subscribe to all events
+          subscribers: Webhooks Subscribers
           subscription_details: Subscription details
           subscription_settings: Subscription settings
-      webhooks_subscribers:
-        addresses: Addresses
-        all_events: All Events
-        assets: Assets
-        cms_pages: CMS Pages
-        cms_section_images: CMS Section Images
-        credit_cards: Credit Cards
-        customer_returns: Customer Returns
-        digital_links: Digital Links
-        digitals: Digitals
-        inventory_units: Inventory Units
-        line_items: Line Items
-        menu_items: Menu Items
-        menus: Menus
-        new_webhooks_subscriber: New Webhooks Subscriber
-        no_events: No Events
-        option_types: Option Types
-        option_values: Option Values
-        orders: Orders
-        payment_capture_events: Payment Capture Events
-        payments: Payments
-        prices: Prices
-        products: Products
-        promotions: Promotions
-        properties: Properties
-        prototypes: Prototypes
-        refunds: Refunds
-        reimbursements: Reimbursements
-        return_authorizations: Return Authorizations
-        return_items: Return Items
-        roles: Roles
-        select_events: Select events
-        shipments: Shipments
-        shipping_categories: Shipping Categories
-        shipping_methods: Shipping Methods
-        shipping_rates: Shipping Rates
-        stock_items: Stock Items
-        stock_locations: Stock Locations
-        stock_movements: Stock Movements
-        stock_transfers: Stock Transfers
-        store_credits: Store Credits
-        stores: Stores
-        subscribe_to_all_events: Subscribe to all events
-        subscribers: Webhooks Subscribers
-        subscriptions: Subscriptions
-        tax_categories: Tax Categories
-        tax_rates: Tax Rates
-        taxon_images: Taxon Images
-        taxonomies: Taxonomies
-        taxons: Taxons
-        time_of_last_event: Time of Last Event
-        variants: Variants
-        webhooks_events: Webhooks Events
-        wished_items: Wished Items
-        wishlists: Wishlists
-        zones: Zones
+          subscriptions: Subscriptions
+          tax_categories: Tax Categories
+          tax_rates: Tax Rates
+          taxon_images: Taxon Images
+          taxonomies: Taxonomies
+          taxons: Taxons
+          time_of_last_event: Time of Last Event
+          variants: Variants
+          webhooks_events: Webhooks Events
+          wished_items: Wished Items
+          wishlists: Wishlists
+          zones: Zones

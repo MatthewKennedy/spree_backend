@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
-  <%= link_to I18n.t('spree.dash.webhooks_subscribers.subscribers'), spree.admin_webhooks_subscribers_path %> /
-  <%= I18n.t('spree.dash.webhooks_subscribers.webhooks_events') %>
+  <%= link_to I18n.t('spree.dash.webhooks.subscribers.subscribers'), spree.admin_webhooks_subscribers_path %> /
+  <%= I18n.t('spree.dash.webhooks.subscribers.webhooks_events') %>
 <% end %>
 
 <fieldset>
@@ -15,7 +15,7 @@
         <td><%= active_badge(@webhooks_subscriber.active) %></td>
       </tr>
       <tr>
-        <td><strong><%= I18n.t('spree.dash.webhooks_subscribers.subscriptions') %></strong></td>
+        <td><strong><%= I18n.t('spree.dash.webhooks.subscribers.subscriptions') %></strong></td>
         <td><%= @webhooks_subscriber.subscriptions&.join(', ') %></td>
       </tr>
     </table>
@@ -54,6 +54,6 @@
 
 <% else %>
   <div class="text-center no-objects-found m-5">
-    <%= I18n.t('spree.dash.webhooks_subscribers.no_events') %>
+    <%= I18n.t('spree.dash.webhooks.subscribers.no_events') %>
   </div>
 <% end %>

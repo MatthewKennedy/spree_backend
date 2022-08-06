@@ -1,5 +1,5 @@
 <% if @product.properties.any? %>
-  <%= form_for @product, url: spree.admin_product_url(@product), method: :put do |f| %>
+  <%= form_with model: @product, url: spree.admin_product_url(@product), method: :put do |f| %>
     <div class="card">
       <div class="card-header d-flex">
         <div class="flex-fill">

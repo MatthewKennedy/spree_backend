@@ -118,8 +118,8 @@ module Spree
       def set_permalink_params
         set_permalink_part
 
-        if params.key? "permalink_part"
-          params[:taxon][:permalink] = @parent_permalink + params[:permalink_part]
+        if params[:taxon][:permalink_part].present?
+          params[:taxon][:permalink] = @parent_permalink + params[:taxon][:permalink_part]
         end
       end
 

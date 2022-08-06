@@ -7,7 +7,7 @@
   <!-- COUNTRY -->
   <%= field_container :country, nil do %>
     <%= f.collection_select :country_id, all_countries, :id, :name, {  }, { class: 'form-select', data: { controller: 'ts--select', action: 'change->form-validation#validate' } } %>
-    <%= f.label :country, raw(Spree.t(:country) + required_span_tag), class: 'form-label' %>
+    <%= f.label :country, raw(Spree.t(:country) + required_span_tag) %>
   <% end %>
   <!-- COUNTRY -->
 
@@ -18,11 +18,11 @@
     <% next unless naming_fields.include?(field) %>
 
     <%= field_container (field), nil do %>
-      <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
+      <%= f.text_field field, required: requireds.include?(field) %>
       <% if requireds.include?(field) %>
-        <%= f.label field, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
+        <%= f.label field, raw(Spree.t(field) + required_span_tag) %>
       <% else %>
-        <%= f.label field, Spree.t(field), class: 'form-label' %>
+        <%= f.label field, Spree.t(field) %>
       <% end %>
     <% end %>
   <% end %>
@@ -39,11 +39,11 @@
       <% end %>
 
       <%= field_container (field), nil do %>
-        <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
+        <%= f.text_field field, required: requireds.include?(field) %>
         <% if requireds.include?(field) %>
-          <%= f.label field, raw(label_name + required_span_tag), class: 'form-label' %>
+          <%= f.label field, raw(label_name + required_span_tag) %>
         <% else %>
-          <%= f.label field, label_name, class: 'form-label' %>
+          <%= f.label field, label_name %>
         <% end %>
       <% end %>
     <% end %>
@@ -66,7 +66,6 @@
           <% if !f.object.country.states.present? && f.object.country.states_required? %>
             <%= f.text_field :state_name, style: "display: #{ f.object.country.states.empty? && f.object.country.states_required? ? 'block' : 'none' };",
                                           required: true,
-                                          class: 'form-control',
                                           data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
           <% end %>
 
@@ -77,9 +76,9 @@
 
           <% if f.object.country.states_required? || f.object.country.states.present? %>
             <% if f.object.country.states_required? %>
-              <%= f.label :state_id, raw(state_lable + required_span_tag), class: 'form-label' %>
+              <%= f.label :state_id, raw(state_lable + required_span_tag) %>
             <% else %>
-              <%= f.label :state_id, state_lable, class: 'form-label' %>
+              <%= f.label :state_id, state_lable %>
             <% end %>
           <% end %>
 
@@ -105,12 +104,12 @@
 
       <!-- ZIPCODE -->
       <%= field_container (field), nil, data: { form_validation_target: "hideOnSubmit" } do %>
-        <%= f.text_field field, class: 'form-control', placeholder: Spree.t(field),  data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
+        <%= f.text_field field, data: { form_validation_target: "disableOnSubmit emptyOnSubmit removeRequiredOnSubmit" } %>
 
         <% if f.object.country.zipcode_required? %>
-          <%= f.label field, (raw(zip_lable) + required_span_tag), class: 'form-label' %>
+          <%= f.label field, (raw(zip_lable) + required_span_tag) %>
         <% else %>
-          <%= f.label field, zip_lable, class: 'form-label' %>
+          <%= f.label field, zip_lable %>
         <% end %>
       <% end %>
       <!-- ZIPCODE -->
@@ -122,11 +121,11 @@
     <hr class="mt-4">
     <h6 class="text-muted">Contact Details</h6>
       <%= field_container (field), nil do %>
-        <%= f.text_field field, class: 'form-control', required: requireds.include?(field), placeholder: Spree.t(field) %>
+        <%= f.text_field field, required: requireds.include?(field) %>
         <% if requireds.include?(field) %>
-          <%= f.label field, raw(Spree.t(field) + required_span_tag), class: 'form-label' %>
+          <%= f.label field, raw(Spree.t(field) + required_span_tag) %>
         <% else %>
-          <%= f.label field, Spree.t(field), class: 'form-label' %>
+          <%= f.label field, Spree.t(field) %>
         <% end %>
       <% end %>
     <% end %>

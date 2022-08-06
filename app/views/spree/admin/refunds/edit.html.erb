@@ -7,7 +7,7 @@
 
 <%= render 'spree/admin/shared/error_messages', target: @refund %>
 
-<%= form_for [:admin, @refund.payment.order, @refund.payment, @refund] do |f| %>
+<%= form_with model: [:admin, @refund.payment.order, @refund.payment, @refund] do |f| %>
   <fieldset>
     <div data-hook="admin_refund_form_fields">
       <div class="form-group">

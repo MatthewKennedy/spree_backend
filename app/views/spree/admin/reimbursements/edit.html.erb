@@ -6,7 +6,7 @@
 
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @reimbursement } %>
 
-<%= form_for [:admin, @order, @reimbursement] do |f| %>
+<%= form_with model: [:admin, @order, @reimbursement] do |f| %>
   <fieldset class='no-border-bottom'>
     <legend><%= Spree.t(:items_to_be_reimbursed) %></legend>
     <div class="table-responsive border rounded bg-white">
