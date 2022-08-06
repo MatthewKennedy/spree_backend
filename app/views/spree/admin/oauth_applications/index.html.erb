@@ -2,19 +2,15 @@
   <%= I18n.t('spree.dash.oauth_applications.list') %>
 <% end %>
 
-<% content_for :page_actions do %>
-  <%= link_to_with_icon I18n.t('spree.dash.oauth_applications.new'), new_object_url, class: "btn-success btn", icon: 'plus-square.svg', id: 'admin_new_role_link' %>
-<% end if can? :create, Spree::OauthApplication %>
-
 <% if @oauth_applications.any? %>
   <div class="table-responsive rounded border mt-4 bg-white">
     <table class="table">
       <thead class="text-muted">
         <tr data-hook="admin_roles_index_headers">
           <th><%= Spree.t(:name) %></th>
-          <th><%= I18n.t('spree.dash.oauth_applications.uid') %></th>
-          <th><%= I18n.t('spree.dash.oauth_applications.scopes') %></th>
-          <th class="actions"></th>
+          <th><%= I18n.t('spree.dash.oauth_applications.client_id') %></th>
+          <th><%= I18n.t('spree.dash.oauth_applications.scope') %></th>
+          <th class="actions text-end"> <%= link_to_with_icon(I18n.t('spree.dash.oauth_applications.new'), new_object_url, class: "btn-secondary btn btn-sm", icon: 'plus-square.svg', id: 'admin_new_role_link') if can? :create, Spree::OauthApplication %></th>
         </tr>
       </thead>
       <tbody>

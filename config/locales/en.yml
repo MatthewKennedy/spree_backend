@@ -200,6 +200,7 @@ en:
         client_secret: Client secret
         list: oAuth applications
         new: New oAuth application
+        scope: Scope
         scopes: Scopes
         uid: UID
       option_type_filterable_info: When an option type is filterable, your storefront visitors are presented with the option to filter a collection of products based on the option type. A typical example of this would be to filter clothing by size and color.<br><br><b>Please Note:</b> Filters will only be visible in the storefront taxons that contain products with this option type set.
@@ -418,10 +419,11 @@ en:
         choose_taxons: Choose taxons
         label: Label
       taxonomies:
-        add_new_taxon: Add a new Taxon
-        edit_root_taxonomy: Edit %{name} Taxonomy
-        no_taxons: "<b>%{taxonomy}</b> has no Taxons. Click the <b>Add a new Taxon</b> button, to begin adding Taxons."
-        taxonomies: Taxonomies
+        add_new_taxon: Add a new Category
+        categories: Categories
+        edit_root_taxonomy: Edit %{name}
+        no_taxons: "<b>%{taxonomy}</b> has no Sub Categories. Click the <b>Add a new Category</b> button, to begin."
+        taxonomies: Categories
       taxons:
         hide_from_sub_navigation: Hide from sub navigation
         messages:

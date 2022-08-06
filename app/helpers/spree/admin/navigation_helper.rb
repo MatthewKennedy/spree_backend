@@ -182,9 +182,9 @@ module Spree
 
       def remote_form_submit_button(resource)
         if resource.persisted?
-          button(I18n.t("spree.dash.actions.update"), "check-lg.svg", "submit", {form: "edit_#{@object.class.name.demodulize.underscore}_#{@object.id}", class: "btn btn-success", id: "globalFormSubmitButton"})
+          button(I18n.t("spree.dash.actions.update"), "check-lg.svg", "submit", {form: "edit_#{@object.class.name.demodulize.underscore}_#{@object.id}", class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
         else
-          button(I18n.t("spree.dash.actions.create"), "check-lg.svg", "submit", {form: "new_#{@object.class.name.demodulize.underscore}", class: "btn btn-success", id: "globalFormSubmitButton"})
+          button(I18n.t("spree.dash.actions.create"), "check-lg.svg", "submit", {form: "new_#{@object.class.name.demodulize.underscore}", class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
         end
       end
 

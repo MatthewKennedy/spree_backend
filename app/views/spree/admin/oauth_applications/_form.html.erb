@@ -4,13 +4,13 @@
   </div>
 
   <div class="card-body">
-    <%= f.field_container :name, 'data-hook' => "oauth_application_name" do %>
-      <%= f.text_field :name, class: 'form-control', required: true, placeholder: raw(Spree.t(:name) + required_span_tag) %>
+    <%= f.field_container :name, data_hook: "oauth_application_name" do %>
+      <%= f.text_field :name, required: true, placeholder: raw(Spree.t(:name) + required_span_tag) %>
       <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
     <% end %>
 
-    <%= f.field_container :scopes, 'data-hook' => "oauth_application_scopes" do %>
-      <%= f.text_field :scopes, class: 'form-control', placeholder: raw(Spree.t(:scopes) + required_span_tag) %>
+    <%= f.field_container :scopes, data_hook: "oauth_application_scopes" do %>
+      <%= f.text_field :scopes, placeholder: raw(Spree.t(:scopes) + required_span_tag) %>
       <%= f.label :scopes, raw(Spree.t(:scopes) + required_span_tag) %>
       <small class="form-text text-muted">
         Possible values:
