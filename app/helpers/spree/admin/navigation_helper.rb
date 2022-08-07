@@ -180,7 +180,9 @@ module Spree
         link_to name.html_safe, url, html_options.except(:icon, :icon_class, :icon_size, :no_text)
       end
 
-      def remote_form_submit_button(resource, button_text = nil)
+      def remote_form_submit_button(resource, form_id = nil, button_text = nil)
+        form_id ||= "mainForm"
+
         if button_text.nil?
           button_text = if resource.persisted?
             I18n.t("spree.dash.actions.update")
@@ -189,7 +191,7 @@ module Spree
           end
         end
 
-        button(button_text, "check-lg.svg", "submit", {form: "mainForm", class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
+        button(button_text, "check-lg.svg", "submit", {form: form_id, class: "btn btn-success animate__fadeIn animate__animated animate__faster", id: "globalFormSubmitButton"})
       end
 
       # Override: Add disable_with option to prevent multiple request on consecutive clicks

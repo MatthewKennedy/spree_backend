@@ -55,48 +55,4 @@
       }
     }
   }
-
-  // Required to stop an opened cal showing above the nav bar.
-  &.open {
-    z-index: $zindex-dropdown;
-  }
-}
-
-// Mixins for calendar toggle icon show/hide.
-@mixin swith-appended-icon {
-  &:placeholder-shown:not(:focus) + * {
-    @content;
-  }
-}
-
-[data-controller="datepicker"] {
-  input.flatpickr-alt-input[readonly] {
-    // Flatpickr alternate input is read-only,
-    // style it as an active input field.
-    background-color: var(--bs-body-bg) !important;
-
-    // Fix a bug where occasionally the whole screen will highlight
-    // if you clicked the Flatpickr input box while moving the cursor.
-    @include prefix(
-      (
-        appearance: none,
-        touch-callout: none,
-        user-select: none
-      ),
-      webkit moz ms khtml
-    );
-
-    @include swith-appended-icon {
-      opacity: 0;
-    }
-  }
-
-  // Required for calendar toggle icon show/hide.
-  .append_over {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    height: 100%;
-  }
 }

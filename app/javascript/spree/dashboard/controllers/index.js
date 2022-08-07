@@ -11,6 +11,8 @@ import DatePickerController from './datepicker_controller'
 import FormStateController from './form_state_controller'
 import FormValidationController from './form_validation_controller'
 import InputDisableController from './input_disable_controller'
+import InputFormatDecimalController from './input/format_decimal_controller'
+import InputFormatIntegerController from './input/format_integer_controller'
 import InputFormattingController from './input_formatting_controller'
 import LinkableTd from './linkable_td_controller'
 import MenuController from './menu_controller'
@@ -38,6 +40,8 @@ Stimulus.register('form-state', FormStateController)
 Stimulus.register('form-validation', FormValidationController)
 Stimulus.register('input-disable', InputDisableController)
 Stimulus.register('input-formatting', InputFormattingController)
+Stimulus.register('input--format-decimal', InputFormatDecimalController)
+Stimulus.register('input--format-integer', InputFormatIntegerController)
 Stimulus.register('linkable-td', LinkableTd)
 Stimulus.register('menu', MenuController)
 Stimulus.register('modal', ModalController)

@@ -13,14 +13,6 @@
   <% end if can?(:admin, Spree::Product) %>
 
   <%= content_tag :li, class: 'nav-item' do %>
-    <%= link_to_with_icon(Spree.t(:images),
-                        spree.admin_product_images_url(@product),
-                        class: "nav-link #{'active' if current == :images}",
-                        icon: 'images.svg') %>
-
-  <% end if can?(:admin, Spree::Image) && !@product.deleted? %>
-
-  <%= content_tag :li, class: 'nav-item' do %>
     <%= link_to_with_icon(Spree.t(:variants),
                         spree.admin_product_variants_url(@product),
                         class: "nav-link #{'active' if current == :variants}",
@@ -51,12 +43,4 @@
                         icon: 'currency-exchange.svg') %>
 
   <% end if can?(:admin, Spree::Price) && !@product.deleted? %>
-
-  <%= content_tag :li, class: 'nav-item' do %>
-    <%= link_to_with_icon(I18n.t('spree.dash.digitals.digital_assets'),
-                                spree.admin_product_digitals_path(@product),
-                                class: "nav-link #{'active' if current == :digitals} #{current}",
-                                icon: 'download.svg') %>
-
-  <% end if can?(:admin, Spree::Digital) && !@product.deleted? %>
 <% end %>

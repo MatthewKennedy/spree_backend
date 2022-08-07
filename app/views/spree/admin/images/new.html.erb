@@ -1,22 +1,18 @@
-<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: :images } %>
-
-<% content_for :page_title do %>
-  <%= Spree.t(:new_image) %>
+<% content_for :modal_header do %>
+  <h5 class="modal-title"><%= Spree.t(:new_image) %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 <% end %>
 
-<div class="card">
-  <div class="card-header">
-    <h5><%= I18n.t("spree.dash.images.new_image") %></h5>
-  </div>
-  <div class="card-body">
-    <%= form_with model: [:admin, @product, @image], builder: Spree::Dash::BootstrapBuilder do |f| %>
+<% content_for :modal_body do %>
+  <div class="container">
+    <%= form_with model: [:admin, @product, @image], builder: Spree::Dash::BootstrapBuilder, id: "newImageForm", data: { turbo_frame: :product_images, action: "turbo:submit-end->modal#submitEnd"} do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
-
-      <div class="form-actions" data-hook="buttons">
-        <%= button I18n.t('spree.dash.actions.create'), 'save.svg' %>
-        <span class="or"><%= Spree.t(:or) %></span>
-        <%= link_to_with_icon I18n.t('spree.dash.actions.cancel'), spree.admin_product_images_url(@product), icon: 'delete.svg', id: 'cancel_link' %>
-      </div>
     <% end %>
   </div>
-</div>
+<% end %>
+
+<% content_for :modal_footer do %>
+  <%= remote_form_submit_button(@object, "newImageForm") %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered modal-lg' } %>

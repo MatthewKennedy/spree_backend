@@ -1,6 +1,11 @@
 import { Controller } from '@hotwired/stimulus'
 import TomSelect from 'tom-select'
 import { createPopper } from '@popperjs/core'
+import TomSelectConditionalSearch from '../../vendors/ts_conditional_search'
+import TomSelectSearchIcon from '../../vendors/ts_search_icon'
+
+TomSelect.define('conditional_search', TomSelectConditionalSearch)
+TomSelect.define('search_icon', TomSelectSearchIcon)
 
 class StimulusTomSelect extends Controller {
   static values = {

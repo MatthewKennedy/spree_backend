@@ -1,12 +1,11 @@
-<%= form_with modle: [admin: @product], scope: :digital, url: admin_product_digitals_path(@product), builder: Spree::Dash::BootstrapBuilder do |f| %>
   <%= hidden_field_tag 'digital[variant_id]', variant.id %>
+
   <div class="card">
     <div class="card-header d-flex">
       <div class="flex-fill">
         <h5 class="card-title">Digitals</h5>
       </div>
       <div>
-
       </div>
     </div>
     <div class="card-body">
@@ -44,4 +43,3 @@
       </div>
     </div>
   </div>
-<% end %>

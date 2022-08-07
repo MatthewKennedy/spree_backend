@@ -40,6 +40,10 @@ module Spree
         current_store.products
       end
 
+      def location_after_save
+        spree.edit_admin_product_path(@product)
+      end
+
       def collection_url
         spree.admin_product_images_url
       end

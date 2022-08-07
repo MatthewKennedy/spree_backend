@@ -17,7 +17,7 @@ export default class extends StimulusTomSelect {
     loadThrottle: { type: Number, default: 400 },
     queryCount: { type: Number, default: 2 },
     options: { type: Array, default: [] },
-    plugins: { type: Array, default: [] } // Set an array of plugin names as per Tom Select docs.
+    plugins: { type: Array, default: ['dropdown_input', 'search_icon'] } // Set an array of plugin names as per Tom Select docs.
   }
 
   initialize () {

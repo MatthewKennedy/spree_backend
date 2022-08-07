@@ -267,6 +267,7 @@ en:
           could_not_remove_from_taxon: Could not remove from taxon
           promotionable_could_not_be_updated: Promotionable could not be updated. %{error}
           status_could_not_be_updated: 'Status could not be updated. Reason: %{error}'
+        images: Images
         messages:
           product_cost_currency_updated_successfully: Product cost currency updated successfully
           product_is_not_promotable: Product is not promotable

@@ -20,6 +20,10 @@ module Spree
 
       private
 
+      def location_after_save
+        spree.edit_admin_product_path(@product)
+      end
+
       def permitted_resource_params
         params.require(:digital).permit(permitted_digital_attributes)
       end

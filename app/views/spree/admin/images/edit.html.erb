@@ -1,30 +1,24 @@
-<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: :images } %>
+<% content_for :modal_header do %>
+  <h5 class="modal-title"><%= Spree.t(:new_image) %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<% end %>
 
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @image } %>
-
-<%= form_with model: [:admin, @product, @image], builder: Spree::Dash::BootstrapBuilder do |f| %>
-  <div data-hook="edit_image" class="card mb-3">
-    <div class="card-header">
-      <h5 class="card-title mb-0 h6">
-        <%= @image.attachment_file_name %>
-      </h5>
-    </div>
-    <div class="card-body">
-      <div class="form-group">
-        <div data-hook="thumbnail" class="col-12 text-center">
-          <div class="admin-product-image-container product-img">
-             <%= link_to image_tag(main_app.cdn_image_url(@image.url(:product))), main_app.cdn_image_url(@image.attachment) %>
-          </div>
-        </div>
-
-        <%= render partial: 'form', locals: { f: f } %>
-
-        <div class="form-actions" data-hook="buttons">
-          <%= button I18n.t('spree.dash.actions.update'), 'save.svg' %>
-          <span class="or"><%= Spree.t(:or) %></span>
-          <%= link_to_with_icon I18n.t('spree.dash.actions.cancel'), spree.admin_product_images_url(@product), id: 'cancel_link', icon: 'x-lg.svg' %>
+<% content_for :modal_body do %>
+  <div class="container">
+    <%= form_with model: [:admin, @product, @image], builder: Spree::Dash::BootstrapBuilder, id: "editImageForm", data: { turbo_frame: :product_images, action: "turbo:submit-end->modal#submitEnd"} do |f| %>
+      <div data-hook="thumbnail" class="col-12 text-center">
+        <div class="admin-product-image-container product-img">
+           <%= link_to image_tag(main_app.cdn_image_url(@image.url(:product))), main_app.cdn_image_url(@image.attachment) %>
         </div>
       </div>
-    </div>
+
+      <%= render partial: 'form', locals: { f: f } %>
+    <% end %>
   </div>
 <% end %>
+
+<% content_for :modal_footer do %>
+  <%= remote_form_submit_button(@object, "editImageForm") %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered modal-lg' } %>
