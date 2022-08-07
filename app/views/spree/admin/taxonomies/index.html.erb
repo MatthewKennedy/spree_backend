@@ -2,10 +2,6 @@
   <%= I18n.t('spree.dash.taxonomies.categories') %>
 <% end %>
 
-<% content_for :page_actions do %>
-  <%= link_to_with_icon I18n.t('spree.dash.taxonomies.add_new_taxon'), new_object_url, class: "btn-success btn", icon: 'plus-square.svg', id: 'admin_new_taxonomy_link' %>
-<% end if can?(:create, Spree::Taxonomy) %>
-
 <% if @taxonomies.any? %>
   <div id="list-taxonomies" data-hook>
     <%= render 'list' %>

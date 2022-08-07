@@ -9,6 +9,7 @@ en:
         create: Create
         delete: Delete
         edit: Edit
+        edit_product: Edit product
         remove: Remove
         save: Save
         update: Update
@@ -178,6 +179,7 @@ en:
         url: URL
         url_info: The URL field can link to an external website using <b>https://example.com</b>, link to an otherwise unreachable internal path using <b>/policies/privacy</b>, launch an email client using <b>mailto:sales@example.com</b> or used to create a clickable phone number with <b>tel:123456789</b>
         you_have_no_menus: You have no Menus, click the Add New Menu button to create your first Menu.
+      new_category: New category
       no_message_set: No message set
       no_payment_provider_settings_message: No payment provider settings message
       not_applicable: Not applicable
@@ -275,6 +277,7 @@ en:
           product_status_updated_to: Product status updated to
         new_product_details: New product details
         new_product_master_price: 'Price: %{currency_iso} - (%{currency_symbol})'
+        products: Products
         properties: Properties
         select_from_prototype: Select from prototype
       promotion_cloned: Promotion cloned
@@ -388,6 +391,7 @@ en:
       tab:
         applications: Applications
         apps: Apps
+        categories: Categories
         content: Content
         customer_returns: Customer Returns
         dashboard: Dashboard

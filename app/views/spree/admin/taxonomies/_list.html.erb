@@ -2,9 +2,13 @@
   <table class="table sortable" id='listing_taxonomies'>
     <thead class="text-muted">
       <tr data-hook="taxonomies_header">
-        <th class="no-border handel-head"></th>
+        <th>
+          <%= inline_svg_tag("arrow-down-up.svg", style: "margin-left: 0.7rem") %>
+        </th>
         <th><%= Spree.t(:name) %></th>
-        <th class="actions"></th>
+        <th class="actions text-end">
+          <%= link_to_with_icon(I18n.t('spree.dash.taxonomies.add_new_taxon'), new_object_url, class: "btn-light btn btn-sm", icon: 'plus-square.svg', id: 'admin_new_taxonomy_link') if can?(:create, Spree::Taxonomy) %>
+        </th>
       </tr>
     </thead>
     <tbody data-controller="sortable" data-sortable-resource-name-value="taxonomy">
