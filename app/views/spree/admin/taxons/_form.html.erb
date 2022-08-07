@@ -95,49 +95,44 @@
             Add A Product
           </div>
         </div>
-        <div class="card-body">
+        <div class="pb-2">
           <%= turbo_frame_tag :taxons do %>
-            <% if @taxon.nil? %>
+            <% if @taxon.products.empty? %>
               <%= render 'instructions' %>
             <% else %>
-
-              <ul id="taxon_products" class="p-2 row" data-controller="sortable" data-sortable-resource-name-value="classification">
+              <ul id="taxon_products" class="list-group list-group-flush" data-controller="sortable" data-sortable-resource-name-value="classification">
                 <% @taxon.products.each do |product| %>
-                <% classification = product.classifications.where(taxon_id: @taxon.id) %>
+                  <% classification = product.classifications.where(taxon_id: @taxon.id) %>
+
                   <li id="<%= dom_id(product) %>"
-                      class="list-group-item col-6 col-md-3 p-2"
+                      class="list-group-item d-flex flex-row align-items-center px-2"
                       data-stream-exit-class="animate__fadeOut"
                       data-sortable-update-url="<%= spree.admin_classification_path(@taxon.id, product.id) %>">
-                      <div class="border rounded p-2 bg-white">
-                        <nav class="navbar bg-light justify-content-between px-0 pt-0" style="background-color:transparent !important;">
-                          <div class="d-flex align-items-center justify-content-center">
-                            <%= render 'spree/admin/shared/drag_handle' %>
-                          </div>
-                        </nav>
 
-                        <% if product.images.any? %>
-                          <% image =  product.images[0] %>
-                          <div class="admin-product-image-container product-img">
-                            <%= image_tag(main_app.cdn_image_url(image.url(:product))) %>
-                          </div>
-                        <% else %>
-                          <div class="admin-product-image-container product-img">
-                            <%= inline_svg_tag "image.svg", class: "noimage", size: "60% * 60%" %>
-                          </div>
-                        <% end %>
+                    <div class="justify-content-center">
+                      <%= render 'spree/admin/shared/drag_handle' %>
+                    </div>
 
-                        <div class="p-0 pt-3 text-center product-info">
-                          <h6 class="name card-text"><%= product.name %></h6>
-                          <p class="price card-text"><%= product.display_price %></p>
-                        </div>
+                    <div class="admin-product-image-container small-img m-0 flex-shrink-0">
+                      <% if product.images.any? %>
+                        <% image =  product.images[0] %>
+                        <%= image_tag(main_app.cdn_image_url(image.url(:product))) %>
+                      <% else %>
+                        <%= inline_svg_tag "image.svg", class: "noimage", size: "60% * 60%" %>
+                      <% end %>
+                    </div>
 
-                        <div class="d-grid gap-2">
-                          <%= form_with scope: :product, url: spree.remove_from_taxon_admin_product_path(product), class: 'd-inline', method: :patch do |f| %>
-                            <%= f.hidden_field :taxon_id, value: @taxon.id %>
-                            <%= f.submit I18n.t('spree.dash.actions.remove'), class: 'btn btn-light btn-sm w-100' %>
-                          <% end %>
-                        </div>
-                      </div>
+                    <div class="mx-2 flex-fill text-truncate">
+                      <%= product.name %>
+                    </div>
+
+                    <div class="mx-2">
+                      <span class="badge bg-success"><%= product.status %></span>
+                    </div>
+
+                    <div>
+                      <%= link_to_with_icon(:product, spree.remove_from_taxon_admin_product_path(product, taxon_id: @taxon.id ), { class: 'btn btn-outline-danger btn-sm', icon: "x-lg.svg", no_text: true, data: { turbo_method: :patch, action: :remove_from_taxon } }) %>
+                    </div>
                   </li>
                 <% end %>
               </ul>

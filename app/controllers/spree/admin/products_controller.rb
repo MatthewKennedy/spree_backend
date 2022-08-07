@@ -61,7 +61,7 @@ module Spree
       end
 
       def remove_from_taxon
-        @taxon = Taxon.find(params[:product][:taxon_id])
+        @taxon = Taxon.find(params[:taxon_id])
 
         if @object.taxons.delete(@taxon)
           respond_to do |format|
