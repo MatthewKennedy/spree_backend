@@ -4,8 +4,8 @@ module Spree
       belongs_to "spree/product", find_by: :slug
 
       def create
-        params.require(:vp).permit!
-        params[:vp].each do |variant_id, prices|
+        params.require(:variant_price).permit!
+        params[:variant_price].each do |variant_id, prices|
           next unless variant_id
 
           variant = parent.variants_including_master.find(variant_id)

@@ -1,4 +1,5 @@
 import StimulusTomSelect from './stimulus_tom_select'
+import { createPopper } from '@popperjs/core'
 import { get } from '../../utilities/request_utility'
 import { deserialize } from 'deserialize-json-api'
 
@@ -28,7 +29,22 @@ export default class extends StimulusTomSelect {
       loadThrottle: this.loadThrottleValue,
       load: (q, callback) => this.search(q, callback),
       onChange: (value) => this.doNext(value),
-      shouldLoad: (query) => (query.length > this.queryCountValue)
+      shouldLoad: (query) => (query.length > this.queryCountValue),
+      onInitialize: function () {
+        this.popper = createPopper(this.control, this.dropdown, {
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 5]
+              }
+            }
+          ]
+        })
+      },
+      onDropdownOpen: function () {
+        this.popper.update()
+      }
     }
   }
 

@@ -1,7 +1,6 @@
 module Spree
   module Admin
     class PaymentMethodsController < ResourceController
-      skip_before_action :load_resource, only: :create
       before_action :load_data
       before_action :validate_payment_method_provider, only: :create
 
@@ -52,7 +51,7 @@ module Spree
         valid_payment_methods = Rails.application.config.spree.payment_methods.map(&:to_s)
         unless valid_payment_methods.include?(params[:payment_method][:type])
           flash[:error] = Spree.t(:invalid_payment_provider)
-          redirect_to new_admin_payment_method_path
+          redirect_to spree.new_admin_payment_method_path
         end
       end
 
@@ -67,7 +66,7 @@ module Spree
         params.require(key).permit!
       end
 
-      def location_after_create
+      def location_after_save
         spree.edit_admin_payment_method_path(@payment_method)
       end
     end

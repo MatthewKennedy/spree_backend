@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import TomSelect from 'tom-select'
+import { createPopper } from '@popperjs/core'
 
 class StimulusTomSelect extends Controller {
   static values = {
@@ -8,7 +9,22 @@ class StimulusTomSelect extends Controller {
 
   initialize () {
     this.config = {
-      plugins: this.pluginsValue
+      plugins: this.pluginsValue,
+      onInitialize: function () {
+        this.popper = createPopper(this.control, this.dropdown, {
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 5]
+              }
+            }
+          ]
+        })
+      },
+      onDropdownOpen: function () {
+        this.popper.update()
+      }
     }
   }
 
