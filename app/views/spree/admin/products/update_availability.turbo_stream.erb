@@ -1,3 +1,7 @@
+<%= turbo_stream.update "productStatus" do %>
+  <%= @product.status.capitalize %>
+<% end %>
+
 <%= turbo_stream.update "productStatusOptions" do %>
   <%= render partial: 'status' %>
 <% end %>

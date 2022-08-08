@@ -148,7 +148,7 @@
                     <h5 class="card-title mb-0"><%= variant.options_text %></h5>
                   </div>
                   <div class="card-body">
-                    <%= render 'spree/admin/digitals/form', variant: variant %>
+                    <%= render 'spree/admin/digitals/form', f: f, variant: variant %>
                   </div>
                 </div>
               </div>
@@ -173,6 +173,19 @@
               <div>
                 <%= render partial: 'spree/admin/shared/submit_button' %>
               </div>
+            </div>
+            <div class="card-body">
+              <h5>
+                <span class="badge bg-success animate__animated" id="productStatus" data-stream-enter-class="animate__pulse"><%= @product.status.capitalize %></span>
+
+              <span class="badge text-bg-success">
+                <% if @product.digital? %>
+                  <%= I18n.t('spree.dash.product_kinds.digital') %>
+                <% else %>
+                  <%= I18n.t('spree.dash.product_kinds.physical') %>
+                <% end %>
+              </span>
+              </h5>
             </div>
             <div class="card-body">
               <%= f.field_container :status, data: { hook: "new_product_status", controller: "form-validation" } do %>
