@@ -16,6 +16,10 @@ module Spree
         super(method, collection, value_method, text_method, options, html_options.reverse_merge(class: "form-select", data: {controller: "ts--select", form_state_target: "watch"}))
       end
 
+      def number_field(method, options = {})
+        super(method, options.reverse_merge(placeholder: method.to_s.capitalize, class: "form-control", data: { controller: "input--format-integer", form_state_target: "watch"}))
+      end
+
       def radio_button(method, tag_value, options = {})
         super(method, tag_value, options.reverse_merge(class: "form-check-input", data: {form_state_target: "watch"}))
       end

@@ -21,7 +21,11 @@ module Spree
       private
 
       def location_after_save
-        spree.edit_admin_product_path(@product)
+        if @object.variant.is_master
+          spree.edit_admin_product_path(@product)
+        else
+          spree.edit_admin_product_variant_path(@product, @object.variant)
+        end
       end
 
       def permitted_resource_params

@@ -248,6 +248,8 @@ en:
           cvc: CVC
       platform_api: Platform API
       presentation: Presentation
+      product:
+        has_variants: Has variants
       product_kinds:
         digital: Digital
         physical: Physical
@@ -262,6 +264,8 @@ en:
         add_new_properties_from_prototype: Add new properties from prototype
         all: All
         archived: Archived
+        create_a_new_variant: Create a new variant
+        create_your_first_variant_for_this_product: Create your first variant for this product
         deleted: Deleted
         draft: Draft
         errors:
@@ -277,9 +281,11 @@ en:
           product_status_updated_to: Product status updated to
         new_product_details: New product details
         new_product_master_price: 'Price: %{currency_iso} - (%{currency_symbol})'
+        overview: Overview
         products: Products
         properties: Properties
         select_from_prototype: Select from prototype
+        variants: Variants
       promotion_cloned: Promotion cloned
       promotion_not_cloned: Promotion not cloned
       promotions:

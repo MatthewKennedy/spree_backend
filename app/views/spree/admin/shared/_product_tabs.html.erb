@@ -1,8 +1,3 @@
-<% content_for :page_title do %>
-  <%= page_header_back_button spree.admin_products_path %>
-  <%= @product.name %>
-<% end %>
-
 <% content_for(:page_tabs) do %>
   <%= content_tag :li, class: 'nav-item' do %>
     <%= link_to_with_icon(Spree.t(:details),
@@ -11,14 +6,6 @@
                          icon: 'edit.svg') %>
 
   <% end if can?(:admin, Spree::Product) %>
-
-  <%= content_tag :li, class: 'nav-item' do %>
-    <%= link_to_with_icon(Spree.t(:variants),
-                        spree.admin_product_variants_url(@product),
-                        class: "nav-link #{'active' if current == :variants}",
-                        icon: 'grid-3x3-gap.svg') %>
-
-  <% end if can?(:admin, Spree::Variant) && !@product.deleted? %>
 
   <%= content_tag :li, class: 'nav-item' do %>
     <%= link_to_with_icon(Spree.t(:properties),

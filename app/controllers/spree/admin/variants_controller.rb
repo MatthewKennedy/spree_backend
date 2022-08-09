@@ -45,6 +45,10 @@ module Spree
         @tax_categories = TaxCategory.order(:name)
       end
 
+      def collection_url
+        spree.edit_admin_product_path(@product)
+      end
+
       def redirect_on_empty_option_values
         redirect_to spree.admin_product_variants_url(params[:product_id]) if @product.empty_option_values?
       end
