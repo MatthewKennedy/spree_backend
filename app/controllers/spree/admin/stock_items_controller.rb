@@ -8,26 +8,25 @@ module Spree
       end
 
       def create
-        variant = current_store.variants.find(params[:variant_id])
-        stock_location = StockLocation.find(params[:stock_location_id])
+        variant = current_store.variants.find(params[:stock_movement][:variant_id])
+        stock_location = StockLocation.find(params[:stock_movement][:stock_location_id])
         stock_movement = stock_location.stock_movements.build(stock_movement_params)
         stock_movement.stock_item = stock_location.set_up_stock_item(variant)
 
         if stock_movement.save
           flash[:success] = flash_message_for(stock_movement, :successfully_created)
+          if variant.is_master?
+            redirect_to spree.edit_admin_product_path(variant.product)
+          else
+            redirect_to spree.edit_admin_product_path(variant.product)
+          end
         else
           flash[:error] = Spree.t(:could_not_create_stock_movement)
         end
-
-        redirect_back fallback_location: spree.stock_admin_product_url(variant.product)
       end
 
       def destroy
         stock_item.destroy
-
-        respond_with(@stock_item) do |format|
-          format.html { redirect_back fallback_location: spree.stock_admin_product_url(stock_item.product) }
-        end
       end
 
       private

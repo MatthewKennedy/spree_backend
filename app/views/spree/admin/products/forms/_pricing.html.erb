@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header d-flex">
         <div class="flex-fill">
-          <h5 class="card-title"><%= I18n.t('spree.dash.cost') %></h5>
+          <h5 class="card-title"><%= I18n.t('spree.dash.products.cost_price') %></h5>
         </div>
         <div>
           <%= render partial: 'spree/admin/shared/submit_button' %>
@@ -32,3 +32,20 @@
     </div>
   <% end %>
 <% end %>
+
+<%= form_with model: [:admin, @product], scope: :prices, url: spree.admin_product_prices_path(@product), method: :post, data: {controller: "form-state", turbo_frame: :product_variants}, builder: Spree::Dash::BootstrapBuilder do |f| %>
+  <div class="card">
+    <div class="card-header d-flex">
+      <div class="flex-fill">
+        <h5 class="card-title"><%= I18n.t('spree.dash.products.pricing') %></h5>
+      </div>
+      <%= render partial: 'spree/admin/shared/submit_button' %>
+    </div>
+
+    <div>
+      <div class="my-3">
+        <%= render 'spree/admin/prices/variant_prices', variant: @product.master %>
+      </div>
+    </div>
+  </div>
+<% end if can?(:admin, Spree::Price) && !@product.deleted? %>

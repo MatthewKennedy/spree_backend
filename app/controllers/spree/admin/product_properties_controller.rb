@@ -29,7 +29,7 @@ module Spree
       end
 
       def location_after_save
-        spree.admin_product_product_properties_path
+        spree.edit_admin_product_path(@product)
       end
     end
   end

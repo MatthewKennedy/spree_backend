@@ -3,8 +3,6 @@
   <%= @property.name %>
 <% end %>
 
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @property } %>
-
 <%= form_with model: [:admin, @property] do |f| %>
   <fieldset>
     <%= render partial: 'form', locals: { f: f } %>

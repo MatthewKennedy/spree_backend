@@ -1,4 +1,4 @@
-<% if @product.properties.any? %>
+<%= turbo_frame_tag :product_properties do %>
   <%= form_with model: @product, url: spree.admin_product_url(@product), method: :put do |f| %>
     <div class="card">
       <div class="card-header d-flex">
@@ -8,11 +8,12 @@
         <div>
           <% if can? :create, Spree::ProductProperty %>
             <%= link_to_with_icon I18n.t('spree.dash.products.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal} %>
-            <%= link_to_with_icon I18n.t('spree.dash.products.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal } %>
+            <%= link_to_with_icon I18n.t('spree.dash.products.add_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-square.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal } %>
           <% end %>
         </div>
       </div>
 
+      <% if @product.properties.any? %>
       <div class="table-responsive">
         <table id="product_properties" class="table">
           <thead class="text-muted">
@@ -26,22 +27,18 @@
           </thead>
           <tbody data-controller="sortable" data-sortable-resource-name-value="product_property">
             <%= f.fields_for :product_properties do |pp_form| %>
-              <%= render 'product_property_fields', f: pp_form if pp_form.object.persisted? %>
+              <%= render 'spree/admin/product_properties/product_property_fields', f: pp_form if pp_form.object.persisted? %>
             <% end %>
           </tbody>
         </table>
       </div>
-    </div>
-    <%= render('spree/admin/shared/edit_resource_links') if can? :update, Spree::ProductProperty %>
-  <% end %>
-<% else %>
-  <% if can? :create, Spree::ProductProperty %>
-    <div class="alert alert-info text-center" role="alert">
-      <p>
-        <%= I18n.t('spree.dash.products.add_first_property') %>
-      </p>
-        <%= link_to_with_icon I18n.t('spree.dash.products.select_from_prototype'), spree.prototypes_admin_product_product_properties_path(@product), icon: 'list.svg', class: 'btn-light btn-sm', data: { turbo_frame: :modal} %>
-        <%= link_to_with_icon I18n.t('spree.dash.products.add_a_new_property'), spree.new_admin_product_product_property_path(@product), icon: 'plus-lg.svg', class: 'btn btn-light btn-sm', data: { turbo_frame: :modal } %>
+      <% else %>
+        <% if can? :create, Spree::ProductProperty %>
+          <div class="alert alert-light text-center mx-5" role="alert">
+            <%= I18n.t('spree.dash.products.add_first_property') %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

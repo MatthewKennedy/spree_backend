@@ -50,9 +50,8 @@ module Spree
         redirect_to spree.admin_products_url
       end
 
-      def stock
-        @variants = @product.variants.includes(*variant_stock_includes)
-        @variants = [@product.master] if @variants.empty?
+      def add_stock
+        @variant = @product.variants_including_master.find_by(id: params[:variant_id])
         @stock_locations = StockLocation.accessible_by(current_ability)
         if @stock_locations.empty?
           flash[:error] = Spree.t(:stock_management_requires_a_stock_location)
@@ -100,11 +99,7 @@ module Spree
       end
 
       def location_after_save
-        if params[:product][:product_properties_attributes].present?
-          spree.admin_product_product_properties_path(@product)
-        else
-          spree.edit_admin_product_path(@product)
-        end
+        spree.edit_admin_product_path(@product)
       end
 
       def load_data

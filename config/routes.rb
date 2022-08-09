@@ -108,19 +108,20 @@ Spree::Core::Engine.add_routes do
         post :update_promotionable
         patch :remove_from_taxon
         post :clone
-        get :stock
+        get :add_stock, path: "/add_stock/:variant_id"
       end
+
+      resources :digitals, only: [:index, :create, :destroy]
+      resources :images
+      resources :prices, only: [:index, :create]
       resources :product_properties do
         collection do
           get :prototypes
           post :prototype_properties
         end
       end
-      resources :images
       resources :variants
       resources :variants_including_master, only: [:update]
-      resources :prices, only: [:index, :create]
-      resources :digitals, only: [:index, :create, :destroy]
     end
 
     # Properties

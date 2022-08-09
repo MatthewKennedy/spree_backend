@@ -9,16 +9,16 @@
   <%= @product.name %>
 <% end %>
 
-<%#= render partial: 'spree/admin/shared/product_tabs', locals: {current: :details} %>
-
 <div data-hook="admin_product_form_fields">
   <div class="row">
     <div class="col-12 col-md-8" data-hook="admin_product_form_left">
       <%= render "spree/admin/products/forms/details" %>
       <%= render "spree/admin/products/forms/seo" %>
       <%= render "spree/admin/products/forms/images" %>
-      <%= render "spree/admin/products/forms/digitals" %>
+      <%= render "spree/admin/products/forms/digitals" unless @product.has_variants? %>
       <%= render "spree/admin/products/forms/variants" %>
+      <%= render "spree/admin/products/forms/stock" unless @product.has_variants? %>
+      <%= render "spree/admin/products/forms/properties" if can?(:admin, Spree::ProductProperty) && !@product.deleted? %>
     </div>
 
     <div class="col-12 col-md-4" data-hook="admin_product_form_right">
