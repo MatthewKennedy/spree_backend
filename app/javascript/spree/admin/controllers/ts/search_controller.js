@@ -65,7 +65,7 @@ export default class extends StimulusTomSelect {
   }
 
   buildRequestURL (q) {
-    const urlWithParams = new URL(SpreeDash.pathFor(this.uriValue))
+    const urlWithParams = new URL(SpreeAdmin.pathFor(this.uriValue))
 
     if (this.hasRansackValue) {
       this.ransackValue.forEach(target => {

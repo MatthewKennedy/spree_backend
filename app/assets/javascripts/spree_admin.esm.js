@@ -4241,7 +4241,7 @@ function arrow(_ref) {
   var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
   var offset = within(min, center, max);
   var axisProp = axis;
-  state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, 
+  state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset,
   _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
 }
 
@@ -4359,11 +4359,11 @@ function mapToStyles(_ref2) {
   y = _ref4.y;
   if (gpuAcceleration) {
     var _Object$assign;
-    return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", 
-    _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", 
+    return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "",
+    _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)",
     _Object$assign));
   }
-  return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "", 
+  return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "",
   _Object$assign2[sideX] = hasX ? x + "px" : "", _Object$assign2.transform = "", _Object$assign2));
 }
 
@@ -13404,7 +13404,7 @@ function FlatpickrInstance(element, instanceConfig) {
     for (dayNumber = 1; dayNumber <= daysInMonth; dayNumber++, dayIndex++) {
       days.appendChild(createDay("", new Date(year, month, dayNumber), dayNumber, dayIndex));
     }
-    for (let dayNum = daysInMonth + 1; dayNum <= 42 - firstOfMonth && (self.config.showMonths === 1 || dayIndex % 7 !== 0); dayNum++, 
+    for (let dayNum = daysInMonth + 1; dayNum <= 42 - firstOfMonth && (self.config.showMonths === 1 || dayIndex % 7 !== 0); dayNum++,
     dayIndex++) {
       days.appendChild(createDay(nextMonthDayClass, new Date(year, month + 1, dayNum % daysInMonth), dayNum, dayIndex));
     }
@@ -15315,7 +15315,7 @@ class DatePickerController extends StimulusFlatpickr {
   locales=Locales;
   connect() {
     this.config = {
-      locale: SpreeDash.translations.flatpickr_locale,
+      locale: SpreeAdmin.translations.flatpickr_locale,
       altInput: true,
       time_24hr: true,
       altInputClass: "flatpickr-alt-input form-control rounded-start",
@@ -74867,7 +74867,7 @@ class FetchRequest {
 }
 
 RequestInterceptor.register((async request => {
-  request.addHeader("Authorization", `Bearer ${SpreeDash.OAUTH_TOKEN}`);
+  request.addHeader("Authorization", `Bearer ${SpreeAdmin.OAUTH_TOKEN}`);
 }));
 
 function showProgressBar() {
@@ -81374,7 +81374,7 @@ class TsSearchController extends StimulusTomSelect {
     }
   }
   buildRequestURL(q) {
-    const urlWithParams = new URL(SpreeDash.pathFor(this.uriValue));
+    const urlWithParams = new URL(SpreeAdmin.pathFor(this.uriValue));
     if (this.hasRansackValue) {
       this.ransackValue.forEach((target => {
         urlWithParams.searchParams.append(`[filter]${target}`, q);
@@ -81820,28 +81820,28 @@ var Uri$1 = {
 
 var Uri = Uri$1.exports;
 
-const SpreeDash$1 = {};
+const SpreeAdmin$1 = {};
 
-if (!window.SpreeDash) {
-  window.SpreeDash = SpreeDash$1;
+if (!window.SpreeAdmin) {
+  window.SpreeAdmin = SpreeAdmin$1;
 }
 
-SpreeDash$1.mountedAt = function() {
+SpreeAdmin$1.mountedAt = function() {
   return window.SpreePaths.mounted_at;
 };
 
-SpreeDash$1.adminPath = function() {
+SpreeAdmin$1.adminPath = function() {
   return window.SpreePaths.admin;
 };
 
-SpreeDash$1.pathFor = function(path) {
+SpreeAdmin$1.pathFor = function(path) {
   const locationOrigin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : "");
   return this.url("" + locationOrigin + this.mountedAt() + path, this.url_params).toString();
 };
 
-SpreeDash$1.localizedPathFor = function(path) {
+SpreeAdmin$1.localizedPathFor = function(path) {
   if (typeof SPREE_LOCALE !== "undefined" && typeof SPREE_CURRENCY !== "undefined") {
-    const fullUrl = new URL(SpreeDash$1.pathFor(path));
+    const fullUrl = new URL(SpreeAdmin$1.pathFor(path));
     const params = fullUrl.searchParams;
     let pathName = fullUrl.pathname;
     params.set("currency", SPREE_CURRENCY);
@@ -81852,10 +81852,10 @@ SpreeDash$1.localizedPathFor = function(path) {
     }
     return fullUrl.origin + pathName + "?" + params.toString();
   }
-  return SpreeDash$1.pathFor(path);
+  return SpreeAdmin$1.pathFor(path);
 };
 
-SpreeDash$1.url = function(uri, query) {
+SpreeAdmin$1.url = function(uri, query) {
   if (uri.path === undefined) {
     uri = new Uri(uri);
   }
@@ -81865,9 +81865,9 @@ SpreeDash$1.url = function(uri, query) {
   return uri;
 };
 
-SpreeDash$1.routes = {};
+SpreeAdmin$1.routes = {};
 
-SpreeDash$1.url_params = {};
+SpreeAdmin$1.url_params = {};
 
 document.addEventListener("turbo:before-stream-render", (function(event) {
   if (event.target.action === "update") {
@@ -81912,8 +81912,8 @@ Turbo.setConfirmMethod(((message, element) => {
   }));
 }));
 
-if (!window.SpreeDash.RequestUtility) {
-  window.SpreeDash.RequestUtility = RequestUtility;
+if (!window.SpreeAdmin.RequestUtility) {
+  window.SpreeAdmin.RequestUtility = RequestUtility;
 }
 
 console.log("Spree Admin Initialized");

@@ -1,20 +1,20 @@
 import Uri from 'jsuri'
 
-const SpreeDash = {}
+const SpreeAdmin = {}
 
-if (!window.SpreeDash) { window.SpreeDash = SpreeDash }
+if (!window.SpreeAdmin) { window.SpreeAdmin = SpreeAdmin }
 
-SpreeDash.mountedAt = function () { return window.SpreePaths.mounted_at }
-SpreeDash.adminPath = function () { return window.SpreePaths.admin }
+SpreeAdmin.mountedAt = function () { return window.SpreePaths.mounted_at }
+SpreeAdmin.adminPath = function () { return window.SpreePaths.admin }
 
-SpreeDash.pathFor = function (path) {
+SpreeAdmin.pathFor = function (path) {
   const locationOrigin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
   return this.url('' + locationOrigin + this.mountedAt() + path, this.url_params).toString()
 }
 
-SpreeDash.localizedPathFor = function (path) {
+SpreeAdmin.localizedPathFor = function (path) {
   if (typeof SPREE_LOCALE !== 'undefined' && typeof SPREE_CURRENCY !== 'undefined') {
-    const fullUrl = new URL(SpreeDash.pathFor(path))
+    const fullUrl = new URL(SpreeAdmin.pathFor(path))
     const params = fullUrl.searchParams
     let pathName = fullUrl.pathname
 
@@ -27,14 +27,14 @@ SpreeDash.localizedPathFor = function (path) {
     }
     return fullUrl.origin + pathName + '?' + params.toString()
   }
-  return SpreeDash.pathFor(path)
+  return SpreeAdmin.pathFor(path)
 }
 
-SpreeDash.url = function (uri, query) {
+SpreeAdmin.url = function (uri, query) {
   if (uri.path === undefined) { uri = new Uri(uri) }
   if (query) { Object.keys(query).forEach(key => { return uri.addQueryParam(key, query[key]) }) }
   return uri
 }
 
-SpreeDash.routes = {}
-SpreeDash.url_params = { }
+SpreeAdmin.routes = {}
+SpreeAdmin.url_params = { }

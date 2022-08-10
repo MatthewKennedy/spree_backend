@@ -60,14 +60,14 @@
       "lib/*"
     ],
     "globals": [
-      "SpreeDash",
+      "SpreeAdmin",
       "Turbo",
       "URL",
       "SPREE_CURRENCY",
       "SPREE_LOCALE",
-      "SpreeDash.OAUTH_TOKEN",
+      "SpreeAdmin.OAUTH_TOKEN",
       "Handlebars",
-      "SpreeDash.ADDRESS_FIELDS",
+      "SpreeAdmin.ADDRESS_FIELDS",
       "clearTimeout",
       "setTimeout",
       "jQuery",

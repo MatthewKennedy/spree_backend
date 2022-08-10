@@ -7,7 +7,7 @@ export default class extends Flatpickr {
 
   connect () {
     this.config = {
-      locale: SpreeDash.translations.flatpickr_locale,
+      locale: SpreeAdmin.translations.flatpickr_locale,
       altInput: true,
       time_24hr: true,
       altInputClass: 'flatpickr-alt-input form-control rounded-start',
