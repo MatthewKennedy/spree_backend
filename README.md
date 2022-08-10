@@ -43,7 +43,39 @@ You can also [add Spree and Admin Dashboard to an existing Ruby on Rails applica
 
 ## Documentation
 
-- [Developer Documentation](https://dev-docs.spreecommerce.org/)
+### Install
+
+In a new Rails 7 app add the following gems:
+```ruby
+   gem "spree"
+   gem "spree_admin"
+   gem "spree_auth_devise"
+   gem "sassc", github: "sass/sassc-ruby", branch: "master"
+```
+
+Add this line to initializers/assets.rb
+```ruby
+   # initializers/assets.rb
+   Rails.application.config.assets.paths << Rails.root.join('node_modules')
+```
+
+From the command line run:
+```bash
+   bin/rails g spree:install --user_class=Spree::User
+```
+
+```bash
+   bin/rails g spree:auth:install
+```
+
+```bash
+   bin/rails g spree:backend:install
+```
+
+```bash
+   yarn add “@spree/admin”
+```
+
 
 ## Contributing
 
@@ -64,7 +96,7 @@ yarn link
 Next, from the root of the Rails app you are using to develop run:
 
 ```bash
-yarn link "@spree/dashboard"
+yarn link "@spree/admin"
 ```
 
 Once your local Spree Dashboard is linked with the Rails app you are using for development you will need two terminal tabs open,

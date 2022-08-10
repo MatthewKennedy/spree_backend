@@ -81916,7 +81916,7 @@ if (!window.SpreeDash.RequestUtility) {
   window.SpreeDash.RequestUtility = RequestUtility;
 }
 
-console.log("Spree Dash Initialized");
+console.log("Spree Admin Initialized");
 
 var adapters = {
   logger: self.console,

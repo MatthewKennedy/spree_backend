@@ -2,7 +2,7 @@
   "name": "@spree/admin",
   "version": "0.0.1",
   "description": "Admin UI for Spree",
-  "main": "app/assets/javascripts/spree_dash.js",
+  "main": "app/assets/javascripts/spree_admin.js",
   "type": "module",
   "license": "MIT",
   "files": [

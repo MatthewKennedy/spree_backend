@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.version = Spree::Backend.version
   s.authors = ["Sean Schofield", "Spark Solutions"]
   s.email = "hello@spreecommerce.org"
-  s.summary = "Admin Dashboard for Spree eCommerce platform"
-  s.description = "Admin Dashboard for Spree eCommerce platform"
+  s.summary = "Admin for Spree eCommerce platform"
+  s.description = "Admin for Spree eCommerce platform"
   s.homepage = "https://spreecommerce.org"
   s.license = "BSD-3-Clause"
 
