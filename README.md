@@ -2,15 +2,9 @@
    <img src="https://raw.githubusercontent.com/spree/spree-dev-docs/master/.gitbook/assets/admin_panel_978-2x.jpg" alt="Spree Commerce - a headless open-source ecommerce platform for multi-store, marketplace, or B2B global brands" />
 </a>
 
-# Spree Admin Dashboard
+# Spree Admin
 
-This is the default Spree Admin Dashboard.
-
-## Developed by
-
-[![Vendo](https://assets-global.website-files.com/6230c485f2c32ea1b0daa438/623372f40a8c54ca9aea34e8_vendo%202.svg)](https://getvendo.com?utm_source=spree_backend_github)
-
-> All-in-one platform for all your Marketplace and B2B eCommerce needs. [Start your 30-day free trial](https://e98esoirr8c.typeform.com/contactvendo?typeform-source=spree_backend_github)
+A new Admin UI for Spree.
 
 ## Key Features
 
@@ -22,59 +16,44 @@ This is the default Spree Admin Dashboard.
 - Easy customization to suit your needs
 - Modern tech-stack based on [Hotwire](https://hotwired.dev/) (Stimulus & Turbo)
 
-## Demo
-
-Fire up your own instance in the cloud:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/spree/spree_starter) <a href="https://render.com/deploy?repo=https://github.com/spree/spree_starter/tree/main">
-<img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height=32>
-</a>
-
-Default credentials:
-
-- login: `spree@example.com`
-- password: `spree123`
-
 ## Installation
 
-Spree Admin Dashboard is bundled with [Spree Starter](https://github.com/spree/spree_starter) and we recommend following [Spree Getting Started guide](https://dev-docs.spreecommerce.org/getting-started/installation).
-
-You can also [add Spree and Admin Dashboard to an existing Ruby on Rails application](https://dev-docs.spreecommerce.org/advanced/existing_app_tutorial) as well.
-
-## Documentation
-
-### Install
-
-In a new Rails 7 app add the following gems:
+Starting with a freshly generated Rails 7 app using esbuild simply add the following gems to your gem file:
 ```ruby
    gem "spree"
    gem "spree_admin"
    gem "spree_auth_devise"
-   gem "sassc", github: "sass/sassc-ruby", branch: "master"
 ```
 
-Add this line to initializers/assets.rb
+Add this line to "config/initializers/assets.rb" if it is not already in there:
 ```ruby
-   # initializers/assets.rb
+   # config/initializers/assets.rb
    Rails.application.config.assets.paths << Rails.root.join('node_modules')
 ```
 
-From the command line run:
+From the command line run the following commands to:
+
+Install Spree
 ```bash
    bin/rails g spree:install --user_class=Spree::User
 ```
 
+Install Spree Auth Devise
 ```bash
    bin/rails g spree:auth:install
 ```
 
+Install Spree Admin
 ```bash
    bin/rails g spree:backend:install
 ```
 
+Install the Spree Admin javascript bundle
 ```bash
    yarn add “@spree/admin”
 ```
+
+## Documentation
 
 
 ## Contributing
@@ -87,7 +66,7 @@ Please review the [Spree Contributing Guide](https://dev-docs.spreecommerce.org/
 
 When working on the JavaScript in Spree Dashboard locally, you will need to yarn link your local development copy of `@spree/dashboard`, to the Rails app you are working in, so that your changes are picked up and represented live in the view.
 
-From the root of `spree_backend` run:
+From the root of `spree_admin` run:
 
 ```bash
 yarn link
@@ -100,9 +79,9 @@ yarn link "@spree/admin"
 ```
 
 Once your local Spree Dashboard is linked with the Rails app you are using for development you will need two terminal tabs open,
-one at the root of your Rails app, and one at the root of `spree_backend`.
+one at the root of your Rails app, and one at the root of `spree_admin`.
 
-In the terminal window at the root of the `spree_backend` run:
+In the terminal window at the root of the `spree_admin` run:
 
 ```bash
 yarn watch
@@ -114,7 +93,7 @@ And from the Rails app you are using to run Spree and develop in run the followi
 bin/dev
 ```
 
-Any changes made to the JavaScript files in `spree_backend` will be processed by yarn and picked up in the Rails app you are running for development.
+Any changes made to the JavaScript files in `spree_admin` will be processed by yarn and picked up in the Rails app you are running for development.
 
 ### Local setup
 
@@ -123,7 +102,7 @@ Any changes made to the JavaScript files in `spree_backend` will be processed by
 3. Create test application:
 
    ```bash
-   cd spree_backend
+   cd spree_admin
    bundle install
    bundle exec rake test_app
    ```
