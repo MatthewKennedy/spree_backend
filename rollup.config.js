@@ -13,11 +13,11 @@ const terserOptions = {
 
 export default [
   {
-    input: 'app/javascript/spree/dashboard/index.js',
+    input: 'app/javascript/spree/admin/index.js',
     output: {
-      file: 'app/assets/javascripts/spree_dash.js',
+      file: 'app/assets/javascripts/spree_admin.js',
       format: 'umd',
-      name: 'SpreeDash',
+      name: 'SpreeAdmin',
       inlineDynamicImports: true,
       sourcemap: false
     },
@@ -25,11 +25,11 @@ export default [
   },
 
   {
-    input: 'app/javascript/spree/dashboard/index.js',
+    input: 'app/javascript/spree/admin/index.js',
     output: {
-      file: 'app/assets/javascripts/spree_dash.esm.js',
+      file: 'app/assets/javascripts/spree_admin.esm.js',
       format: 'es',
-      name: 'SpreeDash',
+      name: 'SpreeAdmin',
       inlineDynamicImports: true,
       sourcemap: false
     },

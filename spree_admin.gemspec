@@ -2,7 +2,7 @@ require_relative "lib/spree/backend/version"
 
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
-  s.name = "spree_backend"
+  s.name = "spree_admin"
   s.version = Spree::Backend.version
   s.authors = ["Sean Schofield", "Spark Solutions"]
   s.email = "hello@spreecommerce.org"

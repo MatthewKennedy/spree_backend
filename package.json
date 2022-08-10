@@ -1,6 +1,6 @@
 {
-  "name": "@spree/dash",
-  "version": "0.1.0",
+  "name": "@spree/admin",
+  "version": "0.0.1",
   "description": "Admin UI for Spree",
   "main": "app/assets/javascripts/spree_dash.js",
   "type": "module",
@@ -12,10 +12,10 @@
   "homepage": "https://spreecommerce.org/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spree/spree_backend.git"
+    "url": "git+https://github.com/matthewkennedy/spree_admin.git"
   },
   "bugs": {
-    "url": "https://github.com/spree/spree_backend/issues"
+    "url": "https://github.com/matthewkennedy/spree_admin/issues"
   },
   "author": "Spark Solutions <hi@sparksolutions.co>",
   "dependencies": {
