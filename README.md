@@ -21,12 +21,6 @@ Starting with a freshly generated Rails 7 app using esbuild simply add the follo
    gem "spree_auth_devise"
 ```
 
-Add this line to "config/initializers/assets.rb" if it is not already in there:
-```ruby
-   # config/initializers/assets.rb
-   Rails.application.config.assets.paths << Rails.root.join('node_modules')
-```
-
 From the command line run the following commands to:
 
 Install Spree
@@ -46,7 +40,7 @@ Install Spree Admin
 
 Install the Spree Admin javascript bundle
 ```bash
-   yarn add “@spree/admin”
+   yarn add "@spree/admin"
 ```
 
 ## Documentation

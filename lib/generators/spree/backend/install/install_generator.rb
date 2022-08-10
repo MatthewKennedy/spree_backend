@@ -15,7 +15,7 @@ module Spree
         def install
           template "app/javascript/spree_admin.js"
           template "vendor/assets/stylesheets/spree/backend/all.css"
-          template "app/assets/stylesheets/spree/backend/spree_admin.scss"
+          template "app/assets/stylesheets/spree/backend/admin.scss"
         end
       end
     end
