@@ -7,14 +7,14 @@ describe "Edit Homepage", type: :feature do
     let!(:store_hp) { create(:store, default: true, name: "Super Store", supported_locales: "en,fr") }
 
     before do
-      I18n.backend.store_translations(:fr,
+      I18n.dash.store_translations(:fr,
         spree: {
           i18n: {
             this_file_language: "Français (FR)"
           }
         })
 
-      visit spree.new_admin_cms_page_path
+      visit spree.new_dash_cms_page_path
 
       fill_in "Title *", with: "Homepage (English)"
       select "Homepage", from: "cms_page[type]"

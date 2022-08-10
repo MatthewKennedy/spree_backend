@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe Spree::Admin::BaseHelper, type: :helper do
-  include Spree::Admin::BaseHelper
+describe Spree::Dash::BaseHelper, type: :helper do
+  include Spree::Dash::BaseHelper
 
   context "#datepicker_field_value" do
     it "returns nil when date is empty" do
@@ -33,24 +33,24 @@ describe Spree::Admin::BaseHelper, type: :helper do
     end
   end
 
-  describe "#admin_logout_link" do
+  describe "#dash_logout_link" do
     it "returns nil if no logout route is defined" do
-      expect(helper.admin_logout_link).to be_nil
+      expect(helper.dash_logout_link).to be_nil
     end
 
     context "returns spree_logout_path if defined" do
       before { allow(helper).to receive(:spree_logout_path).and_return("/logout") }
 
-      it { expect(helper.admin_logout_link).to eq("/logout") }
+      it { expect(helper.dash_logout_link).to eq("/logout") }
     end
 
-    context "spree.admin_logout_path if defined" do
+    context "spree.dash_logout_path if defined" do
       before do
         allow(helper).to receive(:spree_logout_path).and_return("/logout")
-        allow(helper).to receive(:admin_logout_path).and_return("/admin/logout")
+        allow(helper).to receive(:dash_logout_path).and_return("/dash/logout")
       end
 
-      it { expect(helper.admin_logout_link).to eq("/admin/logout") }
+      it { expect(helper.dash_logout_link).to eq("/dash/logout") }
     end
   end
 end

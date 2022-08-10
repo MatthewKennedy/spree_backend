@@ -4,14 +4,14 @@ describe "Properties", type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_products_path
+    visit spree.dash_products_path
   end
 
   context "Property index" do
     before do
       create(:property, name: "shirt size", presentation: "size", filterable: true)
       create(:property, name: "shirt fit", presentation: "fit", filterable: false)
-      visit spree.admin_properties_path
+      visit spree.dash_properties_path
     end
 
     context "listing product properties" do
@@ -67,8 +67,8 @@ describe "Properties", type: :feature, js: true do
   end
 
   context "creating a property" do
-    it "allows an admin to create a new product property" do
-      visit spree.admin_properties_path
+    it "allows an dash to create a new product property" do
+      visit spree.dash_properties_path
       click_link "new_property_link"
       within(".content-header") { expect(page).to have_content("New Property") }
 
@@ -82,11 +82,11 @@ describe "Properties", type: :feature, js: true do
   context "editing a property" do
     before do
       create(:property)
-      visit spree.admin_properties_path
+      visit spree.dash_properties_path
       within_row(1) { click_icon :edit }
     end
 
-    it "allows an admin to edit an existing product property" do
+    it "allows an dash to edit an existing product property" do
       fill_in "property_name", with: "model 99"
       click_button "Update"
       expect(page).to have_content("successfully updated!")
@@ -103,7 +103,7 @@ describe "Properties", type: :feature, js: true do
   context "linking a property to a product" do
     before do
       product = create(:product, stores: Spree::Store.all)
-      visit spree.admin_product_product_properties_path(product)
+      visit spree.dash_product_product_properties_path(product)
     end
 
     # Regression test for #2279

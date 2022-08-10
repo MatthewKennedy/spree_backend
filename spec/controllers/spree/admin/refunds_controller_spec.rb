@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::RefundsController do
+describe Spree::Dash::RefundsController do
   stub_authorization!
 
   describe "POST create" do

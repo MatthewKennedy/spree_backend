@@ -7,11 +7,11 @@ describe "Product Details", type: :feature, js: true do
 
   context "editing a product with WYSIWYG disabled" do
     before do
-      Spree::Backend::Config.product_wysiwyg_editor_enabled = false
-      visit spree.admin_product_path(product)
+      Spree::Dash::Config.product_wysiwyg_editor_enabled = false
+      visit spree.dash_product_path(product)
     end
 
-    after { Spree::Backend::Config.product_wysiwyg_editor_enabled = true }
+    after { Spree::Dash::Config.product_wysiwyg_editor_enabled = true }
 
     it "displays the product description as a standard input field" do
       expect(page).to have_field(id: "product_description", with: product.description)
@@ -21,8 +21,8 @@ describe "Product Details", type: :feature, js: true do
 
   context "editing a product with WYSIWYG editer enabled" do
     before do
-      Spree::Backend::Config.product_wysiwyg_editor_enabled = true
-      visit spree.admin_product_path(product)
+      Spree::Dash::Config.product_wysiwyg_editor_enabled = true
+      visit spree.dash_product_path(product)
     end
 
     it "displays the product details with a WYSIWYG editor for the product description input" do
@@ -52,14 +52,14 @@ describe "Product Details", type: :feature, js: true do
 
       click_link "Details"
 
-      expect(page).to have_css("#adminPreviewProduct")
+      expect(page).to have_css("#dashPreviewProduct")
       expect(page).to have_link Spree.t(:preview_product), href: "http://www.example.com/products/bun-th-t-n-ng"
     end
   end
 
   describe "status related fields behavior" do
     before do
-      visit spree.admin_product_path(product)
+      visit spree.dash_product_path(product)
     end
 
     it "hides make available_on" do

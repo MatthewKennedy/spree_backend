@@ -7,11 +7,11 @@ class OrderSpecificAbility
   include CanCan::Ability
 
   def initialize(_user)
-    can [:admin, :manage], Spree::Order, number: "R987654321"
+    can [:dash, :manage], Spree::Order, number: "R987654321"
   end
 end
 
-describe Spree::Admin::OrdersController, type: :controller do
+describe Spree::Dash::OrdersController, type: :controller do
   let(:store) { Spree::Store.default }
 
   shared_examples "refreshes shipping rates conditionally" do |action_name|
@@ -39,11 +39,11 @@ describe Spree::Admin::OrdersController, type: :controller do
 
     let(:order) { create(:order_with_line_items, number: "R123456789", store: store) }
     let(:adjustments) { order.all_adjustments.reload }
-    let(:admin_user) { create(:admin_user) }
+    let(:dash_user) { create(:dash_user) }
     let(:display_value) { Spree::ShippingMethod::DISPLAY_ON_BACK_END }
 
     before do
-      allow(controller).to receive(:try_spree_current_user).and_return(admin_user)
+      allow(controller).to receive(:try_spree_current_user).and_return(dash_user)
     end
 
     describe "#approve" do
@@ -52,7 +52,7 @@ describe Spree::Admin::OrdersController, type: :controller do
         expect(flash[:success]).to eq Spree.t(:order_approved)
         order.reload
         expect(order.approved?).to eq true
-        expect(order.approver).to eq admin_user
+        expect(order.approver).to eq dash_user
       end
     end
 
@@ -64,7 +64,7 @@ describe Spree::Admin::OrdersController, type: :controller do
         expect(flash[:success]).to eq Spree.t(:order_canceled)
         order.reload
         expect(order.canceled?).to eq true
-        expect(order.canceler).to eq admin_user
+        expect(order.canceler).to eq dash_user
       end
     end
 
@@ -119,7 +119,7 @@ describe Spree::Admin::OrdersController, type: :controller do
     describe "#new" do
       it "a new order has the current user assigned as a creator and proper store" do
         get :new
-        expect(assigns[:order].created_by).to eq(admin_user)
+        expect(assigns[:order].created_by).to eq(dash_user)
         expect(assigns[:order].store).to eq(store)
       end
     end
@@ -186,12 +186,12 @@ describe Spree::Admin::OrdersController, type: :controller do
 
       context "when referer" do
         before do
-          request.env["HTTP_REFERER"] = spree.admin_url(host: "http://test.host")
+          request.env["HTTP_REFERER"] = spree.dash_url(host: "http://test.host")
         end
 
         it "redirects back" do
           put :open_adjustments, params: {id: order.number}
-          expect(response).to redirect_to(spree.admin_url(host: "http://test.host"))
+          expect(response).to redirect_to(spree.dash_url(host: "http://test.host"))
         end
       end
 
@@ -202,7 +202,7 @@ describe Spree::Admin::OrdersController, type: :controller do
 
         it "refirects to fallback location" do
           put :open_adjustments, params: {id: order.number}
-          expect(response).to redirect_to(admin_order_adjustments_url(order))
+          expect(response).to redirect_to(dash_order_adjustments_url(order))
         end
       end
     end
@@ -234,12 +234,12 @@ describe Spree::Admin::OrdersController, type: :controller do
 
       context "when referer" do
         before do
-          request.env["HTTP_REFERER"] = spree.admin_url(host: "http://test.host")
+          request.env["HTTP_REFERER"] = spree.dash_url(host: "http://test.host")
         end
 
         it "redirects back" do
           put :close_adjustments, params: {id: order.number}
-          expect(response).to redirect_to(spree.admin_url(host: "http://test.host"))
+          expect(response).to redirect_to(spree.dash_url(host: "http://test.host"))
         end
       end
 
@@ -250,13 +250,13 @@ describe Spree::Admin::OrdersController, type: :controller do
 
         it "refirects to fallback location" do
           put :close_adjustments, params: {id: order.number}
-          expect(response).to redirect_to(admin_order_adjustments_url(order))
+          expect(response).to redirect_to(dash_order_adjustments_url(order))
         end
       end
     end
   end
 
-  describe "#authorize_admin" do
+  describe "#authorize_dash" do
     let(:user) { create(:user) }
     let(:order) { create(:completed_order_with_totals, number: "R987654321") }
 
@@ -272,8 +272,8 @@ describe Spree::Admin::OrdersController, type: :controller do
       allow(controller).to receive_messages spree_current_user: user
     end
 
-    it "grants access to users with an admin role" do
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+    it "grants access to users with an dash role" do
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
       post :index
       expect(response).to render_template :index
     end
@@ -294,14 +294,14 @@ describe Spree::Admin::OrdersController, type: :controller do
         user.spree_roles.clear
         user.spree_roles << Spree::Role.find_or_create_by(name: "bar")
         put :update, params: {id: order.number}
-        expect(response).to redirect_to(spree.admin_forbidden_path)
+        expect(response).to redirect_to(spree.dash_forbidden_path)
       end
     end
 
-    it "denies access to users without an admin role" do
+    it "denies access to users without an dash role" do
       allow(user).to receive_messages has_spree_role?: false
       post :index
-      expect(response).to redirect_to(spree.admin_forbidden_path)
+      expect(response).to redirect_to(spree.dash_forbidden_path)
     end
 
     it "denies access to not signed in users" do
@@ -333,7 +333,7 @@ describe Spree::Admin::OrdersController, type: :controller do
     it "redirects to orders list" do
       get :edit, params: {id: 99_999_999}
 
-      expect(response).to redirect_to(spree.admin_orders_path)
+      expect(response).to redirect_to(spree.dash_orders_path)
     end
   end
 
@@ -345,7 +345,7 @@ describe Spree::Admin::OrdersController, type: :controller do
     it "redirects to orders list" do
       get :edit, params: {id: order.number}
 
-      expect(response).to redirect_to(spree.admin_orders_path)
+      expect(response).to redirect_to(spree.dash_orders_path)
     end
   end
 end

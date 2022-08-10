@@ -1,0 +1,4 @@
+<ul id="sidebar-stock" class="collapse nav nav-pills nav-stacked" data-hook="dash_stock_sub_tabs">
+  <%= tab(:stock_transfers, spree.dash_stock_transfers_path) if can? :manage, Spree::StockTransfer %>
+  <%= tab(:stock_locations, spree.dash_stock_locations_path) if can? :manage, Spree::StockLocation %>
+</ul>

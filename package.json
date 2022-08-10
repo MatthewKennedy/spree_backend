@@ -12,10 +12,10 @@
   "homepage": "https://spreecommerce.org/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spree/spree_backend.git"
+    "url": "git+https://github.com/spree/spree_dash.git"
   },
   "bugs": {
-    "url": "https://github.com/spree/spree_backend/issues"
+    "url": "https://github.com/spree/spree_dash/issues"
   },
   "author": "Spark Solutions <hi@sparksolutions.co>",
   "dependencies": {

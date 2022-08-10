@@ -1,0 +1,15 @@
+<%= render partial: 'spree/dash/shared/error_messages', locals: { target: @property } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:properties), dash_properties_url %> /
+  <%= Spree.t(:new_property) %>
+<% end %>
+
+<%= form_with model: [:dash, @property] do |f| %>
+  <fieldset data-hook="new_property">
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="form-actions">
+      <%= render partial: 'spree/dash/shared/new_resource_links' %>
+    </div>
+  </fieldset>
+<% end %>

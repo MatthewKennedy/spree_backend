@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:stock_locations), spree.dash_stock_locations_url %> /
+  <%= Spree.t(:new_stock_location) %>
+<% end %>
+
+<%= render partial: 'spree/dash/shared/error_messages', locals: { target: @stock_location } %>
+
+<%= form_with model: [:dash, @stock_location] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/dash/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

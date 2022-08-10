@@ -10,7 +10,7 @@ describe "Shipping Methods", type: :feature do
     allow_any_instance_of(Spree::Order).to receive_messages(require_email: false)
     create(:check_payment_method)
 
-    visit spree.admin_shipping_methods_path
+    visit spree.dash_shipping_methods_path
   end
 
   context "show" do
@@ -38,7 +38,7 @@ describe "Shipping Methods", type: :feature do
       end
 
       click_on "Create"
-      expect(page).to have_current_path(spree.edit_admin_shipping_method_path(Spree::ShippingMethod.last))
+      expect(page).to have_current_path(spree.edit_dash_shipping_method_path(Spree::ShippingMethod.last))
     end
   end
 

@@ -13,7 +13,7 @@ const terserOptions = {
 
 export default [
   {
-    input: 'app/javascript/spree/dashboard/index.js',
+    input: 'app/javascript/spree/dash/index.js',
     output: {
       file: 'app/assets/javascripts/spree_dash.js',
       format: 'umd',
@@ -25,7 +25,7 @@ export default [
   },
 
   {
-    input: 'app/javascript/spree/dashboard/index.js',
+    input: 'app/javascript/spree/dash/index.js',
     output: {
       file: 'app/assets/javascripts/spree_dash.esm.js',
       format: 'es',

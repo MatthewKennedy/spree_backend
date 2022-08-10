@@ -15,7 +15,7 @@ describe "Hero Image section", type: :feature do
   let(:file_path) { Rails.root + "../../spec/support/ror_ringer.jpeg" }
 
   before do
-    visit spree.edit_admin_cms_page_cms_section_path(feature_page, section)
+    visit spree.edit_dash_cms_page_cms_section_path(feature_page, section)
   end
 
   context "editing new page", js: true do
@@ -33,16 +33,16 @@ describe "Hero Image section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(taxon.permalink)
-      assert_admin_flash_alert_success('Section "Test Hero Image" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Hero Image" has been successfully updated!')
     end
 
-    it "admin should be able to add image" do
+    it "dash should be able to add image" do
       attach_file("cms_section_image_one", file_path)
 
       click_button "Update"
 
       expect(page).to have_content("successfully updated!")
-      expect(page).to have_css(".admin-img-holder img")
+      expect(page).to have_css(".dash-img-holder img")
     end
 
     it "saves product path and loads it back into the view" do
@@ -55,7 +55,7 @@ describe "Hero Image section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(product.slug)
-      assert_admin_flash_alert_success('Section "Test Hero Image" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Hero Image" has been successfully updated!')
     end
 
     it "saves page path and loads it back into the view" do
@@ -68,7 +68,7 @@ describe "Hero Image section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(cms_standard_page.slug)
-      assert_admin_flash_alert_success('Section "Test Hero Image" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Hero Image" has been successfully updated!')
     end
 
     it "does not display homepages in Link To Page results" do
@@ -84,7 +84,7 @@ describe "Hero Image section", type: :feature do
       end
     end
 
-    it "allows admin to enter and save details" do
+    it "allows dash to enter and save details" do
       fill_in "Title", with: "Trendy Styles"
       fill_in "Button Text", with: "Learn More"
       select2("Gutters", from: "Gutters", exact_text: true)

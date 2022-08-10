@@ -6,16 +6,16 @@ describe "Stock Transfers", type: :feature, js: true do
   let!(:oauth_application) { create(:oauth_application, name: "Test app") }
 
   it "renders a list of applications" do
-    visit "/admin/oauth_applications"
+    visit "/dash/oauth_applications"
 
     expect(page).to have_content("Test app")
   end
 
   it "can create a new app" do
-    visit "/admin/oauth_applications/new"
+    visit "/dash/oauth_applications/new"
 
     fill_in "Name", with: "My app"
-    fill_in "Scope", with: "admin"
+    fill_in "Scope", with: "dash"
     click_button "Create"
 
     expect(page).to have_content("Client ID")
@@ -24,7 +24,7 @@ describe "Stock Transfers", type: :feature, js: true do
   end
 
   it "can modify existing app" do
-    visit "/admin/oauth_applications/#{oauth_application.id}/edit"
+    visit "/dash/oauth_applications/#{oauth_application.id}/edit"
 
     fill_in "Name", with: "New name"
     click_button "Update"

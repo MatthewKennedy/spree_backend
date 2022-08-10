@@ -12,13 +12,13 @@ describe "Delete Digital Asset", type: :feature, js: true do
       end
 
       digital = create(:digital, variant: product.master)
-      visit spree.admin_product_digitals_path(product)
+      visit spree.dash_product_digitals_path(product)
 
       expect(page).to have_content(digital.attachment.filename)
       click_link(class: "delete-digital-asset")
       page.driver.browser.switch_to.alert.accept
 
-      assert_admin_flash_alert_success("Digital has been successfully removed!")
+      assert_dash_flash_alert_success("Digital has been successfully removed!")
     end
   end
 
@@ -30,13 +30,13 @@ describe "Delete Digital Asset", type: :feature, js: true do
       end
 
       digital = create(:digital, variant: variant)
-      visit spree.admin_product_digitals_path(product)
+      visit spree.dash_product_digitals_path(product)
 
       expect(page).to have_content(digital.attachment.filename)
       click_link(class: "delete-digital-asset")
       page.driver.browser.switch_to.alert.accept
 
-      assert_admin_flash_alert_success("Digital has been successfully removed!")
+      assert_dash_flash_alert_success("Digital has been successfully removed!")
     end
   end
 end

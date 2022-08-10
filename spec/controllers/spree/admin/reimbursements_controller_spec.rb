@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::ReimbursementsController, type: :controller do
+describe Spree::Dash::ReimbursementsController, type: :controller do
   stub_authorization!
 
   before do
@@ -24,7 +24,7 @@ describe Spree::Admin::ReimbursementsController, type: :controller do
 
     it "redirects to the edit page" do
       subject
-      expect(response).to redirect_to(spree.edit_admin_order_reimbursement_path(order, assigns(:reimbursement)))
+      expect(response).to redirect_to(spree.edit_dash_order_reimbursement_path(order, assigns(:reimbursement)))
     end
   end
 
@@ -41,7 +41,7 @@ describe Spree::Admin::ReimbursementsController, type: :controller do
 
     it "redirects to customer return page" do
       subject
-      expect(response).to redirect_to spree.admin_order_reimbursement_path(order, reimbursement)
+      expect(response).to redirect_to spree.dash_order_reimbursement_path(order, reimbursement)
     end
 
     it "performs the reimbursement" do
@@ -66,7 +66,7 @@ describe Spree::Admin::ReimbursementsController, type: :controller do
 
       it "redirects to the edit page" do
         subject
-        redirect_path = spree.edit_admin_order_reimbursement_path(order, assigns(:reimbursement))
+        redirect_path = spree.edit_dash_order_reimbursement_path(order, assigns(:reimbursement))
         expect(response).to redirect_to(redirect_path)
       end
     end

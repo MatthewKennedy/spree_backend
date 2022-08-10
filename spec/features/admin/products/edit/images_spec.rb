@@ -17,9 +17,9 @@ describe "Product Images", type: :feature, js: true do
   end
 
   context "uploading, editing, and deleting an image" do
-    it "allows an admin to upload and edit an image for a product" do
+    it "allows an dash to upload and edit an image for a product" do
       product
-      visit spree.admin_products_path
+      visit spree.dash_products_path
       click_icon(:edit)
       click_link "Images"
       click_link "new_image_link"
@@ -48,7 +48,7 @@ describe "Product Images", type: :feature, js: true do
   it "sees variant images", js: false do
     variant = create(:variant, product: product)
     create_image(variant, File.open(file_path))
-    visit spree.admin_product_images_path(product)
+    visit spree.dash_product_images_path(product)
 
     expect(page).not_to have_content("No Images Found.")
     within("table.table") do
@@ -71,7 +71,7 @@ describe "Product Images", type: :feature, js: true do
 
   it "does not see variant column when product has no variants", js: false do
     create_image(product, File.open(file_path))
-    visit spree.admin_product_images_path(product)
+    visit spree.dash_product_images_path(product)
 
     expect(page).not_to have_content("No Images Found.")
     within("table.table") do

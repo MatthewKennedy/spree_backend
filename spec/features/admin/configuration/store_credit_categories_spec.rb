@@ -4,11 +4,11 @@ describe "Store Credit Categories", type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Settings"
   end
 
-  context "admin visiting store credit categories list" do
+  context "dash visiting store credit categories list" do
     it "displays existing store credit categories" do
       create(:store_credit_category)
       click_link "Store Credit Categories"
@@ -17,10 +17,10 @@ describe "Store Credit Categories", type: :feature, js: true do
     end
   end
 
-  context "admin creating a new store credit category" do
+  context "dash creating a new store credit category" do
     before do
       click_link "Store Credit Categories"
-      click_link "admin_new_store_credit_category_link"
+      click_link "dash_new_store_credit_category_link"
     end
 
     it "is able to create a new store credit category" do
@@ -36,7 +36,7 @@ describe "Store Credit Categories", type: :feature, js: true do
     end
   end
 
-  context "admin editing a store credit category" do
+  context "dash editing a store credit category" do
     it "is able to update an existing store credit category" do
       create(:store_credit_category)
       click_link "Store Credit Categories"

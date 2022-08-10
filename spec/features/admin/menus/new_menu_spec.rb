@@ -5,7 +5,7 @@ describe "New Menu", type: :feature do
 
   context "when a user tries to create a menu with no name" do
     before do
-      visit spree.new_admin_menu_path
+      visit spree.new_dash_menu_path
     end
 
     it "warns that the Name can't be blank" do
@@ -18,7 +18,7 @@ describe "New Menu", type: :feature do
     let!(:main_menu) { create(:menu, name: "Main Menu") }
 
     before do
-      visit spree.new_admin_menu_path
+      visit spree.new_dash_menu_path
     end
 
     it "warns the user that the location has already been taken" do
@@ -32,7 +32,7 @@ describe "New Menu", type: :feature do
 
   context "user can create a new menu", js: true do
     before do
-      visit spree.new_admin_menu_path
+      visit spree.new_dash_menu_path
     end
 
     it "with stores" do
@@ -41,7 +41,7 @@ describe "New Menu", type: :feature do
       select2 "Footer", from: "Location"
       click_on "Create"
 
-      assert_admin_flash_alert_success('Menu "Main Menu" has been successfully created!')
+      assert_dash_flash_alert_success('Menu "Main Menu" has been successfully created!')
       expect(page).to have_text "Main Menu has no items. Click the Add New Item button to begin adding links to this menu."
       expect(page).to have_selector("a", text: I18n.t("spree.dash.navigation.add_new_item"))
 

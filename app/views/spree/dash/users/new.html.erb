@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+  <%= page_header_back_button spree.dash_users_path %>
+  <%= Spree.t(:new_user) %>
+<% end %>
+
+<div data-hook="dash_user_new_form_header">
+  <%= render partial: 'spree/dash/shared/error_messages', locals: { target: @user } %>
+</div>
+
+<div data-hook="dash_user_new_form">
+  <%= form_with model: [:dash, @user], url: spree.dash_users_url, method: :post do |f| %>
+    <%= render partial: 'form', locals: { f: f } %>
+
+    <div data-hook="dash_user_new_form_buttons">
+      <%= render partial: 'spree/dash/shared/new_resource_links' %>
+    </div>
+  <% end %>
+</div>

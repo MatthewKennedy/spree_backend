@@ -10,7 +10,7 @@ if ENV["COVERAGE"]
     add_filter "/spec/"
     add_filter "/lib/generators/"
 
-    coverage_dir "#{ENV["COVERAGE_DIR"]}/backend" if ENV["COVERAGE_DIR"]
+    coverage_dir "#{ENV["COVERAGE_DIR"]}/dash" if ENV["COVERAGE_DIR"]
   end
 end
 
@@ -39,14 +39,14 @@ require "spree/testing_support/authorization_helpers"
 require "spree/testing_support/factories"
 require "spree/testing_support/preferences"
 require "spree/testing_support/controller_requests"
-require "spree/backend/testing_support/flash"
+require "spree/dash/testing_support/flash"
 require "spree/testing_support/url_helpers"
 require "spree/testing_support/order_walkthrough"
-require "spree/backend/testing_support/capybara_utils"
+require "spree/dash/testing_support/capybara_utils"
 require "spree/testing_support/capybara_config"
 require "spree/testing_support/rspec_retry_config"
 require "spree/testing_support/image_helpers"
-require "spree/backend/testing_support/flatpickr_capybara"
+require "spree/dash/testing_support/flatpickr_capybara"
 
 require "spree/api/testing_support/factories"
 
@@ -112,13 +112,13 @@ RSpec.configure do |config|
   config.include CapybaraSelect2::Helpers
   config.include FactoryBot::Syntax::Methods
 
-  config.include Spree::Backend::TestingSupport::CapybaraUtils
+  config.include Spree::Dash::TestingSupport::CapybaraUtils
   config.include Spree::TestingSupport::Preferences
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::ControllerRequests, type: :controller
-  config.include Spree::Backend::TestingSupport::Flash
+  config.include Spree::Dash::TestingSupport::Flash
   config.include Spree::TestingSupport::ImageHelpers
-  config.include Spree::Backend::TestingSupport::FlatpickrCapybara
+  config.include Spree::Dash::TestingSupport::FlatpickrCapybara
 
   config.include Spree::Core::ControllerHelpers::StrongParameters, type: :controller
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::ReturnAuthorizationsController, type: :controller do
+describe Spree::Dash::ReturnAuthorizationsController, type: :controller do
   stub_authorization!
 
   # Regression test for #1370 #3
@@ -154,7 +154,7 @@ describe Spree::Admin::ReturnAuthorizationsController, type: :controller do
 
     it "can create a return authorization" do
       subject
-      expect(response).to redirect_to spree.admin_order_return_authorizations_path(order)
+      expect(response).to redirect_to spree.dash_order_return_authorizations_path(order)
     end
   end
 

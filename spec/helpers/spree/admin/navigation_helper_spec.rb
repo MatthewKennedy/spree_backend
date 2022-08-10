@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::NavigationHelper, type: :helper do
+describe Spree::Dash::NavigationHelper, type: :helper do
   before do
     # `spree` route helper is not accessible in `type: :helper` hence extending it explicitly
     # https://github.com/rspec/rspec-rails/issues/1626
@@ -14,22 +14,22 @@ describe Spree::Admin::NavigationHelper, type: :helper do
       allow(helper).to receive(:cannot?).and_return false
     end
 
-    context "creating an admin tab" do
+    context "creating an dash tab" do
       it "capitalizes the first letter of each word in the tab's label" do
-        admin_tab = helper.tab(:orders)
-        expect(admin_tab).to include("Orders")
+        dash_tab = helper.tab(:orders)
+        expect(dash_tab).to include("Orders")
       end
     end
 
     it "accepts options with label and capitalize each word of it" do
-      admin_tab = helper.tab(:orders, label: "delivered orders")
-      expect(admin_tab).to include("Delivered Orders")
+      dash_tab = helper.tab(:orders, label: "delivered orders")
+      expect(dash_tab).to include("Delivered Orders")
     end
 
     it "capitalizes words with unicode characters" do
       # overview
-      admin_tab = helper.tab(:orders, label: "přehled")
-      expect(admin_tab).to include("Přehled")
+      dash_tab = helper.tab(:orders, label: "přehled")
+      expect(dash_tab).to include("Přehled")
     end
 
     describe "selection" do
@@ -58,7 +58,7 @@ describe Spree::Admin::NavigationHelper, type: :helper do
 
         context "when match_path option is supplied" do
           before do
-            allow(helper).to receive(:request).and_return(double(ActionDispatch::Request, fullpath: "/admin/orders/edit/1"))
+            allow(helper).to receive(:request).and_return(double(ActionDispatch::Request, fullpath: "/dash/orders/edit/1"))
           end
 
           it "is selected if the fullpath matches" do

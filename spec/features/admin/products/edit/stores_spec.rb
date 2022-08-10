@@ -9,7 +9,7 @@ describe "Edit Product Stores", type: :feature, js: true do
   let!(:store_3) { create(:store) }
 
   before do
-    visit spree.edit_admin_product_path(product)
+    visit spree.edit_dash_product_path(product)
   end
 
   it "allows assigning multiple stores" do

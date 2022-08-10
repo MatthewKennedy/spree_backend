@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Admin
+  module Dash
     describe TaxCategoriesController, type: :controller do
       stub_authorization!
 

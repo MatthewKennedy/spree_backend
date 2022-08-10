@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::TaxonomiesController, type: :controller do
+describe Spree::Dash::TaxonomiesController, type: :controller do
   stub_authorization!
 
   let(:store) { create(:store) }

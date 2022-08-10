@@ -20,7 +20,7 @@ describe "Order Details", type: :feature, js: true do
     context "cart edit page" do
       before do
         stock_location.stock_item(product.master).update_column(:count_on_hand, 100)
-        visit spree.cart_admin_order_path(order)
+        visit spree.cart_dash_order_path(order)
       end
 
       it "allows me to edit order details" do
@@ -81,7 +81,7 @@ describe "Order Details", type: :feature, js: true do
       end
 
       it "can add tracking information" do
-        visit spree.edit_admin_order_path(order)
+        visit spree.edit_dash_order_path(order)
 
         within(".show-tracking") do
           click_icon :edit
@@ -97,7 +97,7 @@ describe "Order Details", type: :feature, js: true do
 
       it "can change the shipping method" do
         order = create(:completed_order_with_totals)
-        visit spree.edit_admin_order_path(order)
+        visit spree.edit_dash_order_path(order)
         within("table.table tr.show-method") do
           click_icon :edit
         end
@@ -116,7 +116,7 @@ describe "Order Details", type: :feature, js: true do
           :completed_order_with_totals,
           shipping_method_filter: Spree::ShippingMethod::DISPLAY_ON_BACK_END
         )
-        visit spree.edit_admin_order_path(order)
+        visit spree.edit_dash_order_path(order)
         within("table tr.show-method") do
           click_icon :edit
         end
@@ -131,7 +131,7 @@ describe "Order Details", type: :feature, js: true do
 
       it "will show the variant sku", js: false do
         order = create(:completed_order_with_totals)
-        visit spree.edit_admin_order_path(order)
+        visit spree.edit_dash_order_path(order)
         sku = order.line_items.first.variant.sku
         expect(page).to have_content("SKU: #{sku}")
       end
@@ -142,7 +142,7 @@ describe "Order Details", type: :feature, js: true do
         end
 
         it "will show the special_instructions", js: false do
-          visit spree.edit_admin_order_path(order)
+          visit spree.edit_dash_order_path(order)
           expect(page).to have_content("Very special instructions here")
         end
       end
@@ -226,7 +226,7 @@ describe "Order Details", type: :feature, js: true do
       end
 
       context "splitting to location" do
-        before { visit spree.edit_admin_order_path(order) }
+        before { visit spree.edit_dash_order_path(order) }
 
         it "should warn you if you have not selected a location or shipment" do
           within_row(1) { click_icon :split }
@@ -349,9 +349,9 @@ describe "Order Details", type: :feature, js: true do
               order = create(:order, state: "payment", store: store)
               order.shipments.create!(stock_location_id: stock_location.id, state: "shipped")
 
-              visit spree.cart_admin_order_path(order)
+              visit spree.cart_dash_order_path(order)
 
-              expect(page).to have_current_path(spree.edit_admin_order_path(order))
+              expect(page).to have_current_path(spree.edit_dash_order_path(order))
               expect(page).not_to have_text "Cart"
             end
           end
@@ -454,7 +454,7 @@ describe "Order Details", type: :feature, js: true do
               expect(page).to have_content(order.number)
               expect(page).to have_css('[data-hook="add_product_name"]', text: "Name or SKU (enter at least first 3 characters of product name)")
 
-              within("[data-hook=admin_order_form_fields]") do
+              within("[data-hook=dash_order_form_fields]") do
                 expect(page).to have_content(tote.name)
               end
             end
@@ -477,7 +477,7 @@ describe "Order Details", type: :feature, js: true do
                 click_icon :add
               end
 
-              within("[data-hook=admin_order_form_fields]") do
+              within("[data-hook=dash_order_form_fields]") do
                 expect(page).to have_content(tote.name)
               end
             end
@@ -503,7 +503,7 @@ describe "Order Details", type: :feature, js: true do
       context "splitting to shipment" do
         before do
           @shipment2 = order.shipments.create(stock_location_id: stock_location2.id)
-          visit spree.edit_admin_order_path(order)
+          visit spree.edit_dash_order_path(order)
         end
 
         it "deletes the old shipment if enough are split off" do
@@ -611,7 +611,7 @@ describe "Order Details", type: :feature, js: true do
 
       context "display order summary", js: false do
         before do
-          visit spree.cart_admin_order_path(order)
+          visit spree.cart_dash_order_path(order)
         end
 
         it "contains elements" do
@@ -628,15 +628,15 @@ describe "Order Details", type: :feature, js: true do
 
   context "with only read permissions" do
     before do
-      allow_any_instance_of(Spree::Admin::BaseController).to receive(:spree_current_user).and_return(nil)
+      allow_any_instance_of(Spree::Dash::BaseController).to receive(:spree_current_user).and_return(nil)
     end
 
     custom_authorization! do |_user|
-      can [:admin, :index, :read, :edit], Spree::Order
+      can [:dash, :index, :read, :edit], Spree::Order
     end
 
     it "does not display forbidden links" do
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
 
       expect(page).not_to have_button("cancel")
       expect(page).not_to have_button("Resend")
@@ -660,23 +660,23 @@ describe "Order Details", type: :feature, js: true do
 
   context "as Fakedispatch", js: true do
     custom_authorization! do |_user|
-      # allow dispatch to :admin, :index, and :edit on Spree::Order
-      can [:admin, :edit, :index, :read], Spree::Order
-      # allow dispatch to :index, :show, :create and :update shipments on the admin
-      can [:admin, :manage, :read, :ship], Spree::Shipment
+      # allow dispatch to :dash, :index, and :edit on Spree::Order
+      can [:dash, :edit, :index, :read], Spree::Order
+      # allow dispatch to :index, :show, :create and :update shipments on the dash
+      can [:dash, :manage, :read, :ship], Spree::Shipment
     end
 
-    let(:admin_app) { Spree::OauthApplication.create(name: "Admin Panel", scopes: "admin", redirect_uri: "") }
-    let(:admin_token) { Spree::OauthAccessToken.create!(application: admin_app, scopes: "admin").token }
+    let(:dash_app) { Spree::OauthApplication.create(name: "Admin Panel", scopes: "dash", redirect_uri: "") }
+    let(:dash_token) { Spree::OauthAccessToken.create!(application: dash_app, scopes: "dash").token }
 
     before do
       allow(Spree.user_class).to receive(:find_by).and_return(Spree.user_class.new)
-      allow_any_instance_of(Spree::Admin::BaseController).to receive(:admin_oauth_application).and_return(admin_app)
-      allow_any_instance_of(Spree::Admin::BaseController).to receive(:admin_oauth_token).and_return(admin_token)
+      allow_any_instance_of(Spree::Dash::BaseController).to receive(:dash_oauth_application).and_return(dash_app)
+      allow_any_instance_of(Spree::Dash::BaseController).to receive(:dash_oauth_token).and_return(dash_token)
     end
 
     it "does not display order tabs or edit buttons without ability", js: false do
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
 
       # Order Form
       expect(page).not_to have_css(".edit-item")
@@ -689,7 +689,7 @@ describe "Order Details", type: :feature, js: true do
     end
 
     it "can add tracking information" do
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
       within("table.stock-contents tr:nth-child(5)", match: :first) do
         click_icon :edit
       end
@@ -704,7 +704,7 @@ describe "Order Details", type: :feature, js: true do
 
     it "can change the shipping method" do
       order = create(:completed_order_with_totals, store: store)
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
       within("table.table tr.show-method") do
         click_icon :edit
       end
@@ -720,7 +720,7 @@ describe "Order Details", type: :feature, js: true do
     it "can ship" do
       order = create(:order_ready_to_ship, store: store)
       order.refresh_shipment_rates
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
       click_on "Ship"
       expect(page).to have_css(".shipment-state", text: "shipped")
     end

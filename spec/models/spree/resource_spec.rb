@@ -11,11 +11,11 @@ module Spree
 end
 
 module Spree
-  module Admin
+  module Dash
     describe Resource, type: :model do
-      let(:resource_base) { Resource.new("spree/admin/test", "test", "widget") }
-      let(:resource_submodule) { Resource.new("spree/admin/submodule/test", "test", "widget") }
-      let(:resource_object_name) { Resource.new("spree/admin/test", "test", "gadget", "widget") }
+      let(:resource_base) { Resource.new("spree/dash/test", "test", "widget") }
+      let(:resource_submodule) { Resource.new("spree/dash/submodule/test", "test", "widget") }
+      let(:resource_object_name) { Resource.new("spree/dash/test", "test", "gadget", "widget") }
 
       it "can get base model class" do
         expect(resource_base.model_class).to eq(Spree::Test)

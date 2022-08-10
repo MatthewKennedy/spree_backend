@@ -7,8 +7,8 @@ describe "Edit Standard Page", type: :feature do
     let!(:store_sp) { create(:store, default: true, name: "Super Store", supported_locales: "en,fr") }
 
     before do
-      visit spree.new_admin_cms_page_path
-      I18n.backend.store_translations(:fr,
+      visit spree.new_dash_cms_page_path
+      I18n.dash.store_translations(:fr,
         spree: {
           i18n: {
             this_file_language: "Français (FR)"

@@ -9,7 +9,7 @@ describe "Stock Movements", type: :feature do
 
   describe "listing" do
     before do
-      visit spree.admin_stock_locations_path
+      visit spree.dash_stock_locations_path
       within "#spree_stock_location_#{stock_location.id}" do
         click_on "Stock Movements"
       end
@@ -26,7 +26,7 @@ describe "Stock Movements", type: :feature do
     let!(:product) { create(:product_in_stock, stores: [store]) }
 
     before do
-      visit spree.admin_stock_location_stock_movements_path(stock_location.id)
+      visit spree.dash_stock_location_stock_movements_path(stock_location.id)
       click_on "New Stock Movement", match: :first
     end
 

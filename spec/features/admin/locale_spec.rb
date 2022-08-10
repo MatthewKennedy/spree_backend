@@ -5,25 +5,25 @@ describe "setting locale", type: :feature do
 
   before do
     I18n.locale = I18n.default_locale
-    I18n.backend.store_translations(:fr,
+    I18n.dash.store_translations(:fr,
       date: {
         month_names: []
       },
       spree: {
-        admin: {
+        dash: {
           orders: {all_orders: "Tous Les Ordres"}
         }
       })
-    Spree::Backend::Config[:locale] = "fr"
+    Spree::Dash::Config[:locale] = "fr"
   end
 
   after do
     I18n.locale = I18n.default_locale
-    Spree::Backend::Config[:locale] = "en"
+    Spree::Dash::Config[:locale] = "en"
   end
 
   it "is in french" do
-    visit spree.admin_path
+    visit spree.dash_path
     expect(page.body).to have_content("Tous Les Ordres")
   end
 end

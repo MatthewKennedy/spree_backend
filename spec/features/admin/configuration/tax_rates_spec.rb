@@ -7,7 +7,7 @@ describe "Tax Rates", type: :feature do
 
   # Regression test for #1422
   it "can create a new tax rate" do
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Settings"
     click_link "Tax Rates"
     within find("#contentHeader") do

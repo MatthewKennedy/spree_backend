@@ -17,10 +17,10 @@ describe "Adjustments Promotions", type: :feature do
     # so we can be sure of a determinate price in our assertions
     line_item.update_column(:price, 10)
 
-    visit spree.admin_order_adjustments_path(order)
+    visit spree.dash_order_adjustments_path(order)
   end
 
-  context "admin adding a promotion" do
+  context "dash adding a promotion" do
     context "successfully" do
       it "creates a new adjustment", js: true do
         fill_in "coupon_code", with: "10_off"
@@ -51,7 +51,7 @@ describe "Adjustments Promotions", type: :feature do
     end
   end
 
-  context "admin is able to add promotion code after removing one before" do
+  context "dash is able to add promotion code after removing one before" do
     it "allows to add previously deleted promotion", js: true do
       fill_in "coupon_code", with: "10_off"
       click_button "Add Coupon Code"

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::StoresHelper, type: :helper do
+describe Spree::Dash::StoresHelper, type: :helper do
   describe "#selected_checkout_zone" do
     let!(:store) { Spree::Store.default }
     let!(:country) { store.default_country }

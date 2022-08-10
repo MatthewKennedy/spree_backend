@@ -10,7 +10,7 @@ describe "Promotion with user rule", type: :feature, js: true do
   let!(:fifth_user) { create(:user, email: "fifth@testing.com") }
 
   before do
-    visit spree.new_admin_promotion_path
+    visit spree.new_dash_promotion_path
   end
 
   it "creates new promotion with user rule" do

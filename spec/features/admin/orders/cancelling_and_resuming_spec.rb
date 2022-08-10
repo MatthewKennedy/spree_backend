@@ -11,11 +11,11 @@ describe "Cancelling + Resuming", type: :feature do
   end
 
   before do
-    allow_any_instance_of(Spree::Admin::BaseController).to receive(:try_spree_current_user).and_return(user)
+    allow_any_instance_of(Spree::Dash::BaseController).to receive(:try_spree_current_user).and_return(user)
   end
 
   it "can cancel an order" do
-    visit spree.edit_admin_order_path(order.number)
+    visit spree.edit_dash_order_path(order.number)
     within find("#contentHeader") do
       click_button "Cancel"
     end
@@ -29,7 +29,7 @@ describe "Cancelling + Resuming", type: :feature do
     end
 
     it "can resume an order" do
-      visit spree.edit_admin_order_path(order.number)
+      visit spree.edit_dash_order_path(order.number)
       within find("#contentHeader") do
         click_button "Resume"
       end

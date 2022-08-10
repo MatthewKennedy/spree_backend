@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Admin
+  module Dash
     describe ImagesController, type: :controller do
       stub_authorization!
 
@@ -85,7 +85,7 @@ module Spree
             before { send_request }
 
             it do
-              expect(send_request).to redirect_to(spree.admin_product_images_path(product))
+              expect(send_request).to redirect_to(spree.dash_product_images_path(product))
               expect(flash[:error]).to eq("Image is not found")
             end
           end
@@ -107,7 +107,7 @@ module Spree
             describe "returns response" do
               before { send_request }
 
-              it { expect(send_request).to redirect_to(spree.admin_product_images_path(product)) }
+              it { expect(send_request).to redirect_to(spree.dash_product_images_path(product)) }
             end
           end
 
@@ -126,7 +126,7 @@ module Spree
               send_request
               expect(flash[:error]).not_to eq("Image is not found")
               expect(flash[:success]).to eq("Image has been successfully removed!")
-              expect(send_request).to redirect_to(spree.admin_product_images_path(product))
+              expect(send_request).to redirect_to(spree.dash_product_images_path(product))
             end
           end
 
@@ -153,7 +153,7 @@ module Spree
             before { send_request }
 
             it do
-              expect(send_request).to redirect_to(spree.admin_product_images_path(product))
+              expect(send_request).to redirect_to(spree.dash_product_images_path(product))
               expect(flash[:error]).to eq("Image is not found")
             end
           end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::DashboardController do
+describe Spree::Dash::DashboardController do
   render_views
 
   stub_authorization!

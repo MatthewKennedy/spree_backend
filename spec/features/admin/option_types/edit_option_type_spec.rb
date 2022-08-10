@@ -8,7 +8,7 @@ describe "Option Type edit spec", type: :feature, js: true do
 
   context "editing option type" do
     before do
-      visit spree.edit_admin_option_type_path(option_type)
+      visit spree.edit_dash_option_type_path(option_type)
     end
 
     it "allows to update filtering attribute of option type" do
@@ -19,7 +19,7 @@ describe "Option Type edit spec", type: :feature, js: true do
 
       expect(page).to have_content "successfully updated!"
 
-      visit spree.admin_option_types_path
+      visit spree.dash_option_types_path
 
       within("#spree_option_type_#{option_type.id}") { click_icon(:edit) }
       expect(page).to have_checked_field("option_type_filterable")

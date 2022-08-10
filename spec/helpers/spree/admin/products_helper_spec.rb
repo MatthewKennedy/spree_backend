@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::ProductsHelper, type: :helper do
+describe Spree::Dash::ProductsHelper, type: :helper do
   context "#available_status" do
     subject(:status) { helper.available_status(product) }
 

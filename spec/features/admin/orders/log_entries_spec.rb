@@ -22,7 +22,7 @@ describe "Log entries", type: :feature do
     end
 
     it "shows a successful attempt" do
-      visit spree.admin_order_payments_path(order)
+      visit spree.dash_order_payments_path(order)
       find("#payment_#{payment.id} a", text: payment.number).click
       within find("#contentHeader") do
         click_link "Logs"
@@ -49,7 +49,7 @@ describe "Log entries", type: :feature do
     end
 
     it "shows a failed attempt" do
-      visit spree.admin_order_payments_path(order)
+      visit spree.dash_order_payments_path(order)
       find("#payment_#{payment.id} a", text: payment.number).click
       within find("#contentHeader") do
         click_link "Logs"

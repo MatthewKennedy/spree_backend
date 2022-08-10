@@ -6,7 +6,7 @@ describe "Tiered Calculator Promotions" do
   let(:promotion) { create :promotion }
 
   before do
-    visit spree.edit_admin_promotion_path(promotion)
+    visit spree.edit_dash_promotion_path(promotion)
   end
 
   it "adding a tiered percent calculator", js: true do
@@ -55,7 +55,7 @@ describe "Tiered Calculator Promotions" do
       action.calculator.preferred_tiers = ({100 => 10, 200 => 15, 300 => 20})
       action.calculator.save!
 
-      visit spree.edit_admin_promotion_path(promotion)
+      visit spree.edit_dash_promotion_path(promotion)
     end
 
     it "deleting a tier", js: true do

@@ -8,7 +8,7 @@ describe "Customer Returns", type: :feature do
     let!(:customer_return_2) { create(:customer_return, created_at: Time.current - 1.day) }
 
     before do
-      visit spree.admin_customer_returns_path
+      visit spree.dash_customer_returns_path
     end
 
     it "lists sorted by created_at" do
@@ -41,7 +41,7 @@ describe "Customer Returns", type: :feature do
     let!(:customer_return_2) { create(:customer_return) }
 
     before do
-      visit spree.admin_customer_returns_path
+      visit spree.dash_customer_returns_path
     end
 
     it "searches on number" do

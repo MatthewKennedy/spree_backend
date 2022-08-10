@@ -13,7 +13,7 @@ describe "Image Side By Side Images section", type: :feature do
   let(:file_path) { Rails.root + "../../spec/support/ror_ringer.jpeg" }
 
   before do
-    visit spree.edit_admin_cms_page_cms_section_path(feature_page, section)
+    visit spree.edit_dash_cms_page_cms_section_path(feature_page, section)
   end
 
   context "editing new page", js: true do
@@ -65,7 +65,7 @@ describe "Image Side By Side Images section", type: :feature do
     end
 
     context "Editing Left Image" do
-      it "allows admin to enter and save details" do
+      it "allows dash to enter and save details" do
         within "div#left_image_details" do
           fill_in "Title", with: "Trendy Styles"
           fill_in "Subtitle", with: "Shop Today"
@@ -86,7 +86,7 @@ describe "Image Side By Side Images section", type: :feature do
       end
 
       if Rails::VERSION::STRING >= "6.0"
-        it "allows admin to change the link type and save a product" do
+        it "allows dash to change the link type and save a product" do
           select2("Product", css: "#cms_section_link_type_one_field")
 
           click_on "Update"
@@ -103,18 +103,18 @@ describe "Image Side By Side Images section", type: :feature do
         end
       end
 
-      it "admin should be able to add image" do
+      it "dash should be able to add image" do
         attach_file("cms_section_image_one", file_path)
 
         click_button "Update"
 
         expect(page).to have_content("successfully updated!")
-        expect(page).to have_css(".admin-img-holder img")
+        expect(page).to have_css(".dash-img-holder img")
       end
     end
 
     context "Editing Right Image" do
-      it "allows admin to enter and save details" do
+      it "allows dash to enter and save details" do
         within "div#right_image_details" do
           fill_in "Title", with: "Trendy Styles"
           fill_in "Subtitle", with: "Shop Today"
@@ -135,7 +135,7 @@ describe "Image Side By Side Images section", type: :feature do
       end
 
       if Rails::VERSION::STRING >= "6.0"
-        it "allows admin to change the link type and save a product" do
+        it "allows dash to change the link type and save a product" do
           select2("Product", css: "#cms_section_link_type_one_field")
 
           click_on "Update"
@@ -152,13 +152,13 @@ describe "Image Side By Side Images section", type: :feature do
         end
       end
 
-      it "admin should be able to add image" do
+      it "dash should be able to add image" do
         attach_file("cms_section_image_one", file_path)
 
         click_button "Update"
 
         expect(page).to have_content("successfully updated!")
-        expect(page).to have_css(".admin-img-holder img")
+        expect(page).to have_css(".dash-img-holder img")
       end
     end
   end

@@ -16,13 +16,13 @@ describe "Shipments", type: :feature do
     end
 
     it "can still be displayed" do
-      expect { visit spree.edit_admin_order_path(order) }.not_to raise_error
+      expect { visit spree.edit_dash_order_path(order) }.not_to raise_error
     end
   end
 
   context "shipping an order", js: true do
     before do
-      visit spree.admin_orders_path
+      visit spree.dash_orders_path
       within_row(1) do
         click_link "R100"
         wait_for_turbo
@@ -40,7 +40,7 @@ describe "Shipments", type: :feature do
   context "moving variants between shipments", js: true do
     before do
       create(:stock_location, name: "LA", propagate_all_variants: true) # we need to make sure all order variants are available in this stock location
-      visit spree.admin_orders_path
+      visit spree.dash_orders_path
       within_row(1) do
         click_link "R100"
         wait_for_turbo

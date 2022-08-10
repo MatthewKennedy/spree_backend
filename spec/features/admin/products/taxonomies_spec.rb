@@ -4,7 +4,7 @@ describe "Taxonomies", type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Products"
   end
 
@@ -12,7 +12,7 @@ describe "Taxonomies", type: :feature, js: true do
     it "displays existing taxonomies" do
       create(:taxonomy, name: "Brand")
       create(:taxonomy, name: "Categories")
-      visit spree.admin_taxonomies_path
+      visit spree.dash_taxonomies_path
       within_row(1) { expect(page).to have_content("Brand") }
       within_row(2) { expect(page).to have_content("Categories") }
     end
@@ -21,10 +21,10 @@ describe "Taxonomies", type: :feature, js: true do
   context "create" do
     before do
       click_link "Taxonomies"
-      click_link "admin_new_taxonomy_link"
+      click_link "dash_new_taxonomy_link"
     end
 
-    it "allows an admin to create a new taxonomy" do
+    it "allows an dash to create a new taxonomy" do
       expect(page).to have_content("New Taxonomy")
 
       fill_in "taxonomy_name", with: "sports"
@@ -45,7 +45,7 @@ describe "Taxonomies", type: :feature, js: true do
   end
 
   context "edit" do
-    it "allows an admin to update an existing taxonomy through root taxon" do
+    it "allows an dash to update an existing taxonomy through root taxon" do
       tx = create(:taxonomy)
       click_link "Taxonomies"
       within_row(1) { click_icon :edit }

@@ -5,18 +5,18 @@ describe "Product Variants", type: :feature, js: true do
 
   before do
     create(:product, stores: Spree::Store.all)
-    visit spree.admin_products_path
+    visit spree.dash_products_path
   end
 
   context "editing variant option types" do
-    it "allows an admin to create option types for a variant" do
+    it "allows an dash to create option types for a variant" do
       within_row(1) { click_icon :edit }
 
       within("#spreePageTabs") { click_link "Variants" }
       expect(page).to have_content("To add variants, you must first define")
     end
 
-    it "allows admin to create a variant if there are option types" do
+    it "allows dash to create a variant if there are option types" do
       within_row(1) { click_icon :edit }
 
       within("#spreePageTabs") { click_link "Variants" }
@@ -32,7 +32,7 @@ describe "Product Variants", type: :feature, js: true do
       click_button "Update"
       expect(page).to have_content("successfully updated!")
 
-      visit spree.admin_products_path
+      visit spree.dash_products_path
       within_row(1) { click_icon :edit }
 
       select2_open label: "Option Types"
@@ -58,7 +58,7 @@ describe "Product Variants", type: :feature, js: true do
       end
     end
 
-    it "allows admin to edit a variants compare at price" do
+    it "allows dash to edit a variants compare at price" do
       within_row(1) { click_icon :edit }
 
       within("#spreePageTabs") { click_link "Variants" }
@@ -72,7 +72,7 @@ describe "Product Variants", type: :feature, js: true do
       page.find("#option_type_option_values_attributes_0_presentation").set("black")
       click_button "Update"
 
-      visit spree.admin_products_path
+      visit spree.dash_products_path
       within_row(1) { click_icon :edit }
 
       select2_open label: "Option Types"

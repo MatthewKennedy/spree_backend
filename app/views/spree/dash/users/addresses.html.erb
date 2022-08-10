@@ -1,0 +1,23 @@
+<%= render partial: 'spree/dash/users/tabs', locals: { current: :address } %>
+<%= render partial: 'spree/dash/users/user_page_actions' %>
+
+<div data-hook="dash_user_addresses" id="dash_user_edit_addresses">
+  <div data-hook="dash_user_edit_form_header">
+
+  </div>
+
+  <div data-hook="dash_user_address_edit_form">
+    <%= form_with model: [:dash, @user], as: :user, url: addresses_dash_user_url(@user), method: :put do |f| %>
+
+      <%= render partial: 'addresses_form', locals: { f: f } %>
+
+      <div class="form-actions text-center card bg-light mb-3" data-hook="dash_user_edit_form_button">
+        <div class="card-body">
+          <%= render partial: 'spree/dash/shared/edit_resource_links', locals: { collection_url: spree.dash_users_url } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'spree/dash/users/lifetime_stats' %>

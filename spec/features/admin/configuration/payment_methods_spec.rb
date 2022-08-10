@@ -12,7 +12,7 @@ describe "Payment Methods", type: :feature do
   let!(:payment_method_two) { create(:payment_method, name: "Should Be MIA", stores: [store_3]) }
 
   before do
-    visit spree.admin_payment_methods_path
+    visit spree.dash_payment_methods_path
   end
 
   context "managine payment methods by store" do
@@ -23,7 +23,7 @@ describe "Payment Methods", type: :feature do
 
         Capybara.app_host = "http://another-store.lvh.me"
 
-        visit spree.admin_payment_methods_path
+        visit spree.dash_payment_methods_path
 
         expect(page).not_to have_content(payment_method_one.name)
         expect(page).to have_content(payment_method_two.name)
@@ -33,7 +33,7 @@ describe "Payment Methods", type: :feature do
     end
   end
 
-  context "admin visiting payment methods listing page" do
+  context "dash visiting payment methods listing page" do
     it "displays existing payment methods" do
       create(:check_payment_method)
       refresh
@@ -51,10 +51,10 @@ describe "Payment Methods", type: :feature do
     end
   end
 
-  context "admin creating a new payment method", js: true do
+  context "dash creating a new payment method", js: true do
     it "is able to create a new payment method" do
       within find("#contentHeader") do
-        click_link "admin_new_payment_methods_link"
+        click_link "dash_new_payment_methods_link"
       end
 
       expect(page).to have_content("New Payment Method")
@@ -68,9 +68,9 @@ describe "Payment Methods", type: :feature do
     end
   end
 
-  context "admin editing a payment method", js: true do
+  context "dash editing a payment method", js: true do
     before do
-      visit spree.edit_admin_payment_method_path(check_payment_method)
+      visit spree.edit_dash_payment_method_path(check_payment_method)
     end
 
     let!(:check_payment_method) { create(:check_payment_method, name: "Check") }

@@ -31,7 +31,7 @@ describe "Prototypes", type: :feature, js: true do
         p.properties << Spree::Property.find_by(name: prop)
       end
 
-      visit spree.admin_path
+      visit spree.dash_path
       click_link "Products"
       click_link "Prototypes"
 
@@ -42,8 +42,8 @@ describe "Prototypes", type: :feature, js: true do
   end
 
   context "creating a prototype" do
-    it "allows an admin to create a new product prototype" do
-      visit spree.admin_path
+    it "allows an dash to create a new product prototype" do
+      visit spree.dash_path
       click_link "Products"
       click_link "Prototypes"
 
@@ -55,7 +55,7 @@ describe "Prototypes", type: :feature, js: true do
       click_button "Create"
       expect(page).to have_content("successfully created!")
 
-      visit spree.admin_prototypes_path
+      visit spree.dash_prototypes_path
       within_row(1) { click_icon :edit }
       fill_in "prototype_name", with: "Shirt 99"
       click_button "Update"
@@ -71,7 +71,7 @@ describe "Prototypes", type: :feature, js: true do
       let!(:taxonomy2) { create(:taxonomy, name: "Bags", store: store2) }
 
       it "should be able to select only current store taxons" do
-        visit spree.admin_path
+        visit spree.dash_path
         click_link "Products"
         click_link "Prototypes"
 
@@ -104,7 +104,7 @@ describe "Prototypes", type: :feature, js: true do
         shirt_prototype.properties << Spree::Property.find_by(name: prop)
       end
 
-      visit spree.admin_path
+      visit spree.dash_path
       click_link "Products"
       click_link "Prototypes"
 
@@ -124,7 +124,7 @@ describe "Prototypes", type: :feature, js: true do
     shirt_prototype = create(:prototype, name: "Shirt", properties: [])
     shirt_prototype.taxons << create(:taxon)
 
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Products"
     click_link "Prototypes"
 

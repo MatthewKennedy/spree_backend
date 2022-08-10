@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Users", type: :feature do
   include Spree::BaseHelper
   stub_authorization!
-  include Spree::Admin::BaseHelper
+  include Spree::Dash::BaseHelper
 
   let(:store) { Spree::Store.default }
   let!(:user_a) { create(:user_with_addresses, email: "a@example.com") }
@@ -58,19 +58,19 @@ describe "Users", type: :feature do
     end
 
     it "can go back to the users list" do
-      expect(page).to have_link Spree.t(:users), href: spree.admin_users_path
+      expect(page).to have_link Spree.t(:users), href: spree.dash_users_path
     end
 
     it "can navigate to the account page" do
-      expect(page).to have_link Spree.t(:"admin.user.account"), href: spree.edit_admin_user_path(user_a)
+      expect(page).to have_link Spree.t(:"dash.user.account"), href: spree.edit_dash_user_path(user_a)
     end
 
     it "can navigate to the order history" do
-      expect(page).to have_link Spree.t(:"admin.user.orders"), href: spree.orders_admin_user_path(user_a)
+      expect(page).to have_link Spree.t(:"dash.user.orders"), href: spree.orders_dash_user_path(user_a)
     end
 
     it "can navigate to the items purchased" do
-      expect(page).to have_link Spree.t(:"admin.user.items"), href: spree.items_admin_user_path(user_a)
+      expect(page).to have_link Spree.t(:"dash.user.items"), href: spree.items_dash_user_path(user_a)
     end
   end
 
@@ -100,7 +100,7 @@ describe "Users", type: :feature do
     Spree::Config[:company] = true
     create(:country)
     stub_const("Spree::User", create(:user, email: "example@example.com").class)
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Users"
   end
 
@@ -173,20 +173,20 @@ describe "Users", type: :feature do
     end
 
     it "can edit user roles" do
-      Spree::Role.create name: "admin"
+      Spree::Role.create name: "dash"
       click_link "Users", match: :first
       click_link user_a.email
 
-      check "user_spree_role_admin"
+      check "user_spree_role_dash"
       click_button "Update"
       expect(page).to have_text "Account updated"
-      expect(page).to have_checked_field("user_spree_role_admin")
+      expect(page).to have_checked_field("user_spree_role_dash")
     end
 
     it "can edit user shipping address" do
       click_link "Addresses"
 
-      within("#admin_user_edit_addresses") do
+      within("#dash_user_edit_addresses") do
         fill_in "user_ship_address_attributes_address1", with: "1313 Mockingbird Ln"
         click_button "Update"
         expect(page).to have_field("user_ship_address_attributes_address1", with: "1313 Mockingbird Ln")
@@ -199,7 +199,7 @@ describe "Users", type: :feature do
     it "can edit user billing address" do
       click_link "Addresses"
 
-      within("#admin_user_edit_addresses") do
+      within("#dash_user_edit_addresses") do
         fill_in "user_bill_address_attributes_address1", with: "1313 Mockingbird Ln"
         click_button "Update"
         expect(page).to have_field("user_bill_address_attributes_address1", with: "1313 Mockingbird Ln")
@@ -212,7 +212,7 @@ describe "Users", type: :feature do
     it "can set shipping address to be the same as billing address" do
       click_link "Addresses"
 
-      within("#admin_user_edit_addresses") do
+      within("#dash_user_edit_addresses") do
         find("#user_use_billing").click
         click_button "Update"
       end
@@ -224,7 +224,7 @@ describe "Users", type: :feature do
   context "order history with sorting" do
     before do
       orders
-      visit spree.orders_admin_user_path(user_a)
+      visit spree.orders_dash_user_path(user_a)
     end
 
     it_behaves_like "a user page"
@@ -253,7 +253,7 @@ describe "Users", type: :feature do
   context "items purchased with sorting" do
     before do
       orders
-      visit spree.items_admin_user_path(user_a)
+      visit spree.items_dash_user_path(user_a)
     end
 
     it_behaves_like "a user page"

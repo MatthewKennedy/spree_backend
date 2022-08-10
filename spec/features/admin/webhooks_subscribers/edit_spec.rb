@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Webhooks::Subscriber#edit", type: :feature do
   stub_authorization!
 
-  before { visit spree.edit_admin_webhooks_subscriber_path(subscriber) }
+  before { visit spree.edit_dash_webhooks_subscriber_path(subscriber) }
 
   context "when subscribed to all events" do
     let!(:subscriber) { create(:webhook_subscriber, :active, subscriptions: ["*"]) }

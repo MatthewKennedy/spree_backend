@@ -1,8 +1,8 @@
 require "spec_helper"
 
 module Spree
-  module Admin
-    class DummyModelsController < Spree::Admin::ResourceController
+  module Dash
+    class DummyModelsController < Spree::Dash::ResourceController
       prepend_view_path("spec/test_views")
 
       def model_class
@@ -12,7 +12,7 @@ module Spree
   end
 end
 
-describe Spree::Admin::DummyModelsController, type: :controller do
+describe Spree::Dash::DummyModelsController, type: :controller do
   stub_authorization!
 
   after(:all) do
@@ -21,7 +21,7 @@ describe Spree::Admin::DummyModelsController, type: :controller do
 
   before do
     Spree::Core::Engine.routes.draw do
-      namespace :admin do
+      namespace :dash do
         resources :dummy_models do
           post :update_positions, on: :member
         end
@@ -140,9 +140,9 @@ module Spree
     end
   end
 
-  module Admin
+  module Dash
     module Submodule
-      class PostsController < Spree::Admin::ResourceController
+      class PostsController < Spree::Dash::ResourceController
         prepend_view_path("spec/test_views")
 
         def model_class

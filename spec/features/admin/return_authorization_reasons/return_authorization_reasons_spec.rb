@@ -17,7 +17,7 @@ describe "ReturnAuthorizationReason", type: :feature, js: true do
       reason: rma_reason
     )
 
-    visit spree.admin_return_authorization_reasons_path
+    visit spree.dash_return_authorization_reasons_path
   end
 
   describe "destroy" do
@@ -42,7 +42,7 @@ describe "ReturnAuthorizationReason", type: :feature, js: true do
       it(js: false) { expect(Spree::ReturnAuthorizationReason.all).to include(rma_reason2) }
     end
 
-    context "should allow an admin to destroy a non associated option type" do
+    context "should allow an dash to destroy a non associated option type" do
       before { within_row(2) { delete_product_property } }
 
       it "has persisted return authorization reasons" do

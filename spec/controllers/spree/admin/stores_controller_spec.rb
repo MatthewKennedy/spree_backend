@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe Spree::Admin::StoresController do
+describe Spree::Dash::StoresController do
   stub_authorization!
 
   let!(:store) { create(:store) }
-  let(:image_file) { Rack::Test::UploadedFile.new(Spree::Backend::Engine.root.join("spec", "fixtures", "thinking-cat.jpg")) }
+  let(:image_file) { Rack::Test::UploadedFile.new(Spree::Dash::Engine.root.join("spec", "fixtures", "thinking-cat.jpg")) }
   let(:store_with_logo) { create(:store, logo: image_file) }
 
   describe "#create" do
@@ -20,7 +20,7 @@ describe Spree::Admin::StoresController do
                 supported_locales: ["en"]}
       }
 
-      expect(response).to redirect_to("http://test-new-store.lvh.me/admin")
+      expect(response).to redirect_to("http://test-new-store.lvh.me/dash")
     end
   end
 

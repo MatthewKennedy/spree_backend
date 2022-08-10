@@ -15,7 +15,7 @@ module Spree
     it "does not clear password on update" do
       expect(payment_method.preferred_password).to eq("haxme")
       put :update, params: {id: payment_method.id, payment_method: {type: payment_method.class.to_s, preferred_password: ""}}
-      expect(response).to redirect_to(spree.edit_admin_payment_method_path(payment_method))
+      expect(response).to redirect_to(spree.edit_dash_payment_method_path(payment_method))
 
       payment_method.reload
       expect(payment_method.preferred_password).to eq("haxme")
@@ -52,7 +52,7 @@ module Spree
 
       expect(Spree::PaymentMethod.last.stores).to eq([store])
 
-      expect(response).to redirect_to spree.edit_admin_payment_method_path(assigns(:payment_method))
+      expect(response).to redirect_to spree.edit_dash_payment_method_path(assigns(:payment_method))
     end
 
     it "can not create a payment method of an invalid type" do
@@ -60,7 +60,7 @@ module Spree
         post :create, params: {payment_method: {name: "Invalid Payment Method", type: "Spree::InvalidType"}}
       end.to change(Spree::PaymentMethod, :count).by(0)
 
-      expect(response).to redirect_to spree.new_admin_payment_method_path
+      expect(response).to redirect_to spree.new_dash_payment_method_path
     end
 
     describe "#index" do
@@ -86,7 +86,7 @@ module Spree
       context "payment method from different store" do
         let(:payment_method) { create(:payment_method, stores: [create(:store)]) }
 
-        it { expect(send_request).to redirect_to(spree.admin_payment_methods_path) }
+        it { expect(send_request).to redirect_to(spree.dash_payment_methods_path) }
       end
     end
 
@@ -114,7 +114,7 @@ module Spree
       context "cannot destroy payment_method from different store" do
         let(:payment_method) { create(:payment_method, stores: [create(:store)]) }
 
-        it { expect(send_request).to redirect_to(spree.admin_payment_methods_path) }
+        it { expect(send_request).to redirect_to(spree.dash_payment_methods_path) }
 
         it do
           send_request

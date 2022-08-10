@@ -14,13 +14,13 @@ describe "New Order", type: :feature do
     create(:shipping_method)
     # create default store
     allow(Spree.user_class).to receive(:find_by).and_return(user)
-    visit spree.new_admin_order_path
+    visit spree.new_dash_order_path
   end
 
   it "does check if you have a billing address before letting you add shipments" do
     click_on "Shipments"
     expect(page).to have_content "Please fill in customer info"
-    expect(page).to have_current_path(spree.edit_admin_order_customer_path(order))
+    expect(page).to have_current_path(spree.edit_dash_order_customer_path(order))
   end
 
   it "sets proper currency and store" do
@@ -45,7 +45,7 @@ describe "New Order", type: :feature do
     click_on "Payments"
     click_on "Update"
 
-    expect(page).to have_current_path(spree.admin_order_payments_path(order))
+    expect(page).to have_current_path(spree.dash_order_payments_path(order))
     click_icon "capture"
 
     click_on "Shipments"
@@ -90,7 +90,7 @@ describe "New Order", type: :feature do
   context "skipping to shipping without having an address", js: true do
     it "prompts you with a flash notice to: Please fill in customer info" do
       click_on "Shipments"
-      assert_admin_flash_alert_notice("Please fill in customer info")
+      assert_dash_flash_alert_notice("Please fill in customer info")
     end
   end
 

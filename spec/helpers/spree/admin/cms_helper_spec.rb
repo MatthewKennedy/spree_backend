@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::CmsHelper, type: :helper do
+describe Spree::Dash::CmsHelper, type: :helper do
   let!(:current_store) { create(:store) }
 
   describe "#cms_page_locale" do

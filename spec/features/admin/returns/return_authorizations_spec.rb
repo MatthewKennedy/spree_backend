@@ -8,7 +8,7 @@ describe "Return Authorizations", type: :feature do
     let!(:return_authorization_2) { create(:return_authorization, created_at: Time.current - 1.day) }
 
     before do
-      visit spree.admin_return_authorizations_path
+      visit spree.dash_return_authorizations_path
     end
 
     it "lists return authorizations sorted by created_at" do
@@ -39,7 +39,7 @@ describe "Return Authorizations", type: :feature do
     let!(:return_authorization_2) { create(:return_authorization, state: "canceled") }
 
     before do
-      visit spree.admin_return_authorizations_path
+      visit spree.dash_return_authorizations_path
     end
 
     it "searches on number" do
@@ -99,7 +99,7 @@ describe "Return Authorizations", type: :feature do
       let!(:return_authorization_2) { create(:return_authorization, state: "canceled") }
 
       it "only shows authorized return authorizations" do
-        visit spree.admin_return_authorizations_path
+        visit spree.dash_return_authorizations_path
         within("#spreePageTabs") do
           click_link "Authorized"
         end
@@ -109,7 +109,7 @@ describe "Return Authorizations", type: :feature do
       end
 
       it "preselects authorized status in filter" do
-        visit spree.admin_return_authorizations_path
+        visit spree.dash_return_authorizations_path
         within("#spreePageTabs") do
           click_link "Authorized"
         end
@@ -126,7 +126,7 @@ describe "Return Authorizations", type: :feature do
       let!(:return_authorization_2) { create(:return_authorization, state: "authorized") }
 
       it "only shows canceled return authorizations" do
-        visit spree.admin_return_authorizations_path
+        visit spree.dash_return_authorizations_path
         within("#spreePageTabs") do
           click_link "Canceled"
         end
@@ -136,7 +136,7 @@ describe "Return Authorizations", type: :feature do
       end
 
       it "preselects canceled status in filter" do
-        visit spree.admin_return_authorizations_path
+        visit spree.dash_return_authorizations_path
         within("#spreePageTabs") do
           click_link "Canceled"
         end

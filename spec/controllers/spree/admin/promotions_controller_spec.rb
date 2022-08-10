@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::PromotionsController, type: :controller do
+describe Spree::Dash::PromotionsController, type: :controller do
   stub_authorization!
 
   let(:store) { Spree::Store.default }
@@ -83,7 +83,7 @@ describe Spree::Admin::PromotionsController, type: :controller do
     context "cannot destroy promotion from different store" do
       let!(:promotion) { create(:promotion, stores: [store_2]) }
 
-      it { expect(send_request).to redirect_to(spree.admin_promotions_path) }
+      it { expect(send_request).to redirect_to(spree.dash_promotions_path) }
       it { expect { send_request }.not_to change { Spree::Promotion.count } }
     end
   end

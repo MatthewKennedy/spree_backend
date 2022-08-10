@@ -1,0 +1,8 @@
+<ul id="sidebar-tax-and-shipping" class="collapse nav nav-pills nav-stacked" data-hook="dash_tax_and_shipping">
+  <%= tab :countries, url: spree.dash_countries_path, label: I18n.t('spree.dash.settings_menu.countries') if can? :manage, Spree::Country %>
+  <%= tab :shipping_categories, url: spree.dash_shipping_categories_path, label: I18n.t('spree.dash.settings_menu.shipping_categories') if can? :manage, Spree::ShippingCategory %>
+  <%= tab :shipping_methods, url: spree.dash_shipping_methods_path, label: I18n.t('spree.dash.settings_menu.shipping_methods') if can? :manage, Spree::ShippingMethod %>
+  <%= tab :tax_categories, url: spree.dash_tax_categories_path, label: I18n.t('spree.dash.settings_menu.tax_categories') if can? :manage, Spree::TaxCategory %>
+  <%= tab :tax_rates, url: spree.dash_tax_rates_path, label: I18n.t('spree.dash.settings_menu.tax_rates') if can? :manage, Spree::TaxRate %>
+  <%= tab :zones, url: spree.dash_zones_path, label: I18n.t('spree.dash.settings_menu.zones') if can? :manage, Spree::Zone %>
+</ul>

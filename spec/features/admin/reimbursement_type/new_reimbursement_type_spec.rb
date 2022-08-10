@@ -4,7 +4,7 @@ describe "new reimbursement type", type: :feature do
   stub_authorization!
 
   before do
-    visit "/admin/reimbursement_types/new"
+    visit "/dash/reimbursement_types/new"
   end
 
   it "view should have select field" do

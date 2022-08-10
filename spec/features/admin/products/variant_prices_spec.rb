@@ -13,7 +13,7 @@ describe "Variant Prices", type: :feature, js: true do
 
   context "with USD and EUR as currencies" do
     it "allows to save a price for each currency" do
-      visit spree.admin_product_path(product)
+      visit spree.dash_product_path(product)
       click_link "Prices"
       expect(page).to have_content "USD"
       expect(page).to have_content "EUR"
@@ -32,7 +32,7 @@ describe "Variant Prices", type: :feature, js: true do
     end
 
     it "allows to save a compare to price for each currency" do
-      visit spree.admin_product_path(product)
+      visit spree.dash_product_path(product)
       click_link "Prices"
       expect(page).to have_content "COMPARE AT PRICE"
 

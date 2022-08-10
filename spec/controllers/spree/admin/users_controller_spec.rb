@@ -1,7 +1,7 @@
 require "spec_helper"
 require "spree/testing_support/bar_ability"
 
-describe Spree::Admin::UsersController, type: :controller do
+describe Spree::Dash::UsersController, type: :controller do
   let(:store) { Spree::Store.default }
   let(:user) { create(:user) }
   let(:mock_user) { mock_model Spree.user_class }
@@ -14,28 +14,28 @@ describe Spree::Admin::UsersController, type: :controller do
 
   context "#show" do
     before do
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
     end
 
     it "redirects to edit" do
       get :show, params: {id: user.id}
-      expect(response).to redirect_to spree.edit_admin_user_path(user)
+      expect(response).to redirect_to spree.edit_dash_user_path(user)
     end
   end
 
-  context "#authorize_admin" do
+  context "#authorize_dash" do
     before { use_mock_user }
 
-    it "grant access to users with an admin role" do
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+    it "grant access to users with an dash role" do
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
       post :index
       expect(response).to render_template :index
     end
 
-    it "deny access to users without an admin role" do
+    it "deny access to users without an dash role" do
       allow(user).to receive_messages has_spree_role?: false
       post :index
-      expect(response).to redirect_to(spree.admin_forbidden_path)
+      expect(response).to redirect_to(spree.dash_forbidden_path)
     end
 
     describe "deny access to users with an bar role" do
@@ -50,12 +50,12 @@ describe Spree::Admin::UsersController, type: :controller do
 
       it "#index" do
         post :index
-        expect(response).to redirect_to(spree.admin_forbidden_path)
+        expect(response).to redirect_to(spree.dash_forbidden_path)
       end
 
       it "#update" do
         post :update, params: {id: "9"}
-        expect(response).to redirect_to(spree.admin_forbidden_path)
+        expect(response).to redirect_to(spree.dash_forbidden_path)
       end
     end
   end
@@ -63,7 +63,7 @@ describe Spree::Admin::UsersController, type: :controller do
   describe "#create" do
     before do
       use_mock_user
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
     end
 
     let(:permitted_user_attrs) do
@@ -87,14 +87,14 @@ describe Spree::Admin::UsersController, type: :controller do
 
     it "redirects to user edit page" do
       post :create, params: {user: user.slice(permitted_user_attrs)}
-      expect(response).to redirect_to(spree.edit_admin_user_path(assigns[:user]))
+      expect(response).to redirect_to(spree.edit_dash_user_path(assigns[:user]))
     end
   end
 
   describe "#update" do
     before do
       use_mock_user
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
     end
 
     it "allows shipping address attributes through" do
@@ -119,7 +119,7 @@ describe Spree::Admin::UsersController, type: :controller do
     it "redirects to user edit page" do
       expect(mock_user).to receive(:update).with(hash_not_including(email: "")).and_return(true)
       put :update, params: {id: mock_user.id, user: {email: "spree@example.com"}}
-      expect(response).to redirect_to(spree.edit_admin_user_path(mock_user))
+      expect(response).to redirect_to(spree.edit_dash_user_path(mock_user))
     end
 
     it "render edit page when update got errors" do
@@ -134,7 +134,7 @@ describe Spree::Admin::UsersController, type: :controller do
     let!(:order_2) { create(:order, user: user, store: create(:store)) }
 
     before do
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
     end
 
     it "assigns a list of the users orders" do
@@ -155,7 +155,7 @@ describe Spree::Admin::UsersController, type: :controller do
     let!(:order_2) { create(:order, user: user, store: create(:store)) }
 
     before do
-      user.spree_roles << Spree::Role.find_or_create_by(name: "admin")
+      user.spree_roles << Spree::Role.find_or_create_by(name: "dash")
     end
 
     it "assigns a list of the users orders" do

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Admin
+  module Dash
     describe StoreCreditsController, type: :controller do
       stub_authorization!
 
@@ -55,7 +55,7 @@ module Spree
         context "cannot destroy store credit with used amount" do
           let(:store_credit_to_destroy) { create(:store_credit, store: store, user: user, amount_used: 10) }
 
-          it { expect { send_request }.to raise_error(Spree::Admin::StoreCreditError) }
+          it { expect { send_request }.to raise_error(Spree::Dash::StoreCreditError) }
         end
       end
     end

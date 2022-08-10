@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:properties), dash_properties_url %> /
+  <%= @property.name %>
+<% end %>
+
+<%= form_with model: [:dash, @property] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/dash/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

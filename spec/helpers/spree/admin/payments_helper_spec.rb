@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::PaymentsHelper, type: :helper do
+describe Spree::Dash::PaymentsHelper, type: :helper do
   let!(:store) { create(:store) }
 
   before do
@@ -10,7 +10,7 @@ describe Spree::Admin::PaymentsHelper, type: :helper do
 
   describe "#payment_method_name" do
     context "user with update permission" do
-      let(:user) { create(:admin_user) }
+      let(:user) { create(:dash_user) }
       let(:payment_method) { create(:credit_card_payment_method, stores: [store]) }
       let(:payment) { build(:payment, payment_method: payment_method) }
 
@@ -19,7 +19,7 @@ describe Spree::Admin::PaymentsHelper, type: :helper do
       end
 
       it "returns link to payment method edit page" do
-        expect(helper.payment_method_name(payment)).to eq("<a href=\"/admin/payment_methods/#{payment_method.id}/edit\">#{payment_method.name}</a>")
+        expect(helper.payment_method_name(payment)).to eq("<a href=\"/dash/payment_methods/#{payment_method.id}/edit\">#{payment_method.name}</a>")
       end
     end
 

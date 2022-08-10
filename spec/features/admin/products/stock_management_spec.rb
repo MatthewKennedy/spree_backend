@@ -10,7 +10,7 @@ describe "Stock Management", type: :feature, js: true do
 
     before do
       stock_location.stock_item(variant).update_column(:count_on_hand, 10)
-      visit spree.stock_admin_product_path(product)
+      visit spree.stock_dash_product_path(product)
     end
 
     context "toggle backorderable for a variant's stock item" do
@@ -45,7 +45,7 @@ describe "Stock Management", type: :feature, js: true do
 
     # Regression test for #2896
     # The regression was that unchecking the last checkbox caused a redirect
-    # to happen. By ensuring that we're still on an /admin/products URL, we
+    # to happen. By ensuring that we're still on an /dash/products URL, we
     # assert that the redirect is *not* happening.
     it "can toggle backorderable for the second variant stock item" do
       new_location = create(:stock_location, name: "Another Location")
@@ -56,7 +56,7 @@ describe "Stock Management", type: :feature, js: true do
       new_location_backorderable.uncheck
       wait_for_ajax
 
-      expect(page).to have_current_path(%r{/admin/products})
+      expect(page).to have_current_path(%r{/dash/products})
     end
 
     it "can create a new stock movement" do
@@ -112,12 +112,12 @@ describe "Stock Management", type: :feature, js: true do
       before do
         Spree::StockLocation.delete_all
 
-        visit spree.stock_admin_product_path(product)
+        visit spree.stock_dash_product_path(product)
       end
 
       it "redirects to stock locations page", js: false do
         expect(page).to have_content(Spree.t(:stock_management_requires_a_stock_location))
-        expect(page).to have_current_path(%r{admin/stock_locations})
+        expect(page).to have_current_path(%r{dash/stock_locations})
       end
     end
   end

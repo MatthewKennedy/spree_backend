@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Admin
+  module Dash
     describe VariantsController, type: :controller do
       stub_authorization!
 
@@ -58,7 +58,7 @@ module Spree
           let(:other_product) { create(:product, stores: [store]) }
           let(:variant) { create(:variant, product: other_product) }
 
-          it { expect(send_request).to redirect_to(spree.admin_product_variants_path(product)) }
+          it { expect(send_request).to redirect_to(spree.dash_product_variants_path(product)) }
 
           it do
             send_request

@@ -6,11 +6,11 @@ describe "Product Properties", type: :feature, js: true do
   let!(:product) { create(:product, stores: Spree::Store.all) }
 
   before do
-    visit spree.admin_products_path
+    visit spree.dash_products_path
   end
 
   context "editing product properties" do
-    it "allows admin to create a new property" do
+    it "allows dash to create a new property" do
       within_row(1) { click_icon :edit }
 
       within("#spreePageTabs") { click_link "Properties" }
@@ -18,7 +18,7 @@ describe "Product Properties", type: :feature, js: true do
       fill_in "product_product_properties_attributes_0_value", with: "Leather"
       click_button "Update"
 
-      expect(page).to have_current_path(spree.admin_product_product_properties_path(product))
+      expect(page).to have_current_path(spree.dash_product_product_properties_path(product))
       expect(page).to have_content("Add Product Properties")
       expect(page).to have_content("SHOW PROPERTY")
       expect(page).to have_selector("input[value='Material']")
@@ -26,7 +26,7 @@ describe "Product Properties", type: :feature, js: true do
       expect(page).to have_field("product_product_properties_attributes_0_show_property", checked: true)
     end
 
-    it "allows admin to create a new property and not show the property on the storefront" do
+    it "allows dash to create a new property and not show the property on the storefront" do
       within_row(1) { click_icon :edit }
 
       within("#spreePageTabs") { click_link "Properties" }
@@ -35,7 +35,7 @@ describe "Product Properties", type: :feature, js: true do
       find(:css, "#product_product_properties_attributes_0_show_property").set(false)
       click_button "Update"
 
-      expect(page).to have_current_path(spree.admin_product_product_properties_path(product))
+      expect(page).to have_current_path(spree.dash_product_product_properties_path(product))
       expect(page).to have_selector("input[value='gtin']")
       expect(page).to have_selector("input[value='9020188287332']")
       expect(page).to have_field("product_product_properties_attributes_0_show_property", checked: false)

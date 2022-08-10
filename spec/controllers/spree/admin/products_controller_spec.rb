@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::ProductsController, type: :controller do
+describe Spree::Dash::ProductsController, type: :controller do
   stub_authorization!
 
   let(:store) { Spree::Store.default }
@@ -149,7 +149,7 @@ describe Spree::Admin::ProductsController, type: :controller do
     context "cannot destroy product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
-      it { expect(send_request).to redirect_to(spree.admin_products_path) }
+      it { expect(send_request).to redirect_to(spree.dash_products_path) }
 
       it do
         send_request
@@ -206,7 +206,7 @@ describe Spree::Admin::ProductsController, type: :controller do
     context "cannot clone product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
-      it { expect(send_request).to redirect_to(spree.admin_products_path) }
+      it { expect(send_request).to redirect_to(spree.dash_products_path) }
 
       it do
         send_request
@@ -224,7 +224,7 @@ describe Spree::Admin::ProductsController, type: :controller do
     context "cannot see product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
-      it { expect(send_request).to redirect_to(spree.admin_products_path) }
+      it { expect(send_request).to redirect_to(spree.dash_products_path) }
 
       it do
         send_request
@@ -247,7 +247,7 @@ describe Spree::Admin::ProductsController, type: :controller do
     context "cannot see stock of product from different store" do
       let(:product) { create(:product, stores: [create(:store)]) }
 
-      it { expect(send_request).to redirect_to(spree.admin_products_path) }
+      it { expect(send_request).to redirect_to(spree.dash_products_path) }
 
       it do
         send_request

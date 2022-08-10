@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::TaxonsController, type: :controller do
+describe Spree::Dash::TaxonsController, type: :controller do
   stub_authorization!
 
   describe "#remove_icon" do

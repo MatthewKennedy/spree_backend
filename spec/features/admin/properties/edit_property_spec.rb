@@ -7,7 +7,7 @@ describe "Property edit spec", type: :feature, js: true do
 
   context "editing option type" do
     before do
-      visit spree.edit_admin_property_path(property)
+      visit spree.edit_dash_property_path(property)
     end
 
     it "allows to update filtering attribute of option type" do

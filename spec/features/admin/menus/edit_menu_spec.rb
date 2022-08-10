@@ -9,21 +9,21 @@ describe "Menu Edit", type: :feature do
 
   context "when link to URL the user can" do
     before do
-      visit spree.edit_admin_menu_menu_item_path(main_menu, menu_item)
+      visit spree.edit_dash_menu_menu_item_path(main_menu, menu_item)
     end
 
     it "set to open in a new window" do
       find("label", text: "Open this link in a new window").click
       click_on "Update"
 
-      assert_admin_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
+      assert_dash_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
       expect(page).to have_checked_field("menu_item_new_window")
     end
   end
 
   context "setting a home page link", js: true do
     before do
-      visit spree.edit_admin_menu_menu_item_path(main_menu, menu_item)
+      visit spree.edit_dash_menu_menu_item_path(main_menu, menu_item)
     end
 
     it "allows you to switch to home page link" do
@@ -31,7 +31,7 @@ describe "Menu Edit", type: :feature do
       expect(page).to have_text "Click the Update button below to change the link field."
       click_on "Update"
 
-      assert_admin_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
+      assert_dash_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
       expect(page).to have_text "This link takes you to your stores home page."
     end
   end
@@ -42,7 +42,7 @@ describe "Menu Edit", type: :feature do
     let!(:product_3) { create(:product, name: "Green Shirt") }
 
     before do
-      visit spree.edit_admin_menu_menu_item_path(main_menu, menu_item)
+      visit spree.edit_dash_menu_menu_item_path(main_menu, menu_item)
     end
 
     it "allows you to switch to select a product and save" do
@@ -53,7 +53,7 @@ describe "Menu Edit", type: :feature do
       select2 product_2.name, from: "Product", search: true
       click_on "Update"
 
-      assert_admin_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
+      assert_dash_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
       expect(page).to have_css("span.select2-selection", text: product_2.name)
       expect(page).to have_text("/products/#{product_2.slug}")
     end
@@ -65,7 +65,7 @@ describe "Menu Edit", type: :feature do
     let!(:taxon_3) { create(:taxon) }
 
     before do
-      visit spree.edit_admin_menu_menu_item_path(main_menu, menu_item)
+      visit spree.edit_dash_menu_menu_item_path(main_menu, menu_item)
     end
 
     it "allows you to select a Taxon and save" do
@@ -76,7 +76,7 @@ describe "Menu Edit", type: :feature do
       select2 taxon_2.name, from: "Taxon", search: true
       click_on "Update"
 
-      assert_admin_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
+      assert_dash_flash_alert_success('Menu item "Link To Somewhere" has been successfully updated!')
       expect(page).to have_css("span.select2-selection", text: taxon_2.pretty_name)
       expect(page).to have_text("/t/#{taxon_2.permalink}")
     end
@@ -84,7 +84,7 @@ describe "Menu Edit", type: :feature do
 
   context "trying to save a menu item without a name" do
     before do
-      visit spree.edit_admin_menu_menu_item_path(main_menu, menu_item)
+      visit spree.edit_dash_menu_menu_item_path(main_menu, menu_item)
     end
 
     it "prompts you to enter a name" do
@@ -96,9 +96,9 @@ describe "Menu Edit", type: :feature do
     end
   end
 
-  context "when admin adds and removes an image icon" do
+  context "when dash adds and removes an image icon" do
     before do
-      visit spree.edit_admin_menu_menu_item_path(main_menu, menu_item)
+      visit spree.edit_dash_menu_menu_item_path(main_menu, menu_item)
     end
 
     it "adds menu_item icon and removes when clicked" do

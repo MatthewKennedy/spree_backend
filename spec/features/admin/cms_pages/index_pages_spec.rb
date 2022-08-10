@@ -5,7 +5,7 @@ describe "Pages Index", type: :feature do
 
   context "when no pages are present" do
     before do
-      visit spree.admin_menus_path
+      visit spree.dash_menus_path
     end
 
     it "prompts the user to create a menu" do

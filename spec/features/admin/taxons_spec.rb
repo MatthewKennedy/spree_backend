@@ -8,20 +8,20 @@ describe "Taxonomies and taxons", type: :feature, js: true do
 
   context "when WYSIWYG editor is in enabled" do
     it "displays the WYSIWYG editor for the taxon description input" do
-      visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
+      visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
 
       expect(page).not_to have_css("#taxon_description")
       expect(page).to have_css("#taxon_description_ifr")
     end
   end
 
-  context "admin should be able to edit taxon changing nesting level" do
+  context "dash should be able to edit taxon changing nesting level" do
     let!(:taxonomy_1) { create(:taxonomy, name: "clothing") }
     let!(:taxon_a) { create(:taxon, taxonomy: taxonomy_1, name: "jackets") }
     let!(:taxon_b) { create(:taxon, taxonomy: taxonomy_1, name: "Sports Jacket") }
 
     it "updates the taxon path" do
-      visit spree.edit_admin_taxonomy_taxon_path(taxonomy_1, taxon_b.id)
+      visit spree.edit_dash_taxonomy_taxon_path(taxonomy_1, taxon_b.id)
       select2 "- jackets", from: "Nested under"
 
       click_button "Update"
@@ -32,20 +32,20 @@ describe "Taxonomies and taxons", type: :feature, js: true do
   end
 
   context "when WYSIWYG editor is disabled" do
-    before { Spree::Backend::Config.taxon_wysiwyg_editor_enabled = false }
+    before { Spree::Dash::Config.taxon_wysiwyg_editor_enabled = false }
 
-    after { Spree::Backend::Config.taxon_wysiwyg_editor_enabled = true }
+    after { Spree::Dash::Config.taxon_wysiwyg_editor_enabled = true }
 
     it "displays the taxon description as a standard input field" do
-      visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
+      visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
 
       expect(page).to have_css("#taxon_description")
       expect(page).not_to have_css("#taxon_description_ifr")
     end
   end
 
-  it "admin should be able to edit taxon" do
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
+  it "dash should be able to edit taxon" do
+    visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
 
     fill_in "taxon_name", with: "Shirt"
 
@@ -58,7 +58,7 @@ describe "Taxonomies and taxons", type: :feature, js: true do
   end
 
   it "taxon without name should not be updated" do
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
+    visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
 
     fill_in "taxon_name", with: ""
 
@@ -70,12 +70,12 @@ describe "Taxonomies and taxons", type: :feature, js: true do
     expect(message).to eq "Please fill out this field."
   end
 
-  it "admin should be able to remove a product from a taxon", js: true do
+  it "dash should be able to remove a product from a taxon", js: true do
     taxon_1 = create(:taxon, name: "Clothing")
     product = create(:product, stores: Spree::Store.all)
     product.taxons << taxon_1
 
-    visit spree.admin_taxons_path
+    visit spree.dash_taxons_path
     select_taxon_from_select2(taxon_1)
 
     find(".product").hover
@@ -92,8 +92,8 @@ describe "Taxonomies and taxons", type: :feature, js: true do
     expect(page).to have_content("No results")
   end
 
-  it "admin should be able to add taxon icon" do
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
+  it "dash should be able to add taxon icon" do
+    visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
 
     attach_file("taxon_icon", file_path)
     click_button "Update"
@@ -101,12 +101,12 @@ describe "Taxonomies and taxons", type: :feature, js: true do
 
     expect(page).to have_content("successfully updated!")
 
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
+    visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
 
     expect(page).to have_css("#taxon_icon_field img")
   end
 
-  # it 'admin should be able to drag and save' do
+  # it 'dash should be able to drag and save' do
   #   taxon_2 = create(:taxon, name: 'Drag Test')
 
   #   product_drag_a = create(:product, stores: Spree::Store.all)
@@ -121,7 +121,7 @@ describe "Taxonomies and taxons", type: :feature, js: true do
   #   product_drag_d.taxons << taxon_2
   #   product_drag_e.taxons << taxon_2
 
-  #   visit spree.admin_taxons_path
+  #   visit spree.dash_taxons_path
 
   #   select2(taxon_2.pretty_name, css: '#taxonSearch', search: 'Drag')
 
@@ -132,10 +132,10 @@ describe "Taxonomies and taxons", type: :feature, js: true do
   #   expect(page).to have_content('Fail')
   # end
 
-  it "admin should be able to remove taxon icon" do
+  it "dash should be able to remove taxon icon" do
     add_icon_to_root_taxon
 
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
+    visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
 
     click_link "Remove Image"
     wait_for_turbo
@@ -150,7 +150,7 @@ describe "Taxonomies and taxons", type: :feature, js: true do
   end
 
   def add_icon_to_root_taxon
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
+    visit spree.edit_dash_taxonomy_taxon_path(taxonomy, taxonomy.root_id)
     attach_file("taxon_icon", file_path)
     click_button "Update"
     wait_for_turbo

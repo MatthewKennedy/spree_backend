@@ -11,7 +11,7 @@ describe "Product Carousel section", type: :feature do
   let!(:section) { create(:cms_product_carousel_section, cms_page: feature_page, name: "Test #{section_type}") }
 
   before do
-    visit spree.edit_admin_cms_page_cms_section_path(feature_page, section)
+    visit spree.edit_dash_cms_page_cms_section_path(feature_page, section)
   end
 
   context "editing new page", js: true do
@@ -27,7 +27,7 @@ describe "Product Carousel section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(taxon.permalink)
-      assert_admin_flash_alert_success('Section "Test Product Carousel" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Product Carousel" has been successfully updated!')
     end
 
     it "allows changing of the section name" do

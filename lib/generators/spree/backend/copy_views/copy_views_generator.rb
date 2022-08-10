@@ -1,7 +1,7 @@
 module Spree
-  module Backend
+  module Dash
     class CopyViewsGenerator < Rails::Generators::Base
-      desc "Copies views from spree backend to your application"
+      desc "Copies views from Spree Dash to your application"
 
       def self.source_paths
         [File.expand_path("../../../../../app", __dir__)]

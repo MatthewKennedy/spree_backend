@@ -10,7 +10,7 @@ describe "Promotion with taxon rule", type: :feature do
   let!(:promotion) { create :promotion }
 
   before do
-    visit spree.edit_admin_promotion_path(promotion)
+    visit spree.edit_dash_promotion_path(promotion)
   end
 
   context "when there are no taxon rules" do
@@ -38,7 +38,7 @@ describe "Promotion with taxon rule", type: :feature do
       rule.save!
       rule.update!(taxons: taxons)
 
-      visit spree.edit_admin_promotion_path(promotion)
+      visit spree.edit_dash_promotion_path(promotion)
     end
 
     it "displays taxon names", js: true do

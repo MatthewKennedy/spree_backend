@@ -5,7 +5,7 @@ describe "Webhooks::Subscriber#new", type: :feature do
 
   context "creating a new subscriber" do
     it "coming from #index" do
-      visit spree.admin_webhooks_subscribers_path
+      visit spree.dash_webhooks_subscribers_path
       within("div#contentHeader") do
         click_on "New Webhooks Subscriber"
       end
@@ -16,14 +16,14 @@ describe "Webhooks::Subscriber#new", type: :feature do
     end
 
     it "submitting with Subscribe To All Events" do
-      visit spree.new_admin_webhooks_subscriber_path
+      visit spree.new_dash_webhooks_subscriber_path
 
       fill_in "webhooks_subscriber_url", with: "https://imgur.com/path"
       check "webhooks_subscriber_active"
 
       click_on "Create"
 
-      expect(page).to have_current_path("/admin/webhooks_subscribers")
+      expect(page).to have_current_path("/dash/webhooks_subscribers")
       expect(page).to have_content "created"
 
       within_row(1) { expect(page).to have_content("*") }
@@ -31,7 +31,7 @@ describe "Webhooks::Subscriber#new", type: :feature do
     end
 
     it "submitting with Subscribe To Selected Events" do
-      visit spree.new_admin_webhooks_subscriber_path
+      visit spree.new_dash_webhooks_subscriber_path
 
       fill_in "webhooks_subscriber_url", with: "https://imgur.com/path"
       check "webhooks_subscriber_active"
@@ -42,7 +42,7 @@ describe "Webhooks::Subscriber#new", type: :feature do
 
       click_on "Create"
 
-      expect(page).to have_current_path("/admin/webhooks_subscribers")
+      expect(page).to have_current_path("/dash/webhooks_subscribers")
       expect(page).to have_content "created"
 
       within_row(1) { expect(page).to have_content("address.create, address.delete, address.update, digital.create, digital.delete, digital.update") }

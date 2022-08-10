@@ -9,7 +9,7 @@ describe "Order Risk Analysis", type: :feature do
   end
 
   def visit_order
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "All Orders"
     within_row(1) do
       click_link order.number
@@ -18,7 +18,7 @@ describe "Order Risk Analysis", type: :feature do
 
   context "the order is considered risky" do
     before do
-      allow_any_instance_of(Spree::Admin::BaseController).to receive_messages try_spree_current_user: create(:user)
+      allow_any_instance_of(Spree::Dash::BaseController).to receive_messages try_spree_current_user: create(:user)
 
       order.payments.first.update_column(:avs_response, "X")
       order.considered_risky!

@@ -5,7 +5,7 @@ describe "Zones", type: :feature do
 
   before do
     Spree::Zone.delete_all
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Settings"
   end
 
@@ -26,10 +26,10 @@ describe "Zones", type: :feature do
   end
 
   context "create" do
-    it "allows an admin to create a new zone" do
+    it "allows an dash to create a new zone" do
       click_link "Zones"
       within find("#contentHeader") do
-        click_link "admin_new_zone_link"
+        click_link "dash_new_zone_link"
       end
       expect(page).to have_content("New Zone")
       fill_in "zone_name", with: "japan"

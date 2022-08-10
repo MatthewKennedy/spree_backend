@@ -26,7 +26,7 @@ describe "Adjustments", type: :feature do
     order.update_totals
     order.persist_totals
 
-    visit spree.admin_orders_path
+    visit spree.dash_orders_path
     within_row(1) { click_on order.number }
     click_on "Adjustments"
   end
@@ -37,7 +37,7 @@ describe "Adjustments", type: :feature do
     end
   end
 
-  context "admin managing adjustments" do
+  context "dash managing adjustments" do
     it "displays the correct values for existing order adjustments" do
       within_row(1) do
         expect(column_text(2)).to eq("VAT 5%")
@@ -50,7 +50,7 @@ describe "Adjustments", type: :feature do
     end
   end
 
-  context "admin creating a new adjustment" do
+  context "dash creating a new adjustment" do
     before do
       within find("#contentHeader") do
         click_link "New Adjustment"
@@ -77,7 +77,7 @@ describe "Adjustments", type: :feature do
     end
   end
 
-  context "admin editing an adjustment", js: true do
+  context "dash editing an adjustment", js: true do
     before do
       within_row(2) do
         visit current_path

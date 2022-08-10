@@ -5,7 +5,7 @@ describe "Menus Index", type: :feature do
 
   context "when no menus are present" do
     before do
-      visit spree.admin_menus_path
+      visit spree.dash_menus_path
     end
 
     it "prompts the user to create a menu" do
@@ -22,8 +22,8 @@ describe "Menus Index", type: :feature do
     let!(:main_menu_other_store) { create(:menu, name: "Other Store Main Menu", store: other_store) }
 
     before do
-      visit spree.admin_menus_path
-      I18n.backend.store_translations(:fr,
+      visit spree.dash_menus_path
+      I18n.dash.store_translations(:fr,
         spree: {
           i18n: {
             this_file_language: "Français (FR)"

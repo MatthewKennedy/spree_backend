@@ -8,7 +8,7 @@ describe "Webhooks::Subscriber#show", type: :feature do
     let!(:event) { create(:webhook_event, :successful, subscriber: subscriber) }
 
     it "lists the events" do
-      visit spree.admin_webhooks_subscriber_path(subscriber)
+      visit spree.dash_webhooks_subscriber_path(subscriber)
 
       expect(page).to have_content(subscriber.url)
       expect(page).to have_content("*")

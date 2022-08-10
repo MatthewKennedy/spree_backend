@@ -1,0 +1,12 @@
+<div data-hook="dash_store_form_fields">
+  <%= render partial: 'spree/dash/stores/form/basic', locals: { f: f } %>
+  <%= render partial: 'spree/dash/stores/form/emails', locals: { f: f } %>
+  <%= render partial: 'spree/dash/stores/form/internationalization', locals: { f: f } %>
+  <% if @store.persisted? %>
+    <%= render partial: 'spree/dash/stores/form/digitals', locals: { f: f } %>
+    <%= render partial: 'spree/dash/stores/form/layout', locals: { f: f } %>
+    <%= render partial: 'spree/dash/stores/form/seo', locals: { f: f } %>
+    <%= render partial: 'spree/dash/stores/form/social', locals: { f: f } %>
+    <%= render partial: 'spree/dash/stores/form/footer', locals: { f: f } %>
+  </div>
+<% end %>

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::ReturnItemsController, type: :controller do
+describe Spree::Dash::ReturnItemsController, type: :controller do
   stub_authorization!
 
   describe "#update" do
@@ -21,7 +21,7 @@ describe Spree::Admin::ReturnItemsController, type: :controller do
 
     it "redirects to the customer return" do
       subject
-      expect(response).to redirect_to spree.edit_admin_order_customer_return_path(customer_return.order, customer_return)
+      expect(response).to redirect_to spree.edit_dash_order_customer_return_path(customer_return.order, customer_return)
     end
   end
 end

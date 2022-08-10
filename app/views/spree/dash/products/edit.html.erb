@@ -1,0 +1,36 @@
+<% content_for :page_actions do %>
+  <% if @product.available? %>
+    <%= external_page_preview_link(@product) %>
+  <% end %>
+<% end %>
+
+<% content_for :page_title do %>
+  <%= page_header_back_button spree.dash_products_path %>
+  <%= @product.name %>
+<% end %>
+
+<div data-hook="dash_product_form_fields">
+  <div class="row">
+    <div class="col-12 col-md-8" data-hook="dash_product_form_left">
+      <%= render "spree/dash/products/forms/details" %>
+      <%= render "spree/dash/products/forms/properties" if can?(:dash, Spree::ProductProperty) && !@product.deleted? %>
+      <%= render "spree/dash/products/forms/images" %>
+      <%= render "spree/dash/products/forms/digitals" unless @product.has_variants? %>
+      <%= render "spree/dash/products/forms/variants" %>
+      <%= render "spree/dash/products/forms/stock" unless @product.has_variants? %>
+    </div>
+
+    <div class="col-12 col-md-4" data-hook="dash_product_form_right">
+      <%= render "spree/dash/products/forms/overview" %>
+      <%= render "spree/dash/products/forms/status" %>
+      <%= render "spree/dash/products/forms/pricing" %>
+      <%= render "spree/dash/products/forms/tax_and_shipping" %>
+      <%= render "spree/dash/products/forms/specifications" %>
+      <%= render "spree/dash/products/forms/organization" %>
+      <%= render "spree/dash/products/forms/seo" %>
+    </div>
+  </div>
+
+  <div data-hook="dash_product_form_meta"></div>
+  <div data-hook="dash_product_form_additional_fields"></div>
+</div>

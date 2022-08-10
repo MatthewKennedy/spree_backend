@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Admin
+  module Dash
     describe CustomerReturnsController, type: :controller do
       stub_authorization!
 
@@ -166,7 +166,7 @@ module Spree
 
           it "redirects to the index page" do
             subject
-            expect(response).to redirect_to(spree.edit_admin_order_customer_return_path(order, assigns(:customer_return)))
+            expect(response).to redirect_to(spree.edit_dash_order_customer_return_path(order, assigns(:customer_return)))
           end
         end
 

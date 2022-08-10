@@ -5,10 +5,10 @@ describe "Promotion Adjustments", type: :feature, js: true do
 
   context "coupon promotions" do
     before do
-      visit spree.new_admin_promotion_path
+      visit spree.new_dash_promotion_path
     end
 
-    it "allows an admin to create a flat rate discount coupon promo" do
+    it "allows an dash to create a flat rate discount coupon promo" do
       fill_in "Name", with: "Promotion"
       fill_in "Code", with: "order"
       click_button "Create"
@@ -56,7 +56,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
       expect(first_action_calculator.preferred_amount).to eq(5)
     end
 
-    it "allows an admin to create a single user coupon promo with flat rate discount" do
+    it "allows an dash to create a single user coupon promo with flat rate discount" do
       fill_in "Name", with: "Promotion"
       fill_in "Limit usage to", with: "1"
       fill_in "Code", with: "single_use"
@@ -94,7 +94,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
       expect(first_action_calculator.preferred_amount).to eq(5)
     end
 
-    it "allows an admin to create an automatic promo with flat percent discount" do
+    it "allows an dash to create an automatic promo with flat percent discount" do
       fill_in "Name", with: "Promotion"
       click_button "Create"
       wait_for_turbo
@@ -128,7 +128,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
       expect(first_action_calculator.preferred_flat_percent).to eq(10)
     end
 
-    it "allows an admin to create an product promo with percent per item discount" do
+    it "allows an dash to create an product promo with percent per item discount" do
       create(:product, name: "RoR Mug")
 
       fill_in "Name", with: "Promotion"
@@ -177,7 +177,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
       expect(first_action_calculator.preferred_percent).to eq(10)
     end
 
-    it "allows an admin to create an automatic promotion with free shipping (no code)" do
+    it "allows an dash to create an automatic promotion with free shipping (no code)" do
       fill_in "Name", with: "Promotion"
       click_button "Create"
       wait_for_turbo
@@ -195,7 +195,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
       expect(first_action.class).to eq(Spree::Promotion::Actions::FreeShipping)
     end
 
-    it "allows an admin to create an automatic promo requiring a landing page to be visited" do
+    it "allows an dash to create an automatic promo requiring a landing page to be visited" do
       fill_in "Name", with: "Promotion"
       fill_in "Path", with: "content/cvv"
       click_button "Create"
@@ -230,7 +230,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
       expect(first_action_calculator.preferred_amount).to eq(4)
     end
 
-    it "allows an admin to create a promotion that adds a 'free' item to the cart" do
+    it "allows an dash to create a promotion that adds a 'free' item to the cart" do
       create(:product, name: "RoR Mug")
       fill_in "Name", with: "Promotion"
       fill_in "Code", with: "complex"
@@ -321,7 +321,7 @@ describe "Promotion Adjustments", type: :feature, js: true do
     let!(:promotion_category) { create(:promotion_category, name: "Welcome Category") }
 
     it "renders selected filters" do
-      visit spree.admin_promotions_path
+      visit spree.dash_promotions_path
 
       click_on "Filters"
 

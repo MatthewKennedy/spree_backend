@@ -3,9 +3,9 @@ require "spec_helper"
 describe "Reports", type: :feature do
   stub_authorization!
 
-  context "visiting the admin reports page" do
+  context "visiting the dash reports page" do
     it "has the right content" do
-      visit spree.admin_path
+      visit spree.dash_path
       click_link "Reports"
       click_link "Sales Total"
 
@@ -16,7 +16,7 @@ describe "Reports", type: :feature do
     end
   end
 
-  context "searching the admin reports page" do
+  context "searching the dash reports page" do
     before do
       order = create(:order)
       order.update_columns(adjustment_total: 100)
@@ -47,7 +47,7 @@ describe "Reports", type: :feature do
     end
 
     it "allows me to search for reports" do
-      visit spree.admin_path
+      visit spree.dash_path
       click_link "Reports"
       click_link "Sales Total"
 

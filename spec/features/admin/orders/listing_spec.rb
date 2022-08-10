@@ -43,7 +43,7 @@ describe "Orders Listing", type: :feature do
     order2
     order3
     order4
-    visit spree.admin_orders_path
+    visit spree.dash_orders_path
   end
 
   describe "listing orders" do
@@ -71,7 +71,7 @@ describe "Orders Listing", type: :feature do
       expect(page).to have_content("R100")
       expect(page).to have_content("R200")
 
-      visit spree.admin_orders_path
+      visit spree.dash_orders_path
 
       Capybara.app_host = "http://another-store.lvh.me"
 
@@ -80,7 +80,7 @@ describe "Orders Listing", type: :feature do
 
       expect(current_url).to match("another-store.lvh.me")
 
-      visit spree.admin_orders_path
+      visit spree.dash_orders_path
 
       expect(page).to have_content("R300")
       expect(page).to have_content("R400")
@@ -125,12 +125,12 @@ describe "Orders Listing", type: :feature do
 
     context "when pagination is really short" do
       before do
-        @old_per_page = Spree::Backend::Config[:admin_orders_per_page]
-        Spree::Backend::Config[:admin_orders_per_page] = 1
+        @old_per_page = Spree::Dash::Config[:dash_orders_per_page]
+        Spree::Dash::Config[:dash_orders_per_page] = 1
       end
 
       after do
-        Spree::Backend::Config[:admin_orders_per_page] = @old_per_page
+        Spree::Dash::Config[:dash_orders_per_page] = @old_per_page
       end
 
       # Regression test for #4004
@@ -164,7 +164,7 @@ describe "Orders Listing", type: :feature do
       before do
         order1.promotions << promotion
         order1.save
-        visit spree.admin_orders_path
+        visit spree.dash_orders_path
       end
 
       it "only shows the orders with the selected promotion" do
@@ -245,7 +245,7 @@ describe "Orders Listing", type: :feature do
       before do
         order1.promotions << promotion
         order1.save
-        visit spree.admin_orders_path
+        visit spree.dash_orders_path
       end
 
       it "renders selected filters" do

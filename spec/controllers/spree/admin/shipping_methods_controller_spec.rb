@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::Admin::ShippingMethodsController, type: :controller do
+describe Spree::Dash::ShippingMethodsController, type: :controller do
   stub_authorization!
 
   # Regression test for #1240

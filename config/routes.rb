@@ -1,5 +1,5 @@
 Spree::Core::Engine.add_routes do
-  namespace :admin, path: Spree.admin_path do
+  namespace :dash, path: Spree.dash_path do
     root to: "dashboard#show"
 
     # Addresses
@@ -249,5 +249,5 @@ Spree::Core::Engine.add_routes do
     resources :zones
   end
 
-  get Spree.admin_path, to: "admin/dashboard#show", as: :admin
+  get Spree.dash_path, to: "dash/dashboard#show", as: :dash
 end

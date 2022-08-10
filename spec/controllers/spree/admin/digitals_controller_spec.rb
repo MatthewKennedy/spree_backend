@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Spree::Admin::DigitalsController do
+RSpec.describe Spree::Dash::DigitalsController do
   include ActionDispatch::TestProcess::FixtureFile
 
   stub_authorization!
@@ -52,7 +52,7 @@ RSpec.describe Spree::Admin::DigitalsController do
           post :create, params: {product_id: product.slug,
                                  digital: {variant_id: variant.id,
                                            attachment: file_upload}}
-          expect(response).to redirect_to(spree.admin_product_digitals_path(product))
+          expect(response).to redirect_to(spree.dash_product_digitals_path(product))
         end.to change(Spree::Digital, :count).by(1)
       end
     end
@@ -79,7 +79,7 @@ RSpec.describe Spree::Admin::DigitalsController do
       it "deletes the associated digital" do
         expect do
           delete :destroy, params: {product_id: product.slug, id: digital.id}
-          expect(response).to redirect_to(spree.admin_product_digitals_path(product))
+          expect(response).to redirect_to(spree.dash_product_digitals_path(product))
         end.to change(Spree::Digital, :count).by(-1)
       end
     end

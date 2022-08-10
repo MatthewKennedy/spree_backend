@@ -337,7 +337,7 @@ en:
         code: Code
         code_info: Adding a code to your shipping method helps integrations and other APIs identify the shipping method.
         display: Display
-        display_info: Select where this shipping method is shown, on the storefront, admin or both.
+        display_info: Select where this shipping method is shown, on the storefront, dash or both.
         internal_name: Internal name
         internal_name_info: Set an internal name for this shipping method.
         tracking_url: Tracking url
@@ -346,7 +346,7 @@ en:
       sku: Sku
       slug: Slug
       specifications: Specifications
-      spree_administration: Spree administration
+      spree_dashistration: Spree dashistration
       starting_from: Starting from
       status: Status
       stock_transfer:

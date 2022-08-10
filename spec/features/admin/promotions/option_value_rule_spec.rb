@@ -11,7 +11,7 @@ describe "Promotion with option value rule", type: :feature do
   let(:promotion) { create :promotion }
 
   before do
-    visit spree.edit_admin_promotion_path(promotion)
+    visit spree.edit_dash_promotion_path(promotion)
   end
 
   it "adding an option value rule", js: true do
@@ -51,7 +51,7 @@ describe "Promotion with option value rule", type: :feature do
                                          variant2.product_id => variant2.option_values.pluck(:id)})
       rule.save!
 
-      visit spree.edit_admin_promotion_path(promotion)
+      visit spree.edit_dash_promotion_path(promotion)
     end
 
     it "deleting a product", js: true do

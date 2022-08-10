@@ -5,7 +5,7 @@ describe "New Page", type: :feature do
 
   context "when a user tries to create a new page with no title" do
     before do
-      visit spree.new_admin_cms_page_path
+      visit spree.new_dash_cms_page_path
     end
 
     it "warns that the title can't be blank" do
@@ -19,7 +19,7 @@ describe "New Page", type: :feature do
     let!(:cms_page) { create(:cms_standard_page, title: "About Us", store: store_1) }
 
     before do
-      visit spree.new_admin_cms_page_path
+      visit spree.new_dash_cms_page_path
     end
 
     it "warns the user that the slug has already been taken", js: true do

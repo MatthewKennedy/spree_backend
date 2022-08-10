@@ -8,7 +8,7 @@ describe "Create New Promotion", type: :feature, js: true do
 
   context "coupon promotions" do
     before do
-      visit spree.new_admin_promotion_path
+      visit spree.new_dash_promotion_path
     end
 
     it "Checkbox generates random promotion code" do

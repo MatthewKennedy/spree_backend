@@ -3,14 +3,14 @@
 # we call process directly instead of get
 require "spec_helper"
 
-class AdminFakesController < Spree::Admin::BaseController
+class AdminFakesController < Spree::Dash::BaseController
   def index
     render plain: "index"
   end
 end
 
-describe Spree::Admin::BaseController, type: :controller do
-  controller(Spree::Admin::BaseController) do
+describe Spree::Dash::BaseController, type: :controller do
+  controller(Spree::Dash::BaseController) do
     def index
       authorize! :update, Spree::Order
       render plain: "test"
@@ -30,7 +30,7 @@ describe Spree::Admin::BaseController, type: :controller do
 
       it "redirects forbidden path" do
         get :index
-        expect(response).to redirect_to("/admin/forbidden")
+        expect(response).to redirect_to("/dash/forbidden")
       end
     end
 

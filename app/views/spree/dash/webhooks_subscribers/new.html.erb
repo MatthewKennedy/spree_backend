@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to I18n.t('spree.dash.webhooks.subscribers.subscribers'), spree.dash_webhooks_subscribers_path %> /
+  <%= I18n.t('spree.dash.webhooks.subscribers.new_webhooks_subscriber') %>
+<% end %>
+
+<%= render partial: 'spree/dash/shared/error_messages', locals: { target: @webhooks_subscriber } %>
+
+<%= form_with model: [:dash, @webhooks_subscriber] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/dash/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

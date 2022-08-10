@@ -14,7 +14,7 @@ describe "Featured Article section", type: :feature do
   let!(:section) { create(:cms_featured_article_section, cms_page: feature_page, name: "Test #{section_type}") }
 
   before do
-    visit spree.edit_admin_cms_page_cms_section_path(feature_page, section)
+    visit spree.edit_dash_cms_page_cms_section_path(feature_page, section)
   end
 
   context "editing new page", js: true do
@@ -34,7 +34,7 @@ describe "Featured Article section", type: :feature do
       click_on "Update"
 
       expect(page).to have_field(id: "cms_section_rte_content", with: "<p>#{rte_content}</p>", visible: :hidden, disabled: false)
-      assert_admin_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
     end
 
     it "saves taxon path and loads it back into the view" do
@@ -43,7 +43,7 @@ describe "Featured Article section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(taxon.permalink)
-      assert_admin_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
     end
 
     it "saves product path and loads it back into the view" do
@@ -56,7 +56,7 @@ describe "Featured Article section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(product.slug)
-      assert_admin_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
     end
 
     it "saves page path and loads it back into the view" do
@@ -69,7 +69,7 @@ describe "Featured Article section", type: :feature do
       click_on "Update"
 
       expect(page).to have_content(cms_standard_page.slug)
-      assert_admin_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
+      assert_dash_flash_alert_success('Section "Test Featured Article" has been successfully updated!')
     end
 
     it "does not display homepages in Link To Page results" do
@@ -85,7 +85,7 @@ describe "Featured Article section", type: :feature do
       end
     end
 
-    it "allows admin to enter and save details" do
+    it "allows dash to enter and save details" do
       fill_in "Title", with: "Trendy Styles"
       fill_in "Subtitle", with: "Shop Today"
       fill_in "Button Text", with: "Learn More"

@@ -4,7 +4,7 @@ describe "Option Types", type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Products"
   end
 
@@ -23,7 +23,7 @@ describe "Option Types", type: :feature, js: true do
   end
 
   context "creating a new option type" do
-    it "allows an admin to create a new option type" do
+    it "allows an dash to create a new option type" do
       click_link "Option Types"
       click_link "new_option_type_link"
       expect(page).to have_content("New Option Type")
@@ -41,7 +41,7 @@ describe "Option Types", type: :feature, js: true do
   end
 
   context "editing an existing option type" do
-    it "allows an admin to update an existing option type" do
+    it "allows an dash to update an existing option type" do
       option_type = create(:option_type, name: "tshirt-size", presentation: "Size")
       create(:option_value, option_type: option_type)
       click_link "Option Types"

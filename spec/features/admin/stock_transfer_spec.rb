@@ -10,7 +10,7 @@ describe "Stock Transfers", type: :feature, js: true do
     variant = create(:variant, product: product)
     variant.set_option_value("Color", "Green")
 
-    visit spree.admin_stock_transfers_path
+    visit spree.dash_stock_transfers_path
     click_on "New Stock Transfer"
 
     select2_open label: "Variant"
@@ -27,7 +27,7 @@ describe "Stock Transfers", type: :feature, js: true do
 
     variant = Spree::Variant.last
 
-    visit spree.admin_stock_transfers_path
+    visit spree.dash_stock_transfers_path
     click_on "New Stock Transfer"
     fill_in "reference", with: "PO 666"
 
@@ -54,7 +54,7 @@ describe "Stock Transfers", type: :feature, js: true do
     product = create(:product, stores: Spree::Store.all)
     Spree::StockLocation.first.stock_items.where(variant_id: product.master.id).first.adjust_count_on_hand(0)
 
-    visit spree.admin_stock_transfers_path
+    visit spree.dash_stock_transfers_path
     click_on "New Stock Transfer"
 
     fill_in "reference", with: "PO 666"
@@ -87,7 +87,7 @@ describe "Stock Transfers", type: :feature, js: true do
 
       variant = Spree::Variant.last
 
-      visit spree.new_admin_stock_transfer_path
+      visit spree.new_dash_stock_transfer_path
 
       fill_in "reference", with: "PO 666"
       check "transfer_receive_stock"
@@ -107,7 +107,7 @@ describe "Stock Transfers", type: :feature, js: true do
       create(:stock_location_with_items, name: "NY") # source_location
       variant = Spree::Variant.last
 
-      visit spree.new_admin_stock_transfer_path
+      visit spree.new_dash_stock_transfer_path
 
       fill_in "reference", with: "PO 666"
 

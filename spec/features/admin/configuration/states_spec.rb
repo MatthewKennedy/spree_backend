@@ -10,22 +10,22 @@ describe "States", type: :feature do
   end
 
   def go_to_states_page
-    visit spree.admin_country_states_path(country)
+    visit spree.dash_country_states_path(country)
     expect(page).to have_selector("#new_state_link")
     page.execute_script("$.fx.off = true")
   end
 
-  context "admin visiting states listing" do
+  context "dash visiting states listing" do
     let!(:state) { create(:state, country: country) }
 
     it "correctly displays the states" do
-      visit spree.admin_country_states_path(country)
+      visit spree.dash_country_states_path(country)
       expect(page).to have_content(state.name)
     end
   end
 
   context "creating and editing states", js: true do
-    it "allows an admin to edit existing states" do
+    it "allows an dash to edit existing states" do
       go_to_states_page
       choose_country(country.name)
 
@@ -37,7 +37,7 @@ describe "States", type: :feature do
       expect(page).to have_content("Calgary")
     end
 
-    it "allows an admin to create states for non default countries" do
+    it "allows an dash to create states for non default countries" do
       go_to_states_page
       choose_country(@hungary.name)
 

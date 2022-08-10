@@ -8,7 +8,7 @@ describe "Webhooks::Subscriber#index", type: :feature do
     let!(:events) { create_list(:webhook_event, 3, subscriber: subscribers.first) }
     let!(:latest_event) { create(:webhook_event, subscriber: subscribers.first) }
 
-    before { visit spree.admin_webhooks_subscribers_path }
+    before { visit spree.dash_webhooks_subscribers_path }
 
     it "lists the subscribers and time of the last event" do
       expect(page).to have_content(subscribers.first.url)

@@ -11,7 +11,7 @@ describe "edit reimbursement type", type: :feature do
   end
 
   before do
-    visit "/admin/reimbursement_types/#{r_type.id}/edit"
+    visit "/dash/reimbursement_types/#{r_type.id}/edit"
   end
 
   context "with valid attributes" do

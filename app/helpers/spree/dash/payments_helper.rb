@@ -1,0 +1,15 @@
+module Spree
+  module Dash
+    module PaymentsHelper
+      def payment_method_name(payment)
+        payment_method = payment.payment_method
+
+        if can?(:update, payment_method)
+          link_to payment_method.name, spree.edit_dash_payment_method_path(payment_method)
+        else
+          payment_method.name
+        end
+      end
+    end
+  end
+end

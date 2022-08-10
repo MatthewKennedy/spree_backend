@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Admin
+  module Dash
     describe PaymentsController, type: :controller do
       stub_authorization!
 
@@ -31,7 +31,7 @@ module Spree
 
         it "processes payment correctly" do
           expect(order.payments.count).to eq(1)
-          expect(response).to redirect_to(spree.admin_order_payments_path(order))
+          expect(response).to redirect_to(spree.dash_order_payments_path(order))
           expect(order.reload.state).to eq("complete")
         end
 
@@ -42,12 +42,12 @@ module Spree
       end
 
       # Regression test for #3233
-      context "with a backend payment method" do
+      context "with a dash payment method" do
         before do
           @payment_method = create(:check_payment_method, display_on: "back_end")
         end
 
-        it "loads backend payment methods" do
+        it "loads dash payment methods" do
           get :new, params: {order_id: order.number}
           expect(response.status).to eq(200)
           expect(assigns[:payment_methods]).to include(@payment_method)
@@ -63,7 +63,7 @@ module Spree
         context "order does not have payments" do
           it "redirect to new payments page" do
             get :index, params: {amount: 100, order_id: order.number}
-            expect(response).to redirect_to(spree.new_admin_order_payment_path(order))
+            expect(response).to redirect_to(spree.new_dash_order_payment_path(order))
           end
         end
 
@@ -87,7 +87,7 @@ module Spree
 
         it "redirects to the customer details page" do
           get :index, params: {amount: 100, order_id: order.number}
-          expect(response).to redirect_to(spree.edit_admin_order_customer_path(order))
+          expect(response).to redirect_to(spree.edit_dash_order_customer_path(order))
         end
       end
     end

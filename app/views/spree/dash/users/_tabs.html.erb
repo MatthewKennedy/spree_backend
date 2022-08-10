@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  <%= page_header_back_button spree.dash_users_path %>
+  <%= @user.email %>
+<% end %>
+
+<% content_for :page_tabs do %>
+  <li class="nav-item">
+    <%= link_to_with_icon
+      Spree.t(:"dash.user.account"),
+      spree.edit_dash_user_path(@user),
+      class: "nav-link #{'active' if current == :account}", icon: 'person.svg' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to_with_icon
+      Spree.t(:"dash.user.addresses"),
+      spree.addresses_dash_user_path(@user),
+      #spree.dash_user_addresses_path(@user),
+      class: "nav-link #{'active' if current == :address}", icon:'pin-map.svg' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to_with_icon
+      Spree.t(:"dash.user.orders"),
+      spree.orders_dash_user_path(@user),
+      class: "nav-link #{'active' if current == :orders}", icon: 'inbox.svg' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to_with_icon
+      Spree.t(:"dash.user.items"),
+      spree.items_dash_user_path(@user),
+      class: "nav-link #{'active' if current == :items}", icon: 'tag.svg' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to_with_icon
+      Spree.t(:"dash.user.store_credits"),
+      spree.dash_user_store_credits_path(@user),
+      class: "nav-link #{'active' if current == :store_credits}", icon: 'gift.svg' %>
+  </li>
+<% end %>

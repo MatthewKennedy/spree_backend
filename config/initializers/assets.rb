@@ -1,4 +1,4 @@
-Rails.application.config.assets.precompile << "spree_backend_manifest.js"
+Rails.application.config.assets.precompile << "spree_dash_manifest.js"
 Rails.application.config.assets.paths << Rails.root.join("node_modules/tinymce")
 Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap-icons/font")
 Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap-icons/icons")

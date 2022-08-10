@@ -4,11 +4,11 @@ describe "Tax Categories", type: :feature do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit spree.dash_path
     click_link "Settings"
   end
 
-  context "admin visiting tax categories list" do
+  context "dash visiting tax categories list" do
     it "displays the existing tax categories" do
       create(:tax_category, name: "Clothing", tax_code: "CL001", description: "For Clothing")
       click_link "Tax Categories"
@@ -21,11 +21,11 @@ describe "Tax Categories", type: :feature do
     end
   end
 
-  context "admin creating new tax category" do
+  context "dash creating new tax category" do
     before do
       click_link "Tax Categories"
       within find("#contentHeader") do
-        click_link "admin_new_tax_categories_link"
+        click_link "dash_new_tax_categories_link"
       end
     end
 
@@ -43,7 +43,7 @@ describe "Tax Categories", type: :feature do
     end
   end
 
-  context "admin editing a tax category" do
+  context "dash editing a tax category" do
     it "is able to update an existing tax category", js: true do
       create(:tax_category)
       click_link "Tax Categories"

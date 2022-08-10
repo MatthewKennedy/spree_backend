@@ -28,7 +28,7 @@ describe "Customer Details", type: :feature, js: true do
   context "brand new order" do
     before do
       allow(Spree.user_class).to receive(:find_by).and_return(user)
-      visit spree.new_admin_order_path
+      visit spree.new_dash_order_path
     end
     # Regression test for #3335 & #5317
 
@@ -69,7 +69,7 @@ describe "Customer Details", type: :feature, js: true do
       end
 
       allow(Spree.user_class).to receive(:find_by).and_return(user)
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
     end
 
     context "selected country has no state" do

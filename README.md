@@ -1,5 +1,5 @@
 <a href="https://spreecommerce.org">
-   <img src="https://raw.githubusercontent.com/spree/spree-dev-docs/master/.gitbook/assets/admin_panel_978-2x.jpg" alt="Spree Commerce - a headless open-source ecommerce platform for multi-store, marketplace, or B2B global brands" />
+   <img src="https://raw.githubusercontent.com/spree/spree-dev-docs/master/.gitbook/assets/dash_panel_978-2x.jpg" alt="Spree Commerce - a headless open-source ecommerce platform for multi-store, marketplace, or B2B global brands" />
 </a>
 
 # Spree Admin Dashboard
@@ -8,9 +8,9 @@ This is the default Spree Admin Dashboard.
 
 ## Developed by
 
-[![Vendo](https://assets-global.website-files.com/6230c485f2c32ea1b0daa438/623372f40a8c54ca9aea34e8_vendo%202.svg)](https://getvendo.com?utm_source=spree_backend_github)
+[![Vendo](https://assets-global.website-files.com/6230c485f2c32ea1b0daa438/623372f40a8c54ca9aea34e8_vendo%202.svg)](https://getvendo.com?utm_source=spree_dash_github)
 
-> All-in-one platform for all your Marketplace and B2B eCommerce needs. [Start your 30-day free trial](https://e98esoirr8c.typeform.com/contactvendo?typeform-source=spree_backend_github)
+> All-in-one platform for all your Marketplace and B2B eCommerce needs. [Start your 30-day free trial](https://e98esoirr8c.typeform.com/contactvendo?typeform-source=spree_dash_github)
 
 ## Key Features
 
@@ -55,7 +55,7 @@ Please review the [Spree Contributing Guide](https://dev-docs.spreecommerce.org/
 
 When working on the JavaScript in Spree Dashboard locally, you will need to yarn link your local development copy of `@spree/dashboard`, to the Rails app you are working in, so that your changes are picked up and represented live in the view.
 
-From the root of `spree_backend` run:
+From the root of `spree_dash` run:
 
 ```bash
 yarn link
@@ -68,9 +68,9 @@ yarn link "@spree/dashboard"
 ```
 
 Once your local Spree Dashboard is linked with the Rails app you are using for development you will need two terminal tabs open,
-one at the root of your Rails app, and one at the root of `spree_backend`.
+one at the root of your Rails app, and one at the root of `spree_dash`.
 
-In the terminal window at the root of the `spree_backend` run:
+In the terminal window at the root of the `spree_dash` run:
 
 ```bash
 yarn watch
@@ -82,7 +82,7 @@ And from the Rails app you are using to run Spree and develop in run the followi
 bin/dev
 ```
 
-Any changes made to the JavaScript files in `spree_backend` will be processed by yarn and picked up in the Rails app you are running for development.
+Any changes made to the JavaScript files in `spree_dash` will be processed by yarn and picked up in the Rails app you are running for development.
 
 ### Local setup
 
@@ -91,7 +91,7 @@ Any changes made to the JavaScript files in `spree_backend` will be processed by
 3. Create test application:
 
    ```bash
-   cd spree_backend
+   cd spree_dash
    bundle install
    bundle exec rake test_app
    ```
@@ -107,7 +107,7 @@ bundle exec rspec
 Single test file:
 
 ```bash
-bundle exec rspec spec/features/admin/users_spec.rb
+bundle exec rspec spec/features/dash/users_spec.rb
 ```
 
 [ChromeDriver](https://chromedriver.chromium.org/) is required for feature tests. On MacOS you can install it by running:
@@ -118,6 +118,6 @@ brew install chromedriver
 
 ## License
 
-Spree Admin Dashboard is released under the [New BSD License](https://github.com/spree/spree_backend/blob/main/license.md).
+Spree Admin Dashboard is released under the [New BSD License](https://github.com/spree/spree_dash/blob/main/license.md).
 
 [spark]: https://sparksolutions.co?utm_source=github

@@ -16,7 +16,7 @@ describe "Payments", type: :feature, js: true do
     let(:state) { "checkout" }
 
     before do
-      visit spree.edit_admin_order_path(order)
+      visit spree.edit_dash_order_path(order)
       click_link "Payments"
     end
 
@@ -48,7 +48,7 @@ describe "Payments", type: :feature, js: true do
       capture_amount = order.outstanding_balance / 2 * 100
       payment.capture!(capture_amount)
 
-      visit spree.admin_order_payment_path(order, payment)
+      visit spree.dash_order_payment_path(order, payment)
       expect(page).to have_content "Capture events"
       within "#capture_events" do
         within_row(1) do
@@ -163,7 +163,7 @@ describe "Payments", type: :feature, js: true do
             wait_for_turbo
           end
 
-          assert_admin_flash_alert_error("Amount is not a number")
+          assert_dash_flash_alert_error("Amount is not a number")
           expect(payment.reload.amount).to eq(150.00)
         end
       end
@@ -190,7 +190,7 @@ describe "Payments", type: :feature, js: true do
     # FIXME: this needs a new test for payment tokens
     xcontext "with a credit card payment method" do
       before do
-        visit spree.admin_order_payments_path(order)
+        visit spree.dash_order_payments_path(order)
       end
 
       it "is able to create a new credit card payment with valid information" do
@@ -220,7 +220,7 @@ describe "Payments", type: :feature, js: true do
         create(:credit_card, user_id: order.user_id, payment_method: payment_method, gateway_customer_profile_id: "BGS-RFRE")
       end
 
-      before { visit spree.admin_order_payments_path(order) }
+      before { visit spree.dash_order_payments_path(order) }
 
       it "is able to reuse customer payment source", js: false do
         expect(page).to have_checked_field(id: "card_#{cc.id}")
@@ -233,7 +233,7 @@ describe "Payments", type: :feature, js: true do
       let!(:payment_method) { create(:check_payment_method) }
 
       before do
-        visit spree.admin_order_payments_path(order.reload)
+        visit spree.dash_order_payments_path(order.reload)
       end
 
       it "can successfully be created and captured" do
@@ -250,7 +250,7 @@ describe "Payments", type: :feature, js: true do
 
       before do
         create(:store_credit, user: order.user, category: category, amount: 500, store: order.store)
-        visit spree.new_admin_order_payment_path(order.reload)
+        visit spree.new_dash_order_payment_path(order.reload)
         choose("payment_payment_method_id_#{payment_method.id}")
         click_button "Continue"
       end
