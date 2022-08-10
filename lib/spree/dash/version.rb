@@ -1,5 +1,5 @@
 module Spree
-  module Backend
+  module Dash
     VERSION = "5.0.0.alpha".freeze
 
     def self.version

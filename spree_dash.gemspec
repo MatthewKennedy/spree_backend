@@ -3,7 +3,7 @@ require_relative "lib/spree/dash/version"
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.name = "spree_dash"
-  s.version = Spree::Backend.version
+  s.version = Spree::Dash.version
   s.authors = ["Sean Schofield", "Spark Solutions"]
   s.email = "hello@spreecommerce.org"
   s.summary = "Admin Dashboard for Spree eCommerce platform"

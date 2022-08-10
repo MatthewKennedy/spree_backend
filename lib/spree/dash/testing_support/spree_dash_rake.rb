@@ -50,7 +50,7 @@ namespace :spree_dash do
 
     unless ["spree/api", "spree/core", "spree/sample"].include?(ENV["LIB_NAME"])
       if ENV["LIB_NAME"] == "spree/dash"
-        $stdout.puts "Installing Spree Backend node dependencies..."
+        $stdout.puts "Installing Spree Dash node dependencies..."
         system("yarn add file:./../../../spree_dash")
         system("yarn link @spree/dash")
         system("yarn install")

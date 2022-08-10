@@ -1,5 +1,5 @@
 module Spree
-  module Backend
+  module Dash
     module Generators
       class InstallGenerator < Rails::Generators::Base
         desc "Installs Spree Dash"
